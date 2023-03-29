@@ -27,7 +27,6 @@
 /* Recipes introduction */
 .recipePrimaryContainer {
     font: var(--primary-font);
-    font-size: 12px;
     background-color: white;
     border-radius: 16px;
 }
@@ -37,7 +36,7 @@
     padding: 8px 0;
     border-bottom: 2px solid rgba(0, 0, 0, 0.25);
     font: var(--primary-font);
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .reviewSection {
@@ -96,7 +95,7 @@
 
 .label  {
     font: var(--primary-font);
-    font-size: 12px;
+    /* font-size: 12px; */
     height: fit-content;
     width: fit-content;
     display: inline-block;
@@ -119,7 +118,7 @@
 .eleContainer {
     width: 100%;
     font: var(--primary-font);
-    font-size: 12px;
+    /* font-size: 12px; */
     display: flex;
     flex-direction: row;
     align-items: center;
