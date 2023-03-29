@@ -1,0 +1,133 @@
+@import "./Header.module.css" globalStyle;
+
+.body {
+    width: 100vw;
+    height: fit-content;
+    background-color: var(--light-orange) ;
+    display: flex;
+    justify-content: center;
+}
+
+.mainContainer {
+    margin-top: 4vh;
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.recipeDetail {
+    width: 50vw;
+    height: fit-content;
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+}
+
+/* Recipes introduction */
+.recipePrimaryContainer {
+    font: var(--primary-font);
+    font-size: 12px;
+    background-color: white;
+    border-radius: 16px;
+}
+
+.title {
+    margin: 0px 16px;
+    padding: 8px 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.25);
+    font: var(--primary-font);
+    font-size: 16px;
+}
+
+.reviewSection {
+    width: 36%;
+    height: 100%;
+    background-color: white;
+}
+
+.recipeImg {
+    width: 50vw;
+    border-radius: 16px 16px 0 0;
+    background-color: black;
+}
+
+.commonInfo {
+    width: 100%;
+    height: fit-content;
+    /* background-color: wheat; */
+    display: flex;
+}
+.commonInfoEle {
+    display: flex;
+    flex-direction: row;
+    margin: 8px 8px 16px;
+}
+
+.commonInfoEle > img {
+    margin: 0 4px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Ingredients */
+
+.ingredientContainer {
+    width: 100%;
+    height: 160px;
+    /* background-color: wheat; */
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.ingredientTab {
+    width: 100%;
+    height: fit-content;
+    border-radius: 16px;
+    background-color: white;
+}
+
+.labelContainer {
+    margin: 0 16px;
+    padding: 12px 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.25);
+}
+
+.label  {
+    font: var(--primary-font);
+    font-size: 12px;
+    height: fit-content;
+    width: fit-content;
+    display: inline-block;
+    padding: 4px 16px;
+    border-radius: 16px;
+    background-color: white;
+    margin: 4px 8px 4px 0;
+    border: 1px ridge rgba(0, 0, 0, 0.25);
+}
+
+
+.ingDetailContainer {
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin: 4px 4px 16px;
+}
+
+.eleContainer {
+    width: 100%;
+    font: var(--primary-font);
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.recipePrimaryContainer p {
+    padding: 4px 16px 16px;
+    text-align: justify;
+    line-height: 1.6;
+}
