@@ -1,71 +1,115 @@
 import React, { useState } from 'react';
-import PublishRecipeStyles from '../styles/PublishRecipe.module.css'
+import styles from '../styles/PublishRecipe.module.css'
 
-function PublishRecipe() {
-  const [ingredients, setIngredients] = useState([{ ingredient: ''}]);
-
-  const handleIngredientChange = (event, index) => {
+const PublishRecipe = () => {
+  const [name, setName] = useState('');
+  const [image, setImage] = useState('');
+  const [description, setDescription] = useState('');
+  const [origin, setOrigin] = useState('');
+  const [duration, setDuration] = useState('');
+  const [servings, setServings] = useState('');
+  const [ingredients, setIngredients] = useState([{ name: '', custom: false }]);
+  
+ 
+  const handleIngredientChange = (igd, event) => {
     const newIngredients = [...ingredients];
-    newIngredients[index][event.target.name] = event.target.value;
+    if (event.target.name === 'name') {
+      newIngredients[igd].name = event.target.value;
+    } else if (event.target.name === 'custom') {
+      newIngredients[igd].custom = event.target.checked;
+      newIngredients[igd].name = '';
+    }
     setIngredients(newIngredients);
   };
 
   const handleAddIngredient = () => {
-    setIngredients([...ingredients, { ingredient: ''}]);
+    setIngredients([...ingredients, { name: '', custom: false }]);
   };
 
-  const handleRemoveIngredient = (index) => {
+  const handleRemoveIngredient = (igd) => {
     const newIngredients = [...ingredients];
-    newIngredients.splice(index, 1);
+    newIngredients.splice(igd, 1);
     setIngredients(newIngredients);
   };
 
+ 
+
   const handleSubmit = (event) => {
     event.preventDefault();
-
   };
 
   return (
-    <div className={PublishRecipeStyles.publish}>
-      <form className="recipe-form" onSubmit={handleSubmit}>
-        <h2>Nom Nom Your Recipe!</h2>
-        <div className="form-group">
-          <label htmlFor="name">Recipe Name:</label>
-          <input type="text" id="name" name="name" className="form-control" />
-        </div>
+    <form className = {styles.publish} onSubmit={handleSubmit}>
 
-        <div className="form-group">
-          <label htmlFor="image">Image:</label>
-          <input type="file" id="image" name="image" className="form-control-file" />
-        </div>
+      <div className = {styles.formControl}>
+      <label>
+      Name:
+      <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+      </label>
+      </div>
+      
+      <div className = {styles.formControl}>
+      <label>
+        Image:
+        <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+      </label>
+      </div>
+      
 
-        <div className="form-group">
-          <label htmlFor="description">Description:</label>
-          <textarea id="description" name="description" className="form-control"></textarea>
-        </div>
+      <div className = {styles.formControl}>
+      <label>
+        Description:
+      <br />
+        <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+      </label>
+      </div>
 
-        <div className="form-group">
-          <label htmlFor="ingredients">Ingredients:</label>
-          <div id="ingredients-list">
-            {ingredients.map((ingredient, index) => (
-              <div className="ingredient" key={index}>
-                <input type="text" name="ingredient" placeholder="Ingredient" value={ingredient.ingredient} onChange={(event) => handleIngredientChange(event, index)} className="form-control" />
-                <button type="button" className="btn btn-danger remove-ingredient" onClick={() => handleRemoveIngredient(index)}>X</button>
+      <div className = {styles.formControl}>
+      <label>
+        Origin:
+        <input type="text" value={origin} onChange={(e) => setOrigin(e.target.value)} />
+      </label>
+      </div>
+      
+      <div className={styles.oneline}>
+        <div className = {styles.formControl}>
+        <label>
+          Duration:
+          <input type="text" value={duration} onChange={(e) => setDuration(e.target.value)} />
+        </label>
+        </div>
+        <div className = {styles.formControl2}>
+        <label>
+          Servings:
+          <input type="text" value={servings} onChange={(e) => setServings(e.target.value)} />
+        </label>
+        </div>
+      </div>
+
+      <div className = {styles.formControl}>
+      <label>
+        Ingredients:
+        <ul>
+          {ingredients.map((ingredient, igd) => (
+            <div key={igd} >  
+              <datalist id="igdList">
+                <option value="Salt"/>
+                <option value="Sugar"/>
+                <option value="Meat"/>
+              </datalist>
+             <div className={styles.inputIgd}>
+                <input type="text" name="name" placeholder="Enter ingredients" list='igdList' autocomplete="off"/>
+                <i  className = {styles.delete} class="fa-solid fa-delete-left" onClick={() => handleRemoveIngredient(igd)}></i>
               </div>
-            ))}
-            <button type="button" className="btn btn-success add-ingredient" onClick={handleAddIngredient}>Add Ingredient</button>
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="instructions">Instructions:</label>
-          <textarea id="instructions" name="instructions" className="form-control"></textarea>
-        </div>
-
-        <button type="submit" className="btn btn-primary">Submit</button>
-      </form>
-    </div>
+             </div>
+          ))}
+        </ul>
+        <button type="button" onClick={handleAddIngredient}>Add Ingredient</button>
+      </label>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   );
-}
+};
 
 export default PublishRecipe;
