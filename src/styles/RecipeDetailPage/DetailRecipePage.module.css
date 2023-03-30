@@ -1,5 +1,5 @@
-@import "./Header.module.css" globalStyle;
-@import "./ReusableStyle.module.css";
+@import "../Header.module.css" globalStyle;
+@import "../ReusableStyle.module.css";
 
 .body {
     width: 100vw;
@@ -8,8 +8,6 @@
     display: flex;
     justify-content: center;
 }
-
-
 
 .mainContainer {
     margin-top: 4vh;
@@ -38,11 +36,7 @@
     font-size: 20px;
 }
 
-.reviewSection {
-    width: 36%;
-    height: 100%;
-    background-color: white;
-}
+
 
 .recipeImg {
     width: 50vw;
@@ -125,4 +119,17 @@
     padding: 4px 16px 16px;
     text-align: justify;
     line-height: 1.6;
+}
+
+
+.reviewSection {
+    width: 36%;
+    height: 100%;
+    background-color: white;
+    border-radius: 16px;
+}
+
+.currentUserReviewContainer {
+    background-color: red;
+    height: 100px;
 }

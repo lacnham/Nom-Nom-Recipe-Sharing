@@ -47,15 +47,11 @@ li {
 
 button {
     font: var(--primary-font);
-    /* font-style: normal;
-    font-weight: 700;
-    font-size: 20px; */
     color: white;
     border:none;
     border-radius: 8px;
     width: 6.5em;
     height: 2.5em;
-    /* background-color: red; */
 }
 .login {
     background-color: var(--black-purple);
