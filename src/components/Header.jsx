@@ -17,16 +17,16 @@ const Header = () => {
         )
 
     return(
-        <header className={styles.header}>
-            <div className={styles.logoContainer} typeof="image">
+        <header className={`${styles.header} ${styles.flexRow}`}>
+            <div className={`${styles.logoContainer} ${styles.flexItemCenter}`} typeof="image">
                 <img src={nomNomLogo} alt="nom-nom-logo" />
             </div>
-            <nav className={styles.navBar}>
-                <ul>
+            <nav className={`${styles.navBar} ${styles.flexItemCenter}`}>
+                <ul className={`${styles.flexItemCenter}`}>
                     {items}
                 </ul>
             </nav>
-            <div className={styles.profileContainer}>
+            <div className={`${styles.profileContainer} ${styles.flexItemCenter}`}>
                 <div className={styles.loginSignup}>
                     <button className={styles.login}>Login</button>
                     <button className={styles.signup}>Signup</button>

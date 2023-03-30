@@ -16,11 +16,11 @@ const RecipeIntro = () => {
       <img className={styles.recipeImg} src={recipe.src} />
       <div className={styles.title}>Beef steak</div>
       <div className={styles.commonInfo}>
-        <div className={styles.commonInfoEle}>
+        <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
           <img src={timeIcon} alt="duration icon" />
           <div>40 minutes</div>
         </div>
-        <div className={styles.commonInfoEle}>
+        <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
           <img src={peopleIcon} alt="people icon" />
           <div>1 people</div>
         </div>
@@ -97,7 +97,7 @@ const RenderDetail = props => {
 
   return (
     // <div className={styles.ingDetailContainer}>
-    <div key={props.key} className={styles.eleContainer}>
+    <div key={props.key} className={`${styles.eleContainer} ${styles.flexRow}`}>
       <img src={doneIcon} />
       <div>{props.name}</div>
       <div>{props.amount}</div>
@@ -156,12 +156,13 @@ const RecipeDescription = () => {
 }
 
 const DetailRecipePage = () => {
+
   return (
     <>
       <Header />
-      <div className={styles.body}>
-        <div className={styles.mainContainer}>
-          <div className={styles.recipeDetail}>
+      <div className={`${styles.body}`}>
+        <div className={`${styles.mainContainer} ${styles.flexRow}`}>
+          <div className={`${styles.recipeDetail} ${styles.flexColumn}`}>
             
             <RecipeIntro />
             <RecipeDescription />
