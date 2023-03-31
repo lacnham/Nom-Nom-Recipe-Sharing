@@ -1,0 +1,35 @@
+.button1 {
+  border-radius: 8px;
+  font-family: Noto Sans JP;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  background-color: #d18d0f;
+  transition: background-color 0.2s;
+  transition: color 0.2s;
+  padding: 10px 70px;
+  border: 2px solid #d18d0f;
+}
+
+.button1:hover {
+  background-color: white;
+  color: #d18d0f;
+}
+
+.button2 {
+  border-radius: 8px;
+  font-family: Noto Sans JP;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  background-color: #3d233a;
+  transition: background-color 0.2s;
+  transition: color 0.2s;
+  padding: 10px 70px;
+  border: 2px solid #3d233a;
+}
+
+.button2:hover {
+  background-color: white;
+  color: #3d233a;
+}
