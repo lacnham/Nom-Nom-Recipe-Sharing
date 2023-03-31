@@ -158,7 +158,6 @@ hr {
 
 .register {
   font-weight: bold;
-
   text-align: end;
   display: flex;
   padding-top: 24px;
@@ -171,4 +170,14 @@ hr {
 
 .register a:hover {
   color: #7d7d7d;
+}
+
+.warning {
+  font-size: small;
+  padding: 2px;
+  padding-left: 20px;
+  min-width: 50px;
+  color: #e43636;
+  text-align: start;
+  background-color: rgb(228, 54, 54, 0.1);
 }

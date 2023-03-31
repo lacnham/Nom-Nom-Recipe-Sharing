@@ -24,6 +24,7 @@ const Header = () => {
       </div>
       <nav className={`${styles.navBar} ${styles.flexItemCenter}`}>
         <ul className={`${styles.flexItemCenter}`}>{items}</ul>
+        {/* TODO Make items clickable */}
       </nav>
       <div className={`${styles.profileContainer} ${styles.flexItemCenter}`}>
         <div className={styles.loginSignup}>
