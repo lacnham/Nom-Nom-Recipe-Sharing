@@ -41,8 +41,12 @@ body {
   padding: 100px;
 }
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .text {
   animation: 1s ease-in 0s 1 fadeIn;
@@ -80,7 +84,6 @@ body {
   background-repeat: no-repeat;
   background-position: 50% 50%;
 }
-
 
 form {
   padding-top: 24px;
@@ -136,7 +139,7 @@ input[type='password'] {
   padding-bottom: 12px;
 }
 
-.psw a:hover{
+.psw a:hover {
   color: #7d7d7d;
   text-decoration: underline;
 }
@@ -149,13 +152,13 @@ input[type='password'] {
 hr {
   height: 2px;
   border-width: 2;
-  color: #3D233A;
-  background-color: #3D233A;
+  color: #3d233a;
+  background-color: #3d233a;
 }
 
 .register {
   font-weight: bold;
-  
+
   text-align: end;
   display: flex;
   padding-top: 24px;

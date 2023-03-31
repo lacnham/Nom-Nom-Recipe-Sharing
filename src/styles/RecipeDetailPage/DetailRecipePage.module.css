@@ -1,5 +1,5 @@
-@import "../Header.module.css" globalStyle;
-@import "../ReusableStyle.module.css";
+@import "../Header.module.css";
+@import "../globalStyles.css";
 
 .body {
     width: 100vw;
@@ -23,7 +23,6 @@
 
 /* Recipes introduction */
 .recipePrimaryContainer {
-    font: var(--primary-font);
     background-color: white;
     border-radius: 16px;
 }
@@ -32,7 +31,6 @@
     margin: 0px 16px;
     padding: 8px 0;
     border-bottom: 2px solid rgba(0, 0, 0, 0.25);
-    font: var(--primary-font);
     font-size: 20px;
 }
 
@@ -87,7 +85,6 @@
 }
 
 .label  {
-    font: var(--primary-font);
     /* font-size: 12px; */
     height: fit-content;
     width: fit-content;
@@ -110,7 +107,6 @@
 
 .eleContainer {
     width: 100%;
-    font: var(--primary-font);
     align-items: center;
     gap: 8px;
 }
@@ -155,7 +151,6 @@
 }
 
  .userReviewContainer > p {
-    font: var(--primary-font);
     display: block;
     display: -webkit-box;
     max-width: 100%;

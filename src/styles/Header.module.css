@@ -1,4 +1,4 @@
-@import "./ReusableStyle.module.css";
+@import "./globalStyles.css";
 
 
 .header {
@@ -13,7 +13,6 @@
 }
 
 .navBar {
-    font: var(--primary-font);
     /* background-color: green; */
     width: 60%;
     height: auto;
@@ -45,18 +44,3 @@ li {
     gap: 2em
 }
 
-button {
-    font: var(--primary-font);
-    color: white;
-    border:none;
-    border-radius: 8px;
-    width: 6.5em;
-    height: 2.5em;
-}
-.login {
-    background-color: var(--black-purple);
-}
-
-.signup {
-    background-color: var(--light-orange);
-}
