@@ -2,7 +2,7 @@ import React from 'react'
 import styles from '../styles/LoginAndSignUp/LoginAndSignUp.module.css'
 import { Button1 } from '../components/Button'
 import { useEffect, useState } from 'react'
-import Frame from '../components/LoginAndSIgnUpCompoments/Frame'
+import Frame from '../components/LoginAndSIgnUpComponents/Frame'
 
 const Signup = () => {
   const [enteredData, setEnteredData] = useState({

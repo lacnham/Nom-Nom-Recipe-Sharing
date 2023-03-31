@@ -1,5 +1,5 @@
 import styles from '../../styles/LoginAndSignUp/LoginAndSignUp.module.css'
-import Header from '../../components/Header'
+import Header from '../Header'
 
 export default function Frame({ Name, Form, Redirect }) {
   return (

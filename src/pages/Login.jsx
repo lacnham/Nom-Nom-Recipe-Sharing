@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../styles/LoginAndSignUp/LoginAndSignUp.module.css'
 import { Button2 } from '../components/Button'
-import Frame from '../components/LoginAndSIgnUpCompoments/Frame.jsx'
+import Frame from '../components/LoginAndSIgnUpComponents/Frame.jsx'
 const Login = () => {
   return (
     <Frame
