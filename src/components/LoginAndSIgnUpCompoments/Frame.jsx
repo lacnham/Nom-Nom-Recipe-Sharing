@@ -1,9 +1,12 @@
 import styles from '../../styles/LoginAndSignUp/LoginAndSignUp.module.css'
+import Header from '../../components/Header'
 
 export default function Frame({ Name, Form, Redirect }) {
   return (
     <div className={styles.page}>
-      <div>Nav Bar goes here</div>
+      <div>
+        <Header></Header>
+      </div>
       <div className={styles.card}>
         <div className={styles.photoContainer}>
           <div className={styles.photo}></div>

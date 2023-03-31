@@ -3,6 +3,7 @@ import styles from '../styles/LoginAndSignUp/LoginAndSignUp.module.css'
 import { Button1 } from '../components/Button'
 import { useEffect, useState } from 'react'
 import Frame from '../components/LoginAndSIgnUpCompoments/Frame'
+
 const Signup = () => {
   const [enteredData, setEnteredData] = useState({
     email: '',

@@ -1,11 +1,13 @@
 import React from 'react'
-import styles from '../styles/LandingPage.module.css'
+import styles from '../styles/LandingPage/LandingPage.module.css'
 import { Button1 } from '../components/Button'
-
+import Header from '../components/Header'
 const LandingPage = () => {
   return (
     <div className={styles.page}>
-      <div>Nav Bar goes here</div>
+      <div>
+        <Header></Header>
+      </div>
       <div className={styles.card}>
         <div className={styles.container}>
           <div className={styles.content}>

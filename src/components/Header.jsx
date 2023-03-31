@@ -18,15 +18,21 @@ const Header = () => {
         className={`${styles.logoContainer} ${styles.flexItemCenter}`}
         typeof="image"
       >
-        <img src={nomNomLogo} alt="nom-nom-logo" />
+        <a href="/">
+          <img src={nomNomLogo} alt="nom-nom-logo" />
+        </a>
       </div>
       <nav className={`${styles.navBar} ${styles.flexItemCenter}`}>
         <ul className={`${styles.flexItemCenter}`}>{items}</ul>
       </nav>
       <div className={`${styles.profileContainer} ${styles.flexItemCenter}`}>
         <div className={styles.loginSignup}>
-          <Button1 type={'button'} options={'Login'} fn={''}></Button1>
-          <Button2 type={'button'} options={'Register'} fn={''}></Button2>
+          <a href="/Login">
+            <Button1 type={'button'} options={'Login'} fn={''}></Button1>
+          </a>
+          <a href="/SignUp">
+            <Button2 type={'button'} options={'Register'} fn={''}></Button2>
+          </a>
         </div>
       </div>
     </header>
