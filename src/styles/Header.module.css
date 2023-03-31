@@ -1,0 +1,62 @@
+@import "./ReusableStyle.module.css";
+
+
+.header {
+    width: 100vw;
+    height: 10vh;
+}
+
+.logoContainer {
+    width: 16%;
+    height: auto;
+    background-color: white;
+}
+
+.navBar {
+    font: var(--primary-font);
+    /* background-color: green; */
+    width: 60%;
+    height: auto;
+}
+ul {
+    list-style-type: none;
+    width: 80%;
+    height: 100%;
+    /* background-color: red; */
+    gap: 40px;
+}
+
+li {
+    font-size: larger;
+    font-weight: bold;
+    text-decoration: solid black;
+}
+
+.profileContainer {
+    /* background-color: red; */
+    width: 24%;
+    height: auto;
+}
+
+.loginSignup {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2em
+}
+
+button {
+    font: var(--primary-font);
+    color: white;
+    border:none;
+    border-radius: 8px;
+    width: 6.5em;
+    height: 2.5em;
+}
+.login {
+    background-color: var(--black-purple);
+}
+
+.signup {
+    background-color: var(--light-orange);
+}
