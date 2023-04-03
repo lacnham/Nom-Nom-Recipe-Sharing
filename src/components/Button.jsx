@@ -28,8 +28,8 @@ export function DefaultButton({fn, options, type, style, className}) {
     setIsHover(false);
   }
   let styleTemp = {
-    backgroundColor: isHover ? 'white' : style.backgroundColor,
-    color: isHover ? style.backgroundColor : style.color
+    backgroundColor: isHover ? style.backgroundColorHover : style.backgroundColor,
+    color: isHover ? style.colorHover : style.color
   }
   return (
     <button type={type} style={styleTemp} className={className} onClick={() => fn} onMouseEnter={handleMouseIn} onMouseLeave={handleMouseOut} >

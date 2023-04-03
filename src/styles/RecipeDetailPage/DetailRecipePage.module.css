@@ -1,13 +1,7 @@
 @import "../Header.module.css";
 @import "../globalStyles.css";
 
-.body {
-    width: 100%;
-    height: fit-content;
-    /* background-color: var(--light-orange) ; */
-    display: flex;
-    justify-content: center;
-}
+
 
 .mainContainer {
     margin-top: 4vh;
@@ -36,9 +30,8 @@
     padding: 8px 0;
     border-bottom: 2px solid rgba(0, 0, 0, 0.25);
     font-size: 20px;
+    font-weight: bold;
 }
-
-
 
 .recipeImg {
     width: 50vw;
@@ -96,8 +89,6 @@
     /* margin: 4px 8px 4px 0; */
     border: 1px ridge rgba(0, 0, 0, 0.25);
 }
-
-
 
 
 .ingDetailContainer {

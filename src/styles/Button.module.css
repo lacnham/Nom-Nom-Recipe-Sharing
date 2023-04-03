@@ -1,20 +1,18 @@
 @import "../styles/globalStyles.css";
 
 button {
-  border-radius: 8px;
   font-family: var(--primary-font);
   font-weight: 600;
-  /* color: white; */
   text-decoration: none;
   transition: background-color 0.5s, color 0.5s;
   padding: 10px 20px;
-  border-width: 2px;
-  /* border-style: solid; */
+  border: none;
   cursor: pointer
 }
 
 .button1 {
   color: white;
+  border-radius: 8px;
   background-color: var(--light-orange);
   border: 2px solid var(--light-orange);
 }
@@ -25,6 +23,7 @@ button {
 }
 
 .button2 {
+  border-radius: 8px;
   color: white;
   background-color: #3d233a;
   border: 2px solid #3d233a;

@@ -2,6 +2,7 @@
 
 
 .header {
+    background-color: white;
     max-width: 100vw;
     height: 10vh;
 }
@@ -9,11 +10,9 @@
 .logoContainer {
     width: 16%;
     height: auto;
-    background-color: white;
 }
 
 .navBar {
-    /* background-color: green; */
     width: 60%;
     height: auto;
 }
@@ -25,14 +24,16 @@ ul {
     gap: 40px;
 }
 
-li {
+li > button {
     font-size: larger;
     font-weight: bold;
     text-decoration: solid black;
+    background-color: inherit;
+    border-radius: 16px;
 }
 
-.profileContainer {
-    /* background-color: red; */
+
+.loginSignupContainer {
     width: 24%;
     height: auto;
 }

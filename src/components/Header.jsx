@@ -1,6 +1,7 @@
 import styles from '../styles/Header.module.css'
 import nomNomLogo from '../images/NomNomHorizontalLogo.png'
 import { Button1, Button2 } from './Button'
+import NavBar from './NavBar'
 
 const Header = () => {
   const tabList = [
@@ -22,11 +23,12 @@ const Header = () => {
           <img src={nomNomLogo} alt="nom-nom-logo" />
         </a>
       </div>
-      <nav className={`${styles.navBar} ${styles.flexItemCenter}`}>
-        <ul className={`${styles.flexItemCenter}`}>{items}</ul>
+      {/* <nav className={`${styles.navBar} ${styles.flexItemCenter}`}> */}
+        {/* <ul className={`${styles.flexItemCenter}`}>{items}</ul> */}
         {/* TODO Make items clickable */}
-      </nav>
-      <div className={`${styles.profileContainer} ${styles.flexItemCenter}`}>
+      {/* </nav> */}
+      <NavBar></NavBar>
+      <div className={`${styles.loginSignupContainer} ${styles.flexItemCenter}`}>
         <div className={styles.loginSignup}>
           <a href="/Login">
             <Button1 type={'button'} options={'Login'} fn={''}></Button1>

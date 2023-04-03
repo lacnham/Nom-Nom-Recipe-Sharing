@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import DetailRecipePage from './pages/DetailRecipePage'
+import UserProfileMainPage from './pages/UserProfilePage'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/Login" element={<Login/>} />
           <Route path="/Signup" element={<Signup/>} />
           <Route path="/Detail" element={<DetailRecipePage/>} />
+          <Route path='/User' element={<UserProfileMainPage/>}/>
         </Routes>
       </BrowserRouter>
     </>
