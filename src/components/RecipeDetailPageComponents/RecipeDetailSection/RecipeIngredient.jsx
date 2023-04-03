@@ -28,15 +28,15 @@ const RecipeIngredient = () => {
     const label = labelProps.map((ele) => RenderLabel(ele))
   
     return (
-      <div className={styles.ingredientContainer}>
-        <div className={styles.ingredientTab}>
+      <div className={`${styles.ingredientContainer} ${styles.flexRow} `}>
+        <div className={`${styles.ingredientTab} ${styles.boxShadowPurple}`}>
           <div className={styles.labelContainer}>
             {label}
           </div>
           <div className={styles.ingDetailContainer}>{labelDetail}</div>
         </div>
   
-        <div className={styles.ingredientTab}>
+        <div className={`${styles.ingredientTab} ${styles.boxShadowPurple}`}>
           <div className={styles.title}>Nutrition facts</div>
           <div className={styles.ingDetailContainer}>{labelDetail}</div>
         </div>

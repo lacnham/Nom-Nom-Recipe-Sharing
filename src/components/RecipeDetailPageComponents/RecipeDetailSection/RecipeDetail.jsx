@@ -6,7 +6,7 @@ import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css
 
 const RecipeDetail = () => {
     return (
-      <div className={`${styles.recipeDetail} ${styles.flexColumn}`}>
+      <div className={`${styles.recipePrimaryContainer} ${styles.flexColumn}`}>
         <RecipeIntro />
         <RecipeDescription />
         <RecipeIngredient />

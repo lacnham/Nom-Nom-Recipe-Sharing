@@ -13,7 +13,7 @@ const RecipeReview = () => {
    const button = buttonList.map((ele) => RenderLabel(ele));
   
     return ( 
-      <div className={`${styles.reviewSection} ${styles.flexColumn}`}>
+      <div className={`${styles.recipePrimaryContainer} ${styles.flexColumn} ${styles.boxShadowPurple}`}>
         <div className={`${styles.labelContainer}`}>
           {button}
         </div>

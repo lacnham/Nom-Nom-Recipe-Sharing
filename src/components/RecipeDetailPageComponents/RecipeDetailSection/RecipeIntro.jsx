@@ -12,7 +12,7 @@ const RecipeIntro = () => {
     }
   
     return (
-      <div className={styles.recipePrimaryContainer}>
+      <div className={`${styles.recipePrimaryContainer} ${styles.boxShadowPurple}`}>
         <img className={styles.recipeImg} src={recipe.src} />
         <div className={styles.title}>Beef steak</div>
         <div className={styles.commonInfo}>
@@ -23,6 +23,14 @@ const RecipeIntro = () => {
           <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
             <img src={peopleIcon} alt="people icon" />
             <div>1 people</div>
+          </div>
+          <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
+            {/* <img src={peopleIcon} alt="people icon" /> */}
+            <div><b>Calories</b>: 600 kcal</div>
+          </div>
+          <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
+            {/* <img src={peopleIcon} alt="people icon" /> */}
+            <div><b>Diet type:</b> none</div>
           </div>
         </div>
       </div>

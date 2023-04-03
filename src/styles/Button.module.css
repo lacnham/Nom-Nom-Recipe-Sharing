@@ -1,28 +1,31 @@
+@import "../styles/globalStyles.css";
+
 button {
   border-radius: 8px;
-  font-family: Noto Sans JP;
+  font-family: var(--primary-font);
   font-weight: 600;
-  color: white;
+  /* color: white; */
   text-decoration: none;
   transition: background-color 0.5s, color 0.5s;
-  padding: 10px 0px;
+  padding: 10px 20px;
   border-width: 2px;
-  border-style: solid;
-  cursor: pointer;
-  min-width: 150px;
+  /* border-style: solid; */
+  cursor: pointer
 }
 
 .button1 {
-  background-color: #d18d0f;
-  border: 2px solid #d18d0f;
+  color: white;
+  background-color: var(--light-orange);
+  border: 2px solid var(--light-orange);
 }
 
 .button1:hover {
   background-color: white;
-  color: #d18d0f;
+  color: var(--light-orange);
 }
 
 .button2 {
+  color: white;
   background-color: #3d233a;
   border: 2px solid #3d233a;
 }
@@ -30,4 +33,9 @@ button {
 .button2:hover {
   background-color: white;
   color: #3d233a;
+}
+
+.defaultButton:hover {
+  background-color: white;
+  color: black;
 }
