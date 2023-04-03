@@ -6,7 +6,10 @@ const UserProfileMainPage = () => {
         <>
         <Header/>
         <div className={`${styles.body}`}>
-            <div className={`${styles.flexRow} ${styles.profileMainContainer}`}></div>
+            <div className={`${styles.flexRow} ${styles.profileMainContainer}`}>
+                {/* Section container fixed width, height fit content, display grid 3 */}
+                {/* UserProfileContainer fixed width */}
+            </div>
         </div>
         </>
         

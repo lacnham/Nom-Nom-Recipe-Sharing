@@ -1,7 +1,7 @@
 @import url('../globalStyles.css');
 
 .profileMainContainer {
-    width: 80%;
+    width: 90vw;
     height: 100vh;
     background-color: red;
 }
