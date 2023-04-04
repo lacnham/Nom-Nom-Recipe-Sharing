@@ -57,7 +57,7 @@ const UserReview = () => {
           <ReactStars {...star} value={review.ratingValue} />
         </div>
       </div>
-      <p>{review.feedBack}</p>
+      <p className={`${styles.textOverFlowEcllipse}`}>{review.feedBack}</p>
     </div>
   ))
 
