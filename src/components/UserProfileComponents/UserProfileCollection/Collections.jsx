@@ -11,8 +11,8 @@ const Collections = (props) => {
 
   const [list, setlist] = useState(props.recipes);
 
-  const addToCollection = ({recipe}) => {
-    const newList =  props.recipe.concat(recipe);
+  const addToCollection = (props) => {
+    const newList =  props.collection.recipe.concat(recipe);
     setlist(newList);
   }
 

@@ -10,7 +10,7 @@ const RecipeDescription = (props) => {
         <div className={`${styles.recipePrimaryContainer} ${styles.boxShadowPurple}`}>
           <div className={styles.title}>Origin</div>
           <p>
-            {props.recipe.origin}
+            {props.recipe.origiin}
           </p>
         </div>
         <div className={`${styles.recipePrimaryContainer} ${styles.boxShadowPurple}`}>
