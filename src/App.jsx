@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import DetailRecipePage from './pages/DetailRecipePage'
 import UserProfileMainPage from './pages/UserProfilePage'
+import CollectionDropList from './components/UserProfileComponents/UserProfileCollection/CollectionDropList'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/Signup" element={<Signup/>} />
           <Route path="/Detail" element={<DetailRecipePage/>} />
           <Route path='/User' element={<UserProfileMainPage/>}/>
+          <Route path='/temp' element={<CollectionDropList/>}/>
         </Routes>
       </BrowserRouter>
     </>

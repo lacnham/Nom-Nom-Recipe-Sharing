@@ -9,6 +9,10 @@
     justify-content: center;
 }
 
+.temp {
+    position: relative;
+}
+
 .mainContainer {
     margin-top: 4vh;
     margin-bottom: 4vh;

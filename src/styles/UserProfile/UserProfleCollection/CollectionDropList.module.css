@@ -1,2 +1,64 @@
 @import url("../../globalStyles.css");
 
+.listMainContainer {
+    /* position: absolute; */
+    width: 280px;
+    height: 100px;
+    /* background-color: red; */
+    padding: 4px;
+}
+
+
+.searchBarAndCreateButtonContainer {
+    height: fit-content;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.25);
+}
+
+.searchBar {
+    height: 32px;
+    width: calc(280px - 8px);
+    background-color: white;
+    padding: 4px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+}
+
+.searchIconContainer {
+    width: 24px;
+    /* background-color: black; */
+}
+
+.inputFieldContainer {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border-width: 0px;
+    font-size: 16px;
+    /* border-radius: 8px; */
+}
+
+.hiddenInputField {
+    display: none;
+    /* height: 32px; */
+}
+.createNewCollection {
+    height: 32px;
+}
+.button {
+    height: 100%;
+    /* border: none; */
+    /* border-radius: 8px; */
+    width: 100%;
+    text-align: left;
+    padding: 0 4px;
+    background-color: transparent;
+    /* padding: 0; */
+    font: var(--primary-font);
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.hiddenInputField:hover {
+    display: block;
+    background-color: red;
+}

@@ -30,9 +30,9 @@ const RecipeIngredient = (props) => {
     const label = props.recipe.ingredients.map((ele) => 
       RenderLabel(ele))
 
-    const nutritionFacts = props.recipe.ingredients.map((ele) => 
-      ele.nutritions[0].name
-    )
+    // const nutritionFacts = props.recipe.ingredients.map((ele) => 
+    //   ele.nutritions[0].name
+    // )
 
       
     const labelDetail = props.recipe.ingredients.map(ele => RenderDetail(ele))
@@ -50,7 +50,7 @@ const RecipeIngredient = (props) => {
   
         <div className={`${styles.ingredientTab} ${styles.boxShadowPurple}`}>
           <div className={styles.title}>Nutrition facts</div>
-          <div className={styles.ingDetailContainer}>{nutritionFacts}</div>
+          {/* <div className={styles.ingDetailContainer}>{nutritionFacts}</div> */}
         </div>
       </div>
     )
