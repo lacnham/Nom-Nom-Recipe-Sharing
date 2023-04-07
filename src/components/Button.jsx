@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import styles from '../styles/Button.module.css'
 
-export function Button1({ fn, options, type }) {
+export function Button1 ({ fn, options, type }) {
   return (
-    <button type={type} className={styles.button1} onClick={() => fn()} >
+    <button type={type} className={styles.button1} onClick={() => fn()}>
       {options}
     </button>
   )
 }
 
-export function Button2({ fn, options, type }) {
+export function Button2 ({ fn, options, type }) {
   return (
     <button type={type} className={styles.button2} onClick={() => fn()}>
       {options}
@@ -17,23 +17,31 @@ export function Button2({ fn, options, type }) {
   )
 }
 
-export function DefaultButton({fn, options, type, style, className}) {
-
-  const [isHover, setIsHover] = useState(false);
+export function DefaultButton ({ fn, options, type, style, className }) {
+  const [isHover, setIsHover] = useState(false)
 
   const handleMouseIn = () => {
-    setIsHover(true);
+    setIsHover(true)
   }
   const handleMouseOut = () => {
-    setIsHover(false);
+    setIsHover(false)
   }
   let styleTemp = {
-    backgroundColor: isHover ? style.backgroundColorHover : style.backgroundColor,
+    backgroundColor: isHover
+      ? style.backgroundColorHover
+      : style.backgroundColor,
     color: isHover ? style.colorHover : style.color
   }
   return (
-    <button type={type} style={styleTemp} className={className} onClick={() => fn} onMouseEnter={handleMouseIn} onMouseLeave={handleMouseOut} >
+    <button
+      type={type}
+      style={styleTemp}
+      className={className}
+      onClickCapture={fn}
+      onMouseEnter={handleMouseIn}
+      onMouseLeave={handleMouseOut}
+    >
       {options}
     </button>
-  );
+  )
 }

@@ -1,23 +1,19 @@
-@import "../Header.module.css";
-@import "../globalStyles.css";
+@import '../Header.module.css';
+@import '../globalStyles.css';
 
 .body {
-    width: 100%;
-    height: fit-content;
-    /* background-color: var(--light-orange) ; */
-    display: flex;
-    justify-content: center;
-}
-
-.temp {
-    position: relative;
+  width: 100%;
+  height: fit-content;
+  /* background-color: var(--light-orange) ; */
+  display: flex;
+  justify-content: center;
 }
 
 .mainContainer {
-    margin-top: 4vh;
-    margin-bottom: 4vh;
-    width: 80vw;
-    gap: 2em;
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+  width: 80vw;
+  gap: 2em;
 }
 
 /* .recipeDetail {
@@ -28,134 +24,132 @@
 
 /* Recipes introduction */
 .recipePrimaryContainer {
-    width: 100%;
-    height: fit-content;
-    /* background-color: white; */
-    border-radius: 16px;
-    gap: 20px
+  width: 100%;
+  height: fit-content;
+  /* background-color: white; */
+  border-radius: 16px;
+  gap: 20px;
 }
 
 .title {
-    margin: 0px 16px;
-    padding: 8px 0;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.25);
-    font-size: 20px;
-    font-weight: bold;
+  margin: 0px 16px;
+  padding: 8px 0;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.25);
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .recipeImg {
-    width: 50vw;
-    border-radius: 16px 16px 0 0;
-    /* background-color: black; */
+  width: 50vw;
+  border-radius: 16px 16px 0 0;
+  /* background-color: black; */
 }
 
 .commonInfo {
-    width: 100%;
-    height: fit-content;
-    /* background-color: wheat; */
-    display: flex;
+  width: 100%;
+  height: fit-content;
+  /* background-color: wheat; */
+  display: flex;
 }
 .commonInfoEle {
-    /* display: flex;
+  /* display: flex;
     flex-direction: row; */
-    margin: 8px 8px 16px;
+  margin: 8px 8px 16px;
 }
 
 .commonInfoEle > img {
-    margin: 0 4px;
-    width: 20px;
-    height: 20px;
+  margin: 0 4px;
+  width: 20px;
+  height: 20px;
 }
 
 /* Ingredients */
 
 .ingredientContainer {
-    gap: 20px;
+  gap: 20px;
 }
 
 .ingredientTab {
-    width: 100%;
-    height: fit-content;
-    border-radius: 16px;
-    /* background-color: white; */
+  width: 100%;
+  height: fit-content;
+  border-radius: 16px;
+  /* background-color: white; */
 }
 
 .labelContainer {
-    margin: 0 16px;
-    padding: 12px 0;
-    display: flex;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.25);
-    gap: 8px
+  margin: 0 16px;
+  padding: 12px 0;
+  display: flex;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.25);
+  gap: 8px;
+  position: relative;
 }
 
-.label  {
-    /* font-size: 12px; */
-    height: fit-content;
-    width: fit-content; 
-    display: inline-block;
-    padding: 8px 16px;
-    border-radius: 16px;
-    
-    /* margin: 4px 8px 4px 0; */
-    border: 1px ridge rgba(0, 0, 0, 0.25);
-}
+.label {
+  /* font-size: 12px; */
+  height: fit-content;
+  width: fit-content;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 16px;
 
+  /* margin: 4px 8px 4px 0; */
+  border: 1px ridge rgba(0, 0, 0, 0.25);
+}
 
 .ingDetailContainer {
-    width: 100%;
-    height: fit-content;
-    display: grid;
-    grid-template-columns: auto auto auto;
-    margin: 4px 4px 16px;
+  width: 100%;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin: 4px 4px 16px;
 }
 
 .eleContainer {
-    width: 100%;
-    align-items: center;
-    gap: 8px;
+  width: 100%;
+  align-items: center;
+  gap: 8px;
 }
 
 .recipePrimaryContainer p {
-    padding: 4px 16px 16px;
-    text-align: justify;
-    line-height: 1.6;
+  padding: 4px 16px 16px;
+  text-align: justify;
+  line-height: 1.6;
 }
-
 
 .reviewSection {
-    /* width: 36%; */
-    height: 100%;
-    /* background-color: white; */
-    border-radius: 16px;
-    /* max-height: 40vh; */
+  /* width: 36%; */
+  height: 100%;
+  /* background-color: white; */
+  border-radius: 16px;
+  /* max-height: 40vh; */
 }
 
-
 .userReviewContainer {
-    height: 200px;
-    margin: 12px;
-    padding: 12px 16px 0 16px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    border-radius: 16px;
-    /* height: 200px; */
-    max-height: 300px;
-    /* text-overflow: clip; */
-    overflow: hidden;
-    /* box-sizing: border-box; */
+  height: 200px;
+  margin: 12px;
+  padding: 12px 16px 0 16px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+  /* height: 200px; */
+  max-height: 300px;
+  /* text-overflow: clip; */
+  overflow: hidden;
+  /* box-sizing: border-box; */
 }
 
 .userAvatar {
-    height: 50px;
-    width: 50px;
-    /* background-color: red; */
+  height: 50px;
+  width: 50px;
+  /* background-color: red; */
 }
 
 .userInfoContainer {
-    gap: 12px;
+  gap: 12px;
 }
 
 .userReviewContainer > p {
-    padding: 14px;
-    font-size: 14px;
-    -webkit-line-clamp: 5;
-}  
+  padding: 14px;
+  font-size: 14px;
+  -webkit-line-clamp: 5;
+}
