@@ -1,5 +1,5 @@
 import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css'
-import {DefaultButton } from '../../Button'
+import { DefaultButton } from '../../Button'
 
 const RenderLabel = props => {
   const style = {
@@ -15,10 +15,9 @@ const RenderLabel = props => {
       type={'button'}
       key={props.key}
       style={style}
-      fn={''}
+      fn={props.fn}
       options={props.name}
-    >
-    </DefaultButton>
+    ></DefaultButton>
   )
 }
 

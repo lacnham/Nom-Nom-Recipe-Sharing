@@ -1,8 +1,8 @@
 import styles from '../../../styles/UserProfile/UserProfileMainPage.module.css'
-import Collections from './Collections'
+import Collections from '../UserProfileCollection/Collections'
 import img from '../../../images/recipeImage.png'
 
-const CollectionSection = () => {
+export const RecipeSection = () => {
   const collection = {
     title: 'tet',
     description: 'lorem',
@@ -15,9 +15,6 @@ const CollectionSection = () => {
       <Collections collection={collection}></Collections>
       <Collections collection={collection}></Collections>
       <Collections collection={collection}></Collections>
-      <Collections collection={collection}></Collections>
     </div>
   )
 }
-
-export default CollectionSection

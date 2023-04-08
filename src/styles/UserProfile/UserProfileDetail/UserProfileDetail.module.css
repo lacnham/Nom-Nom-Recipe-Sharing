@@ -1,0 +1,39 @@
+@import url('../../globalStyles.css');
+
+.detailContainer {
+  padding: 8px 0;
+  border-radius: 16px;
+  height: 200px;
+  width: 400px;
+  background-color: var(--light-orange);
+  gap: 4%;
+}
+
+.avatarContainer {
+  border-right: 2px solid black;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatarContainer > img {
+  width: 100px;
+  height: 100px;
+}
+
+.infoContainer {
+  width: 60%;
+  /* background-color: wheat; */
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  flex-direction: column;
+}
+
+.tabContainer {
+  width: 100%;
+  gap: 8px;
+  max-width: 400px;
+  flex-wrap: wrap;
+}

@@ -1,63 +1,59 @@
 @import url('../globalStyles.css');
 @import url('../RecipeDetailPage/DetailRecipePage.module.css');
 
-
 .profileMainContainer {
-    margin-top: 8% ;
-    width: 90%;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: auto auto;
+  margin-top: 8%;
+  width: 90%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: auto auto;
 
-    /* background-color: red; */
+  /* background-color: red; */
 }
-
 
 .collectionMainContainer {
-    width: 100%;
-    height: 1000px;
-    flex-wrap: wrap; 
-    gap: 24px;
+  width: 100%;
+  height: 1000px;
+  flex-wrap: wrap;
+  gap: 24px;
 }
 
-
 .collectionContainer {
-    width: 300px;
-    height: 460px;
-    border-radius: 8px;
-    background-color: white;
-    padding: 2px;
+  width: 300px;
+  height: 460px;
+  border-radius: 8px;
+  background-color: white;
+  padding: 2px;
 }
 
 .contContainer {
-    width: 100%;
-    /* height: 100%; */
-    border-radius: 8px;
-    box-sizing: border-box;
-    /* padding: 8px; */
+  width: 100%;
+  /* height: 100%; */
+  border-radius: 8px;
+  box-sizing: border-box;
+  /* padding: 8px; */
 }
 
 .contContainer > img {
-    /* width: 10; */
-    /* height: 300px; */
-    border-radius: 8px 8px 0 0;
-    object-fit: cover;
-    height: 240px;
+  /* width: 10; */
+  /* height: 300px; */
+  border-radius: 8px 8px 0 0;
+  object-fit: cover;
+  height: 240px;
 }
 .text {
-    width: 100%;
-    padding: 12px 12px 0 12px;
-    -webkit-line-clamp: 6;
-    height: 100%;
+  width: 100%;
+  padding: 12px 12px 0 12px;
+  -webkit-line-clamp: 6;
+  height: 100%;
 }
 
-
 .contContainer > .title {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .userProfileSideMainContainer {
-    width: 400px;
-    height: 1000px;
-    background-color: yellow;
+  width: 400px;
+  height: 1000px;
+  gap: 20px;
 }
