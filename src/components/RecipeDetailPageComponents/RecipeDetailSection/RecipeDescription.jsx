@@ -1,28 +1,23 @@
-
 import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css'
 
-const RecipeDescription = (props) => {
+const RecipeDescription = props => {
+  return (
+    <>
+      <div
+        className={`${styles.recipePrimaryContainer} ${styles.boxShadowPurple}`}
+      >
+        <div className={styles.title}>Origin</div>
+        <p>{props.recipe.origin}</p>
+      </div>
+      <div
+        className={`${styles.recipePrimaryContainer} ${styles.boxShadowPurple}`}
+      >
+        {/* <div className={`${styles.authorContainer}`}>Author hehe</div> */}
+        <div className={styles.title}>Description</div>
+        <p>{props.recipe.description}</p>
+      </div>
+    </>
+  )
+}
 
-
-
-    return (
-      <>
-        <div className={`${styles.recipePrimaryContainer} ${styles.boxShadowPurple}`}>
-          <div className={styles.title}>Origin</div>
-          <p>
-            {props.recipe.origiin}
-          </p>
-        </div>
-        <div className={`${styles.recipePrimaryContainer} ${styles.boxShadowPurple}`}>
-          <div className={styles.title}>Description</div>
-          <p>
-            {props.recipe.description}
-          </p>
-        </div>
-        
-      </>
-      
-    )
-  }
-
-  export default RecipeDescription;
+export default RecipeDescription
