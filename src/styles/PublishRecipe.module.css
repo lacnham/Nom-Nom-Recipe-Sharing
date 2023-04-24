@@ -1,12 +1,12 @@
-body {
-  background-color: rgb(255, 218, 177);
+/* body {
+  
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: 'Ubuntu', sans-serif;
   font-size: 20px;
   font-weight: bold;
-}
+} */
 
 textarea,
 input {
@@ -40,8 +40,12 @@ span:hover {
 }
 
 .container {
-  height: 100vh;
-  overflow-y: scroll;
+  background-color: rgb(255, 218, 177);
+  min-height:fit-content;
+  /* height: 100vh; */
+  /* overflow-y: scroll; */
+  display: flex;
+  justify-content: center;
 }
 
 .publish {
@@ -103,6 +107,12 @@ option:hover,
 
 .inputIgd {
   padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.inputIgd i{
+  padding: 10px;
 }
 
 /*ADD INGREDIENTS*/
@@ -136,4 +146,18 @@ option:hover,
 .submitBtn:hover {
   background-color: rgb(134, 168, 124);
   transform: scale(0.9);
+}
+
+.preview{
+  justify-content: center;
+  display: flex;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-left: 8px;
+}
+
+.preview img{
+  padding: 15px;
+  max-width: 300px;
+  height: auto;
 }

@@ -1,9 +1,9 @@
 import styles from '../styles/Button.module.css'
 
-export function Button1({ fn, options, type }) {
+export function Button1({ fn, options, type, icon }) {
   return (
     <button type={type} className={styles.button1} onClick={() => fn} >
-      {options}
+      {icon}{options}
     </button>
   )
 }

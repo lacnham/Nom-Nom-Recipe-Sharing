@@ -6,6 +6,7 @@ import RecipeReview from '../components/RecipeDetailPageComponents/RecipeReviewS
 const DetailRecipePage = () => {
   return (
     <>
+    {/* TODO CSS clashes with PublicRecipe.module.css page [FIX] */}
       <Header />
       <div className={`${styles.body}`}>
         <div className={`${styles.mainContainer} ${styles.flexRow}`}>
