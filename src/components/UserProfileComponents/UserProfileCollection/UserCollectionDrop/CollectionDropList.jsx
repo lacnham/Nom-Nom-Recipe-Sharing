@@ -3,7 +3,18 @@ import searchIcon from '../../../../images/Nom nom icons/Search_alt.svg'
 
 import { CreateNewCollection } from './CreateNewCollection'
 import { CollectionInDropList } from './CollectionInDropList'
+import { FetchUserCollections } from '../FetchUserCollections'
 const CollectionDropList = props => {
+  const userCollections = FetchUserCollections()
+  // console.log('recipe ID = ' + props.recipe.recipe_id)
+  const collection = userCollections.map(ele => (
+    <CollectionInDropList
+      key={ele.collection_id}
+      recipe={props.recipe}
+      collection={ele}
+    ></CollectionInDropList>
+  ))
+
   return (
     <div
       className={`${styles.listMainContainer} ${styles.flexColumn}`}
@@ -21,26 +32,7 @@ const CollectionDropList = props => {
 
         <CreateNewCollection></CreateNewCollection>
       </div>
-      <div className={`${styles.itemsContainer}`}>
-        <CollectionInDropList></CollectionInDropList>
-        <CollectionInDropList></CollectionInDropList>
-        <CollectionInDropList></CollectionInDropList>
-        <CollectionInDropList></CollectionInDropList>
-        <CollectionInDropList></CollectionInDropList>
-        <CollectionInDropList></CollectionInDropList>
-        <CollectionInDropList></CollectionInDropList>
-        <CollectionInDropList></CollectionInDropList>
-        <CollectionInDropList></CollectionInDropList>
-        <CollectionInDropList></CollectionInDropList>
-        <CollectionInDropList></CollectionInDropList>
-        <CollectionInDropList></CollectionInDropList>
-        <CollectionInDropList></CollectionInDropList>
-
-        {/* display list of collections */}
-        {/* height fit content */}
-        {/* scrollable */}
-        {/* max item 10 */}
-      </div>
+      <div className={`${styles.itemsContainer}`}>{collection}</div>
     </div>
   )
 }

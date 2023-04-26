@@ -5,7 +5,9 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import DetailRecipePage from './pages/DetailRecipePage'
 import UserProfileMainPage from './pages/UserProfilePage'
-import CollectionDropList from './components/UserProfileComponents/UserProfileCollection/UserCollectionDrop/CollectionDropList'
+import { CollectionRecipes } from './components/UserProfileComponents/UserProfileCollection/CollectionRecipes'
+
+// import CollectionRecipes from './components/UserProfileComponents/CollectionRecipes'
 
 function App () {
   return (
@@ -17,7 +19,8 @@ function App () {
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Detail" element={<DetailRecipePage />} />
           <Route path="/User" element={<UserProfileMainPage />} />
-          <Route path="/temp" element={<CollectionDropList />} />
+          {/* <Route path="/Recipe" element={<Collec />} /> */}
+          <Route path="/Collection/1" element={<CollectionRecipes />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -6,7 +6,7 @@ import UserReview from './UserReviews'
 import { useState } from 'react'
 import ClickChangeStyle from '../../ClickChangeStyle'
 
-const RecipeReview = () => {
+const RecipeReview = props => {
   //   const buttonList = [
   //     {key: 1, name: 'Save', color: 'green', textColor: 'white'},
   //     {key: 2,name: 'Share', color: 'green', textColor: 'white'},
@@ -21,13 +21,20 @@ const RecipeReview = () => {
   const [current, setCurrent] = useState('none')
 
   let handleClick = ClickChangeStyle(current, setCurrent, styleElement)
+
   return (
     <div
       className={`${styles.recipePrimaryContainer} ${styles.flexColumn} ${styles.boxShadowPurple}`}
     >
       <div className={`${styles.labelContainer} ${styles.temp}`}>
-        <SaveRecipeButton fn={handleClick}></SaveRecipeButton>
-        <CollectionDropList current={current}></CollectionDropList>
+        <SaveRecipeButton
+          fn={handleClick}
+          onBlur={handleClick}
+        ></SaveRecipeButton>
+        <CollectionDropList
+          recipe={props.recipe}
+          current={current}
+        ></CollectionDropList>
       </div>
       <UserReview></UserReview>
     </div>

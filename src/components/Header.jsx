@@ -2,6 +2,8 @@ import styles from '../styles/Header.module.css'
 import nomNomLogo from '../images/NomNomHorizontalLogo.png'
 import { Button1, Button2 } from './Button'
 import NavBar from './NavBar'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 
 const Header = () => {
   const tabList = [
@@ -24,11 +26,13 @@ const Header = () => {
         </a>
       </div>
       {/* <nav className={`${styles.navBar} ${styles.flexItemCenter}`}> */}
-        {/* <ul className={`${styles.flexItemCenter}`}>{items}</ul> */}
-        {/* TODO Make items clickable */}
+      {/* <ul className={`${styles.flexItemCenter}`}>{items}</ul> */}
+      {/* TODO Make items clickable */}
       {/* </nav> */}
       <NavBar></NavBar>
-      <div className={`${styles.loginSignupContainer} ${styles.flexItemCenter}`}>
+      <div
+        className={`${styles.loginSignupContainer} ${styles.flexItemCenter}`}
+      >
         <div className={styles.loginSignup}>
           <a href="/Login">
             <Button1 type={'button'} options={'Login'} fn={''}></Button1>
