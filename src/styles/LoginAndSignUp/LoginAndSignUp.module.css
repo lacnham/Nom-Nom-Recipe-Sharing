@@ -156,13 +156,9 @@ hr {
   padding-top: 24px;
   justify-content: center;
 }
-.register a {
+.register > a {
   font-style: italic;
   text-decoration: underline;
-}
-
-.register a:hover {
-  color: #7d7d7d;
 }
 
 .warning {
@@ -173,4 +169,5 @@ hr {
   color: #e43636;
   text-align: start;
   background-color: rgb(228, 54, 54, 0.1);
+  border-radius: 8px;
 }

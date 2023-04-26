@@ -35,3 +35,8 @@ button > i{
   background-color: white;
   color: #3d233a;
 }
+
+.disabledButton{
+  background-color: #949497;
+  cursor: not-allowed;
+}

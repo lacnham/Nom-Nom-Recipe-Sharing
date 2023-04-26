@@ -2,6 +2,8 @@ import React from 'react'
 import styles from '../styles/LoginAndSignUp/LoginAndSignUp.module.css'
 import Frame from '../components/LoginAndSIgnUpComponents/Frame'
 import LoginForm from '../components/LoginAndSIgnUpComponents/LoginForm'
+import { withAuth } from '../components/SessionVerification/AuthChecking'
+
 const Login = ({}) => {
   return (
     <Frame
@@ -16,4 +18,4 @@ const Login = ({}) => {
   )
 }
 
-export default Login
+export default withAuth(Login)

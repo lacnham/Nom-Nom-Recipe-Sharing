@@ -33,8 +33,7 @@ span {
   color: lightslategray;
 }
 
-i:hover,
-span:hover {
+.formControl i:hover, .formControl span:hover {
   color: lightslategray;
   transform: scale(0.9);
 }

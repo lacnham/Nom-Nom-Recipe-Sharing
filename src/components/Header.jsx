@@ -1,7 +1,9 @@
 import styles from '../styles/Header.module.css'
 import nomNomLogo from '../images/NomNomHorizontalLogo.png'
 import { Button1, Button2 } from './Button'
-
+import { useContext } from 'react'
+import { AuthContext } from './SessionVerification/AuthContext'
+import Dropdown from './Dropdown/Dropdown'
 const Header = () => {
   const tabList = [
     { key: 1, label: 'Recipes', link: '' },
@@ -11,7 +13,9 @@ const Header = () => {
   ]
 
   const items = tabList.map(tab => <li key={tab.key}>{tab.label}</li>)
+  function doNothing() {}
 
+  const { userData } = useContext(AuthContext)
   return (
     <header className={`${styles.header} ${styles.flexRow}`}>
       <div
@@ -27,14 +31,25 @@ const Header = () => {
         {/* TODO Make items clickable */}
       </nav>
       <div className={`${styles.profileContainer} ${styles.flexItemCenter}`}>
-        <div className={styles.loginSignup}>
-          <a href="/Login">
-            <Button1 type={'button'} options={'Login'} fn={''}></Button1>
-          </a>
-          <a href="/SignUp">
-            <Button2 type={'button'} options={'Register'} fn={''}></Button2>
-          </a>
-        </div>
+        {userData === null ? (
+          <div className={styles.loginSignup}>
+            <a href="/Login">
+              <Button1 type={'button'} options={'Login'} fn={() => ''}></Button1>
+            </a>
+            <a href="/SignUp">
+              <Button2 type={'button'} options={'Register'} fn={() => ''}></Button2>
+            </a>
+          </div>
+        ) : (
+          <div>
+            <Dropdown
+              username={userData.user.username}
+              options={[
+                { id: 1, title: 'Profile',icon: 'fa-solid fa-user', link: '' },
+              ]}
+            ></Dropdown>
+          </div>
+        )}
       </div>
     </header>
   )

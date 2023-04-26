@@ -3,6 +3,7 @@ import axios from 'axios';
 import Header from '../components/Header';
 import styles from '../styles/AllRecipePage/AllRecipe.module.css';
 import SearchBar from '../components/SearchBar';
+import { withoutAuth } from '../components/SessionVerification/AuthChecking';
 import { Button1 } from '../components/Button';
 
 const AllRecipe = () => {
@@ -97,4 +98,4 @@ const AllRecipe = () => {
   );
 };
 
-export default AllRecipe;
+export default withoutAuth(AllRecipe);

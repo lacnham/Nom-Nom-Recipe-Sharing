@@ -1,48 +1,31 @@
 import styles from '../../styles/LoginAndSignUp/LoginAndSignUp.module.css'
 import { Button2 } from '../Button'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 
 const LoginForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = async () => {
-
-    let config = {
-      method: 'post',
-      url:'http://localhost:3000/auth/login',
-      data: {
-        email: 'khangngoc2222@gmail.com',
-        password: '123456789'
-      }
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
-      const res = await axios.request(config)
-      console.log(res.message)
-      setEmail(res.data.email)
-      setPassword(res.data.password)
+      const response = await axios.post('http://localhost:3000/auth/login', {
+        email: email,
+        password: password,
+      })
+      localStorage.setItem('accessToken', JSON.stringify(response.data.accesstoken).replace(/"/g, ''));
+      localStorage.setItem('refreshtoken', JSON.stringify(response.data.refreshtoken).replace(/"/g, ''));
+      console.log(localStorage);
+      window.location.replace('/allrecipe')
     } catch (error) {
-      console.log(error)
+      console.error(error)
+      // Handle errors here, such as displaying an error message to the user.
     }
-
-    // e.preventDefault();
-    // try {
-    //   const response = await axios.post('http://localhost:3000/auth/login', {
-    //     email: email,
-    //     password: password,
-    //   });
-    //   console.log(response.data);
-    //   // Do something with the response, such as store the token in local storage or cookies.
-    // } catch (error) {
-    //   console.error(error);
-    //   // Handle errors here, such as displaying an error message to the user.
-    // }
-  };
-  
+  }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit} method='POST'>
       <div>
         <div className={styles.inputContainer}>
           <i className={`${styles.icon} ${'fa-solid fa-envelope'}`}></i>
@@ -74,7 +57,7 @@ const LoginForm = () => {
           </span>
         </div>
         <div className={styles.btnContainer}>
-          <Button2 type={'submit'} options={'Login'} fn={handleSubmit}></Button2>
+          <Button2 type={'submit'} options={'Login'} fn={() => ''}></Button2>
         </div>
       </div>
     </form>

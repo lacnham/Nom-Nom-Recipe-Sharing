@@ -2,6 +2,7 @@ import React from 'react'
 import styles from '../styles/LandingPage/LandingPage.module.css'
 import { Button1 } from '../components/Button'
 import Header from '../components/Header'
+import { withAuth } from '../components/SessionVerification/AuthChecking'
 const LandingPage = () => {
   return (
     <div className={styles.page}>
@@ -14,15 +15,17 @@ const LandingPage = () => {
             <div className={styles.text}>
               <h1>Bring you to the world of food</h1>
               <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Sapiente non rerum incidunt, quas officia voluptas quam quasi
-                officiis omnis. Saepe?
+                NomNom is a social platform where you can share and discover
+                recipes with a community of food lovers. Join now to find new
+                recipe inspirations and connect with other foodies.
               </p>
-              <Button1
-                type={'button'}
-                options={'Get Started!'}
-                fn={console.log('Clicked!')}
-              ></Button1>
+              <a href="/Login">
+                <Button1
+                  type={'button'}
+                  options={'Get Started'}
+                  fn={''}
+                ></Button1>
+              </a>
             </div>
           </div>
         </div>
@@ -34,4 +37,4 @@ const LandingPage = () => {
   )
 }
 
-export default LandingPage
+export default withAuth(LandingPage)
