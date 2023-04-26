@@ -1,0 +1,56 @@
+.page{
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.text{
+  padding: 50px
+}
+
+.cardContainer{
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+}
+
+.cardContainer>* {
+  flex-basis: 33.33333%;
+}
+
+.cardContainer > div:empty {
+  height: 0;
+  border: none;
+  width: 350px;
+}
+
+.cardLazyLoading{
+  background-color: #fff;
+  border: 1px solid #ddd;
+  height: 350px;
+  width: 350px;
+  border-radius: 8px;
+  box-shadow: 8px 8px 8px #ddd;
+  margin: 12px 0px;
+  flex-basis: 33.33333%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.noResultsFound{
+  display: flex;
+  align-items: center;
+  flex-direction: column;;
+}
+
+.noResultsFound > img{
+  padding-top: 30px;
+}
+
+.noResultsFound > *:not(:last-child) {
+  display: block;
+  padding-bottom: 20px;
+} 
