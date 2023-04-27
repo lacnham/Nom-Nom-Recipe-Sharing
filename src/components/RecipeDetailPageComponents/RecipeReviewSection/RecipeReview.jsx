@@ -20,7 +20,25 @@ const RecipeReview = props => {
   }
   const [current, setCurrent] = useState('none')
 
-  let handleClick = ClickChangeStyle(current, setCurrent, styleElement)
+  // let handleClick = ClickChangeStyle(current, setCurrent, styleElement)
+
+  const handleClick = () => {
+    let newStyle
+    if (current == styleElement.default) {
+      newStyle = styleElement.change
+      console.log(1)
+    }
+    setCurrent(newStyle)
+  }
+
+  const handleBlur = () => {
+    let newStyle
+    if (current == styleElement.change) {
+      newStyle = styleElement.default
+      console.log(2)
+    }
+    setCurrent(newStyle)
+  }
 
   return (
     <div
@@ -29,9 +47,11 @@ const RecipeReview = props => {
       <div className={`${styles.labelContainer} ${styles.temp}`}>
         <SaveRecipeButton
           fn={handleClick}
-          onBlur={handleClick}
+          onBlur={handleBlur}
         ></SaveRecipeButton>
         <CollectionDropList
+          setCurrent={setCurrent}
+          style={styleElement}
           recipe={props.recipe}
           current={current}
         ></CollectionDropList>

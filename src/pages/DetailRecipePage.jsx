@@ -5,7 +5,7 @@ import RecipeReview from '../components/RecipeDetailPageComponents/RecipeReviewS
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { FetchRecipeByID } from '../components/RecipeDetailPageComponents/FetchRecipeByID'
-import { LLogin } from '../components/Login'
+// import { LLogin } from '../components/Login'
 
 const DetailRecipePage = () => {
   // let config = {
@@ -30,13 +30,14 @@ const DetailRecipePage = () => {
   //     })
   // }, [])
 
-  const recipe = FetchRecipeByID(6)
+  const recipe = FetchRecipeByID(41)
 
-  const accesstoken = LLogin()
-  console.log(accesstoken)
+  // const accesstoken = LLogin()
+  // console.log(accesstoken)
 
   return (
     <>
+      {/* TODO CSS clashes with PublicRecipe.module.css page [FIX] */}
       <Header />
       <div className={`${styles.body}`}>
         <div className={`${styles.mainContainer} ${styles.flexRow}`}>

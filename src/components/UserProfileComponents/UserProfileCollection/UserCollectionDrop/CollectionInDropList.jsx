@@ -7,29 +7,48 @@ export const CollectionInDropList = props => {
   const [message, setMessage] = useState('')
   const [isSuccess, setIsSuccess] = useState(false)
 
-  const handleAddRecipe = async () => {
-    let config = {
-      method: 'post',
-      url: 'http://localhost:3000/collection/add-recipe',
-      headers: {
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgyMzAxNzA1LCJleHAiOjE2ODIzNDQ5MDV9.idJQTXPgC8Uxb57EvDEqeQPY1IQ4OJqurlLQBXIddms'
-      },
-      data: {
-        collection_id: props.collection.collection_id,
-        recipe_id: props.recipe.recipe_id
-      }
+  const handleBlur = () => {
+    let newStyle
+    if (props.current == props.style.change) {
+      newStyle = props.style.default
+      console.log(2)
     }
+    props.setCurrent(newStyle)
+  }
+
+  let config = {
+    method: 'post',
+    url: 'http://localhost:3000/collection/add-recipe',
+    headers: {
+      // 'Content-Type': 'application/json',
+      Authorization: localStorage.accessToken
+    },
+    data: {
+      collection_id: props.collection.collection_id,
+      recipe_id: props.recipe.recipe_id
+    }
+  }
+
+  const handleAddRecipe = async () => {
+    // console.log('Access token ' + localStorage.accesstoken)
     try {
       const res = await axios.request(config)
       setMessage(res.data.message)
+      console.log(res.data)
       setIsSuccess(true)
     } catch (error) {
       console.log(error)
     }
-    console.log(props.collection.collection_id)
-    console.log(props.recipe.recipe_id)
-    console.log(message)
+
+    // console.log('Collection id ' + props.collection.collection_id)
+    // console.log('Recipe id ' + props.recipe.recipe_id)
+    handleBlur()
+    if (isSuccess) {
+      console.log(message)
+    }
+
+    // console.log('Collection id' + props.collection.collection_id)
+    // console.log(props.recipe.recipe_id)
   }
 
   return (

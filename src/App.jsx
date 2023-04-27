@@ -4,6 +4,8 @@ import LandingPage from './pages/LandingPage'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import DetailRecipePage from './pages/DetailRecipePage'
+import PublishRecipe from './pages/PublishRecipe'
+import AllRecipe from './pages/AllRecipe'
 import UserProfileMainPage from './pages/UserProfilePage'
 import { CollectionRecipes } from './components/UserProfileComponents/UserProfileCollection/CollectionRecipes'
 
@@ -21,6 +23,8 @@ function App () {
           <Route path="/User" element={<UserProfileMainPage />} />
           {/* <Route path="/Recipe" element={<Collec />} /> */}
           <Route path="/Collection/1" element={<CollectionRecipes />} />
+          <Route path="/PublishRecipe" element={<PublishRecipe />} />
+          <Route path="/AllRecipe" element={<AllRecipe />} />
         </Routes>
       </BrowserRouter>
     </>

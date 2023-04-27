@@ -10,6 +10,14 @@ button {
   cursor: pointer
 }
 
+button > i{
+  margin-right: 5px;
+}
+
+button > i{
+  margin-right: 5px;
+}
+
 .button1 {
   color: white;
   border-radius: 8px;
@@ -34,6 +42,10 @@ button {
   color: #3d233a;
 }
 
+.disabledButton{
+  background-color: #949497;
+  cursor: not-allowed;
+}
 .defaultButton:hover {
   background-color: white;
   color: black;

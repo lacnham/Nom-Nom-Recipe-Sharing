@@ -6,9 +6,11 @@ import { CollectionInDropList } from './CollectionInDropList'
 import { FetchUserCollections } from '../FetchUserCollections'
 const CollectionDropList = props => {
   const userCollections = FetchUserCollections()
-  // console.log('recipe ID = ' + props.recipe.recipe_id)
   const collection = userCollections.map(ele => (
     <CollectionInDropList
+      current={props.current}
+      setCurrent={props.setCurrent}
+      style={props.style}
       key={ele.collection_id}
       recipe={props.recipe}
       collection={ele}
@@ -26,6 +28,7 @@ const CollectionDropList = props => {
             className={`${styles.searchIconContainer}`}
             src={searchIcon}
           ></img>
+
           <input className={`${styles.inputFieldContainer}`} />
           {/* check with user collections */}
         </div>

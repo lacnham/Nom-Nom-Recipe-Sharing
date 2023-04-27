@@ -10,9 +10,11 @@ export const FetchUserCollections = () => {
     maxBodlength: Infinity,
     url: 'http://localhost:3000/collection',
     headers: {
-      Authorization: `${userData.accesstoken}`
+      Authorization: localStorage.accessToken
     }
   }
+
+  console.log(localStorage.accessToken)
 
   const [userCollections, setUserCollections] = useState([])
 

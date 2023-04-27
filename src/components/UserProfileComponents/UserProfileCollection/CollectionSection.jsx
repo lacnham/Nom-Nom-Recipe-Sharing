@@ -12,6 +12,11 @@ const CollectionSection = props => {
 
   const collections = FetchUserCollections()
 
+  console.log(collections)
+
+  if (!collections) {
+    return <div>Loading user data...</div>
+  }
   const collection = collections.map(ele => (
     <Collections collection={ele}></Collections>
   ))
