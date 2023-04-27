@@ -1,12 +1,12 @@
 import styles from '../styles/Card.module.css'
 import React from 'react'
 
-function CardImage(props) {
+function CardImage (props) {
   const isImageURL = props.image
   // If an image was passed:
   if (isImageURL) {
     return (
-      <div className={styles.Image} style={{ width: props.width + 'px'}}>
+      <div className={styles.Image} style={{ width: props.width + 'px' }}>
         <img
           style={{ width: props.width + 'px', marginTop: '-8%' }}
           src={props.image}
@@ -19,7 +19,7 @@ function CardImage(props) {
   return null
 }
 
-function CardContent(props) {
+function CardContent (props) {
   return (
     <div className={styles.CardContent}>
       <p className={styles.CardTitle}>{props.title}</p>
@@ -38,7 +38,7 @@ function CardContent(props) {
 }
 
 export default class Card extends React.Component {
-  render() {
+  render () {
     return (
       <div className={styles.Card}>
         <div>

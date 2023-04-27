@@ -2,13 +2,27 @@ import styles from '../../../styles/UserProfile/UserProfleCollection/CollectionR
 import Header from '../../Header'
 import Collections from './Collections'
 import img from '../../../images/recipeImage.png'
+import { FetchCollectionWithID } from './FetchCollectionWithID'
+import { useParams } from 'react-router-dom'
+import { FetchCollectionRecipe } from './FetchCollectionRecipe'
+import { RecipesInCollection } from './RecipesInCollection'
 
 export const CollectionRecipes = props => {
-  const collection = {
-    title: 'tet',
-    description: 'lorem',
-    img: img
+  const { id } = useParams()
+
+  const collection = FetchCollectionWithID(id)
+
+  if (!collection) {
+    return <div> Loading...</div>
   }
+
+  // console.log(recipes)
+
+  // const collection = {
+  //   title: 'tet',
+  //   description: 'lorem',
+  //   img: img
+  // }
   return (
     <>
       <Header />
@@ -17,28 +31,23 @@ export const CollectionRecipes = props => {
       >
         <div className={`${styles.collectionHeader} ${styles.flexColumn}`}>
           <div className={`${styles.blurredBackground} `}>
-            <div className={`${styles.collectionTitle}`}>
-              {/* {props.collection.name} */}
-              asdasdasd
-            </div>
-            <div className={`${styles.collectionNote}`}>
-              {/* {props.collection.note} */}
-              asdasd
-            </div>
+            <div className={`${styles.collectionTitle}`}>{collection.name}</div>
+            <div className={`${styles.collectionNote}`}>{collection.note}</div>
           </div>
         </div>
-        <div className={`${styles.collectionBody}`}>
+        {/* <div className={`${styles.collectionBody}`}> */}
+        <RecipesInCollection id={id} />
+        {/* <Collections collection={collection} />
           <Collections collection={collection} />
           <Collections collection={collection} />
-          <Collections collection={collection} />
-          <Collections collection={collection} />
-          <Collections collection={collection} />
-          <Collections collection={collection} />
-          {/* <Collections collection={collection} />
           <Collections collection={collection} />
           <Collections collection={collection} />
           <Collections collection={collection} /> */}
-        </div>
+        {/* <Collections collection={collection} />
+          <Collections collection={collection} />
+          <Collections collection={collection} />
+          <Collections collection={collection} /> */}
+        {/* </div> */}
       </div>
     </>
   )

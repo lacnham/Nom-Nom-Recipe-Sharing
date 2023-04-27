@@ -22,7 +22,7 @@ function App () {
           <Route path="/Detail" element={<DetailRecipePage />} />
           <Route path="/User" element={<UserProfileMainPage />} />
           {/* <Route path="/Recipe" element={<Collec />} /> */}
-          <Route path="/Collection/1" element={<CollectionRecipes />} />
+          <Route path="/Collection/:id" element={<CollectionRecipes />} />
           <Route path="/PublishRecipe" element={<PublishRecipe />} />
           <Route path="/AllRecipe" element={<AllRecipe />} />
         </Routes>

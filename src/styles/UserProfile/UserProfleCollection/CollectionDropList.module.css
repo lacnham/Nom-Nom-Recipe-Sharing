@@ -34,7 +34,7 @@
 
 .inputFieldContainer {
   height: 100%;
-  width: 100%;
+  width: 90%;
   outline: none;
   border-width: 0px;
   font-size: 16px;
@@ -43,7 +43,6 @@
 
 .hiddenInputField {
   display: none;
-  /* height: 32px; */
 }
 .createNewCollection {
   height: 32px;

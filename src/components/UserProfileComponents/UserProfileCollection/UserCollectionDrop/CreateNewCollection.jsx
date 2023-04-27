@@ -2,6 +2,11 @@ import styles from '../../../../styles/UserProfile/UserProfleCollection/Collecti
 import { DefaultButton } from '../../../Button'
 import { useState } from 'react'
 import ClickChangeStyle from '../../../ClickChangeStyle'
+// import {
+//   EnterToSubmit,
+//   handleInputChange,
+//   handleKeyDown
+// } from '../../../EnterSubmit'
 
 export const CreateNewCollection = () => {
   const style = {
@@ -35,6 +40,8 @@ export const CreateNewCollection = () => {
     styleElement
   )
 
+  const [value, setValue] = useState('')
+
   return (
     <>
       <div className={`${styles.createNewCollection}`}>
@@ -51,7 +58,12 @@ export const CreateNewCollection = () => {
         className={`${styles.searchBar} ${styles.hiddenInputField}`}
         style={{ display: `${currentDisplay}` }}
       >
-        <input className={`${styles.inputFieldContainer} `} />
+        <input
+          value={value}
+          className={`${styles.inputFieldContainer} `}
+          // onKeyDown={handleKeyDown(value)}
+          // onChange={handleInputChange(setValue)}
+        />
       </div>
     </>
   )
