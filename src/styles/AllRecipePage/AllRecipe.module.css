@@ -1,13 +1,13 @@
-.page{
+.page {
   min-height: 100vh;
   background-color: #fff;
 }
 
-.text{
-  padding: 50px
+.text {
+  padding: 50px;
 }
 
-.cardContainer{
+.cardContainer {
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -16,7 +16,7 @@
   width: 80%;
 }
 
-.cardContainer>* {
+.cardContainer > * {
   flex-basis: 33.33333%;
 }
 
@@ -26,7 +26,7 @@
   width: 350px;
 }
 
-.cardLazyLoading{
+.cardLazyLoading {
   background-color: #fff;
   border: 1px solid #ddd;
   height: 350px;
@@ -40,17 +40,23 @@
   justify-content: space-between;
 }
 
-.noResultsFound{
+.noResultsFound {
   display: flex;
   align-items: center;
-  flex-direction: column;;
+  flex-direction: column;
 }
 
-.noResultsFound > img{
+.noResultsFound > img {
   padding-top: 30px;
 }
 
 .noResultsFound > *:not(:last-child) {
   display: block;
   padding-bottom: 20px;
-} 
+}
+
+.loadMore {
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+}

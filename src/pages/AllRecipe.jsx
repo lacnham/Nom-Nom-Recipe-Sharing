@@ -1,51 +1,71 @@
-import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react';
-import axios from 'axios';
-import Header from '../components/Header';
-import styles from '../styles/AllRecipePage/AllRecipe.module.css';
-import SearchBar from '../components/SearchBar';
-import { withoutAuth } from '../components/SessionVerification/AuthChecking';
-import { Button1 } from '../components/Button';
-
+import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react'
+import axios from 'axios'
+import Header from '../components/Header'
+import styles from '../styles/AllRecipePage/AllRecipe.module.css'
+import SearchBar from '../components/SearchBar'
+import { withoutAuth } from '../components/SessionVerification/AuthChecking'
+import { Button1 } from '../components/Button'
+import AutoClickButton from '../components/AutoClickButton'
 const AllRecipe = () => {
-  const [searchInput, setSearchInput] = useState('');
-  const [data, setData] = useState([]);
+  const perLoad = 12
+  const [searchInput, setSearchInput] = useState('')
+  const [data, setData] = useState([])
+  const [itemsToRender, setItemsToRender] = useState(0)
 
   const filteredData = useMemo(() => {
-    return data.filter((item) =>
+    return data.filter(item =>
       item.name.toLowerCase().includes(searchInput.toLowerCase())
-    );
-  }, [data, searchInput]);
+    )
+  }, [data, searchInput])
 
   const fetchRecipes = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/recipe`);
-      setData(response.data);
+      const response = await axios.get(`http://localhost:3000/recipe`)
+      setData(response.data)
     } catch (error) {
-      console.log(error);
-      setData([]);
+      console.log(error)
+      setData([])
     }
-  };
+  }
 
   useEffect(() => {
-    fetchRecipes();
-  }, []);
+    fetchRecipes()
+  }, [])
 
-  const Card = lazy(() => import('../components/Card'));
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setItemsToRender(prev => prev + perLoad)
+          }
+        })
+      },
+      { rootMargin: '0px 0px 10px 0px' } // Load next batch before the bottom of the page
+    )
+
+    observer.observe(document.querySelector('#bottom'))
+
+    return () => observer.disconnect()
+  }, [])
+
+  const Card = lazy(() => import('../components/Card'))
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} id="bottom">
       <Header />
       <div className={styles.card}>
         <div className={styles.container}>
           <div className={styles.content}>
             <div className={styles.text}>
               <h1>Hello</h1>
+              <SearchBar data={data}></SearchBar>
               <input
                 autoFocus
                 placeholder="Type..."
                 type="text"
                 value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
+                onChange={e => setSearchInput(e.target.value)}
               />
               {filteredData.length === 0 ? (
                 <div className={styles.noResultsFound}>
@@ -68,7 +88,7 @@ const AllRecipe = () => {
               ) : (
                 <div>
                   <div className={styles.cardContainer}>
-                    {filteredData.map((item) => (
+                    {filteredData.slice(0, itemsToRender).map(item => (
                       <div key={item.recipe_id}>
                         <Suspense
                           fallback={
@@ -78,16 +98,22 @@ const AllRecipe = () => {
                           <Card
                             image={item.image_link}
                             title={item.name}
-                            category={['asd', 'asd1', 'asd2']}
-                            location="Downtown, Seattle WA"
                             description={item.description}
+                            id={item.recipe_id}
                           />
                         </Suspense>
                       </div>
                     ))}
-                    {/* space holder */}
-                    <div></div>
+                    <div keyword="place_holder"></div>
                   </div>
+
+                  {filteredData.length > itemsToRender && (
+                    <div className={styles.loadMore}>
+                      <AutoClickButton
+                        fn={() => setItemsToRender(itemsToRender + perLoad)}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -95,7 +121,7 @@ const AllRecipe = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default withoutAuth(AllRecipe);
+export default withoutAuth(AllRecipe)

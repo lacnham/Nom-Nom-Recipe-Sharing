@@ -23,7 +23,7 @@ const LandingPage = () => {
                 <Button1
                   type={'button'}
                   options={'Get Started'}
-                  fn={''}
+                  fn={() => ''}
                 ></Button1>
               </a>
             </div>
