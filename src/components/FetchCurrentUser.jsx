@@ -25,9 +25,9 @@ export const FetchCurrentuser = () => {
     fetchData()
   }, [])
 
-  console.log(localStorage.getItem('accesstoken'))
+  // console.log(localStorage.getItem('accesstoken'))
 
-  console.log(userData)
+  // console.log(userData)
 
   return userData
 }

@@ -25,6 +25,7 @@ function App () {
           <Route path="/Collection/:id" element={<CollectionRecipes />} />
           <Route path="/PublishRecipe" element={<PublishRecipe />} />
           <Route path="/AllRecipe" element={<AllRecipe />} />
+          <Route path="/CreateRecipe" element={<PublishRecipe />} />
         </Routes>
       </BrowserRouter>
     </>
