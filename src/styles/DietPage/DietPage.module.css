@@ -7,7 +7,7 @@
   padding: 50px;
 }
 
-.cardContainer {
+.dietCardContainer {
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -16,17 +16,17 @@
   width: 80%;
 }
 
-.cardContainer > * {
+.dietCardContainer > * {
   flex-basis: 33.33333%;
 }
 
-.cardContainer > div:empty {
+.dietCardContainer > div:empty {
   height: 0;
   border: none;
   width: 350px;
 }
 
-.cardLazyLoading {
+.dietCardLazyLoading {
   background-color: #fff;
   border: 1px solid #ddd;
   height: 350px;
@@ -38,25 +38,4 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.noResultsFound {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.noResultsFound > img {
-  padding-top: 30px;
-}
-
-.noResultsFound > *:not(:last-child) {
-  display: block;
-  padding-bottom: 20px;
-}
-
-.loadMore {
-  padding-top: 50px;
-  display: flex;
-  justify-content: center;
 }

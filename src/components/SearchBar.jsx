@@ -1,23 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const SearchBar = () => {
+const SearchBar = data => {
   const [searchInput, setSearchInput] = useState('')
-
-  const food = [
-    { name: 'food1', origin: 'Europe' },
-    { name: 'food2', origin: 'Asia' }
-  ]
-
+  const [selectedFood, setSelectedFood] = useState(null)
+  const [filteredFood, setFilteredFood] = useState([])
+  const dataArray = Object.values(data)
+  const names = dataArray[0].map(item => item.name)
+  const uniqueNames = [...new Set(names)]
+  const mergedData = uniqueNames.map(name => {
+    const items = dataArray[0].filter(item => item.name === name)
+    return Object.assign({}, ...items)
+  })
+  const food = mergedData.map(item => ({ name: item.name }))
+  
   const handleChange = e => {
-    e.preventDefault()
     setSearchInput(e.target.value)
   }
-
-  if (searchInput.length > 0) {
-    food.filter(country => {
-      return country.name.match(searchInput)
-    })
+  
+  const handleFoodClick = food => {
+    setSelectedFood(food)
+    setSearchInput(food.name)
   }
+  
+  useEffect(() => {
+    if (searchInput.length > 0) {
+      setFilteredFood(food.filter(food => food.name.match(searchInput)))
+    } else {
+      setFilteredFood([])
+      setSelectedFood()
+    }
+  }, [searchInput])
+
+  
+  
+
 
   return (
     <div>
@@ -28,21 +44,34 @@ const SearchBar = () => {
         value={searchInput}
       />
 
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Origin</th>
-        </tr>
-
-        {food.map((food, index) => {
-          <div>
+      {filteredFood.length > 0 && (
+        <table>
+          <thead>
             <tr>
-              <td>{food.name}</td>
-              <td>{food.origin}</td>
+              <th>Name</th>
+              <th>Origin</th>
             </tr>
-          </div>
-        })}
-      </table>
+          </thead>
+
+          <tbody>
+            {filteredFood.map((food, index) => (
+              <tr
+                style={{
+                  cursor: 'pointer',
+                  ':hover': { textDecoration: 'underline' }
+                }}
+                key={index}
+                onClick={() => handleFoodClick(food)}
+              >
+                <td>{food.name}</td>
+                <td>{food.origin}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
+      {selectedFood && <p>You selected {selectedFood.name}</p>}
     </div>
   )
 }

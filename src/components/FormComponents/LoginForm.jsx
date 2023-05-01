@@ -14,7 +14,7 @@ const LoginForm = () => {
         email: email,
         password: password,
       })
-      localStorage.setItem('accessToken', JSON.stringify(response.data.accesstoken).replace(/"/g, ''));
+      localStorage.setItem('accesstoken', JSON.stringify(response.data.accesstoken).replace(/"/g, ''));
       localStorage.setItem('refreshtoken', JSON.stringify(response.data.refreshtoken).replace(/"/g, ''));
       console.log(localStorage);
       window.location.replace('/allrecipe')

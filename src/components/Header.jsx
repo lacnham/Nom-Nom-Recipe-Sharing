@@ -17,7 +17,6 @@ const Header = () => {
   ]
 
   const items = tabList.map(tab => <li key={tab.key}>{tab.label}</li>)
-  function doNothing () {}
 
   const { userData } = useContext(AuthContext)
   return (

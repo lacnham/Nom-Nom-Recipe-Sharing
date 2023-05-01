@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from '../styles/LoginAndSignUp/LoginAndSignUp.module.css'
 import Frame from '../components/FormComponents/Frame'
-import SignUpForm from '../components/FormComponents/SignUpForm'
+import RecoverForm from '../components/FormComponents/RecoverForm'
 import {withAuth} from '../components/SessionVerification/AuthChecking'
 const Signup = ({}) => {
   return (
     <Frame
-      Name={'Register'}
-      Form={<SignUpForm></SignUpForm>}
+      Name={'Recover'}
+      Form={<RecoverForm></RecoverForm>}
       Redirect={
         <span className={styles.register}>
           Already have account? &nbsp;<a href="/Login">Login here</a>
