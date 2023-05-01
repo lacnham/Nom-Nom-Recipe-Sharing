@@ -14,12 +14,18 @@ input {
   border-right-style: hidden;
   border-left-style: hidden;
   border-bottom-style: groove;
-  font-size: 20px;
+  font-size: 16px;
   outline: none;
+
   margin-left: 10px;
   width: 90%;
   justify-content: center;
   align-items: center;
+}
+
+input {
+  outline: none;
+  border-radius: 8px !important;
 }
 
 textarea {
@@ -28,19 +34,20 @@ textarea {
 }
 
 span {
-  font-size: 15px;
+  font-size: 16px;
   margin-left: 10px;
   color: lightslategray;
 }
 
-.formControl i:hover, .formControl span:hover {
+.formControl i:hover,
+.formControl span:hover {
   color: lightslategray;
   transform: scale(0.9);
 }
 
 .container {
   background-color: rgb(255, 218, 177);
-  min-height:fit-content;
+  min-height: fit-content;
   /* height: 100vh; */
   /* overflow-y: scroll; */
   display: flex;
@@ -105,12 +112,12 @@ option:hover,
 }
 
 .inputIgd {
-  padding: 10px;
+  padding: 0 10px 0;
   display: flex;
   align-items: center;
 }
 
-.inputIgd i{
+.inputIgd i {
   padding: 10px;
 }
 
@@ -147,7 +154,7 @@ option:hover,
   transform: scale(0.9);
 }
 
-.preview{
+.preview {
   justify-content: center;
   display: flex;
   background-color: #fff;
@@ -155,8 +162,45 @@ option:hover,
   margin-left: 8px;
 }
 
-.preview img{
+.preview img {
   padding: 15px;
   max-width: 300px;
   height: auto;
+}
+
+.addIngredientContainer {
+  padding: 10px 0;
+  width: 100%;
+}
+
+.inputIgd > input:first-of-type {
+  border-right-style: hidden;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.inputIgd > input:last-of-type {
+  width: 30%;
+  border-radius: 0 !important;
+  /* border-bottom-left-radius: 0 !important; */
+}
+
+.unitContainer {
+  width: 16%;
+  height: 46.5px;
+  margin: 8px 0;
+  /* height: calc(input); */
+  padding: 12px 0;
+  border: 2px solid #ff8600;
+
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+
+  /* border-top-style: hidden; */
+  /* border-right-style: hidden; */
+  border-left-style: hidden;
+  /* border-bottom-style: groove; */
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
 }

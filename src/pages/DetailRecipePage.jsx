@@ -30,7 +30,8 @@ const DetailRecipePage = () => {
   //     })
   // }, [])
 
-  const recipe = FetchRecipeByID(41)
+  const recipe = FetchRecipeByID(1)
+  console.log(recipe)
 
   // const accesstoken = LLogin()
   // console.log(accesstoken)

@@ -11,6 +11,7 @@ const PublishRecipe = () => {
   const [duration, setDuration] = useState('')
   const [servings, setServings] = useState('')
   const [ingredients, setIngredients] = useState([{ name: '', custom: false }])
+  const [unit, setUnit] = useState('')
 
   useEffect(() => {
     console.log(image)
@@ -37,8 +38,47 @@ const PublishRecipe = () => {
     setIngredients(newIngredients)
   }
 
+  const handleUnit = event => {
+    setUnit(event.target.value)
+  }
+
+  let config = {
+    method: 'post',
+    url: 'http://localhost:3000/recipe',
+    headers: {
+      Authorization: localStorage.accessToken
+    },
+    data: {
+      name: name,
+      servingSize: servings,
+      duration: duration,
+      imageLink: image,
+      description: description
+    }
+  }
+
+  const handleCreateRecipe = async () => {
+    // console.log('Access token ' + localStorage.accesstoken)
+    try {
+      const res = await axios.request(config)
+    } catch (error) {
+      console.log(error)
+    }
+
+    // console.log('Collection id ' + props.collection.collection_id)
+    // console.log('Recipe id ' + props.recipe.recipe_id)
+    // handleBlur()
+    // if (isSuccess) {
+    //   console.log(message)
+    // }
+
+    // console.log('Collection id' + props.collection.collection_id)
+    // console.log(props.recipe.recipe_id)
+  }
+
   const handleSubmit = event => {
     event.preventDefault()
+    handleCreateRecipe()
   }
 
   return (
@@ -83,10 +123,7 @@ const PublishRecipe = () => {
           </div>
           {image ? (
             <div>
-              <img
-                
-                src={URL.createObjectURL(image)}
-              />
+              <img src={URL.createObjectURL(image)} />
             </div>
           ) : null}
 
@@ -138,7 +175,7 @@ const PublishRecipe = () => {
           <div className={styles.formControl}>
             <label>
               Ingredients:
-              <ul>
+              <ul className={`${styles.addIngredientContainer}`}>
                 {ingredients.map((ingredient, igd) => (
                   <div key={igd}>
                     <datalist id="igdList">
@@ -154,6 +191,21 @@ const PublishRecipe = () => {
                         list="igdList"
                         autoComplete="off"
                       />
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="Quantity"
+                        // autoComplete='on'
+                      />
+                      <select
+                        value={unit}
+                        onChange={handleUnit}
+                        className={`${styles.unitContainer}`}
+                      >
+                        <option value="one">one</option>
+                        <option value="two">two</option>
+                        <option value="three">three</option>
+                      </select>
                       <i
                         className={`${
                           styles.delete
