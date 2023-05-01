@@ -7,6 +7,7 @@ import DetailRecipePage from './pages/DetailRecipePage';
 import PublishRecipe from './pages/PublishRecipe';
 import AllRecipe from './pages/AllRecipe';
 import RecoverPage from './pages/RecoverPage';
+import DietPage from './pages/DietPage';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -44,6 +45,7 @@ function App() {
           <Route path="/PublishRecipe" element={<PublishRecipe />} />
           <Route path="/AllRecipe" element={<AllRecipe />} />
           <Route path="/Recover" element={<RecoverPage />} />
+          <Route path="/Diet" element={<DietPage />} />
 
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

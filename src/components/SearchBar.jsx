@@ -1,33 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const SearchBar = (data) => {
+const SearchBar = data => {
   const [searchInput, setSearchInput] = useState('')
   const [selectedFood, setSelectedFood] = useState(null)
+  const [filteredFood, setFilteredFood] = useState([])
+  const dataArray = Object.values(data)
+  const names = dataArray[0].map(item => item.name)
+  const uniqueNames = [...new Set(names)]
+  const mergedData = uniqueNames.map(name => {
+    const items = dataArray[0].filter(item => item.name === name)
+    return Object.assign({}, ...items)
+  })
+  const food = mergedData.map(item => ({ name: item.name }))
   
-  console.log(data);
-  const food = [
-    { name: 'food1', origin: 'Europe' },
-    { name: 'food2', origin: 'Asia' },
-    { name: 'food3', origin: 'Europe' },
-    { name: 'food4', origin: 'Asia' }
-  ]
-
   const handleChange = e => {
-    e.preventDefault()
     setSearchInput(e.target.value)
   }
-
+  
   const handleFoodClick = food => {
     setSelectedFood(food)
     setSearchInput(food.name)
   }
+  
+  useEffect(() => {
+    if (searchInput.length > 0) {
+      setFilteredFood(food.filter(food => food.name.match(searchInput)))
+    } else {
+      setFilteredFood([])
+      setSelectedFood()
+    }
+  }, [searchInput])
 
-  let filteredFood = []
-  if (searchInput.length > 0) {
-    filteredFood = food.filter(country => {
-      return country.name.match(searchInput)
-    })
-  }
+  
+  
+
 
   return (
     <div>
@@ -50,8 +56,10 @@ const SearchBar = (data) => {
           <tbody>
             {filteredFood.map((food, index) => (
               <tr
-              style={{ cursor: 'pointer', ':hover': {textDecoration: 'underline' }}}
-
+                style={{
+                  cursor: 'pointer',
+                  ':hover': { textDecoration: 'underline' }
+                }}
                 key={index}
                 onClick={() => handleFoodClick(food)}
               >
