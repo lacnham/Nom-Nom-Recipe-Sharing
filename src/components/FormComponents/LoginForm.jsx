@@ -53,7 +53,7 @@ const LoginForm = () => {
         </div>
         <div className={styles.psw}>
           <span>
-            <a href="#">Forgot password?</a>
+            <a href="/Recover">Forgot password?</a>
           </span>
         </div>
         <div className={styles.btnContainer}>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from '../styles/Button.module.css'
 
-export function Button1 ({ fn, options, type, icon }) {
+export function Button1({ fn, options, type, icon }) {
   return (
     <button type={type} className={styles.button1} onClick={fn}>
       {icon}
@@ -10,7 +10,7 @@ export function Button1 ({ fn, options, type, icon }) {
   )
 }
 
-export function Button2 ({ fn, options, type, icon }) {
+export function Button2({ fn, options, type, icon }) {
   return (
     <button type={type} className={styles.button2} onClick={fn}>
       {icon}
@@ -19,7 +19,7 @@ export function Button2 ({ fn, options, type, icon }) {
   )
 }
 
-export function DisabledButton ({ options, icon }) {
+export function DisabledButton({ options, icon }) {
   return (
     <button className={styles.disabledButton} disabled>
       {icon}
@@ -28,7 +28,7 @@ export function DisabledButton ({ options, icon }) {
   )
 }
 
-export function DefaultButton ({
+export function DefaultButton({
   fn,
   options,
   type,
@@ -56,14 +56,9 @@ export function DefaultButton ({
   }
 
   let styleTemp = {
-    backgroundColor: isHover
-      ? style.backgroundColorHover
-      : style.backgroundColor,
-    color: isHover ? style.colorHover : style.color,
-    backgroundColor: isFocus
-      ? style.backgroundColorHover
-      : style.backgroundColor,
-    color: isFocus ? style.colorHover : style.color
+    backgroundColor:
+      isHover || isFocus ? style.backgroundColorHover : style.backgroundColor,
+    color: isHover || isFocus ? style.colorHover : style.color
   }
   return (
     <button

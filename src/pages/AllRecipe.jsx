@@ -4,7 +4,7 @@ import Header from '../components/Header'
 import styles from '../styles/AllRecipePage/AllRecipe.module.css'
 import SearchBar from '../components/SearchBar'
 import { withoutAuth } from '../components/SessionVerification/AuthChecking'
-import { Button1 } from '../components/Button'
+import { Button2 } from '../components/Button'
 import AutoClickButton from '../components/AutoClickButton'
 const AllRecipe = () => {
   const perLoad = 12
@@ -80,7 +80,7 @@ const AllRecipe = () => {
                       your fellow cooks!
                     </p>
                   </div>
-                  <Button1
+                  <Button2
                     icon={<i className={'fa-solid fa-utensils'}></i>}
                     options={'Add recipe'}
                   />

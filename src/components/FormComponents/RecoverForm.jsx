@@ -19,9 +19,7 @@ const RecoverForm = () => {
   }
 
   return (
-    <form
-    onSubmit={handleSubmit} method='POST'
-    >
+    <form onSubmit={handleSubmit} method="POST">
       <div>
         <div className={styles.inputContainer}>
           <i className={`${styles.icon} ${'fa-solid fa-envelope'}`}></i>
@@ -34,14 +32,8 @@ const RecoverForm = () => {
             onChange={e => setEmail(e.target.value)}
           />
         </div>
-
-        <div className={styles.psw}>
-          <span>
-            <a href="#">Forgot password?</a>
-          </span>
-        </div>
         <div className={styles.btnContainer}>
-          <Button2 type={'submit'} options={'Submit'} fn={() => ''}></Button2>
+          <Button2 type={'submit'} options={'Send'} fn={() => ''}></Button2>
         </div>
       </div>
     </form>

@@ -7,7 +7,7 @@ export const FetchCurrentuser = () => {
     url: `http://localhost:3000/user/my-profile`,
     headers: {
       // 'Content-Type': 'application/json',
-      Authorization: localStorage.accessToken
+      Authorization: localStorage.accesstoken
     }
   }
 

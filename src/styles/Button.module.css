@@ -1,4 +1,4 @@
-@import "../styles/globalStyles.css";
+@import '../styles/globalStyles.css';
 
 button {
   font-family: var(--primary-font);
@@ -7,27 +7,28 @@ button {
   transition: background-color 0.5s, color 0.5s;
   padding: 10px 20px;
   border: none;
-  cursor: pointer
+  cursor: pointer;
+  min-width: 97px;
 }
 
-button > i{
+button > i {
   margin-right: 5px;
 }
 
-button > i{
+button > i {
   margin-right: 5px;
 }
 
 .button1 {
   color: white;
   border-radius: 8px;
-  background-color: var(--light-orange);
-  border: 2px solid var(--light-orange);
+  background-color: var(--med-orange);
+  border: 2px solid var(--med-orange);
 }
 
 .button1:hover {
   background-color: white;
-  color: var(--light-orange);
+  color: var(--med-orange);
 }
 
 .button2 {
@@ -42,7 +43,7 @@ button > i{
   color: #3d233a;
 }
 
-.disabledButton{
+.disabledButton {
   background-color: #949497;
   cursor: not-allowed;
 }

@@ -3,8 +3,43 @@ import axios from 'axios'
 import Header from '../components/Header'
 import styles from '../styles/DietPage/DietPage.module.css'
 import { withoutAuth } from '../components/SessionVerification/AuthChecking'
-
+import { Button1 } from '../components/Button'
+import { useContext } from 'react'
+import { AuthContext } from '../components/SessionVerification/AuthContext'
 const Diet = () => {
+  //diet data
+  const { dietData } = useContext(AuthContext)
+  const [dietaryPreferences, setDietaryPreferences] = useState(null)
+
+  useEffect(() => {
+    if (dietData) {
+      setDietaryPreferences(
+        dietData.msg.map(preference => preference.dietary_preference_name)
+      )
+    }
+  }, [dietData])
+
+  const [checkedDivContent, setCheckedDivContent] = useState([])
+
+  function findCheckedDivContent() {
+    const checkedDivs = document.querySelectorAll('div#checked')
+    const contentArray = []
+    checkedDivs.forEach(div => {
+      contentArray.push(div.querySelector('p').innerHTML)
+    })
+    setCheckedDivContent(contentArray) // Update the state variable
+  }
+
+  // This useEffect hook will log the checkedDivContent array
+  // whenever it is updated.
+  useEffect(() => {
+    console.log(checkedDivContent)
+  }, [checkedDivContent])
+
+  useEffect(() => {
+    findCheckedDivContent
+  }, [])
+
   const [diet, setDiet] = useState([])
 
   const fetchData = async () => {
@@ -20,8 +55,6 @@ const Diet = () => {
     fetchData()
   }, [])
 
-  console.log(diet)
-
   const DietCard = lazy(() => import('../components/DietCard'))
 
   return (
@@ -31,19 +64,34 @@ const Diet = () => {
         <div className={styles.container}>
           <div className={styles.content}>
             <div className={styles.text}>
-              <h1>Hello</h1>
+              <h1>Select Your Diet Plan</h1>
               <div>
                 <div className={styles.dietCardContainer}>
-                  <div>
-                    <Suspense
-                      fallback={<div className={styles.dietCardLazyLoading}></div>}
+                  {diet.map(diet_plan => (
+                    <div
+                      key={diet_plan.name}
+                      onChange={() => {
+                        findCheckedDivContent()
+                      }}
                     >
-                      <DietCard />
-                    </Suspense>
-                  </div>
+                      <Suspense fallback={<div>Loading...</div>}>
+                        <DietCard
+                          title={diet_plan.name}
+                          data={dietaryPreferences}
+                        />
+                      </Suspense>
+                    </div>
+                  ))}
                   <div keyword="place_holder"></div>
                 </div>
               </div>
+              <Button1
+                type={'button'}
+                options={'Save'}
+                fn={() => {
+                  findCheckedDivContent()
+                }}
+              />
             </div>
           </div>
         </div>

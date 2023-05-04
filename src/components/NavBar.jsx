@@ -25,7 +25,7 @@ const NavBar = () => {
         type={'button'} 
         style={style} 
         className={''}
-        fn={''}/>
+        fn={() => ''}/>
     </li>
     )
     

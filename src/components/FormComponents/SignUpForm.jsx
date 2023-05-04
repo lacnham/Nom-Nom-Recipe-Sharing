@@ -79,8 +79,8 @@ export default function SignUpForm() {
 
   return (
     <form
-    // onSubmit={handleSubmit}
-    // method='POST'
+    onSubmit={handleSubmit}
+    method='POST'
     >
       <div>
         {enteredData.Errors.general && (

@@ -12,28 +12,28 @@ const SearchBar = data => {
     return Object.assign({}, ...items)
   })
   const food = mergedData.map(item => ({ name: item.name }))
-  
+
   const handleChange = e => {
     setSearchInput(e.target.value)
   }
-  
+
   const handleFoodClick = food => {
     setSelectedFood(food)
     setSearchInput(food.name)
   }
-  
+
   useEffect(() => {
     if (searchInput.length > 0) {
-      setFilteredFood(food.filter(food => food.name.match(searchInput)))
+      setFilteredFood(
+        food.filter(food =>
+          food.name.toLowerCase().match(searchInput.toLowerCase())
+        )
+      )
     } else {
       setFilteredFood([])
       setSelectedFood()
     }
   }, [searchInput])
-
-  
-  
-
 
   return (
     <div>

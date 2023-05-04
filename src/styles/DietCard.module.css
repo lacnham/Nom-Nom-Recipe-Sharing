@@ -1,108 +1,69 @@
 .dietCard {
-    border: 1px solid #ddd;
-    height: 200px;
-    width: 200px;
-    border-radius: 8px;
-    box-shadow: 8px 8px 8px #ddd;
-    margin: 12px 0px;
-    transition: transform 0.3s ease-in-out;
-    cursor: pointer;
-    flex-basis: 33.33333%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #5FCCA0;
-  
-  }
-  
-  .dietCard:hover {
-    transform: scale(1.05);
-  }
-  
-  .dietCardContent {
-    padding: 4px 16px 20px 16px;
-  }
-  
-  .dietCardTitle {
-    font-size: 20px;
-    font-weight: 600;
-    margin: 12px 0px 0px 0px;
-  }
-  
-  .LocationLabel {
-    color: #8294aa;
-    font-size: 14px;
-    margin: 4px 0;
-  }
-  
-  .Description {
-    font-size: 14px;
-    margin: 8px 0 0 0px;
-    word-break: break-all;
-    text-overflow: ellipsis;
-    overflow: hidden; 
-    width: auto;
-    height: auto; 
-    white-space: nowrap;
-  }
-  
-  /* .pill {
-    display: inline-block;
-    padding: 0.5em 1em;
-    border-radius: 20px;
-    background: var(--color-gray);
-    color: white;
-    margin: auto;
-    align-self: center;
-    font-size: 10px;
-    font-weight: bold;
-    transition: 0.2s var(--ease);
-    margin-right: 0.5em;
-    cursor: pointer;
-  }
-  
-  .pill:nth-child(1) {
-    background: #f87e7e;
-  }
-  
-  .pill:nth-child(2) {
-    background: #ffc483;
-  }
-  
-  .pill:nth-child(3) {
-    background: #5a3055;
-  }
-  
-  .pill:nth-child(4) {
-    background: #74956a;
-  }
-  
-  .pill:nth-child(5) {
-    background: #bf50ff;
-  }
-  
-  .pill:hover {
-    filter: saturate(2);
-    color: white;
-  } */
-  
-  .buttonContainer {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .seeMoreButton {
-    background-color: #f2f2f2;
-    border: none;
-    color: #333;
-    cursor: pointer;
-    font-size: 14px;
-    padding: 8px 16px;
-    border-radius: 70px 0px 0px;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  .seeMoreButton:hover {
-    background-color: #ddd;
-  }
-  
+  border: 1px solid #ddd;
+  height: min-content;
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 8px 8px 8px #ddd;
+  margin: 12px 0px;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  flex-basis: 33.33333%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* background-color: #5FCCA0; */
+}
+
+.dietCard:hover {
+  transform: scale(1.05);
+}
+
+.dietCardContent {
+  padding: 4px 16px 20px 16px;
+}
+
+.dietCardTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 12px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.LocationLabel {
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.Description {
+  font-size: 14px;
+  margin: 8px 0 0 0px;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: auto;
+  height: auto;
+  white-space: nowrap;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dietCardTitle input[type='checkbox'] {
+  display: none;
+}
+.dietCardTitle i{
+  color: #ddd;
+}
+
+.dietCard .active {
+  outline: 3px solid #7096f8;
+  border-radius: 8px;
+}
+
+.dietCard .active .dietCardTitle, .dietCard .active .dietCardTitle i {
+  color: #7096f8;
+}
