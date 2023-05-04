@@ -8,11 +8,12 @@ import { useEffect, useState } from 'react'
 
 const RecipeDetail = props => {
   const recipe = {
+    id: props.id,
     title: props.recipe.name,
     img: image,
     commonInfo: {
-      // duration: `${props.recipe.duration.minutes} minutes`,
-      serving: props.recipe.serving_size,
+      // duration: `${duration[0][1]} ${duration[0][0]}`,
+      serving: `${parseInt(props.recipe.serving_size)} people`,
       calories: '600 kcal',
       dietType: ''
     },
@@ -46,8 +47,12 @@ const RecipeDetail = props => {
   return (
     <div className={`${styles.recipePrimaryContainer} ${styles.flexColumn}`}>
       <RecipeIntro recipe={recipe} />
-      <RecipeDescription recipe={recipe} />
-      <RecipeIngredient recipe={recipe} />
+      <RecipeDescription recipe={recipe} id={props.id} />
+      <RecipeIngredient
+        recipe={recipe}
+        id={props.id}
+        servingNum={props.recipe.serving_size}
+      />
     </div>
   )
 }

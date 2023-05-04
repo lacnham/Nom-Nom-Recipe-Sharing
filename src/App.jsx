@@ -44,12 +44,16 @@ function App () {
           <Route path="/" element={<LandingPage />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
-          <Route path="/Detail" element={<DetailRecipePage />} />
+
           <Route path="/User" element={<UserProfileMainPage />} />
           {/* <Route path="/Recipe" element={<Collec />} /> */}
           <Route path="/Collection/:id" element={<CollectionRecipes />} />
+          {/* <Route path="/Detail" element={<DetailRecipePage />} /> */}
+
           <Route path="/PublishRecipe" element={<PublishRecipe />} />
           <Route path="/AllRecipe" element={<AllRecipe />} />
+
+          <Route path="/recipe/:name/:id" element={<DetailRecipePage />} />
           <Route path="/Recover" element={<RecoverPage />} />
           <Route path="/Diet" element={<DietPage />} />
 

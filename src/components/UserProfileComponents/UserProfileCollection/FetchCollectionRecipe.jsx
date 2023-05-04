@@ -6,7 +6,7 @@ export const FetchCollectionRecipe = id => {
     method: 'get',
     url: `http://localhost:3000/collection/${id}/recipes`,
     headers: {
-      Authorization: localStorage.accessToken
+      Authorization: localStorage.accesstoken
     }
   }
   const [recipes, setRecipes] = useState()

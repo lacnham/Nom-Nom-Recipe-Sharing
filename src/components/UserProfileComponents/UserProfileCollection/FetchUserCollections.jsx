@@ -10,7 +10,7 @@ export const FetchUserCollections = () => {
     maxBodlength: Infinity,
     url: 'http://localhost:3000/collection',
     headers: {
-      Authorization: localStorage.accessToken
+      Authorization: localStorage.accesstoken
     }
   }
 

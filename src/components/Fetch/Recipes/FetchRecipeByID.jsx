@@ -4,7 +4,6 @@ import axios from 'axios'
 export const FetchRecipeByID = id => {
   let config = {
     method: 'get',
-    maxBodlength: Infinity,
     url: `http://localhost:3000/recipe/${id}`
   }
 

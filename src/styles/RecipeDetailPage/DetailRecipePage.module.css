@@ -58,7 +58,7 @@
 }
 
 .commonInfoEle > img {
-  margin: 0 4px;
+  margin: 2px 4px;
   width: 20px;
   height: 20px;
 }
@@ -66,6 +66,8 @@
 /* Ingredients */
 
 .ingredientContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
@@ -102,13 +104,14 @@
 .ingDetailContainer {
   width: 100%;
   height: fit-content;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  margin: 4px 4px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 4px 4px 16px 4px;
 }
 
 .eleContainer {
-  width: 100%;
+  width: fit-content;
   align-items: center;
   gap: 8px;
 }
@@ -156,3 +159,11 @@
   -webkit-line-clamp: 5;
 }
 
+.originContainer {
+  display: flex;
+  /* align-items: start; */
+}
+
+.originContainer > p {
+  width: fit-content;
+}

@@ -31,14 +31,14 @@ const RecipeReview = props => {
     setCurrent(newStyle)
   }
 
-  const handleBlur = () => {
-    let newStyle
-    if (current == styleElement.change) {
-      newStyle = styleElement.default
-      console.log(2)
-    }
-    setCurrent(newStyle)
-  }
+  // const handleBlur = () => {
+  //   let newStyle
+  //   if (current == styleElement.change) {
+  //     newStyle = styleElement.default
+  //     console.log(2)
+  //   }
+  //   setCurrent(newStyle)
+  // }
 
   return (
     <div
@@ -47,7 +47,7 @@ const RecipeReview = props => {
       <div className={`${styles.labelContainer} ${styles.temp}`}>
         <SaveRecipeButton
           fn={handleClick}
-          onBlur={handleBlur}
+          // onBlur={handleBlur}
         ></SaveRecipeButton>
         <CollectionDropList
           setCurrent={setCurrent}

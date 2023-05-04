@@ -33,7 +33,10 @@ const CollectionDropList = props => {
           {/* check with user collections */}
         </div>
 
-        <CreateNewCollection></CreateNewCollection>
+        <CreateNewCollection
+          setCurrent={props.setCurrent}
+          id={props.recipe.recipe_id}
+        ></CreateNewCollection>
       </div>
       <div className={`${styles.itemsContainer}`}>{collection}</div>
     </div>

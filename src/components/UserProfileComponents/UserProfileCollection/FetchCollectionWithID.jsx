@@ -6,7 +6,7 @@ export const FetchCollectionWithID = id => {
     method: 'get',
     url: `http://localhost:3000/collection/${id}`,
     headers: {
-      Authorization: localStorage.accessToken
+      Authorization: localStorage.accesstoken
     }
   }
 

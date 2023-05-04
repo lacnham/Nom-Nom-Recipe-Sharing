@@ -4,7 +4,8 @@ import RecipeDetail from '../components/RecipeDetailPageComponents/RecipeDetailS
 import RecipeReview from '../components/RecipeDetailPageComponents/RecipeReviewSection/RecipeReview'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { FetchRecipeByID } from '../components/RecipeDetailPageComponents/FetchRecipeByID'
+import { FetchRecipeByID } from '../components/Fetch/Recipes/FetchRecipeByID'
+import { useParams } from 'react-router-dom'
 // import { LLogin } from '../components/Login'
 
 const DetailRecipePage = () => {
@@ -14,6 +15,7 @@ const DetailRecipePage = () => {
   //   url: 'http://localhost:3000/recipe/8'
   // }
 
+  const { id } = useParams()
   // const [data, setData] = useState({})
   // const [isLoading, setIsLoading] = useState(true)
 
@@ -30,8 +32,9 @@ const DetailRecipePage = () => {
   //     })
   // }, [])
 
-  const recipe = FetchRecipeByID(1)
-  console.log(recipe)
+  const recipe = FetchRecipeByID(id)
+
+  // const recipe = Recipe(1)
 
   // const accesstoken = LLogin()
   // console.log(accesstoken)
@@ -42,7 +45,7 @@ const DetailRecipePage = () => {
       <Header />
       <div className={`${styles.body}`}>
         <div className={`${styles.mainContainer} ${styles.flexRow}`}>
-          <RecipeDetail recipe={recipe} />
+          <RecipeDetail recipe={recipe} id={id} />
           <RecipeReview recipe={recipe} />
         </div>
       </div>
