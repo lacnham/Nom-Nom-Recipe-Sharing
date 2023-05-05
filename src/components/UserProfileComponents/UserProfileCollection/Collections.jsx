@@ -2,13 +2,26 @@ import { Link } from 'react-router-dom'
 import styles from '../../../styles/UserProfile/UserProfileMainPage.module.css'
 
 import { useState } from 'react'
+import { UpdateButton } from '../UpdateProfileButton'
+import { UpdateForm } from '../../FormComponents/UpdateForm'
+import { RecipeTemp } from './RecipeTemp'
 // import { CollectionRecipes } from './CollectionRecipes'
 
 const Collections = props => {
-  const handleClick = () => {
-    // alert('clicked')
+  const handleDisplay = () => {
     props.setCurrentStyle('flex')
   }
+  const handleClick = () => {
+    // alert('clicked')
+
+    props.setUpdateForm(<UpdateForm collection={props.collection} />)
+    // handleDisplay()
+    props.setCurrentStyle('flex')
+  }
+
+  // const handleSetSection = () => {
+  //   props.setSection(<RecipeTemp id={props.collection.collection_id} />)
+  // }
 
   return (
     <div
@@ -17,7 +30,6 @@ const Collections = props => {
       <Link
         to={`/collection/${props.collection.collection_id}`}
         key={props.collection.collection_id}
-        // className={`${styles.collectionContainer} ${styles.boxShadowPurple} ${styles.flexColumn}`}
       >
         <div className={`${styles.contContainer} ${styles.flexColumn}`}>
           <img alt="collection image" src={props.collection.img} />
@@ -26,14 +38,24 @@ const Collections = props => {
             {props.collection.note}
           </div>
         </div>
-
-        {/* img */}
-        {/* title */}
-        {/* des */}
       </Link>
-      <button onClick={handleClick} className={styles.updateDeleteContainer}>
+      {/* <div
+        // to={`/collection/${props.collection.collection_id}`}
+        onClick={handleSetSection}
+        key={props.collection.collection_id}
+      >
+        <div className={`${styles.contContainer} ${styles.flexColumn}`}>
+          <img alt="collection image" src={props.collection.img} />
+          <div className={`${styles.title}`}>{props.collection.name}</div>
+          <div className={`${styles.textOverFlowEcllipse} ${styles.text}`}>
+            {props.collection.note}
+          </div>
+        </div>
+      </div> */}
+      {/* <button onClick={handleClick} className={styles.updateDeleteContainer}>
         Update
-      </button>
+      </button> */}
+      <UpdateButton fn={handleClick} />
     </div>
   )
 }

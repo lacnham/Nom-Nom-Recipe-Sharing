@@ -1,30 +1,25 @@
 import { DefaultButton } from '../Button'
 import styles from '../../styles/RecipeDetailPage/DetailRecipePage.module.css'
 
-export const RenderProfileSection = (section, setSection) => {
+export const RenderProfileSection = (current, setSection) => {
   const style = {
-    backgroundColor: section.color,
-    color: section.textColor,
+    backgroundColor: ' #3d233a',
+    color: 'white',
     backgroundColorHover: '',
-    colorHover: section.color
+    colorHover: ' #3d233a'
   }
   const handleClick = () => {
-    // console.log(section)
-    // console.log('setSection', setSection)
-    // console.log(1)
-    // let count = 0
-    // style.backgroundColor = 'white'
-    setSection(section.path)
+    setSection()
   }
 
   return (
     <DefaultButton
       className={`${styles.label}`}
       type={'button'}
-      key={section.key}
+      key={current.key}
       style={style}
       fn={handleClick}
-      options={section.name}
+      options={current.name}
     ></DefaultButton>
   )
 }

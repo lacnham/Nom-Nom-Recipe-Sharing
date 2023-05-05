@@ -24,11 +24,20 @@ const CollectionSection = props => {
     return <div>Loading user data...</div>
   }
   const collection = userCollectionData.map(ele => (
-    <Collections key={ele.collection_id} collection={ele}></Collections>
+    <Collections
+      key={ele.collection_id}
+      collection={ele}
+      setCurrentStyle={props.setCurrentStyle}
+      setUpdateForm={props.setUpdateForm}
+      // setSection={props.setSection}
+    ></Collections>
   ))
 
   return (
-    <div className={`${styles.collectionMainContainer} ${styles.flexRow}`}>
+    <div
+      className={`${styles.collectionMainContainer} ${styles.flexRow}`}
+      style={{ display: `${props.display.collection}` }}
+    >
       {/* <Collections collection={collection}></Collections>
       <Collections collection={collection}></Collections>
       <Collections collection={collection}></Collections>

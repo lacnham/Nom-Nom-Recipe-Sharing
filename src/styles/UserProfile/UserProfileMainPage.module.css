@@ -1,6 +1,6 @@
 @import url('../globalStyles.css');
 @import url('../RecipeDetailPage/DetailRecipePage.module.css');
-
+@import url('../UserProfile/UserProfileDetail/UserProfileDetail.module.css');
 .profileMainContainer {
   margin-top: 8%;
   width: 90%;
@@ -11,7 +11,14 @@
   /* background-color: red; */
 }
 
+.sectionContainer {
+  position: relative;
+  width: 200%;
+  height: fit-content;
+}
+
 .collectionMainContainer {
+  position: absolute;
   width: 100%;
   height: fit-content;
   flex-wrap: wrap;

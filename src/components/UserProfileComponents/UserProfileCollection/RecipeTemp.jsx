@@ -1,8 +1,10 @@
+import styles from '../../../styles/UserProfile/UserProfileMainPage.module.css'
+
 import { Suspense, lazy } from 'react'
-import styles from '../../../styles/UserProfile/UserProfleCollection/CollectionRecipe.module.css'
+// import styles from '../../../styles/UserProfile/UserProfleCollection/CollectionRecipe.module.css'
 import { FetchCollectionRecipe } from './FetchCollectionRecipe'
 
-export const RecipesInCollection = props => {
+export const RecipeTemp = () => {
   const recipes = FetchCollectionRecipe(props.id)
 
   if (!recipes) {
@@ -15,6 +17,7 @@ export const RecipesInCollection = props => {
 
   const recipe = recipes.map(ele => (
     <Card
+      key={ele.recipe_id}
       image={ele.image_link}
       title={ele.name}
       category={['asd', 'asd1', 'asd2']}
@@ -24,7 +27,7 @@ export const RecipesInCollection = props => {
   ))
 
   return (
-    <div className={`${styles.collectionBody}`}>
+    <div className={`${styles.collectionMainContainer}`}>
       <Suspense>
         {/* <Card
           image={item.image_link}

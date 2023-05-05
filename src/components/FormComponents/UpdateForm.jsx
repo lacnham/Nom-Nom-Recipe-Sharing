@@ -5,31 +5,10 @@ import axios from 'axios'
 export const UpdateForm = props => {
   // const [name, setName] = useState(props.collectionData.name)
   // const [note, setNote] = useState(props.collectionData.note)
-  const [name, setName] = useState('')
-  const [note, setNote] = useState('')
-  const [image, setImage] = useState('')
+  const [name, setName] = useState(props.collection.name)
+  const [note, setNote] = useState(props.collection.note)
+  // const [image, setImage] = useState('')
   const [message, setMessage] = useState('')
-
-  // let config = {
-  //   method: 'post',
-  //   url: `http://localhost:3000/collection/${props.collectionData.id}/update`,
-  //   header: {
-  //     Authorization: localStorage.accesstoken
-  //   },
-  //   data: {
-  //     name: name,
-  //     note: note
-  //   }
-  // }
-
-  // const handleSubmit = async () => {
-  //   try {
-  //     const res = await axios.request(config)
-  //     setMessage(res.data.msg)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
 
   const handleChangeName = e => {
     setName(e.target.value)
@@ -39,7 +18,33 @@ export const UpdateForm = props => {
     setNote(e.target.value)
   }
 
-  console.log(name + ' ' + note)
+  let config = {
+    method: 'PUT',
+    url: `http://localhost:3000/collection/${props.collection.collection_id}`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: localStorage.accesstoken
+    },
+    data: {
+      name: name,
+      note: note
+    }
+  }
+
+  const refreshPage = () => {
+    window.location.reload(false)
+  }
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    try {
+      const res = await axios.request(config)
+      setMessage(res.data.message)
+      refreshPage()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <form className={`${styles.updateForm} ${styles.flexColumn}`}>
@@ -71,7 +76,7 @@ export const UpdateForm = props => {
       <button
         className={`${styles.submitButton}`}
         type="submit"
-        // onClick={handleSubmit}
+        onClick={handleSubmit}
       >
         Update
       </button>
