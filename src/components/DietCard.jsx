@@ -46,7 +46,7 @@ class DietCardContent extends React.Component {
           )}
           <span className="checkbox__icon"></span>
         </div>
-        <p className={styles.LocationLabel}>{this.props.location}</p>
+        <p className={styles.DescriptionLabel}>{this.props.description}</p>
       </div>
     )
   }
@@ -62,7 +62,6 @@ export default class DietCard extends React.Component {
       >
         <DietCardContent
           title={this.props.title}
-          location={this.props.location}
           description={this.props.description}
           category={this.props.category}
           data={this.props.data}
@@ -75,7 +74,6 @@ export default class DietCard extends React.Component {
 DietCard.defaultProps = {
   title: 'Long term',
   category: ['Plans'],
-  location: 'Create a vision. To get started, imagine your life.',
-  description: '',
+  description: 'Create a vision. To get started, imagine your life.',
   active: false
 }

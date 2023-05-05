@@ -44,6 +44,7 @@ button > i {
 }
 
 .disabledButton {
+  border-radius: 8px;
   background-color: #949497;
   cursor: not-allowed;
 }

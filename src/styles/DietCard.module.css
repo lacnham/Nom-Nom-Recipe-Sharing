@@ -1,10 +1,11 @@
 .dietCard {
   border: 1px solid #ddd;
   height: min-content;
+  height: 137px;
   width: 300px;
   border-radius: 8px;
   box-shadow: 8px 8px 8px #ddd;
-  margin: 12px 0px;
+  margin: 12px auto;
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
   flex-basis: 33.33333%;
@@ -19,6 +20,7 @@
 }
 
 .dietCardContent {
+  height: inherit;
   padding: 4px 16px 20px 16px;
 }
 
@@ -31,20 +33,9 @@
   justify-content: space-between;
 }
 
-.LocationLabel {
+.DescriptionLabel {
   font-size: 14px;
   margin: 4px 0;
-}
-
-.Description {
-  font-size: 14px;
-  margin: 8px 0 0 0px;
-  word-break: break-all;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  width: auto;
-  height: auto;
-  white-space: nowrap;
 }
 
 .buttonContainer {
@@ -67,3 +58,4 @@
 .dietCard .active .dietCardTitle, .dietCard .active .dietCardTitle i {
   color: #7096f8;
 }
+

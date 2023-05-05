@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react' // Importing useEffect and us
 import axios from 'axios' // Importing axios library for making http requests
 import styles from '../../styles/LoginAndSignUp/LoginAndSignUp.module.css'
 import { Button1, DisabledButton } from '../Button'
+import useModal from '../ModalComponents/useModal'
+import Modal from '../ModalComponents/Modal'
 
 export default function SignUpForm() {
+
+  const [signUpEr, setSignUpEr] = useState(null)
+
   const [enteredData, setEnteredData] = useState({
     username: '',
     email: '',
@@ -24,6 +29,7 @@ export default function SignUpForm() {
       // window.location.replace('/allrecipe');
     } catch (error) {
       console.error(error)
+      setSignUpEr(error.response.data.msg)
       // Handle errors here, such as displaying an error message to the user.
     }
   }
@@ -73,15 +79,16 @@ export default function SignUpForm() {
     enteredData.verifypassword
   ])
 
-  useEffect(() => {
-    console.log(enteredData.Errors)
-  })
+  const { isShowing, toggle } = useModal()
 
   return (
     <form
     onSubmit={handleSubmit}
     method='POST'
     >
+            <div className={styles.formError}>
+        {signUpEr}
+      </div>
       <div>
         {enteredData.Errors.general && (
           <div className={styles.warning}>{enteredData.Errors.general}</div>
@@ -154,7 +161,7 @@ export default function SignUpForm() {
         )}
         <div className={styles.btnContainer}>
           {Object.keys(enteredData.Errors).length === 0 ? (
-            <Button1 type={'submit'} options={'Register'} fn={''}></Button1>
+            <Button1 type={'submit'} options={'Register'} fn={() => ''}></Button1>
           ) : <DisabledButton options={'Register'} disabled={true}></DisabledButton>}
         </div>
       </div>
