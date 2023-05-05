@@ -6,7 +6,9 @@
   width: 100vw;
   height: 100vh;
   background-color: #000;
-  opacity: 0.5;
+  opacity: 0.7;
+  backdrop-filter: blur(2px); /* apply blur filter */
+
 }
 
 .modal_wrapper {
@@ -46,9 +48,9 @@
 }
 
 .modal_title i {
-    color: #3d233a;
-    padding-right: 5px;
-  }
+  color: #3d233a;
+  padding-right: 5px;
+}
 
 .modal_close_ {
   font-size: 1.4rem;
@@ -62,11 +64,11 @@
 
 .modal_body {
   text-align: center;
-  padding-top: 2rem;
+  color: #949497;
+  padding: 2rem 2rem 1rem 2rem;
 }
 
 .modal_btnContainer {
-  padding-top: 2rem;
   display: flex;
   justify-content: end;
 }

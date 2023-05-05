@@ -10,14 +10,13 @@ import useModal from '../components/ModalComponents/useModal'
 import Modal from '../components/ModalComponents/Modal'
 import { useNavigate } from 'react-router-dom'
 const Diet = () => {
-
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   //diet data
   const { dietData } = useContext(AuthContext)
   const { userData } = useContext(AuthContext)
   const [dietaryPreferences, setDietaryPreferences] = useState(null)
-  const [checkedDivContent, setCheckedDivContent] = useState(null)
+  // const [checkedDivContent, setCheckedDivContent] = useState(null)
   useEffect(() => {
     if (dietData) {
       setDietaryPreferences(
@@ -25,7 +24,7 @@ const Diet = () => {
       )
     }
     console.log(dietaryPreferences)
-    setCheckedDivContent(dietaryPreferences)
+    // setCheckedDivContent(dietaryPreferences)
   }, [dietData])
 
   // function findCheckedDivContent() {
@@ -81,11 +80,6 @@ const Diet = () => {
   }
 
   const updateDietPpreference = async () => {
-    // console.log('here',JSON.stringify(data));
-    // while(data === null){
-    //   findCheckedDivContent()
-    // }
-
     console.log(
       'await is here',
       JSON.stringify(await waitForCheckedDivContent())
@@ -132,14 +126,13 @@ const Diet = () => {
     11: {description: 'Limiting the intake of fat, particularly saturated and trans fats.'},
     12: {description: 'Focusing on consuming foods that are rich in protein to support muscle growth and repair.'},
     13: {description: 'Eating uncooked and unprocessed foods that are rich in nutrients and enzymes.'},
-    14: {description: 'A diet consisting primarily of fruits, nuts, seeds, and other plant-based foods that can be harvested without killing the plant.'}
+    14: {description: 'Plant-based diet consisting of fruits, nuts, seeds, and other harvestable plant-based foods.'}
   };
   
   const combinedData = diet.map((item, index) => ({
     ...item,
     description: diet_description[index].description
-  }));
-
+  }))
 
   const DietCard = lazy(() => import('../components/DietCard'))
 
@@ -160,7 +153,9 @@ const Diet = () => {
                 modalMsg={'User dietary preferences updated successfully'}
                 closeable={false}
                 titleIcon={<i className="fa-solid fa-circle-check"></i>}
-                btnFn={() => {navigate('/')}}
+                btnFn={() => {
+                  navigate('/')
+                }}
               />
               <h1>
                 Select Your Diet Plan (you can change this later in your user

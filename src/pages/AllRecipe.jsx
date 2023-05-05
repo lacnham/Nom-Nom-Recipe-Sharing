@@ -120,6 +120,8 @@ const AllRecipe = () => {
           </div>
         </div>
       </div>
+
+      
     </div>
   )
 }

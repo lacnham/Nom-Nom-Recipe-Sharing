@@ -73,6 +73,9 @@
   font-size: 14px;
   font-family: Noto Sans JP;
   font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .dropdownMenu li > i{
@@ -81,6 +84,7 @@
 
 .dropdownMenu li:hover {
   background-color: #e7e7e7;
+  border-radius: 8px;
 }
 
 .dropdownMenu li a {
@@ -89,3 +93,8 @@
   padding: 15px 20px;
   display: block;
 }
+
+.dropdownMenu button{
+  width: 100% !important;
+}
+
