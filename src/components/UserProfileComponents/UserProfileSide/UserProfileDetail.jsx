@@ -24,7 +24,6 @@ export const UserProfileDetail = () => {
           <div>{userData.user.username}</div>
           <div>{userData.user.email}</div>
         </div>
-
         <UpdateButton />
       </div>
     </div>
