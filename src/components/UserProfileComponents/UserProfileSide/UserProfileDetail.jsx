@@ -3,12 +3,13 @@ import img from '../../../images/avatarTemp.png'
 import { AuthContext } from '../../SessionVerification/AuthContext'
 import { useContext } from 'react'
 import { FetchCurrentuser } from '../../FetchCurrentUser'
+import { UpdateButton } from '../UpdateProfileButton'
 
 export const UserProfileDetail = () => {
-  // const { user } = useContext(AuthContext)
-  const user = FetchCurrentuser()
-  console.log(user)
-  if (!user) {
+  const { userData } = useContext(AuthContext)
+  // const user = FetchCurrentuser()
+  // console.log('user ++++' + userData.user.id)
+  if (!userData) {
     return <div>Loading user data...</div>
   }
 
@@ -17,10 +18,14 @@ export const UserProfileDetail = () => {
       <div className={`${styles.avatarContainer}`}>
         <img src={img} alt="user avatar" />
       </div>
-      <div className={`${styles.infoContainer}`}>
-        <div>ID: {user.user.id}</div>
-        <div>{user.user.username}</div>
-        <div>{user.user.email}</div>
+      <div className={`${styles.infoContainerAndUpdate}`}>
+        <div className={`${styles.infoContainer}`}>
+          <div>ID: {userData.user.id}</div>
+          <div>{userData.user.username}</div>
+          <div>{userData.user.email}</div>
+        </div>
+
+        <UpdateButton />
       </div>
     </div>
   )

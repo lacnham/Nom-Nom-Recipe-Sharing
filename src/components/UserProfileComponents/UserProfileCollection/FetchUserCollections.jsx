@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-// import { Login } from '../../Login'
+import { useState, useEffect } from 'react'
 
 export const FetchUserCollections = () => {
   // const userData = Login()

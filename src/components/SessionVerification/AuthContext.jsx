@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { FetchUserCollections } from '../UserProfileComponents/UserProfileCollection/FetchUserCollections'
 export const AuthContext = React.createContext()
 
 export const logout = async () => {
@@ -29,6 +30,7 @@ const accesstoken = localStorage.getItem('accesstoken')
 const url = 'http://localhost:3000/user/my-profile'
 const AuthContextProvider = props => {
   const [userData, setUserData] = useState(null)
+  const userCollectionData = FetchUserCollections()
 
   const getUserSession = async () => {
     if (accesstoken) {
@@ -65,7 +67,7 @@ const AuthContextProvider = props => {
 
   return (
     // <AuthContext.Provider value={{ userData, backendMsg }}>
-    <AuthContext.Provider value={{ userData, logout }}>
+    <AuthContext.Provider value={{ userData, logout, userCollectionData }}>
       {props.children}
     </AuthContext.Provider>
   )

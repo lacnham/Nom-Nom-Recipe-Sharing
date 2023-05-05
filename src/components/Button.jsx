@@ -56,14 +56,13 @@ export function DefaultButton ({
   }
 
   let styleTemp = {
-    backgroundColor: isHover
-      ? style.backgroundColorHover
-      : style.backgroundColor,
-    color: isHover ? style.colorHover : style.color,
-    backgroundColor: isFocus
-      ? style.backgroundColorHover
-      : style.backgroundColor,
-    color: isFocus ? style.colorHover : style.color
+    backgroundColor:
+      isHover || isFocus ? style.backgroundColorHover : style.backgroundColor,
+    color: isHover || isFocus ? style.colorHover : style.color
+    // backgroundColor: isFocus
+    //   ? style.backgroundColorHover
+    //   : style.backgroundColor,
+    // color: isFocus ? style.colorHover : style.color
   }
   return (
     <button

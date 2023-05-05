@@ -1,7 +1,7 @@
 @import url('../../globalStyles.css');
 
 .detailContainer {
-  padding: 8px 0;
+  /* padding: 8px 0; */
   border-radius: 16px;
   height: 200px;
   width: 400px;
@@ -10,25 +10,33 @@
 }
 
 .avatarContainer {
-  border-right: 2px solid black;
-  width: 40%;
+  border-right: 2px solid rgba(0, 0, 0, 0.5);
+  width: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .avatarContainer > img {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 }
 
-.infoContainer {
-  width: 60%;
+.infoContainerAndUpdate {
+  width: 70%;
   /* background-color: wheat; */
   display: flex;
   /* align-items: center; */
   justify-content: center;
   flex-direction: column;
+  border-radius: inherit;
+}
+
+.infoContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .tabContainer {

@@ -25,11 +25,19 @@ const RecipeIngredient = props => {
   // }, [])
 
   let config = {
-    method: 'get',
+    method: 'post',
     // url: `http://localhost:3000/recipe/get-ingredients-by-recipe/${props.id}`,
-    url: `http://localhost:3000/recipe/nutritions/total-nutrition-facts/${props.i}`,
+    url: `http://localhost:3000/recipe/nutritions/total-ing-nutrition-facts/${props.id}`,
     data: {
-      servingNum: 1.0
+      servingNum: props.servingNum
+    }
+  }
+
+  let configNutrition = {
+    method: 'post',
+    url: `http://localhost:3000/recipe/nutritions/total-nutrition-facts/${props.id}`,
+    data: {
+      servingNum: props.servingNum
     }
   }
 
@@ -38,44 +46,32 @@ const RecipeIngredient = props => {
   // console.log(axios.request(config)
 
   const [ingredients, setIngredients] = useState([])
+  const [nutritions, setNutritions] = useState([])
 
   useEffect(() => {
     axios
-      .request(config)
-      .then(res => setIngredients(res.data.ingredientFactsOfRecipe))
+      .all([axios.request(config), axios.request(configNutrition)])
+      .then(
+        axios.spread((response1, response2) => {
+          // handle both responses here
+          setIngredients(response1.data.ingredientFactsOfRecipe)
+          setNutritions(response2.data.ingredientFactsOfRecipe[0])
+          // console.log(response1.data.ingredientFactsOfRecipe)
+          // console.log(response2.data.ingredientFactsOfRecipe[0])
+        })
+      )
       .catch(error => console.log(error))
   }, [])
 
-  // console.log('serving num' + props.servingNum)
-  console.log(ingredients[0])
-  // const ingToArr = Object.entries(ingredients[0])
+  let nutritionToArr = Object.entries(nutritions)
 
-  // let nutritions = []
-  // let count = 0
-  // for (let i = 0; i < ingredients.length; i++) {
-  //   let ingToArr = Object.entries(ingredients[i])
-  //   for (let j = 4; j < ingToArr.length; j++) {
-  //     if (ingToArr[j][0] == nutritions[count][0]) {
-  //       nutritions[count][1] =
-  //         parseFloat(nutritions[count][1]) + parseFloat(ingToArr[j][i])
-  //     }
-  //     nutritions.push(ingToArr[j])
-  //     count++
-  //   }
-  // }
+  for (let i = 0; i < nutritionToArr.length; i++) {
+    if (nutritionToArr[i][0].includes('_')) {
+      nutritionToArr[i][0] = nutritionToArr[i][0].replace('_', ' ')
+    }
+  }
 
-  // console.log(nutritions)
-
-  // const nutritions = []
-  // for (let i = 4; i < ingToArr.length; i++) {
-  //   nutritions.push(ingToArr[i])
-  // }
-  // console.log(nutritions)
-  // console.log(Object.entries(ingredients))
-
-  // const nutritionFacts = props.recipe.ingredients.map((ele) =>
-  //   ele.nutritions[0].name
-  // )
+  console.log(nutritionToArr)
 
   const label = ingredients.map(ele => (
     <div key={ele.id} className={styles.label}>
@@ -92,6 +88,15 @@ const RecipeIngredient = props => {
     </div>
   ))
 
+  const nutrition = nutritionToArr.map(ele => (
+    <div key={ele.id} className={`${styles.eleContainer} ${styles.flexRow}`}>
+      <img src={doneIcon} />
+      <div>{ele[0]}</div>
+      <div>{ele[1]}</div>
+      {/* <div>{ele.unit_name}</div> */}
+    </div>
+  ))
+
   // const label = props.recipe.ingredients.map(ele => RenderLabel(ele))
   // const labelDetail = props.recipe.ingredients.map(ele => RenderDetail(ele))
 
@@ -105,6 +110,8 @@ const RecipeIngredient = props => {
       <div className={`${styles.ingredientTab} ${styles.boxShadowPurple}`}>
         <div className={styles.title}>Nutrition facts</div>
         {/* <div className={styles.ingDetailContainer}>{nutritionFacts}</div> */}
+
+        <div className={styles.ingDetailContainer}> {nutrition}</div>
       </div>
     </div>
   )

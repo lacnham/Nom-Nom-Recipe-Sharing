@@ -5,9 +5,13 @@ import UserProfileSide from '../components/UserProfileComponents/UserProfileSide
 import styles from '../styles/UserProfile/UserProfileMainPage.module.css'
 import { RecipeSection } from '../components/UserProfileComponents/UserProfileRecipe/RecipeSection'
 import { useState } from 'react'
+import { UpdateForm } from '../components/FormComponents/UpdateForm'
 
 const UserProfileMainPage = () => {
-  const [section, setSection] = useState(<CollectionSection />)
+  const [currentStyle, setCurrentStyle] = useState('none')
+  const [section, setSection] = useState(
+    <CollectionSection setCurrentStyle={setCurrentStyle} />
+  )
 
   return (
     <>
@@ -18,8 +22,13 @@ const UserProfileMainPage = () => {
           {/* <CollectionSection></CollectionSection> */}
           {/* <CollectionSection /> */}
           {section}
-          {/* UserProfileContainer fixed width */}
           <UserProfileSide setSection={setSection}></UserProfileSide>
+        </div>
+        <div
+          className={`${styles.updateFormBackground}`}
+          style={{ display: `${currentStyle}` }}
+        >
+          <UpdateForm />
         </div>
       </div>
     </>

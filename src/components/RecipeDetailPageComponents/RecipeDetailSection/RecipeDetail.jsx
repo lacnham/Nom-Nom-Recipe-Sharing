@@ -7,12 +7,14 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 const RecipeDetail = props => {
+  const duration = Object.entries(props.recipe.duration)
+
   const recipe = {
     id: props.id,
     title: props.recipe.name,
     img: image,
     commonInfo: {
-      // duration: `${duration[0][1]} ${duration[0][0]}`,
+      duration: `${duration[0][1]} ${duration[0][0]}`,
       serving: `${parseInt(props.recipe.serving_size)} people`,
       calories: '600 kcal',
       dietType: ''

@@ -2,6 +2,9 @@ import styles from '../../../styles/UserProfile/UserProfileMainPage.module.css'
 import Collections from './Collections'
 import img from '../../../images/recipeImage.png'
 import { FetchUserCollections } from './FetchUserCollections'
+import { useContext } from 'react'
+import { AuthContext } from '../../SessionVerification/AuthContext'
+// import { CollectionContext } from './UserCollectionContext'
 
 const CollectionSection = props => {
   // const collection = {
@@ -10,15 +13,18 @@ const CollectionSection = props => {
   //   img: img
   // }
 
-  const collections = FetchUserCollections()
+  const { userCollectionData } = useContext(AuthContext)
+  console.log('here:', userCollectionData)
 
-  console.log(collections)
+  // const collections = FetchUserCollections()
 
-  if (!collections) {
+  // console.log(collections)
+
+  if (!userCollectionData) {
     return <div>Loading user data...</div>
   }
-  const collection = collections.map(ele => (
-    <Collections collection={ele}></Collections>
+  const collection = userCollectionData.map(ele => (
+    <Collections key={ele.collection_id} collection={ele}></Collections>
   ))
 
   return (

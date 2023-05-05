@@ -40,12 +40,14 @@ a {
 
 body {
   max-width: 1920px;
+  /* position: relative; */
   /* overflow: hidden; */
 }
 
 .body {
   width: 100%;
   height: fit-content;
+  position: relative;
   /* background-color: var(--light-orange) ; */
   display: flex;
   justify-content: center;

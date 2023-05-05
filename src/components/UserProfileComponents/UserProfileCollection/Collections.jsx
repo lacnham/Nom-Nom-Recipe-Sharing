@@ -5,25 +5,36 @@ import { useState } from 'react'
 // import { CollectionRecipes } from './CollectionRecipes'
 
 const Collections = props => {
-  const tempCollections = [{ title: '', description: '', img: '', recipes: [] }]
+  const handleClick = () => {
+    // alert('clicked')
+    props.setCurrentStyle('flex')
+  }
 
   return (
-    <Link
-      to={`/collection/${props.collection.collection_id}`}
-      key={props.collection.collection_id}
-      className={`${styles.collectionContainer} ${styles.boxShadowPurple}`}
+    <div
+      className={`${styles.collectionContainer} ${styles.boxShadowPurple} ${styles.flexColumn}`}
     >
-      <div className={`${styles.contContainer} ${styles.flexColumn}`}>
-        <img alt="collection image" src={props.collection.img} />
-        <div className={`${styles.title}`}>{props.collection.name}</div>
-        <div className={`${styles.textOverFlowEcllipse} ${styles.text}`}>
-          {props.collection.note}
+      <Link
+        to={`/collection/${props.collection.collection_id}`}
+        key={props.collection.collection_id}
+        // className={`${styles.collectionContainer} ${styles.boxShadowPurple} ${styles.flexColumn}`}
+      >
+        <div className={`${styles.contContainer} ${styles.flexColumn}`}>
+          <img alt="collection image" src={props.collection.img} />
+          <div className={`${styles.title}`}>{props.collection.name}</div>
+          <div className={`${styles.textOverFlowEcllipse} ${styles.text}`}>
+            {props.collection.note}
+          </div>
         </div>
-      </div>
-      {/* img */}
-      {/* title */}
-      {/* des */}
-    </Link>
+
+        {/* img */}
+        {/* title */}
+        {/* des */}
+      </Link>
+      <button onClick={handleClick} className={styles.updateDeleteContainer}>
+        Update
+      </button>
+    </div>
   )
 }
 
