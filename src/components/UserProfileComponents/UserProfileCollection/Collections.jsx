@@ -14,7 +14,13 @@ const Collections = props => {
   const handleClick = () => {
     // alert('clicked')
 
-    props.setUpdateForm(<UpdateForm collection={props.collection} />)
+    props.setUpdateForm(
+      <UpdateForm
+        collection={props.collection}
+        setUpdateForm={props.setUpdateForm}
+        setCurrentStyle={props.setCurrentStyle}
+      />
+    )
     // handleDisplay()
     props.setCurrentStyle('flex')
   }

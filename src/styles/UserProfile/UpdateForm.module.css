@@ -11,7 +11,7 @@
   gap: 16px;
   align-items: center;
   border-radius: 8px;
-  transition: 2s;
+  /* transition: 2s; */
   /* justify-content: center; */
 }
 
@@ -59,4 +59,28 @@
   width: 20%;
   border-radius: 16px;
   font: var(--primary-font);
+}
+
+.closeButton {
+  align-self: flex-end;
+  width: 36px;
+  height: 36px;
+  background-color: var(--black-purple);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: var(--primary-font);
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.formTitle {
+  text-align: center;
+  width: 100%;
+  font: var(--primary-font);
+  color: var(--black-purple);
+  font-size: 24px;
+  font-weight: bold;
+  /* display: flex; */
 }

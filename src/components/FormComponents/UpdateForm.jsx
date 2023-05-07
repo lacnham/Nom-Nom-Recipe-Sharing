@@ -46,8 +46,24 @@ export const UpdateForm = props => {
     }
   }
 
+  const handleCloseButton = () => {
+    console.log(typeof props.setUpdateForm)
+    props.setUpdateForm(<div></div>)
+    props.setCurrentStyle('none')
+    // alert('clicked')
+  }
+
   return (
     <form className={`${styles.updateForm} ${styles.flexColumn}`}>
+      <div
+        type="button"
+        className={`${styles.closeButton}`}
+        onClick={handleCloseButton}
+      >
+        X
+      </div>
+      <div className={styles.formTitle}>Update collection</div>
+
       <div className={`${styles.updateImage}`}></div>
       <div className={`${styles.updateName} ${styles.flexRow}`}>
         <label className={`${styles.label}`}>Name</label>

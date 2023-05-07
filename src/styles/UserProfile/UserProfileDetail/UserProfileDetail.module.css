@@ -1,12 +1,38 @@
 @import url('../../globalStyles.css');
 
+.detailMainContainer {
+  display: flex;
+  /* height: 100%; */
+  height: fit-content;
+  min-height: 200px;
+
+  /* max-height: 230px; */
+}
+
 .detailContainer {
   /* padding: 8px 0; */
   border-radius: 16px;
-  height: 200px;
+  height: fit-content;
+  min-height: 200px;
   width: 400px;
   background-color: var(--light-orange);
   gap: 4%;
+  transition: 2s;
+}
+
+.form {
+  height: 100% !important;
+}
+
+.inputField {
+  width: 80% !important;
+  height: fit-content;
+  padding: 6px !important;
+  margin: 0;
+  border: none !important;
+  outline: none;
+  font-size: 16px;
+  font: var(--primary-font);
 }
 
 .avatarContainer {
@@ -24,6 +50,7 @@
 
 .infoContainerAndUpdate {
   width: 70%;
+
   /* background-color: wheat; */
   display: flex;
   /* align-items: center; */
