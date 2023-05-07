@@ -14,10 +14,6 @@ export const UpdateProfileDetail = props => {
     setName(e.target.value)
   }
 
-  const handleChangeEmail = e => {
-    setEmail(e.target.value)
-  }
-
   const handleChangePassword = e => {
     setPassword(e.target.value)
   }
@@ -25,7 +21,8 @@ export const UpdateProfileDetail = props => {
   const handleVerifyPassword = e => {
     setVeryPassword(e.target.value)
   }
-  console.log(props.display)
+
+  let config = {}
 
   return (
     <form

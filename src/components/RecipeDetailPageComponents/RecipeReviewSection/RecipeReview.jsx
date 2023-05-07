@@ -54,6 +54,7 @@ const RecipeReview = props => {
           style={styleElement}
           recipe={props.recipe}
           current={current}
+          id={props.id}
         ></CollectionDropList>
       </div>
       <UserReview></UserReview>

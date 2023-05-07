@@ -35,7 +35,7 @@ const CollectionDropList = props => {
 
         <CreateNewCollection
           setCurrent={props.setCurrent}
-          id={props.recipe.recipe_id}
+          id={props.id}
         ></CreateNewCollection>
       </div>
       <div className={`${styles.itemsContainer}`}>{collection}</div>

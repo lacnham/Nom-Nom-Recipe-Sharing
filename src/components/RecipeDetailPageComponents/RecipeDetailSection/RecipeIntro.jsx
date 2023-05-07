@@ -23,11 +23,11 @@ const RecipeIntro = props => {
           <img src={peopleIcon} alt="people icon" />
           <div>{props.recipe.commonInfo.serving}</div>
         </div>
-        <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
+        {/* <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
           <div>
             <b>Calories</b>: {props.recipe.commonInfo.calories}
           </div>
-        </div>
+        </div> */}
         <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
           <div>
             <b>Diet type</b>: {props.recipe.commonInfo.dietType}
