@@ -34,7 +34,9 @@ const RecipeDetail = props => {
   }
 
   return (
-    <div className={`${styles.recipePrimaryContainer} ${styles.flexColumn}`}>
+    <div
+      className={`${styles.recipePrimaryContainer} ${styles.flexColumn} ${styles.recipeDetailMainContainer}`}
+    >
       <RecipeIntro recipe={recipe} />
       <RecipeDescription
         recipe={recipe}

@@ -42,7 +42,7 @@ const RecipeReview = props => {
 
   return (
     <div
-      className={`${styles.recipePrimaryContainer} ${styles.flexColumn} ${styles.boxShadowPurple}`}
+      className={`${styles.recipePrimaryContainer} ${styles.flexColumn} ${styles.boxShadowPurple} ${styles.reviewsContainer}`}
     >
       <div className={`${styles.labelContainer} ${styles.temp}`}>
         <SaveRecipeButton
@@ -57,7 +57,7 @@ const RecipeReview = props => {
           id={props.id}
         ></CollectionDropList>
       </div>
-      <UserReview></UserReview>
+      <UserReview id={props.id}></UserReview>
     </div>
   )
 }

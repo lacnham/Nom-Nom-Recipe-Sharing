@@ -12,7 +12,8 @@ const CollectionDropList = props => {
       setCurrent={props.setCurrent}
       style={props.style}
       key={ele.collection_id}
-      recipe={props.recipe}
+      id={props.id}
+      // recipe={props.recipe}
       collection={ele}
     ></CollectionInDropList>
   ))

@@ -7,6 +7,7 @@
   /* background-color: var(--light-orange) ; */
   display: flex;
   justify-content: center;
+  font: var(--primary-font);
 }
 
 .mainContainer {
@@ -26,9 +27,14 @@
 .recipePrimaryContainer {
   width: 100%;
   height: fit-content;
-  /* background-color: white; */
+  background-color: whitesmoke;
   border-radius: 16px;
   gap: 20px;
+}
+
+.recipeDetailMainContainer {
+  background-color: var(--light-orange);
+  padding: 12px;
 }
 
 .title {
@@ -75,7 +81,7 @@
   width: 100%;
   height: fit-content;
   border-radius: 16px;
-  /* background-color: white; */
+  background-color: whitesmoke;
 }
 
 .labelContainer {
@@ -134,8 +140,8 @@
   height: 200px;
   margin: 12px;
   padding: 12px 16px 0 16px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 16px;
+  background-color: whitesmoke;
   /* height: 200px; */
   max-height: 300px;
   /* text-overflow: clip; */
@@ -166,4 +172,8 @@
 
 .originContainer > p {
   width: fit-content;
+}
+
+.reviewsContainer {
+  background-color: var(--light-orange);
 }

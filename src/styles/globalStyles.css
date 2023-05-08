@@ -17,7 +17,7 @@
 
   --primary-font: 16px normal Ubuntu;
   --black-purple: #3d233a;
-  --light-orange: rgba(255, 196, 131, 1);
+  --light-orange: rgba(255, 196, 131, 0.7);
 
   color: rgba(0, 0, 0, 0.87);
   background-color: #f1f1f4;

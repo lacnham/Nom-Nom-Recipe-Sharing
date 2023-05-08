@@ -25,7 +25,7 @@ export const CollectionInDropList = props => {
     },
     data: {
       collection_id: props.collection.collection_id,
-      recipe_id: props.recipe.recipe_id
+      recipe_id: props.id
     }
   }
 
