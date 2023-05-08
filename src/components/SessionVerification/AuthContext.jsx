@@ -24,6 +24,31 @@ export const logout = async () => {
   }
 }
 
+export const dietFetch = async (userData) => {
+  if (userData) {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/get-dietary-preference/${userData.user.id}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('return data', data);
+        return data; // Return the data instead of setting state
+      } else {
+        throw new Error('Unable to get dietary preference');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
 
 const accesstoken = localStorage.getItem('accesstoken')
 
@@ -95,7 +120,7 @@ const AuthContextProvider = props => {
 
   return (
     // <AuthContext.Provider value={{ userData, backendMsg }}>
-    <AuthContext.Provider value={{ userData, logout, dietData }}>
+    <AuthContext.Provider value={{ userData, logout, dietData, dietFetch }}>
       {props.children}
     </AuthContext.Provider>
   )

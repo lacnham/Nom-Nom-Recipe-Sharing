@@ -18,7 +18,7 @@
   --primary-font: 16px normal Ubuntu;
   --black-purple: #3d233a;
   --med-orange: #ff8600;
-  --light-orange: rgba(255, 196, 131, 1);
+  --light-orange: #ffc483;
 
   color: rgba(0, 0, 0, 0.87);
   background-color: #f1f1f4;
@@ -122,4 +122,5 @@ input{
   border: 2px solid #ff8600;
   box-sizing: border-box;
   border-radius: 8px !important;
+  font-family: Noto Sans JP !important;
 }

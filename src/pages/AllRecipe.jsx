@@ -10,6 +10,9 @@ const AllRecipe = () => {
   const perLoad = 12
   const [searchInput, setSearchInput] = useState('')
   const [data, setData] = useState([])
+  const [diet, setDiet] = useState([])
+  const [country, setCountry] = useState([])
+
   const [itemsToRender, setItemsToRender] = useState(0)
 
   const filteredData = useMemo(() => {
@@ -28,9 +31,35 @@ const AllRecipe = () => {
     }
   }
 
+  const fetchDietaty = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/dietary/get-all')
+      setDiet(response.data)
+    } catch (error) {
+      console.log(error)
+      setDiet([])
+    }
+  }
+
+  const fetchCountry = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/country/get-all')
+      setCountry(response.data)
+    } catch (error) {
+      console.log(error)
+      setCountry([])
+    }
+  }
+
   useEffect(() => {
     fetchRecipes()
+    fetchCountry()
+    fetchDietaty()
   }, [])
+
+  useEffect(() => {
+    console.log('sessionStorage: ', sessionStorage.getItem('recipe'))
+  })
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -59,7 +88,7 @@ const AllRecipe = () => {
           <div className={styles.content}>
             <div className={styles.text}>
               <h1>Hello</h1>
-              <SearchBar data={data}></SearchBar>
+              <SearchBar data={data} diet={diet} country={country}></SearchBar>
               <input
                 autoFocus
                 placeholder="Type..."
@@ -120,8 +149,6 @@ const AllRecipe = () => {
           </div>
         </div>
       </div>
-
-      
     </div>
   )
 }

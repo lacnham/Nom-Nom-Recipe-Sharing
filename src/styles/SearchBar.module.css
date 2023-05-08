@@ -1,0 +1,35 @@
+.form_Container {
+  padding: 0px 200px;
+}
+
+.search_Container {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.search_Container > div {
+  margin: 0px;
+}
+
+.btnContainer > button {
+  width: 150px !important;
+  height: 100% !important;
+}
+
+.filter_Container {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter_Container > div {
+  /* margin: 6px; */
+  width: 50% !important;
+  /* border: 2px solid #ff8600 !important;
+  border-radius: 8px !important; */
+}
+/* .filter_Container > div > div > div > input:focus {
+    background-color: yellow;
+} */

@@ -36,6 +36,7 @@
 .DescriptionLabel {
   font-size: 14px;
   margin: 4px 0;
+  height: fit-content;
 }
 
 .buttonContainer {

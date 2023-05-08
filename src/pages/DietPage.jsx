@@ -10,11 +10,17 @@ import useModal from '../components/ModalComponents/useModal'
 import Modal from '../components/ModalComponents/Modal'
 import { useNavigate } from 'react-router-dom'
 const Diet = () => {
+  
   const navigate = useNavigate()
 
   //diet data
   const { dietData } = useContext(AuthContext)
   const { userData } = useContext(AuthContext)
+
+  // useEffect(() =>{
+  //   getDietaryData();
+  // },[])
+
   const [dietaryPreferences, setDietaryPreferences] = useState(null)
   // const [checkedDivContent, setCheckedDivContent] = useState(null)
   useEffect(() => {
@@ -112,23 +118,64 @@ const Diet = () => {
   }
 
   const diet_description = {
-    0: {description: 'Consuming both animal and plant-based food.'},
-    1: {description: 'Excluding meat, fish, and poultry from the diet, but may include dairy and eggs.'},
-    2: {description: 'Avoiding all animal-based products including meat, dairy, eggs, and honey.'},
-    3: {description: 'Following a vegetarian diet but including fish and seafood.'},
-    4: {description: 'Primarily vegetarian, but may occasionally eat meat or fish.'},
-    5: {description: 'Based on the diet of our hunter-gatherer ancestors, excluding grains, dairy, and processed foods.'},
-    6: {description: 'A high-fat, low-carb diet that puts the body in a state of ketosis, resulting in weight loss.'},
-    7: {description: 'Emphasizing whole foods, fruits, vegetables, legumes, and healthy fats such as olive oil and nuts.'},
-    8: {description: 'Avoiding foods that contain gluten, a protein found in wheat, barley, and rye.'},
-    9: {description: 'Excluding all dairy products, including milk, cheese, and yogurt.'},
-    10: {description: 'Restricting carbohydrate intake to promote weight loss and manage blood sugar levels.'},
-    11: {description: 'Limiting the intake of fat, particularly saturated and trans fats.'},
-    12: {description: 'Focusing on consuming foods that are rich in protein to support muscle growth and repair.'},
-    13: {description: 'Eating uncooked and unprocessed foods that are rich in nutrients and enzymes.'},
-    14: {description: 'Plant-based diet consisting of fruits, nuts, seeds, and other harvestable plant-based foods.'}
-  };
-  
+    0: { description: 'Consuming both animal and plant-based food.' },
+    1: {
+      description:
+        'Excluding meat, fish, and poultry from the diet, but may include dairy and eggs.'
+    },
+    2: {
+      description:
+        'Avoiding all animal-based products including meat, dairy, eggs, and honey.'
+    },
+    3: {
+      description: 'Following a vegetarian diet but including fish and seafood.'
+    },
+    4: {
+      description:
+        'Primarily vegetarian, but may occasionally eat meat or fish.'
+    },
+    5: {
+      description:
+        'Based on the diet of our hunter-gatherer ancestors, excluding grains, dairy, and processed foods.'
+    },
+    6: {
+      description:
+        'A high-fat, low-carb diet that puts the body in a state of ketosis, resulting in weight loss.'
+    },
+    7: {
+      description:
+        'Emphasizing whole foods, fruits, vegetables, legumes, and healthy fats such as olive oil and nuts.'
+    },
+    8: {
+      description:
+        'Avoiding foods that contain gluten, a protein found in wheat, barley, and rye.'
+    },
+    9: {
+      description:
+        'Excluding all dairy products, including milk, cheese, and yogurt.'
+    },
+    10: {
+      description:
+        'Restricting carbohydrate intake to promote weight loss and manage blood sugar levels.'
+    },
+    11: {
+      description:
+        'Limiting the intake of fat, particularly saturated and trans fats.'
+    },
+    12: {
+      description:
+        'Focusing on consuming foods that are rich in protein to support muscle growth and repair.'
+    },
+    13: {
+      description:
+        'Eating uncooked and unprocessed foods that are rich in nutrients and enzymes.'
+    },
+    14: {
+      description:
+        'Plant-based diet consisting of fruits, nuts, seeds, and other harvestable plant-based foods.'
+    }
+  }
+
   const combinedData = diet.map((item, index) => ({
     ...item,
     description: diet_description[index].description
@@ -137,6 +184,7 @@ const Diet = () => {
   const DietCard = lazy(() => import('../components/DietCard'))
 
   const { isShowing, toggle } = useModal()
+
 
   return (
     <div className={styles.page}>
