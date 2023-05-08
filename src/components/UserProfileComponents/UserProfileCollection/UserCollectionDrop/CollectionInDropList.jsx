@@ -25,7 +25,7 @@ export const CollectionInDropList = props => {
     },
     data: {
       collection_id: props.collection.collection_id,
-      recipe_id: props.recipe.recipe_id
+      recipe_id: props.id
     }
   }
 
@@ -40,10 +40,8 @@ export const CollectionInDropList = props => {
       console.log(error)
     }
 
-    // console.log('Collection id ' + props.collection.collection_id)
-    // console.log('Recipe id ' + props.recipe.recipe_id)
-    handleBlur()
     if (isSuccess) {
+      handleBlur()
       console.log(message)
     }
 

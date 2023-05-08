@@ -31,32 +31,33 @@ const RecipeReview = props => {
     setCurrent(newStyle)
   }
 
-  const handleBlur = () => {
-    let newStyle
-    if (current == styleElement.change) {
-      newStyle = styleElement.default
-      console.log(2)
-    }
-    setCurrent(newStyle)
-  }
+  // const handleBlur = () => {
+  //   let newStyle
+  //   if (current == styleElement.change) {
+  //     newStyle = styleElement.default
+  //     console.log(2)
+  //   }
+  //   setCurrent(newStyle)
+  // }
 
   return (
     <div
-      className={`${styles.recipePrimaryContainer} ${styles.flexColumn} ${styles.boxShadowPurple}`}
+      className={`${styles.recipePrimaryContainer} ${styles.flexColumn} ${styles.boxShadowPurple} ${styles.reviewsContainer}`}
     >
       <div className={`${styles.labelContainer} ${styles.temp}`}>
         <SaveRecipeButton
           fn={handleClick}
-          onBlur={handleBlur}
+          // onBlur={handleBlur}
         ></SaveRecipeButton>
         <CollectionDropList
           setCurrent={setCurrent}
           style={styleElement}
           recipe={props.recipe}
           current={current}
+          id={props.id}
         ></CollectionDropList>
       </div>
-      <UserReview></UserReview>
+      <UserReview id={props.id}></UserReview>
     </div>
   )
 }

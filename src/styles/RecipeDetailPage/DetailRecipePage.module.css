@@ -7,6 +7,7 @@
   /* background-color: var(--light-orange) ; */
   display: flex;
   justify-content: center;
+  font: var(--primary-font);
 }
 
 .mainContainer {
@@ -26,9 +27,14 @@
 .recipePrimaryContainer {
   width: 100%;
   height: fit-content;
-  /* background-color: white; */
+  background-color: whitesmoke;
   border-radius: 16px;
   gap: 20px;
+}
+
+.recipeDetailMainContainer {
+  background-color: var(--light-orange);
+  padding: 12px;
 }
 
 .title {
@@ -58,7 +64,7 @@
 }
 
 .commonInfoEle > img {
-  margin: 0 4px;
+  margin: 2px 4px;
   width: 20px;
   height: 20px;
 }
@@ -66,6 +72,8 @@
 /* Ingredients */
 
 .ingredientContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
@@ -73,7 +81,7 @@
   width: 100%;
   height: fit-content;
   border-radius: 16px;
-  /* background-color: white; */
+  background-color: whitesmoke;
 }
 
 .labelContainer {
@@ -102,13 +110,14 @@
 .ingDetailContainer {
   width: 100%;
   height: fit-content;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  margin: 4px 4px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 4px 4px 16px 4px;
 }
 
 .eleContainer {
-  width: 100%;
+  width: fit-content;
   align-items: center;
   gap: 8px;
 }
@@ -131,8 +140,8 @@
   height: 200px;
   margin: 12px;
   padding: 12px 16px 0 16px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 16px;
+  background-color: whitesmoke;
   /* height: 200px; */
   max-height: 300px;
   /* text-overflow: clip; */
@@ -156,3 +165,15 @@
   -webkit-line-clamp: 5;
 }
 
+.originContainer {
+  display: flex;
+  /* align-items: start; */
+}
+
+.originContainer > p {
+  width: fit-content;
+}
+
+.reviewsContainer {
+  background-color: var(--light-orange);
+}

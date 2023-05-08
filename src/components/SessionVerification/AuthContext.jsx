@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { FetchUserCollections } from '../UserProfileComponents/UserProfileCollection/FetchUserCollections'
+import { FetchRecipeByID } from '../Fetch/Recipes/FetchRecipeByID'
 export const AuthContext = React.createContext()
 
 export const logout = async () => {
@@ -54,7 +56,10 @@ const accesstoken = localStorage.getItem('accesstoken')
 
 const AuthContextProvider = props => {
   const [userData, setUserData] = useState(null)
+
   const [dietData, setDietData] = useState(null)
+
+  const userCollectionData = FetchUserCollections()
 
   const getUserSession = async () => {
     if (accesstoken) {
@@ -120,7 +125,8 @@ const AuthContextProvider = props => {
 
   return (
     // <AuthContext.Provider value={{ userData, backendMsg }}>
-    <AuthContext.Provider value={{ userData, logout, dietData, dietFetch }}>
+    <AuthContext.Provider value={{ userData, logout, dietData, dietFetch, userCollectionData }}>
+
       {props.children}
     </AuthContext.Provider>
   )

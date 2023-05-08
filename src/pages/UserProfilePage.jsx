@@ -5,9 +5,34 @@ import UserProfileSide from '../components/UserProfileComponents/UserProfileSide
 import styles from '../styles/UserProfile/UserProfileMainPage.module.css'
 import { RecipeSection } from '../components/UserProfileComponents/UserProfileRecipe/RecipeSection'
 import { useState } from 'react'
+import { UpdateForm } from '../components/FormComponents/UpdateForm'
+import { UserProfileTab } from '../components/UserProfileComponents/UserProfileSide/UserProfileTab'
 
 const UserProfileMainPage = () => {
-  const [section, setSection] = useState(<CollectionSection />)
+  const [currentStyle, setCurrentStyle] = useState('none')
+
+  const [updateForm, setUpdateForm] = useState(<div></div>)
+  const [section, setSection] = useState(
+    <CollectionSection
+      setCurrentStyle={setCurrentStyle}
+      setUpdateForm={setUpdateForm}
+    />
+  )
+
+  const sectionDisplay = {
+    collection: 'flex',
+    recipe: 'none'
+  }
+
+  // const [temp, setTemp] = useState( <CollectionSection
+  //   setCurrentStyle={setCurrentStyle}
+  //   setUpdateForm={setUpdateForm}
+  //   setSection={setSection}
+  // />)
+
+  // console.log(sectionDisplay.collection)
+
+  const [display, setDisplay] = useState(sectionDisplay)
 
   return (
     <>
@@ -17,9 +42,26 @@ const UserProfileMainPage = () => {
           {/* Section container fixed width, height fit content, display grid 3 */}
           {/* <CollectionSection></CollectionSection> */}
           {/* <CollectionSection /> */}
-          {section}
-          {/* UserProfileContainer fixed width */}
-          <UserProfileSide setSection={setSection}></UserProfileSide>
+          <div className={`${styles.sectionContainer}`}>
+            <CollectionSection
+              display={display}
+              setCurrentStyle={setCurrentStyle}
+              setUpdateForm={setUpdateForm}
+            />
+            <RecipeSection display={display} />
+          </div>
+
+          <UserProfileSide
+            display={display}
+            setDisplay={setDisplay}
+          ></UserProfileSide>
+        </div>
+        <div
+          className={`${styles.updateFormBackground}`}
+          style={{ display: `${currentStyle}` }}
+        >
+          {updateForm}
+          {/* <UpdateForm /> */}
         </div>
       </div>
     </>

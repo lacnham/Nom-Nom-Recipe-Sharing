@@ -6,6 +6,8 @@ import SearchBar from '../components/SearchBar'
 import { withoutAuth } from '../components/SessionVerification/AuthChecking'
 import { Button2 } from '../components/Button'
 import AutoClickButton from '../components/AutoClickButton'
+
+import { Link } from 'react-router-dom'
 const AllRecipe = () => {
   const perLoad = 12
   const [searchInput, setSearchInput] = useState('')
@@ -83,6 +85,7 @@ const AllRecipe = () => {
   return (
     <div className={styles.page} id="bottom">
       <Header />
+
       <div className={styles.card}>
         <div className={styles.container}>
           <div className={styles.content}>
@@ -116,9 +119,17 @@ const AllRecipe = () => {
                 </div>
               ) : (
                 <div>
+                  {/*  <Link
+                  to={`/collection/${props.collection.collection_id}`}
+                  key={props.collection.collection_id}
+                  className={`${styles.collectionContainer} ${styles.boxShadowPurple}`}
+                > */}
                   <div className={styles.cardContainer}>
                     {filteredData.slice(0, itemsToRender).map(item => (
-                      <div key={item.recipe_id}>
+                      <Link
+                        to={`/recipe/${item.name}/${item.recipe_id}`}
+                        key={item.recipe_id}
+                      >
                         <Suspense
                           fallback={
                             <div className={styles.cardLazyLoading}></div>
@@ -131,7 +142,7 @@ const AllRecipe = () => {
                             id={item.recipe_id}
                           />
                         </Suspense>
-                      </div>
+                      </Link>
                     ))}
                     <div keyword="place_holder"></div>
                   </div>

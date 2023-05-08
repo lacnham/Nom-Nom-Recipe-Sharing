@@ -87,20 +87,21 @@ const PublishRecipe = () => {
       <Header></Header>
       <div className={styles.container}>
         <form className={styles.publish} onSubmit={handleSubmit}>
-          <div className={styles.formControl}>
-            <label>
-              Name:
+          <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
+            <div className={`${styles.inputFieldContainer} ${styles.flexRow}`}>
+              <label className={`${styles.fieldLabel}`}>Name</label>
               <input
                 type="text"
                 value={name}
+                className={`${styles.inputField}`}
                 onChange={e => setName(e.target.value)}
               />
-            </label>
+            </div>
           </div>
 
-          <div className={styles.formControl}>
-            <label style={{ display: 'flex', alignItems: 'center' }}>
-              Image:
+          <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
+            <div className={`${styles.inputFieldContainer} ${styles.flexRow}`}>
+              <label className={`${styles.fieldLabel}`}>Image</label>
               {image ? (
                 <>
                   <span>{image.name}</span>
@@ -109,7 +110,8 @@ const PublishRecipe = () => {
                 <span>Upload your image</span>
               )}
               <input
-                style={{ display: 'none' }}
+                style={{ visibility: 'hidden' }}
+                className={`${styles.inputField}`}
                 type="file"
                 onChange={e => {
                   setImage(e.target.files[0])
@@ -119,7 +121,7 @@ const PublishRecipe = () => {
               <div style={{ marginLeft: 'auto' }}>
                 <i className="fa-solid fa-image"></i>
               </div>
-            </label>
+            </div>
           </div>
           {image ? (
             <div>
@@ -127,104 +129,118 @@ const PublishRecipe = () => {
             </div>
           ) : null}
 
-          <div className={styles.formControl}>
-            <label>
-              Description:
-              <br />
-              <textarea
-                value={description}
-                onChange={e => setDescription(e.target.value)}
-              />
-            </label>
-          </div>
-
-          <div className={styles.formControl}>
-            <label>
-              Origin:
-              <input
-                type="text"
-                value={origin}
-                onChange={e => setOrigin(e.target.value)}
-              />
-            </label>
+          <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
+            <div className={styles.title}>Description</div>
+            <textarea
+              className={`${styles.textArea}`}
+              value={description}
+              rows={12}
+              onChange={e => setDescription(e.target.value)}
+            />
           </div>
 
           <div className={styles.oneline}>
-            <div className={styles.formControl}>
-              <label>
-                Duration:
+            <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
+              <div
+                className={`${styles.inputFieldContainer} ${styles.flexRow}`}
+              >
+                {/* <label className={`${styles.fieldLabel}`}>Origin</label> */}
                 <input
+                  className={`${styles.inputField}`}
+                  type="text"
+                  value={origin}
+                  placeholder="Origins"
+                  onChange={e => setOrigin(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
+              <div
+                className={`${styles.inputFieldContainer} ${styles.flexRow}`}
+              >
+                {/* <label className={`${styles.fieldLabel}`}>Duration</label> */}
+                <input
+                  className={`${styles.inputField}`}
                   type="text"
                   value={duration}
+                  placeholder="Duration"
                   onChange={e => setDuration(e.target.value)}
                 />
-              </label>
+              </div>
             </div>
-            <div className={styles.formControl2}>
-              <label>
-                Servings:
+            <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
+              <div
+                className={`${styles.inputFieldContainer} ${styles.flexRow}`}
+              >
+                {/* <label className={`${styles.fieldLabel}`}>Servings</label> */}
                 <input
+                  className={`${styles.inputField}`}
                   type="text"
                   value={servings}
+                  placeholder="Servings"
                   onChange={e => setServings(e.target.value)}
                 />
-              </label>
+              </div>
             </div>
           </div>
 
           <div className={styles.formControl}>
-            <label>
-              Ingredients:
-              <ul className={`${styles.addIngredientContainer}`}>
-                {ingredients.map((ingredient, igd) => (
-                  <div key={igd}>
-                    <datalist id="igdList">
-                      <option value="Salt" />
-                      <option value="Sugar" />
-                      <option value="Meat" />
-                    </datalist>
-                    <div className={styles.inputIgd}>
-                      <input
-                        type="text"
-                        name="name"
-                        placeholder="Enter ingredients"
-                        list="igdList"
-                        autoComplete="off"
-                      />
-                      <input
-                        type="text"
-                        name="name"
-                        placeholder="Quantity"
-                        // autoComplete='on'
-                      />
-                      <select
-                        value={unit}
-                        onChange={handleUnit}
-                        className={`${styles.unitContainer}`}
-                      >
-                        <option value="one">one</option>
-                        <option value="two">two</option>
-                        <option value="three">three</option>
-                      </select>
-                      <i
-                        className={`${
-                          styles.delete
-                        } ${'fa-solid fa-delete-left'}`}
-                        onClick={() => handleRemoveIngredient(igd)}
-                      ></i>
-                    </div>
+            <div className={styles.title}>Ingredients:</div>
+            <ul className={`${styles.addIngredientContainer}`}>
+              {ingredients.map((ingredient, igd) => (
+                <div key={igd}>
+                  <datalist id="igdList">
+                    <option value="Salt" />
+                    <option value="Sugar" />
+                    <option value="Meat" />
+                  </datalist>
+                  <div
+                    className={`${styles.ingredientInputContainer} ${styles.flexRow} ${styles.inputFieldContainer}`}
+                  >
+                    <input
+                      type="text"
+                      className={`${styles.inputField}`}
+                      name="name"
+                      placeholder="Enter ingredients"
+                      list="igdList"
+                      autoComplete="off"
+                      // style={{ borderRight:  2px solid #ff8600 }}
+                    />
+
+                    <input
+                      type="text"
+                      className={`${styles.inputField}`}
+                      name="quantity"
+                      placeholder="Quantity"
+                      // autoComplete='on'
+                    />
+                    <select
+                      value={unit}
+                      onChange={handleUnit}
+                      className={`${styles.inputField}`}
+                    >
+                      <option value="one">one</option>
+                      <option value="two">two</option>
+                      <option value="three">three</option>
+                    </select>
+                    <i
+                      className={`${
+                        styles.delete
+                      } ${'fa-solid fa-delete-left'}`}
+                      onClick={() => handleRemoveIngredient(igd)}
+                    ></i>
                   </div>
-                ))}
-              </ul>
-              <div
-                className={styles.addIgd}
-                type="button"
-                onClick={handleAddIngredient}
-              >
-                <i className="fa-solid fa-circle-plus"></i>
-                <span> Add More Ingredients </span>
-              </div>
-            </label>
+                </div>
+              ))}
+            </ul>
+            <div
+              className={styles.addIgd}
+              type="button"
+              onClick={handleAddIngredient}
+            >
+              <i className="fa-solid fa-circle-plus"></i>
+              <span> Add More Ingredients </span>
+            </div>
           </div>
           <div className={styles.btnWrap}>
             <button className={styles.submitBtn} type="submit">

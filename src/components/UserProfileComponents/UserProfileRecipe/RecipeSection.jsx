@@ -5,7 +5,7 @@ import { FetchCurrentuser } from '../../FetchCurrentUser'
 import { Suspense, lazy, useEffect, useState } from 'react'
 import axios from 'axios'
 
-export const RecipeSection = () => {
+export const RecipeSection = props => {
   const collection = {
     title: 'tet',
     description: 'lorem',
@@ -45,7 +45,11 @@ export const RecipeSection = () => {
   ))
 
   return (
-    <div className={`${styles.collectionMainContainer} ${styles.flexRow}`}>
+    <div
+      className={`${styles.collectionMainContainer} ${styles.flexRow}`}
+      style={{ display: `${props.display.recipe}` }}
+      // style={{ display: `none` }}
+    >
       {/* <Collections collection={collection}></Collections>
       <Collections collection={collection}></Collections>
       <Collections collection={collection}></Collections>

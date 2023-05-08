@@ -1,34 +1,69 @@
 @import url('../../globalStyles.css');
 
+.detailMainContainer {
+  display: flex;
+  /* height: 100%; */
+  height: fit-content;
+  min-height: 200px;
+
+  /* max-height: 230px; */
+}
+
 .detailContainer {
-  padding: 8px 0;
+  /* padding: 8px 0; */
   border-radius: 16px;
-  height: 200px;
+  height: fit-content;
+  min-height: 200px;
   width: 400px;
   background-color: var(--light-orange);
   gap: 4%;
+  transition: 2s;
+}
+
+.form {
+  height: 100% !important;
+}
+
+.inputField {
+  width: 80% !important;
+  height: fit-content;
+  padding: 6px !important;
+  margin: 0;
+  border: none !important;
+  outline: none;
+  font-size: 16px;
+  font: var(--primary-font);
 }
 
 .avatarContainer {
-  border-right: 2px solid black;
-  width: 40%;
+  border-right: 2px solid rgba(0, 0, 0, 0.5);
+  width: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .avatarContainer > img {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 }
 
-.infoContainer {
-  width: 60%;
+.infoContainerAndUpdate {
+  width: 70%;
+
   /* background-color: wheat; */
   display: flex;
   /* align-items: center; */
   justify-content: center;
   flex-direction: column;
+  border-radius: inherit;
+}
+
+.infoContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .tabContainer {

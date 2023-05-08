@@ -4,7 +4,9 @@ import RecipeDetail from '../components/RecipeDetailPageComponents/RecipeDetailS
 import RecipeReview from '../components/RecipeDetailPageComponents/RecipeReviewSection/RecipeReview'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { FetchRecipeByID } from '../components/RecipeDetailPageComponents/FetchRecipeByID'
+import { FetchRecipeByID } from '../components/Fetch/Recipes/FetchRecipeByID'
+import { useParams } from 'react-router-dom'
+import { FetchIngAndNutri } from '../components/Fetch/Recipes/FetchIngAndNutri'
 // import { LLogin } from '../components/Login'
 
 const DetailRecipePage = () => {
@@ -14,6 +16,7 @@ const DetailRecipePage = () => {
   //   url: 'http://localhost:3000/recipe/8'
   // }
 
+  const { id } = useParams()
   // const [data, setData] = useState({})
   // const [isLoading, setIsLoading] = useState(true)
 
@@ -30,11 +33,42 @@ const DetailRecipePage = () => {
   //     })
   // }, [])
 
-  const recipe = FetchRecipeByID(1)
-  console.log(recipe)
+  // const recipe = FetchRecipeByID(id)
 
-  // const accesstoken = LLogin()
-  // console.log(accesstoken)
+  // const { recipe, ingredients, nutritions } = FetchRecipeByID(id)
+  const { recipe } = FetchRecipeByID(id)
+  // const [ingredients, setIngredients] = useState([])
+  // const [nutritions, setNutritions] = useState([])
+
+  // if (!recipe) {
+  //   return <div>Loading data...</div>
+  // }
+
+  // let configIng = {
+  //   method: 'post',
+  //   url: `http://localhost:3000/recipe/nutritions/total-ing-nutrition-facts/${id}`,
+  //   data: {
+  //     servingNum: `${recipe.serving_num}`
+  //   }
+  // }
+
+  // let configNutrition = {
+  //   method: 'post',
+  //   url: `http://localhost:3000/recipe/nutritions/total-nutrition-facts/${id}`,
+  //   data: {
+  //     servingNum: `${recipe.serving_num}`
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   axios.all([axios.request(configIng), axios.request(configNutrition)]).then(
+  //     axios.spread((resIng, resNutri) => {
+  //       console.log('ing ', resIng, 'Nug ', resNutri)
+  //       setIngredients(resIng && resIng.data.ingredientFactsOfRecipe)
+  //       setNutritions(resNutri && resNutri.data.ingredientFactsOfRecipe[0])
+  //     })
+  //   )
+  // }, [])
 
   return (
     <>
@@ -42,8 +76,14 @@ const DetailRecipePage = () => {
       <Header />
       <div className={`${styles.body}`}>
         <div className={`${styles.mainContainer} ${styles.flexRow}`}>
-          <RecipeDetail recipe={recipe} />
-          <RecipeReview recipe={recipe} />
+          <RecipeDetail
+            id={id}
+            recipe={recipe}
+            // ingredients={ingredients}
+            // nutritions={nutritions}
+          />
+          {/* <RecipeDetail recipe={recipe} id={id} /> */}
+          <RecipeReview recipe={recipe} id={id} />
         </div>
       </div>
     </>

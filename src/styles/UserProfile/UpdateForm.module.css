@@ -1,0 +1,86 @@
+@import url(../globalStyles.css);
+@import url(../RecipeDetailPage/DetailRecipePage.module.css);
+
+.updateForm {
+  width: 40%;
+  height: fit-content;
+  background-color: var(--light-orange);
+  position: relative;
+  top: 200px;
+  padding: 20px;
+  gap: 16px;
+  align-items: center;
+  border-radius: 8px;
+  /* transition: 2s; */
+  /* justify-content: center; */
+}
+
+.updateName {
+  width: 100%;
+  /* height: fit-content; */
+  background-color: white;
+  /* justify-content: center; */
+  align-items: center;
+  border-radius: 8px;
+}
+
+.label {
+  width: 16%;
+  text-align: center;
+  border: none;
+  border-radius: 0 !important;
+  border-right: 2px solid rgba(0, 0, 0, 0.5);
+  font: var(--primary-font);
+  padding: 0 8px;
+}
+
+.inputField {
+  border: none !important;
+  outline: none;
+  padding: 8px !important;
+}
+
+.updateNote {
+  width: 100%;
+  height: fit-content;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.noteLabel {
+  display: block;
+  margin: 0 16px;
+  padding: 8px 0;
+  /* font-size: 16px; */
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+  font: var(--primary-font);
+}
+.submitButton {
+  width: 20%;
+  border-radius: 16px;
+  font: var(--primary-font);
+}
+
+.closeButton {
+  align-self: flex-end;
+  width: 36px;
+  height: 36px;
+  background-color: var(--black-purple);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: var(--primary-font);
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.formTitle {
+  text-align: center;
+  width: 100%;
+  font: var(--primary-font);
+  color: var(--black-purple);
+  font-size: 24px;
+  font-weight: bold;
+  /* display: flex; */
+}

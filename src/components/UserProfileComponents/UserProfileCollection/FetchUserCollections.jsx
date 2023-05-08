@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-// import { Login } from '../../Login'
+import { useState, useEffect } from 'react'
 
 export const FetchUserCollections = () => {
   // const userData = Login()
@@ -10,7 +9,7 @@ export const FetchUserCollections = () => {
     maxBodlength: Infinity,
     url: 'http://localhost:3000/collection',
     headers: {
-      Authorization: localStorage.accessToken
+      Authorization: localStorage.accesstoken
     }
   }
 
