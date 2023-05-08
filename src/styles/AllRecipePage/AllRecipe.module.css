@@ -4,7 +4,7 @@
 }
 
 .text {
-  padding: 50px;
+  padding: 75px;
 }
 
 .cardContainer {
@@ -18,6 +18,11 @@
 
 .cardContainer > * {
   flex-basis: 33.33333%;
+}
+
+.cardContainer > a{
+  display: flex;
+  justify-content: center;
 }
 
 .cardContainer > div:empty {

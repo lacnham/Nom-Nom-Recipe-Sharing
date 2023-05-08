@@ -3,14 +3,33 @@ import styles from '../styles/SearchBar.module.css'
 import { Button2 } from './Button'
 import Select from 'react-select'
 
-const SearchBar = (data, diet, country) => {
-  const [searchInput, setSearchInput] = useState(null)
+const SearchBar = ({
+  setSearchInput,
+  food,
+  diet,
+  country,
+  onDataFromChild
+}) => {
+  const [childMessage, setChildMessage] = useState('')
+
+  const handleChildData = data => {
+    setChildMessage(data)
+    onDataFromChild(data)
+  }
+
+  useEffect(() => {
+    handleChildData(food)
+  }, [food])
 
   const [dietOptions, setDietOptions] = useState(null)
   const [countryOptions, setCountryOptions] = useState(null)
 
   const [selectedDiet, setSelectedDiet] = useState(null)
   const [selectedCountry, setSelectedCountry] = useState(null)
+
+useEffect(() => {
+  console.log(selectedCountry, selectedDiet);
+})
 
   const handleSubmit = async event => {
     event.preventDefault()
@@ -29,7 +48,6 @@ const SearchBar = (data, diet, country) => {
       )
       const recipesByDietaryPreferenceJSON =
         await recipesByDietaryPreference.json()
-      console.log(recipesByDietaryPreferenceJSON)
 
       if (selectedCountry != null && selectedCountry != []) {
         const recipesByCountryPreference = await fetch(
@@ -43,41 +61,38 @@ const SearchBar = (data, diet, country) => {
         )
         const recipesByCountryPreferenceJSON =
           await recipesByCountryPreference.json()
-        console.log(recipesByCountryPreferenceJSON)
 
-        console.log(
+        handleChildData(
           compareObjectsByRecipeId(
             recipesByCountryPreferenceJSON,
             recipesByDietaryPreferenceJSON
           )
         )
-        sessionStorage.setItem(
-          'recipe',
-          JSON.stringify(
-            compareObjectsByRecipeId(
-              recipesByCountryPreferenceJSON,
-              recipesByDietaryPreferenceJSON
-            )
-          )
+      } else {
+        handleChildData(recipesByDietaryPreferenceJSON)
+      }
+    } else {
+      if (selectedCountry != null && selectedCountry != []) {
+        const recipesByCountryPreference = await fetch(
+          `http://localhost:3000/recipe/by-country/${selectedCountry.value}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
         )
-
-        // Navigate to the receiving page
-        history.push('/allRecipe')
+        const recipesByCountryPreferenceJSON =
+          await recipesByCountryPreference.json()
+        handleChildData(recipesByCountryPreferenceJSON)
+      } else {
+        handleChildData([food])
       }
     }
+
+    const searchValue = event.target.elements.search.value
+    setSearchInput(searchValue)
   }
-
-  useEffect(() => {
-    sessionStorage.removeItem('recipe')
-  }, [])
-
-  // useEffect(() => {
-  //   if ('recipe' in sessionStorage) {
-  //     console.log('yes')
-  //   } else {
-  //     console.log('no');
-  //   }
-  // })
 
   function compareObjectsByRecipeId(obj1, obj2) {
     const result = {}
@@ -97,16 +112,14 @@ const SearchBar = (data, diet, country) => {
     return result
   }
 
-  function transformData(data) {
-    const dietArray = Array.from(data.diet, item => item.name)
+  function transformData(diet, country) {
+    const dietArray = Array.from(diet, item => item.name)
     const transformedDietData = dietArray.map(item => ({
       value: item,
       label: item
     }))
     setDietOptions(transformedDietData)
-    console.log(transformedDietData);
-
-    const countryArray = Array.from(data.country, item => ({
+    const countryArray = Array.from(country, item => ({
       value: item.id,
       label: item.name
     }))
@@ -122,12 +135,8 @@ const SearchBar = (data, diet, country) => {
   }
 
   useEffect(() => {
-    transformData(data)
-  }, [data, diet, country])
-
-  useEffect(() => {
-    console.log(selectedDiet, selectedCountry)
-  }, [selectedCountry, selectedDiet])
+    transformData(diet, country)
+  }, [food, diet, country])
 
   return (
     <div>
@@ -137,7 +146,15 @@ const SearchBar = (data, diet, country) => {
       >
         <div className={styles.form_Container}>
           <div className={styles.search_Container}>
-            <input placeholder="Search..." />
+            {/* {search} */}
+            <input
+              placeholder="Type..."
+              type="text"
+              name="search" // Add a name attribute to the input element
+
+              // value={searchInput}
+              // onChange={e => setSearchInput(e.target.value)}
+            />
             <div className={styles.btnContainer}>
               <Button2
                 type={'submit'}

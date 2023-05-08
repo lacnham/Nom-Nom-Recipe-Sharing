@@ -17,11 +17,29 @@ const AllRecipe = () => {
 
   const [itemsToRender, setItemsToRender] = useState(0)
 
+  const [parentMessage, setParentMessage] = useState('')
+
+  const handleParentData = data => {
+    setParentMessage(data)
+  }
+
   const filteredData = useMemo(() => {
-    return data.filter(item =>
-      item.name.toLowerCase().includes(searchInput.toLowerCase())
-    )
-  }, [data, searchInput])
+    const parentMessageArray = Object.values(parentMessage)
+    console.log('searchInput:', searchInput)
+    if (searchInput != '' && searchInput != null) {
+      console.log('parentMessageArray1', parentMessageArray)
+      console.log(...parentMessageArray.filter(obj =>
+        obj.name.toLowerCase().includes(searchInput.toLowerCase())
+      ));
+      return parentMessageArray.filter(obj =>
+        obj.name.toLowerCase().includes(searchInput.toLowerCase())
+      )
+    } else {
+      console.log('parentMessageArray', parentMessageArray)
+
+      return parentMessageArray
+    }
+  }, [parentMessage, searchInput])
 
   const fetchRecipes = async () => {
     try {
@@ -60,10 +78,6 @@ const AllRecipe = () => {
   }, [])
 
   useEffect(() => {
-    console.log('sessionStorage: ', sessionStorage.getItem('recipe'))
-  })
-
-  useEffect(() => {
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
@@ -90,72 +104,82 @@ const AllRecipe = () => {
         <div className={styles.container}>
           <div className={styles.content}>
             <div className={styles.text}>
-              <h1>Hello</h1>
-              <SearchBar data={data} diet={diet} country={country}></SearchBar>
-              <input
-                autoFocus
-                placeholder="Type..."
-                type="text"
-                value={searchInput}
-                onChange={e => setSearchInput(e.target.value)}
-              />
-              {filteredData.length === 0 ? (
-                <div className={styles.noResultsFound}>
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbnTCjL_7-pIzDQg2W30Vy1wdTNuy8zYAP8A&usqp=CAU"
-                    alt=""
-                  />
-                  <h2>Can&#8217;t find a recipe? </h2>
-                  <div>
-                    <p>
-                      Be the first and share your own. Join the fun and help
-                      your fellow cooks!
-                    </p>
+              {/* <h1>Hello {parentMessage}</h1> */}
+              <SearchBar
+                // search={
+                //   <input
+                //     placeholder="Type..."
+                //     type="text"
+                //     value={searchInput}
+                //     onChange={e => setSearchInput(e.target.value)}
+                //   />
+                // }
+
+                setSearchInput={setSearchInput}
+                food={data}
+                diet={diet}
+                country={country}
+                onDataFromChild={handleParentData}
+              ></SearchBar>
+              <div>
+                {filteredData.length === 0 ? (
+                  <div className={styles.noResultsFound}>
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbnTCjL_7-pIzDQg2W30Vy1wdTNuy8zYAP8A&usqp=CAU"
+                      alt=""
+                    />
+                    <h2>Can&#8217;t find a recipe? </h2>
+                    <div>
+                      <p>
+                        Be the first and share your own. Join the fun and help
+                        your fellow cooks!
+                      </p>
+                    </div>
+                    <Button2
+                      icon={<i className={'fa-solid fa-utensils'}></i>}
+                      options={'Add recipe'}
+                    />
                   </div>
-                  <Button2
-                    icon={<i className={'fa-solid fa-utensils'}></i>}
-                    options={'Add recipe'}
-                  />
-                </div>
-              ) : (
-                <div>
-                  {/*  <Link
+                ) : (
+                  <div>
+                    {/*  <Link
                   to={`/collection/${props.collection.collection_id}`}
                   key={props.collection.collection_id}
                   className={`${styles.collectionContainer} ${styles.boxShadowPurple}`}
                 > */}
-                  <div className={styles.cardContainer}>
-                    {filteredData.slice(0, itemsToRender).map(item => (
-                      <Link
-                        to={`/recipe/${item.name}/${item.recipe_id}`}
-                        key={item.recipe_id}
-                      >
-                        <Suspense
-                          fallback={
-                            <div className={styles.cardLazyLoading}></div>
-                          }
+                    <div className={styles.cardContainer}>
+                      {filteredData.slice(0, itemsToRender).map(item => (
+                        <Link
+                          to={`/recipe/${item.name}/${item.recipe_id}`}
+                          key={item.recipe_id}
                         >
-                          <Card
-                            image={item.image_link}
-                            title={item.name}
-                            description={item.description}
-                            id={item.recipe_id}
-                          />
-                        </Suspense>
-                      </Link>
-                    ))}
-                    <div keyword="place_holder"></div>
-                  </div>
-
-                  {filteredData.length > itemsToRender && (
-                    <div className={styles.loadMore}>
-                      <AutoClickButton
-                        fn={() => setItemsToRender(itemsToRender + perLoad)}
-                      />
+                          <Suspense
+                            fallback={
+                              <div className={styles.cardLazyLoading}></div>
+                            }
+                          >
+                            <Card
+                              image={item.image_link}
+                              title={item.name}
+                              description={item.description}
+                              id={item.recipe_id}
+                            />
+                          </Suspense>
+                        </Link>
+                      ))}
+                      <div keyword="place_holder"></div>
                     </div>
-                  )}
-                </div>
-              )}
+
+                    {filteredData.length > itemsToRender && (
+                      <div className={styles.loadMore}>
+                        <AutoClickButton
+                          fn={() => setItemsToRender(itemsToRender + perLoad)}
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
