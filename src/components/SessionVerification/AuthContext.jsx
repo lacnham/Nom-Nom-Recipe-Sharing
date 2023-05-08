@@ -26,17 +26,45 @@ export const logout = async () => {
   }
 }
 
+export const dietFetch = async (userData) => {
+  if (userData) {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/get-dietary-preference/${userData.user.id}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('return data', data);
+        return data; // Return the data instead of setting state
+      } else {
+        throw new Error('Unable to get dietary preference');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
+
 const accesstoken = localStorage.getItem('accesstoken')
 
-const url = 'http://localhost:3000/user/my-profile'
 const AuthContextProvider = props => {
   const [userData, setUserData] = useState(null)
+
+  const [dietData, setDietData] = useState(null)
+
   const userCollectionData = FetchUserCollections()
 
   const getUserSession = async () => {
     if (accesstoken) {
       try {
-        const response = await fetch(url, {
+        const response = await fetch(`http://localhost:3000/user/my-profile`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -56,19 +84,49 @@ const AuthContextProvider = props => {
     }
   }
 
-  useEffect(() => {
+  const getDietaryData = async (userData) => {
+    if (userData) {
+      // console.log(`http://localhost:3000/get-dietary-preference/${userData.user.id}`);
+      try {
+        const response = await fetch(
+          `http://localhost:3000/get-dietary-preference/${userData.user.id}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+
+        if (response.ok) {
+          const data = await response.json()
+          // console.log('data here:', data)
+          setDietData(data)
+          // console.log(dietData);
+        } else {
+          throw new Error('Unable to get dietary preference')
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
+
+  useEffect(()=>{
     getUserSession()
       .then(data => {
         setUserData(data)
+        getDietaryData(data)
       })
       .catch(error => {
         setUserData(null)
       })
-  }, [])
+  },[])
 
   return (
     // <AuthContext.Provider value={{ userData, backendMsg }}>
-    <AuthContext.Provider value={{ userData, logout, userCollectionData }}>
+    <AuthContext.Provider value={{ userData, logout, dietData, dietFetch, userCollectionData }}>
+
       {props.children}
     </AuthContext.Provider>
   )

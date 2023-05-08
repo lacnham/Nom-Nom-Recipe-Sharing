@@ -1,77 +1,203 @@
 import React, { useEffect, useState } from 'react'
+import styles from '../styles/SearchBar.module.css'
+import { Button2 } from './Button'
+import Select from 'react-select'
 
-const SearchBar = data => {
-  const [searchInput, setSearchInput] = useState('')
-  const [selectedFood, setSelectedFood] = useState(null)
-  const [filteredFood, setFilteredFood] = useState([])
-  const dataArray = Object.values(data)
-  const names = dataArray[0].map(item => item.name)
-  const uniqueNames = [...new Set(names)]
-  const mergedData = uniqueNames.map(name => {
-    const items = dataArray[0].filter(item => item.name === name)
-    return Object.assign({}, ...items)
-  })
-  const food = mergedData.map(item => ({ name: item.name }))
-  
-  const handleChange = e => {
-    setSearchInput(e.target.value)
-  }
-  
-  const handleFoodClick = food => {
-    setSelectedFood(food)
-    setSearchInput(food.name)
-  }
-  
-  useEffect(() => {
-    if (searchInput.length > 0) {
-      setFilteredFood(food.filter(food => food.name.match(searchInput)))
-    } else {
-      setFilteredFood([])
-      setSelectedFood()
+const SearchBar = (data, diet, country) => {
+  const [searchInput, setSearchInput] = useState(null)
+
+  const [dietOptions, setDietOptions] = useState(null)
+  const [countryOptions, setCountryOptions] = useState(null)
+
+  const [selectedDiet, setSelectedDiet] = useState(null)
+  const [selectedCountry, setSelectedCountry] = useState(null)
+
+  const handleSubmit = async event => {
+    event.preventDefault()
+    console.log('submit')
+    // Additional form submission logic here
+
+    if (selectedDiet != null && selectedDiet != []) {
+      const recipesByDietaryPreference = await fetch(
+        `http://localhost:3000/recipe/by-dietary/${selectedDiet.value}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+      const recipesByDietaryPreferenceJSON =
+        await recipesByDietaryPreference.json()
+      console.log(recipesByDietaryPreferenceJSON)
+
+      if (selectedCountry != null && selectedCountry != []) {
+        const recipesByCountryPreference = await fetch(
+          `http://localhost:3000/recipe/by-country/${selectedCountry.value}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+        const recipesByCountryPreferenceJSON =
+          await recipesByCountryPreference.json()
+        console.log(recipesByCountryPreferenceJSON)
+
+        console.log(
+          compareObjectsByRecipeId(
+            recipesByCountryPreferenceJSON,
+            recipesByDietaryPreferenceJSON
+          )
+        )
+        sessionStorage.setItem(
+          'recipe',
+          JSON.stringify(
+            compareObjectsByRecipeId(
+              recipesByCountryPreferenceJSON,
+              recipesByDietaryPreferenceJSON
+            )
+          )
+        )
+
+        // Navigate to the receiving page
+        history.push('/allRecipe')
+      }
     }
-  }, [searchInput])
+  }
 
-  
-  
+  useEffect(() => {
+    sessionStorage.removeItem('recipe')
+  }, [])
 
+  // useEffect(() => {
+  //   if ('recipe' in sessionStorage) {
+  //     console.log('yes')
+  //   } else {
+  //     console.log('no');
+  //   }
+  // })
+
+  function compareObjectsByRecipeId(obj1, obj2) {
+    const result = {}
+
+    for (const key1 in obj1) {
+      for (const key2 in obj2) {
+        if (obj1[key1].recipe_id === obj2[key2].recipe_id) {
+          result[key1] = {
+            recipe_id: obj1[key1].recipe_id,
+            ...obj1[key1]
+          }
+          break
+        }
+      }
+    }
+
+    return result
+  }
+
+  function transformData(data) {
+    const dietArray = Array.from(data.diet, item => item.name)
+    const transformedDietData = dietArray.map(item => ({
+      value: item,
+      label: item
+    }))
+    setDietOptions(transformedDietData)
+    console.log(transformedDietData);
+
+    const countryArray = Array.from(data.country, item => ({
+      value: item.id,
+      label: item.name
+    }))
+    const transformedCountryData = countryArray.reduce((accumulator, item) => {
+      const existingItem = accumulator.find(i => i.label === item.label)
+      if (!existingItem) {
+        accumulator.push(item)
+      }
+      return accumulator
+    }, [])
+
+    setCountryOptions(transformedCountryData)
+  }
+
+  useEffect(() => {
+    transformData(data)
+  }, [data, diet, country])
+
+  useEffect(() => {
+    console.log(selectedDiet, selectedCountry)
+  }, [selectedCountry, selectedDiet])
 
   return (
     <div>
-      <input
-        type="search"
-        placeholder="Search here"
-        onChange={handleChange}
-        value={searchInput}
-      />
+      <form
+        onSubmit={handleSubmit}
+        //method="POST"
+      >
+        <div className={styles.form_Container}>
+          <div className={styles.search_Container}>
+            <input placeholder="Search..." />
+            <div className={styles.btnContainer}>
+              <Button2
+                type={'submit'}
+                options={'Search'}
+                fn={() => ''}
+                icon={<i className="fa-solid fa-magnifying-glass"></i>}
+              />
+            </div>
+          </div>
+          <div className={styles.filter_Container}>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              isClearable={true}
+              isSearchable={true}
+              options={dietOptions}
+              onChange={setSelectedDiet}
+              placeholder={'Choose your dietary'}
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  borderColor: state.isFocused ? '#ff8600' : '#ff8600',
+                  borderWidth: '2px',
+                  borderRadius: '8px',
+                  // This line disable the blue border
+                  boxShadow: state.isFocused ? 0 : 0,
+                  '&:hover': {
+                    borderColor: '#ff8600',
+                    outline: 'none'
+                  }
+                })
+              }}
+            />
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              isClearable={true}
+              isSearchable={true}
+              options={countryOptions}
+              onChange={setSelectedCountry}
+              placeholder={"Choose the food's origin"}
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  borderColor: state.isFocused ? '#ff8600' : '#ff8600',
+                  borderWidth: '2px',
+                  borderRadius: '8px',
+                  // This line disable the blue border
+                  boxShadow: state.isFocused ? 0 : 0,
 
-      {filteredFood.length > 0 && (
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Origin</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {filteredFood.map((food, index) => (
-              <tr
-                style={{
-                  cursor: 'pointer',
-                  ':hover': { textDecoration: 'underline' }
-                }}
-                key={index}
-                onClick={() => handleFoodClick(food)}
-              >
-                <td>{food.name}</td>
-                <td>{food.origin}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-
-      {selectedFood && <p>You selected {selectedFood.name}</p>}
+                  '&:hover': {
+                    borderColor: '#ff8600',
+                    outline: 'none'
+                  }
+                })
+              }}
+            />
+          </div>
+        </div>
+      </form>
     </div>
   )
 }

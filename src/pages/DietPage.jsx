@@ -3,10 +3,56 @@ import axios from 'axios'
 import Header from '../components/Header'
 import styles from '../styles/DietPage/DietPage.module.css'
 import { withoutAuth } from '../components/SessionVerification/AuthChecking'
-
+import { Button1 } from '../components/Button'
+import { useContext } from 'react'
+import { AuthContext } from '../components/SessionVerification/AuthContext'
+import useModal from '../components/ModalComponents/useModal'
+import Modal from '../components/ModalComponents/Modal'
+import { useNavigate } from 'react-router-dom'
 const Diet = () => {
-  const [diet, setDiet] = useState([])
+  
+  const navigate = useNavigate()
 
+  //diet data
+  const { dietData } = useContext(AuthContext)
+  const { userData } = useContext(AuthContext)
+
+  // useEffect(() =>{
+  //   getDietaryData();
+  // },[])
+
+  const [dietaryPreferences, setDietaryPreferences] = useState(null)
+  // const [checkedDivContent, setCheckedDivContent] = useState(null)
+  useEffect(() => {
+    if (dietData) {
+      setDietaryPreferences(
+        dietData.msg.map(preference => preference.dietary_preference_name)
+      )
+    }
+    console.log(dietaryPreferences)
+    // setCheckedDivContent(dietaryPreferences)
+  }, [dietData])
+
+  // function findCheckedDivContent() {
+  //   const checkedDivs = document.querySelectorAll('div#checked')
+  //   const contentArray = []
+  //   checkedDivs.forEach(div => {
+  //     contentArray.push(div.querySelector('p').innerHTML)
+  //   })
+  //   setCheckedDivContent(contentArray) // Update the state variable
+  // }
+
+  // This useEffect hook will log the checkedDivContent array
+  // whenever it is updated.
+  // useEffect(() => {
+  //   console.log(checkedDivContent)
+  // }, [checkedDivContent])
+
+  // useEffect(() => {
+  //   findCheckedDivContent()
+  // }, [])
+
+  const [diet, setDiet] = useState([])
   const fetchData = async () => {
     try {
       const response = await axios.get('http://localhost:3000/dietary/get-all')
@@ -20,9 +66,125 @@ const Diet = () => {
     fetchData()
   }, [])
 
-  console.log(diet)
+  function waitForCheckedDivContent() {
+    return new Promise(resolve => {
+      const interval = setInterval(() => {
+        const checkedDivs = document.querySelectorAll('div#checked')
+        if (checkedDivs.length > 0) {
+          clearInterval(interval)
+          const contentArray = []
+          checkedDivs.forEach(div => {
+            contentArray.push(div.querySelector('p').innerHTML)
+          })
+          const transformedData = {
+            dietaryPreference: contentArray
+          }
+          resolve(transformedData)
+        }
+      }, 100)
+    })
+  }
+
+  const updateDietPpreference = async () => {
+    console.log(
+      'await is here',
+      JSON.stringify(await waitForCheckedDivContent())
+    )
+    try {
+      const response = await fetch(
+        `http://localhost:3000/update-dietary-preference/${userData.user.id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(await waitForCheckedDivContent())
+        }
+      )
+      console.log(response.json())
+      if (response.ok) {
+        console.log('Data sent successfully.')
+        toggle()
+      } else {
+        console.error(
+          'Failed to send data:',
+          response.status,
+          response.statusText
+        )
+      }
+    } catch (error) {
+      console.error('Error while sending data:', error)
+    }
+  }
+
+  const diet_description = {
+    0: { description: 'Consuming both animal and plant-based food.' },
+    1: {
+      description:
+        'Excluding meat, fish, and poultry from the diet, but may include dairy and eggs.'
+    },
+    2: {
+      description:
+        'Avoiding all animal-based products including meat, dairy, eggs, and honey.'
+    },
+    3: {
+      description: 'Following a vegetarian diet but including fish and seafood.'
+    },
+    4: {
+      description:
+        'Primarily vegetarian, but may occasionally eat meat or fish.'
+    },
+    5: {
+      description:
+        'Based on the diet of our hunter-gatherer ancestors, excluding grains, dairy, and processed foods.'
+    },
+    6: {
+      description:
+        'A high-fat, low-carb diet that puts the body in a state of ketosis, resulting in weight loss.'
+    },
+    7: {
+      description:
+        'Emphasizing whole foods, fruits, vegetables, legumes, and healthy fats such as olive oil and nuts.'
+    },
+    8: {
+      description:
+        'Avoiding foods that contain gluten, a protein found in wheat, barley, and rye.'
+    },
+    9: {
+      description:
+        'Excluding all dairy products, including milk, cheese, and yogurt.'
+    },
+    10: {
+      description:
+        'Restricting carbohydrate intake to promote weight loss and manage blood sugar levels.'
+    },
+    11: {
+      description:
+        'Limiting the intake of fat, particularly saturated and trans fats.'
+    },
+    12: {
+      description:
+        'Focusing on consuming foods that are rich in protein to support muscle growth and repair.'
+    },
+    13: {
+      description:
+        'Eating uncooked and unprocessed foods that are rich in nutrients and enzymes.'
+    },
+    14: {
+      description:
+        'Plant-based diet consisting of fruits, nuts, seeds, and other harvestable plant-based foods.'
+    }
+  }
+
+  const combinedData = diet.map((item, index) => ({
+    ...item,
+    description: diet_description[index].description
+  }))
 
   const DietCard = lazy(() => import('../components/DietCard'))
+
+  const { isShowing, toggle } = useModal()
+
 
   return (
     <div className={styles.page}>
@@ -31,18 +193,46 @@ const Diet = () => {
         <div className={styles.container}>
           <div className={styles.content}>
             <div className={styles.text}>
-              <h1>Hello</h1>
+              <Modal
+                isShowing={isShowing}
+                hide={toggle}
+                btnMsg={'Confirm'}
+                title={'Success'}
+                modalMsg={'User dietary preferences updated successfully'}
+                closeable={false}
+                titleIcon={<i className="fa-solid fa-circle-check"></i>}
+                btnFn={() => {
+                  navigate('/')
+                }}
+              />
+              <h1>
+                Select Your Diet Plan (you can change this later in your user
+                setting)
+              </h1>
               <div>
                 <div className={styles.dietCardContainer}>
-                  <div>
-                    <Suspense
-                      fallback={<div className={styles.dietCardLazyLoading}></div>}
-                    >
-                      <DietCard />
-                    </Suspense>
-                  </div>
+                  {combinedData.map(diet_plan => (
+                    <div key={diet_plan.name}>
+                      <Suspense fallback={<div>Loading...</div>}>
+                        <DietCard
+                          title={diet_plan.name}
+                          description={diet_plan.description}
+                          data={dietaryPreferences}
+                        />
+                      </Suspense>
+                    </div>
+                  ))}
                   <div keyword="place_holder"></div>
                 </div>
+              </div>
+              <div className={styles.dietBtn}>
+                <Button1
+                  type={'button'}
+                  options={'Save'}
+                  fn={() => {
+                    updateDietPpreference()
+                  }}
+                />
               </div>
             </div>
           </div>

@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react' // Importing useEffect and us
 import axios from 'axios' // Importing axios library for making http requests
 import styles from '../../styles/LoginAndSignUp/LoginAndSignUp.module.css'
 import { Button1, DisabledButton } from '../Button'
+import useModal from '../ModalComponents/useModal'
+import Modal from '../ModalComponents/Modal'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignUpForm() {
+  const [signUpEr, setSignUpEr] = useState(null)
+
   const [enteredData, setEnteredData] = useState({
     username: '',
     email: '',
@@ -22,8 +27,11 @@ export default function SignUpForm() {
         verifypassword: enteredData.verifypassword
       })
       // window.location.replace('/allrecipe');
+      setSignUpEr(null)
+      toggle()
     } catch (error) {
       console.error(error)
+      setSignUpEr(error.response.data.msg)
       // Handle errors here, such as displaying an error message to the user.
     }
   }
@@ -73,15 +81,25 @@ export default function SignUpForm() {
     enteredData.verifypassword
   ])
 
-  useEffect(() => {
-    console.log(enteredData.Errors)
-  })
+  const { isShowing, toggle } = useModal()
+
+  const navigate = useNavigate();
 
   return (
-    <form
-    // onSubmit={handleSubmit}
-    // method='POST'
-    >
+    <form onSubmit={handleSubmit} method="POST">
+      <Modal
+        isShowing={isShowing}
+        hide={toggle}
+        btnMsg={'Confirm'}
+        title={'Account Created Successfully!'}
+        modalMsg={'Your account has been created successfully. You can now log in and start exploring our website!'}
+        closeable={false}
+        titleIcon={<i className="fa-solid fa-circle-check"></i>}
+        btnFn={() => {
+          navigate('/login')
+        }}
+      />
+      <div className={styles.formError}>{signUpEr}</div>
       <div>
         {enteredData.Errors.general && (
           <div className={styles.warning}>{enteredData.Errors.general}</div>
@@ -154,8 +172,17 @@ export default function SignUpForm() {
         )}
         <div className={styles.btnContainer}>
           {Object.keys(enteredData.Errors).length === 0 ? (
-            <Button1 type={'submit'} options={'Register'} fn={''}></Button1>
-          ) : <DisabledButton options={'Register'} disabled={true}></DisabledButton>}
+            <Button1
+              type={'submit'}
+              options={'Register'}
+              fn={() => ''}
+            ></Button1>
+          ) : (
+            <DisabledButton
+              options={'Register'}
+              disabled={true}
+            ></DisabledButton>
+          )}
         </div>
       </div>
     </form>

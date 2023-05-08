@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 const LoginForm = () => {
+  const [loginEr, setLoginEr] = useState(null)
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -20,12 +22,16 @@ const LoginForm = () => {
       window.location.replace('/allrecipe')
     } catch (error) {
       console.error(error)
+      setLoginEr(error.response.data.error)
       // Handle errors here, such as displaying an error message to the user.
     }
   }
 
   return (
     <form onSubmit={handleSubmit} method='POST'>
+      <div className={styles.formError}>
+        {loginEr}
+      </div>
       <div>
         <div className={styles.inputContainer}>
           <i className={`${styles.icon} ${'fa-solid fa-envelope'}`}></i>
@@ -53,7 +59,7 @@ const LoginForm = () => {
         </div>
         <div className={styles.psw}>
           <span>
-            <a href="#">Forgot password?</a>
+            <a href="/Recover">Forgot password?</a>
           </span>
         </div>
         <div className={styles.btnContainer}>

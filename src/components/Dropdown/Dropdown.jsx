@@ -2,8 +2,11 @@ import React, { useState, useRef, useContext } from 'react'
 import styles from '../../styles/Dropdown.module.css'
 import { AuthContext } from '../SessionVerification/AuthContext'
 import { Button2 } from '../Button'
+import { useNavigate } from 'react-router-dom'
 
 const Dropdown = props => {
+  const navigate = useNavigate()
+
   const [isActive, setIsActive] = useState(false)
   const dropdownRef = useRef(null)
 
@@ -17,7 +20,7 @@ const Dropdown = props => {
 
   const onSelectOption = option => {
     setIsActive(false)
-    console.log(`Option ${option.title} was selected.`)
+    navigate(`${option.link}`)
   }
 
   return (
