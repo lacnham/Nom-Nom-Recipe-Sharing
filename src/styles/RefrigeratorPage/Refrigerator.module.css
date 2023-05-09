@@ -24,6 +24,16 @@
     border-radius: 8px !important; */
 }
 
+.first_Time {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.first_Time > img {
+  padding-top: 30px;
+  height: 300px;
+}
 .noResultsFound {
   display: flex;
   align-items: center;

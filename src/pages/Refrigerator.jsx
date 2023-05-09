@@ -10,6 +10,10 @@ import AutoClickButton from '../components/AutoClickButton'
 import { Link } from 'react-router-dom'
 
 const Refrigerator = () => {
+  const [firstTime, setFirstTime] = useState(true)
+
+  const [ingData, setIngData] = useState([])
+
   const perLoad = 12
 
   const [data, setData] = useState([])
@@ -18,7 +22,7 @@ const Refrigerator = () => {
   const handleSubmit = async event => {
     event.preventDefault()
     // Additional form submission logic here
-
+    setFirstTime(false)
     try {
       const response = await axios.get('http://localhost:3000/recipe')
       setData(response.data)
@@ -52,6 +56,33 @@ const Refrigerator = () => {
     }
   }, [perLoad])
 
+  async function fetchData() {
+    try {
+      const response = await fetch('http://localhost:3000/ingredient/get-all')
+      const data = await response.json()
+
+      // Extract ing_name from each child
+      const extractedData = data.map(child => child.ing_name)
+      setIngData(
+        extractedData.map(item => ({
+          value: item,
+          label: item
+        }))
+      )
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    }
+  }
+
+  // Call the fetchData function to initiate the data fetching process
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  useEffect(() => {
+    console.log(ingData)
+  }, [ingData])
+
   const Card = lazy(() => import('../components/Card'))
 
   return (
@@ -72,9 +103,9 @@ const Refrigerator = () => {
                 classNamePrefix="select"
                 isClearable={true}
                 isSearchable={true}
-                // options={dietOptions}
+                options={ingData}
                 // onChange={setSelectedDiet}
-                placeholder={'Choose your dietary'}
+                placeholder={'Choose your ingredients...'}
                 styles={{
                   control: (baseStyles, state) => ({
                     ...baseStyles,
@@ -103,60 +134,74 @@ const Refrigerator = () => {
           </form>
         </div>
         <div>
-          {data.length === 0 ? (
-            <div className={styles.noResultsFound}>
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbnTCjL_7-pIzDQg2W30Vy1wdTNuy8zYAP8A&usqp=CAU"
-                alt=""
-              />
-              <h2>Can&#8217;t find a recipe? </h2>
-              <div>
-                <p>
-                  Be the first and share your own. Join the fun and help your
-                  fellow cooks!
-                </p>
-              </div>
-              <Button2
-                icon={<i className={'fa-solid fa-pen-to-square'}></i>}
-                options={'Add recipe'}
-              />
+          {firstTime ? (
+            <div className={styles.first_Time}>
+              <img src="src/images/TypeE.svg" alt="" />
+              <h2>
+                Choose the ingredient and we will found the suitable recipe for
+                you
+              </h2>
             </div>
           ) : (
-            <div>
-              {/*  <Link
+            <>
+              {data.length === 0 ? (
+                <div className={styles.noResultsFound}>
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbnTCjL_7-pIzDQg2W30Vy1wdTNuy8zYAP8A&usqp=CAU"
+                    alt=""
+                  />
+                  <h2>Can&#8217;t find a recipe? </h2>
+                  <div>
+                    <p>
+                      Be the first and share your own. Join the fun and help
+                      your fellow cooks!
+                    </p>
+                  </div>
+                  <Button2
+                    icon={<i className={'fa-solid fa-pen-to-square'}></i>}
+                    options={'Add recipe'}
+                  />
+                </div>
+              ) : (
+                <div>
+                  {/*  <Link
               to={`/collection/${props.collection.collection_id}`}
               key={props.collection.collection_id}
               className={`${styles.collectionContainer} ${styles.boxShadowPurple}`}
             > */}
-              <div className={styles.cardContainer}>
-                {data.slice(0, itemsToRender).map(item => (
-                  <Link
-                    to={`/recipe/${item.name}/${item.recipe_id}`}
-                    key={item.recipe_id}
-                  >
-                    <Suspense
-                      fallback={<div className={styles.cardLazyLoading}></div>}
-                    >
-                      <Card
-                        image={item.image_link}
-                        title={item.name}
-                        description={item.description}
-                        id={item.recipe_id}
-                      />
-                    </Suspense>
-                  </Link>
-                ))}
-                <div keyword="place_holder"></div>
-              </div>
+                  <div className={styles.cardContainer}>
+                    {data.slice(0, itemsToRender).map(item => (
+                      <Link
+                        to={`/recipe/${item.name}/${item.recipe_id}`}
+                        key={item.recipe_id}
+                      >
+                        <Suspense
+                          fallback={
+                            <div className={styles.cardLazyLoading}></div>
+                          }
+                        >
+                          <Card
+                            image={item.image_link}
+                            title={item.name}
+                            description={item.description}
+                            id={item.recipe_id}
+                          />
+                        </Suspense>
+                      </Link>
+                    ))}
+                    <div keyword="place_holder"></div>
+                  </div>
 
-              {data.length > itemsToRender && (
-                <div className={styles.loadMore}>
-                  <AutoClickButton
-                    fn={() => setItemsToRender(itemsToRender + perLoad)}
-                  />
+                  {data.length > itemsToRender && (
+                    <div className={styles.loadMore}>
+                      <AutoClickButton
+                        fn={() => setItemsToRender(itemsToRender + perLoad)}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
-            </div>
+            </>
           )}
         </div>
       </div>
