@@ -143,6 +143,7 @@ const SearchBar = ({
           <div className={styles.search_Container}>
             {/* {search} */}
             <input
+            autoFocus={false}
               placeholder="Type..."
               type="text"
               name="search" // Add a name attribute to the input element

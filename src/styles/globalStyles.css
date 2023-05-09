@@ -126,3 +126,20 @@ input{
   border-radius: 8px !important;
   font-family: Noto Sans JP !important;
 }
+
+
+/* body::-webkit-scrollbar {
+  width: 0.5rem;
+  border-radius: 10px;
+}
+  
+body::-webkit-scrollbar-thumb {
+  background-color: var(--black-purple);
+  outline: none;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #20131f;
+
+  opacity: 0.8;
+} */

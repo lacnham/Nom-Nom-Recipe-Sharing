@@ -80,7 +80,7 @@ form {
   padding-bottom: 24px;
 }
 
-.formError{
+.formError {
   color: #e43636;
 }
 
@@ -115,17 +115,18 @@ form {
 }
 
 .inputField:focus {
-  border-bottom: 5px inset #ff8600;
+  outline: solid 1px #ff8600;
 }
 
-.inputContainer input{
+.inputContainer input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
   border: 2px solid #ff8600;
+  outline: solid 1px transparent;
   box-sizing: border-box;
-  border-radius: 0px 8px 8px 0px !important;;
+  border-radius: 0px 8px 8px 0px !important;
 }
 
 .psw {
