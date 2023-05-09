@@ -8,7 +8,6 @@ import { Button2 } from '../components/Button'
 import AutoClickButton from '../components/AutoClickButton'
 import { BackToTopButton } from '../components/Button'
 import { Link } from 'react-router-dom'
-
 const AllRecipe = () => {
   const perLoad = 12
   const [searchInput, setSearchInput] = useState('')
@@ -121,89 +120,81 @@ const AllRecipe = () => {
     <div className={styles.page} id="bottom">
       <Header />
       <BackToTopButton />
-      <div className={styles.card}>
-        <div className={styles.container}>
-          <div className={styles.content}>
-            <div className={styles.text}>
-              {/* <h1>Hello {parentMessage}</h1> */}
-              <SearchBar
-                // search={
-                //   <input
-                //     placeholder="Type..."
-                //     type="text"
-                //     value={searchInput}
-                //     onChange={e => setSearchInput(e.target.value)}
-                //   />
-                // }
+      <div className={styles.text}>
+        <h1>Hello</h1>
+        <SearchBar
+          // search={
+          //   <input
+          //     placeholder="Type..."
+          //     type="text"
+          //     value={searchInput}
+          //     onChange={e => setSearchInput(e.target.value)}
+          //   />
+          // }
 
-                setSearchInput={setSearchInput}
-                food={data}
-                diet={diet}
-                country={country}
-                onDataFromChild={handleParentData}
-              ></SearchBar>
-              <div>
-                {filteredData.length === 0 ? (
-                  <div className={styles.noResultsFound}>
-                    <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbnTCjL_7-pIzDQg2W30Vy1wdTNuy8zYAP8A&usqp=CAU"
-                      alt=""
-                    />
-                    <h2>Can&#8217;t find a recipe? </h2>
-                    <div>
-                      <p>
-                        Be the first and share your own. Join the fun and help
-                        your fellow cooks!
-                      </p>
-                    </div>
-                    <Button2
-                      icon={<i className={'fa-solid fa-utensils'}></i>}
-                      options={'Add recipe'}
-                    />
-                  </div>
-                ) : (
-                  <div>
-                    {/*  <Link
-                  to={`/collection/${props.collection.collection_id}`}
-                  key={props.collection.collection_id}
-                  className={`${styles.collectionContainer} ${styles.boxShadowPurple}`}
-                > */}
-                    <div className={styles.cardContainer}>
-                      {filteredData.slice(0, itemsToRender).map(item => (
-                        <Link
-                          to={`/recipe/${item.name}/${item.recipe_id}`}
-                          key={item.recipe_id}
-                        >
-                          <Suspense
-                            fallback={
-                              <div className={styles.cardLazyLoading}></div>
-                            }
-                          >
-                            <Card
-                              image={item.image_link}
-                              title={item.name}
-                              description={item.description}
-                              id={item.recipe_id}
-                            />
-                          </Suspense>
-                        </Link>
-                      ))}
-                      <div keyword="place_holder"></div>
-                    </div>
-
-                    {filteredData.length > itemsToRender && (
-                      <div className={styles.loadMore}>
-                        <AutoClickButton
-                          fn={() => setItemsToRender(itemsToRender + perLoad)}
-                        />
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
+          setSearchInput={setSearchInput}
+          food={data}
+          diet={diet}
+          country={country}
+          onDataFromChild={handleParentData}
+        ></SearchBar>
+      </div>
+      <div>
+        {filteredData.length === 0 ? (
+          <div className={styles.noResultsFound}>
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbnTCjL_7-pIzDQg2W30Vy1wdTNuy8zYAP8A&usqp=CAU"
+              alt=""
+            />
+            <h2>Can&#8217;t find a recipe? </h2>
+            <div>
+              <p>
+                Be the first and share your own. Join the fun and help your
+                fellow cooks!
+              </p>
             </div>
+            <Button2
+              icon={<i className={'fa-solid fa-pen-to-square'}></i>}
+              options={'Add recipe'}
+            />
           </div>
-        </div>
+        ) : (
+          <div>
+            {/*  <Link
+              to={`/collection/${props.collection.collection_id}`}
+              key={props.collection.collection_id}
+              className={`${styles.collectionContainer} ${styles.boxShadowPurple}`}
+            > */}
+            <div className={styles.cardContainer}>
+              {filteredData.slice(0, itemsToRender).map(item => (
+                <Link
+                  to={`/recipe/${item.name}/${item.recipe_id}`}
+                  key={item.recipe_id}
+                >
+                  <Suspense
+                    fallback={<div className={styles.cardLazyLoading}></div>}
+                  >
+                    <Card
+                      image={item.image_link}
+                      title={item.name}
+                      description={item.description}
+                      id={item.recipe_id}
+                    />
+                  </Suspense>
+                </Link>
+              ))}
+              <div keyword="place_holder"></div>
+            </div>
+
+            {filteredData.length > itemsToRender && (
+              <div className={styles.loadMore}>
+                <AutoClickButton
+                  fn={() => setItemsToRender(itemsToRender + perLoad)}
+                />
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )

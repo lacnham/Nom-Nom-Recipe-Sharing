@@ -60,7 +60,18 @@ const Header = () => {
               username={userData.user.username}
               options={[
                 { id: 1, title: 'Profile', icon: 'fa-solid fa-user', link: '' },
-                { id: 2, title: 'Diet Plan', icon: 'fa-solid fa-utensils', link: '/diet' }
+                {
+                  id: 2,
+                  title: 'Diet Plan',
+                  icon: 'fa-solid fa-utensils',
+                  link: '/diet'
+                },
+                {
+                  id: 3,
+                  title: 'Add Recipe',
+                  icon: 'fa-solid fa-pen-to-square',
+                  link: ''
+                }
               ]}
             ></Dropdown>
           </div>
