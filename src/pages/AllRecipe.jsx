@@ -6,7 +6,7 @@ import SearchBar from '../components/SearchBar'
 import { withoutAuth } from '../components/SessionVerification/AuthChecking'
 import { Button2 } from '../components/Button'
 import AutoClickButton from '../components/AutoClickButton'
-
+import { BackToTopButton } from '../components/Button'
 import { Link } from 'react-router-dom'
 
 const AllRecipe = () => {
@@ -22,35 +22,38 @@ const AllRecipe = () => {
     setParentMessage(data)
   }
 
-  // useEffect(() => {
-  //   console.log('filteredData:', filteredData)
-  //   console.log('filteredData:', typeof filteredData)
-  // })
   const filteredData = useMemo(() => {
-    const parentMessageArray = Object.values(parentMessage);
-  
+    const parentMessageArray = Object.values(parentMessage)
+
     if (searchInput && searchInput.trim() !== '') {
-      const filteredArray = parentMessageArray.filter(
-        obj =>
-          obj.name &&
-          obj.name.toLowerCase().includes(searchInput.toLowerCase())
-      );
-      return filteredArray;
+      if (!parentMessageArray[0].hasOwnProperty('recipe_id')) {
+        const filteredArray = parentMessageArray[0].filter(
+          obj =>
+            obj.name &&
+            obj.name.toLowerCase().includes(searchInput.toLowerCase())
+        )
+        return filteredArray
+      } else {
+        const filteredArray = parentMessageArray.filter(
+          obj =>
+            obj.name &&
+            obj.name.toLowerCase().includes(searchInput.toLowerCase())
+        )
+        return filteredArray
+      }
     } else if (
       parentMessageArray.length > 0 &&
       parentMessageArray[0].hasOwnProperty('recipe_id')
     ) {
-      return parentMessageArray;
-    } else if (
-      typeof parentMessageArray[0] !== 'undefined' &&
-      parentMessageArray[0].length > 0
-    ) {
-      return parentMessageArray[0];
+      return parentMessageArray
+    } else if (typeof parentMessageArray[0] != 'undefined') {
+      if (parentMessageArray[0].length > 0) {
+        return parentMessageArray[0]
+      }
     } else {
-      return [];
+      return []
     }
-  }, [parentMessage, searchInput]);
-  
+  }, [parentMessage, searchInput])
 
   const fetchRecipes = async () => {
     try {
@@ -117,7 +120,7 @@ const AllRecipe = () => {
   return (
     <div className={styles.page} id="bottom">
       <Header />
-
+      <BackToTopButton />
       <div className={styles.card}>
         <div className={styles.container}>
           <div className={styles.content}>

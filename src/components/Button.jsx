@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styles from '../styles/Button.module.css'
-
+import { useEffect } from 'react'
 export function Button1({ fn, options, type, icon }) {
   return (
     <button type={type} className={styles.button1} onClick={fn}>
@@ -73,6 +73,38 @@ export function DefaultButton({
       onBlurCapture={blur}
     >
       {options}
+    </button>
+  )
+}
+
+export function BackToTopButton() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  const handleScroll = () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+    setIsVisible(scrollTop > 100)
+  }
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  return (
+    <button
+      className={`${styles.backToTopButton} ${isVisible ? styles.visible : ''}`}
+      onClick={scrollToTop}
+    >
+      <i className="fa-solid fa-arrow-up"></i>{' '}
     </button>
   )
 }
