@@ -27,13 +27,8 @@ const SearchBar = ({
   const [selectedDiet, setSelectedDiet] = useState(null)
   const [selectedCountry, setSelectedCountry] = useState(null)
 
-useEffect(() => {
-  console.log(selectedCountry, selectedDiet);
-})
-
   const handleSubmit = async event => {
     event.preventDefault()
-    console.log('submit')
     // Additional form submission logic here
 
     if (selectedDiet != null && selectedDiet != []) {
@@ -61,7 +56,7 @@ useEffect(() => {
         )
         const recipesByCountryPreferenceJSON =
           await recipesByCountryPreference.json()
-
+        console.log(recipesByCountryPreferenceJSON, recipesByDietaryPreferenceJSON);
         handleChildData(
           compareObjectsByRecipeId(
             recipesByCountryPreferenceJSON,

@@ -8,42 +8,53 @@ import { Button2 } from '../components/Button'
 import AutoClickButton from '../components/AutoClickButton'
 
 import { Link } from 'react-router-dom'
+
 const AllRecipe = () => {
   const perLoad = 12
   const [searchInput, setSearchInput] = useState('')
   const [data, setData] = useState([])
   const [diet, setDiet] = useState([])
   const [country, setCountry] = useState([])
-
   const [itemsToRender, setItemsToRender] = useState(0)
-
-  const [parentMessage, setParentMessage] = useState('')
+  const [parentMessage, setParentMessage] = useState(data)
 
   const handleParentData = data => {
     setParentMessage(data)
   }
 
+  // useEffect(() => {
+  //   console.log('filteredData:', filteredData)
+  //   console.log('filteredData:', typeof filteredData)
+  // })
   const filteredData = useMemo(() => {
-    const parentMessageArray = Object.values(parentMessage)
-    console.log('searchInput:', searchInput)
-    if (searchInput != '' && searchInput != null) {
-      console.log('parentMessageArray1', parentMessageArray)
-      console.log(...parentMessageArray.filter(obj =>
-        obj.name.toLowerCase().includes(searchInput.toLowerCase())
-      ));
-      return parentMessageArray.filter(obj =>
-        obj.name.toLowerCase().includes(searchInput.toLowerCase())
-      )
+    const parentMessageArray = Object.values(parentMessage);
+  
+    if (searchInput && searchInput.trim() !== '') {
+      const filteredArray = parentMessageArray.filter(
+        obj =>
+          obj.name &&
+          obj.name.toLowerCase().includes(searchInput.toLowerCase())
+      );
+      return filteredArray;
+    } else if (
+      parentMessageArray.length > 0 &&
+      parentMessageArray[0].hasOwnProperty('recipe_id')
+    ) {
+      return parentMessageArray;
+    } else if (
+      typeof parentMessageArray[0] !== 'undefined' &&
+      parentMessageArray[0].length > 0
+    ) {
+      return parentMessageArray[0];
     } else {
-      console.log('parentMessageArray', parentMessageArray)
-
-      return parentMessageArray
+      return [];
     }
-  }, [parentMessage, searchInput])
+  }, [parentMessage, searchInput]);
+  
 
   const fetchRecipes = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/recipe`)
+      const response = await axios.get('http://localhost:3000/recipe')
       setData(response.data)
     } catch (error) {
       console.log(error)
@@ -51,7 +62,7 @@ const AllRecipe = () => {
     }
   }
 
-  const fetchDietaty = async () => {
+  const fetchDietary = async () => {
     try {
       const response = await axios.get('http://localhost:3000/dietary/get-all')
       setDiet(response.data)
@@ -74,7 +85,7 @@ const AllRecipe = () => {
   useEffect(() => {
     fetchRecipes()
     fetchCountry()
-    fetchDietaty()
+    fetchDietary()
   }, [])
 
   useEffect(() => {
@@ -89,10 +100,17 @@ const AllRecipe = () => {
       { rootMargin: '0px 0px 10px 0px' } // Load next batch before the bottom of the page
     )
 
-    observer.observe(document.querySelector('#bottom'))
+    const bottomElement = document.querySelector('#bottom')
+    if (bottomElement) {
+      observer.observe(bottomElement)
+    }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => {
+      if (bottomElement) {
+        observer.unobserve(bottomElement)
+      }
+    }
+  }, [perLoad])
 
   const Card = lazy(() => import('../components/Card'))
 
