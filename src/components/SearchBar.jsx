@@ -79,7 +79,7 @@ const SearchBar = (data, diet, country) => {
   //   }
   // })
 
-  function compareObjectsByRecipeId(obj1, obj2) {
+  function compareObjectsByRecipeId (obj1, obj2) {
     const result = {}
 
     for (const key1 in obj1) {
@@ -97,14 +97,14 @@ const SearchBar = (data, diet, country) => {
     return result
   }
 
-  function transformData(data) {
+  function transformData (data) {
     const dietArray = Array.from(data.diet, item => item.name)
     const transformedDietData = dietArray.map(item => ({
       value: item,
       label: item
     }))
     setDietOptions(transformedDietData)
-    console.log(transformedDietData);
+    console.log(transformedDietData)
 
     const countryArray = Array.from(data.country, item => ({
       value: item.id,

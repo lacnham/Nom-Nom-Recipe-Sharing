@@ -35,6 +35,7 @@
 .recipeDetailMainContainer {
   background-color: var(--light-orange);
   padding: 12px;
+  width: 64% !important;
 }
 
 .title {
@@ -46,7 +47,7 @@
 }
 
 .recipeImg {
-  width: 50vw;
+  width: 100%;
   border-radius: 16px 16px 0 0;
   /* background-color: black; */
 }
@@ -73,8 +74,10 @@
 
 .ingredientContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  background-color: whitesmoke;
+  grid-template-columns: 1fr 2fr;
   gap: 20px;
+  border-radius: 16px;
 }
 
 .ingredientTab {
@@ -82,6 +85,11 @@
   height: fit-content;
   border-radius: 16px;
   background-color: whitesmoke;
+}
+
+.nutritionDetail {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
 }
 
 .labelContainer {
@@ -113,7 +121,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 4px 4px 16px 4px;
+  padding: 4px 8px 16px;
+  /* margin: 4px 4px 16px 4px; */
 }
 
 .eleContainer {
@@ -137,15 +146,16 @@
 }
 
 .userReviewContainer {
-  height: 200px;
+  height: fit-content;
   margin: 12px;
   padding: 12px 16px 0 16px;
   border-radius: 16px;
   background-color: whitesmoke;
   /* height: 200px; */
-  max-height: 300px;
+  /* max-height: 300px; */
   /* text-overflow: clip; */
   overflow: hidden;
+
   /* box-sizing: border-box; */
 }
 
@@ -160,7 +170,8 @@
 }
 
 .userReviewContainer > p {
-  padding: 14px;
+  padding: 14px 4px;
+  font: var(--primary-font);
   font-size: 14px;
   -webkit-line-clamp: 5;
 }
@@ -175,5 +186,6 @@
 }
 
 .reviewsContainer {
+  width: 36%;
   background-color: var(--light-orange);
 }

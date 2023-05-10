@@ -39,7 +39,7 @@ span {
 .formControl i:hover,
 .formControl span:hover {
   color: lightslategray;
-  transform: scale(0.9);
+  /* transform: scale(0.9); */
 }
 
 .container {
@@ -81,12 +81,17 @@ span {
 }
 
 .inputField {
+  width: 100%;
   outline: none;
   padding: 12px 8px !important;
   border: none !important;
   border-radius: 8px !important;
   font: var(--primary-font);
   margin: 0 !important;
+}
+
+.select {
+  padding: 4px 0 !important;
 }
 
 .inputField::placeholder {
@@ -103,13 +108,15 @@ span {
 
 .ingredientInputContainer {
   width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 0.2fr;
 }
 
 .ingredientInputContainer > .inputField {
   border-radius: 0 !important;
 }
-.ingredientInputContainer > .inputField:nth-child(1),
-.inputField:nth-child(2) {
+.ingredientInputContainer > input:nth-child(1),
+.ingredientInputContainer > input:nth-child(2) {
   border-right: 2px solid #ff8600 !important;
 }
 
@@ -129,7 +136,10 @@ span {
   gap: 8px;
   width: 100%;
 }
-
+.duration {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+}
 /*INGREIENTS LIST*/
 datalist {
   position: absolute;

@@ -5,6 +5,7 @@ import CollectionDropList from '../../UserProfileComponents/UserProfileCollectio
 import UserReview from './UserReviews'
 import { useState } from 'react'
 import ClickChangeStyle from '../../ClickChangeStyle'
+import { UserReviewForm } from './UserReviewForm'
 
 const RecipeReview = props => {
   //   const buttonList = [
@@ -57,6 +58,7 @@ const RecipeReview = props => {
           id={props.id}
         ></CollectionDropList>
       </div>
+      <UserReviewForm id={props.id} />
       <UserReview id={props.id}></UserReview>
     </div>
   )
