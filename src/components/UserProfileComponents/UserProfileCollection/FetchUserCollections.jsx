@@ -13,7 +13,7 @@ export const FetchUserCollections = () => {
     }
   }
 
-  console.log(localStorage.accessToken)
+  // console.log(localStorage.accessToken)
 
   const [userCollections, setUserCollections] = useState([])
 

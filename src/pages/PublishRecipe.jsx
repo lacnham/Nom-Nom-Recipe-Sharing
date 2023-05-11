@@ -2,35 +2,74 @@ import React, { useState } from 'react'
 import styles from '../styles/PublishRecipe.module.css'
 import Header from '../components/Header'
 import { useEffect } from 'react'
+import { FetchAllIngAndCountry } from '../components/Fetch/FetchAllIngAndCountry'
+import Select from 'react-select'
 
 const PublishRecipe = () => {
+  const { countryOptions, unitOptions, ingredientOPtion } =
+    FetchAllIngAndCountry()
+  // console.log(countryOptions)
+
+  const durationUnits = ['hours', 'minutes']
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
   const [description, setDescription] = useState('')
   const [origin, setOrigin] = useState('')
-  const [duration, setDuration] = useState('')
+  const [duration, setDuration] = useState('' + durationUnits[1])
   const [servings, setServings] = useState('')
-  const [ingredients, setIngredients] = useState([{ name: '', custom: false }])
+
+  const [quantity, setQuantity] = useState('')
+  const [ing, setIng] = useState({})
+
+  // const [ingTemp, setIngtemp] = useState({})
+  const [ingredients, setIngredients] = useState([
+    { id: '', name: '', quantity: '' }
+  ])
+
+  // const [ingreTemp, setIngreTemp] = useState({
+  //   id: ing.value,
+  //   name: ing.label,
+  //   quantity: quantity
+  // })
   const [unit, setUnit] = useState('')
 
-  useEffect(() => {
-    console.log(image)
-  })
+  // let arrayIng = []
+  // const handleIngredient = e => {
+  //   setIng()
+  //   arrayIng.push(ing)
+  //   setIngredients(arrayIng)
+  // }
 
-  const handleIngredientChange = (igd, event) => {
-    const newIngredients = [...ingredients]
-    if (event.target.name === 'name') {
-      newIngredients[igd].name = event.target.value
-    } else if (event.target.name === 'custom') {
-      newIngredients[igd].custom = event.target.checked
-      newIngredients[igd].name = ''
+  if (ing != '') {
+    console.log(ing)
+
+    console.log(ingredients)
+  }
+
+  const handleIngredientChange = (e, igd) => {
+    console.log('Vo roi ne', e)
+    setIng(e)
+    let newIngredients = [...ingredients]
+    for (let i = 0; i < newIngredients.length; i++) {
+      // console.log('Ingredients ne hehe', newIngredients[i].id, ' ', e.value)
+      if (newIngredients[i].id === e.value) {
+        alert('Cannot add more')
+        return newIngredients
+      }
     }
-    setIngredients(newIngredients)
+    newIngredients[igd].id = e.value
+    newIngredients[igd].name = e.label
   }
 
   const handleAddIngredient = () => {
-    setIngredients([...ingredients, { name: '', custom: false }])
+    // setIng('')
+    setIngredients([...ingredients, { id: '', name: '', quantity: '' }])
+    // handleIngredientChange(igd)
   }
+
+  // useEffect(() => {
+  //   handleIngredientChange()
+  // }, [])
 
   const handleRemoveIngredient = igd => {
     const newIngredients = [...ingredients]
@@ -38,9 +77,10 @@ const PublishRecipe = () => {
     setIngredients(newIngredients)
   }
 
-  const handleUnit = event => {
-    setUnit(event.target.value)
-  }
+  // const handleUnit = event => {
+
+  //   setUnit(event.target.value)
+  // }
 
   let config = {
     method: 'post',
@@ -107,12 +147,13 @@ const PublishRecipe = () => {
                   <span>{image.name}</span>
                 </>
               ) : (
-                <span>Upload your image</span>
+                <span style={{ width: '100%' }}>Upload your image</span>
               )}
               <input
-                style={{ visibility: 'hidden' }}
                 className={`${styles.inputField}`}
+                style={{ visibility: 'hidden' }}
                 type="file"
+                placeholder="Upload your image"
                 onChange={e => {
                   setImage(e.target.files[0])
                   console.log(e.target.files[0].name)
@@ -145,27 +186,57 @@ const PublishRecipe = () => {
                 className={`${styles.inputFieldContainer} ${styles.flexRow}`}
               >
                 {/* <label className={`${styles.fieldLabel}`}>Origin</label> */}
-                <input
+                <Select
+                  className={`${styles.inputField} ${styles.select}`}
+                  classNamePrefix="select"
+                  options={countryOptions}
+                  placeholder={`Recipe origin`}
+                  onChange={setOrigin}
+                  styles={{
+                    control: (baseStyles, state) => ({
+                      ...baseStyles,
+                      border: 'none',
+                      width: '100%',
+                      // This line disable the blue border
+                      boxShadow: state.isFocused ? 0 : 0,
+
+                      '&:hover': {
+                        borderColor: '#ff8600',
+                        outline: 'none'
+                      }
+                    }),
+                    menu: (baseStyles, state) => ({
+                      ...baseStyles,
+                      width: 'fit-content',
+                      height: '200px',
+                      overflow: 'auto',
+                      display: 'flex'
+                    })
+                  }}
+                />
+                {/* <input
                   className={`${styles.inputField}`}
                   type="text"
                   value={origin}
                   placeholder="Origins"
                   onChange={e => setOrigin(e.target.value)}
-                />
+                /> */}
               </div>
             </div>
             <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
               <div
-                className={`${styles.inputFieldContainer} ${styles.flexRow}`}
+                className={`${styles.inputFieldContainer} ${styles.flexRow} ${styles.duration}`}
               >
                 {/* <label className={`${styles.fieldLabel}`}>Duration</label> */}
                 <input
                   className={`${styles.inputField}`}
-                  type="text"
+                  type="number"
                   value={duration}
-                  placeholder="Duration"
+                  min={'1'}
+                  placeholder="1"
                   onChange={e => setDuration(e.target.value)}
                 />
+                <span>{durationUnits[1]}</span>
               </div>
             </div>
             <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
@@ -175,7 +246,8 @@ const PublishRecipe = () => {
                 {/* <label className={`${styles.fieldLabel}`}>Servings</label> */}
                 <input
                   className={`${styles.inputField}`}
-                  type="text"
+                  type="number"
+                  min={'1'}
                   value={servings}
                   placeholder="Servings"
                   onChange={e => setServings(e.target.value)}
@@ -188,23 +260,51 @@ const PublishRecipe = () => {
             <div className={styles.title}>Ingredients:</div>
             <ul className={`${styles.addIngredientContainer}`}>
               {ingredients.map((ingredient, igd) => (
-                <div key={igd}>
-                  <datalist id="igdList">
-                    <option value="Salt" />
-                    <option value="Sugar" />
-                    <option value="Meat" />
-                  </datalist>
+                <div
+                  key={igd}
+                  // onChange={e => handleIngredientChange(e, igd)}
+                >
                   <div
                     className={`${styles.ingredientInputContainer} ${styles.flexRow} ${styles.inputFieldContainer}`}
                   >
-                    <input
+                    {/* <input
                       type="text"
                       className={`${styles.inputField}`}
-                      name="name"
+                      name="ingre"
                       placeholder="Enter ingredients"
                       list="igdList"
                       autoComplete="off"
+                      onChange={setIng}
                       // style={{ borderRight:  2px solid #ff8600 }}
+                    /> */}
+                    <Select
+                      className={`${styles.inputField} ${styles.select}`}
+                      classNamePrefix="select"
+                      options={ingredientOPtion}
+                      // onFocus={setIsFocus(true)}
+                      placeholder={`Enter ingredient`}
+                      onChange={e => handleIngredientChange(e, igd)}
+                      styles={{
+                        control: (baseStyles, state) => ({
+                          ...baseStyles,
+                          border: 'none',
+                          width: '100%',
+                          // This line disable the blue border
+                          boxShadow: state.isFocused ? 0 : 0,
+
+                          '&:hover': {
+                            borderColor: '#ff8600',
+                            outline: 'none'
+                          }
+                        }),
+                        menu: (baseStyles, state) => ({
+                          ...baseStyles,
+                          width: 'fit-content',
+                          height: '160px',
+                          overflow: 'auto',
+                          display: 'flex'
+                        })
+                      }}
                     />
 
                     <input
@@ -212,17 +312,43 @@ const PublishRecipe = () => {
                       className={`${styles.inputField}`}
                       name="quantity"
                       placeholder="Quantity"
+                      onChange={e => setQuantity(e.target.value)}
                       // autoComplete='on'
                     />
-                    <select
-                      value={unit}
-                      onChange={handleUnit}
-                      className={`${styles.inputField}`}
-                    >
-                      <option value="one">one</option>
-                      <option value="two">two</option>
-                      <option value="three">three</option>
-                    </select>
+                    <Select
+                      className={`${styles.inputField} ${styles.select}`}
+                      classNamePrefix="select"
+                      name={'ingre'}
+                      options={unitOptions}
+                      placeholder={`unit`}
+                      onChange={setUnit}
+                      styles={{
+                        control: (baseStyles, state) => ({
+                          ...baseStyles,
+                          // borderColor: state.isFocused ? '#ff8600' : '#ff8600',
+                          // borderWidth: '2px',
+                          border: 'none',
+                          // borderRadius: '8px',
+                          width: '100%',
+                          // This line disable the blue border
+                          boxShadow: state.isFocused ? 0 : 0,
+
+                          '&:hover': {
+                            borderColor: '#ff8600',
+                            outline: 'none'
+                          }
+                        }),
+                        menu: (baseStyles, state) => ({
+                          ...baseStyles,
+                          width: 'fit-content',
+                          height: '120px',
+                          overflow: 'auto',
+                          display: 'flex'
+
+                          // position: 'fixed'
+                        })
+                      }}
+                    />
                     <i
                       className={`${
                         styles.delete
@@ -237,6 +363,7 @@ const PublishRecipe = () => {
               className={styles.addIgd}
               type="button"
               onClick={handleAddIngredient}
+              // onChange={splice}
             >
               <i className="fa-solid fa-circle-plus"></i>
               <span> Add More Ingredients </span>

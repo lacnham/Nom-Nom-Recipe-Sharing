@@ -39,7 +39,7 @@ export const UserProfileDetail = () => {
             <div>{userData.user.username}</div>
             <div>{userData.user.email}</div>
           </div>
-          <UpdateButton fn={handleClick} />
+          <UpdateButton fn={handleClick} option={'Update'} />
         </div>
       </div>
       <UpdateProfileDetail user={userData.user} display={display} />

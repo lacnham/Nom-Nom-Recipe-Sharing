@@ -59,7 +59,12 @@ const Header = () => {
             <Dropdown
               username={userData.user.username}
               options={[
-                { id: 1, title: 'Profile', icon: 'fa-solid fa-user', link: '' },
+                {
+                  id: 1,
+                  title: 'Profile',
+                  icon: 'fa-solid fa-user',
+                  link: `/user`
+                },
                 {
                   id: 2,
                   title: 'Diet Plan',

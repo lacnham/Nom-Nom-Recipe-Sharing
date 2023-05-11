@@ -61,7 +61,7 @@ const Collections = props => {
       {/* <button onClick={handleClick} className={styles.updateDeleteContainer}>
         Update
       </button> */}
-      <UpdateButton fn={handleClick} />
+      <UpdateButton fn={handleClick} option={'Update'} />
     </div>
   )
 }

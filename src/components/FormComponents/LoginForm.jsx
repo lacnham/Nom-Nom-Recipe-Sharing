@@ -2,6 +2,7 @@ import styles from '../../styles/LoginAndSignUp/LoginAndSignUp.module.css'
 import { Button2 } from '../Button'
 import React, { useState } from 'react'
 import axios from 'axios'
+import { FetchAllIngAndCountry } from '../Fetch/FetchAllIngAndCountry'
 
 const LoginForm = () => {
   const [loginEr, setLoginEr] = useState(null)
@@ -9,17 +10,24 @@ const LoginForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
     try {
       const response = await axios.post('http://localhost:3000/auth/login', {
         email: email,
-        password: password,
+        password: password
       })
-      localStorage.setItem('accesstoken', JSON.stringify(response.data.accesstoken).replace(/"/g, ''));
-      localStorage.setItem('refreshtoken', JSON.stringify(response.data.refreshtoken).replace(/"/g, ''));
-      console.log(localStorage);
+      localStorage.setItem(
+        'accesstoken',
+        JSON.stringify(response.data.accesstoken).replace(/"/g, '')
+      )
+      localStorage.setItem(
+        'refreshtoken',
+        JSON.stringify(response.data.refreshtoken).replace(/"/g, '')
+      )
+      console.log(localStorage)
       window.location.replace('/allrecipe')
+      FetchAllIngAndCountry()
     } catch (error) {
       console.error(error)
       setLoginEr(error.response.data.error)
@@ -28,10 +36,8 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} method='POST'>
-      <div className={styles.formError}>
-        {loginEr}
-      </div>
+    <form onSubmit={handleSubmit} method="POST">
+      <div className={styles.formError}>{loginEr}</div>
       <div>
         <div className={styles.inputContainer}>
           <i className={`${styles.icon} ${'fa-solid fa-envelope'}`}></i>
