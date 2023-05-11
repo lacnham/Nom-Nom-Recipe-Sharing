@@ -17,20 +17,22 @@ const PublishRecipe = () => {
   const [origin, setOrigin] = useState('')
   const [duration, setDuration] = useState('' + durationUnits[1])
   const [servings, setServings] = useState('')
-  const [ingredients, setIngredients] = useState([])
-  const [ing, setIng] = useState('')
+
+  const [quantity, setQuantity] = useState('')
+  const [ing, setIng] = useState({})
+
+  // const [ingTemp, setIngtemp] = useState({})
+  const [ingredients, setIngredients] = useState([
+    { id: '', name: '', quantity: '' }
+  ])
+
+  // const [ingreTemp, setIngreTemp] = useState({
+  //   id: ing.value,
+  //   name: ing.label,
+  //   quantity: quantity
+  // })
   const [unit, setUnit] = useState('')
 
-  const handleIngredientChange = (igd, event) => {
-    const newIngredients = [...ingredients]
-    if (event.target.name === 'name') {
-      newIngredients[igd] = ing
-    } else if (event.target.name === 'custom') {
-      newIngredients[igd].custom = event.target.checked
-      newIngredients[igd].name = ''
-    }
-    setIngredients(newIngredients)
-  }
   // let arrayIng = []
   // const handleIngredient = e => {
   //   setIng()
@@ -39,12 +41,35 @@ const PublishRecipe = () => {
   // }
 
   if (ing != '') {
+    console.log(ing)
+
     console.log(ingredients)
   }
 
-  const handleAddIngredient = () => {
-    setIngredients([...ingredients, ing])
+  const handleIngredientChange = (e, igd) => {
+    console.log('Vo roi ne', e)
+    setIng(e)
+    let newIngredients = [...ingredients]
+    for (let i = 0; i < newIngredients.length; i++) {
+      // console.log('Ingredients ne hehe', newIngredients[i].id, ' ', e.value)
+      if (newIngredients[i].id === e.value) {
+        alert('Cannot add more')
+        return newIngredients
+      }
+    }
+    newIngredients[igd].id = e.value
+    newIngredients[igd].name = e.label
   }
+
+  const handleAddIngredient = () => {
+    // setIng('')
+    setIngredients([...ingredients, { id: '', name: '', quantity: '' }])
+    // handleIngredientChange(igd)
+  }
+
+  // useEffect(() => {
+  //   handleIngredientChange()
+  // }, [])
 
   const handleRemoveIngredient = igd => {
     const newIngredients = [...ingredients]
@@ -52,13 +77,10 @@ const PublishRecipe = () => {
     setIngredients(newIngredients)
   }
 
-  const handleUnit = event => {
-    setUnit(event.target.value)
-  }
+  // const handleUnit = event => {
 
-  if (origin != '') {
-    console.log(origin.value)
-  }
+  //   setUnit(event.target.value)
+  // }
 
   let config = {
     method: 'post',
@@ -238,25 +260,30 @@ const PublishRecipe = () => {
             <div className={styles.title}>Ingredients:</div>
             <ul className={`${styles.addIngredientContainer}`}>
               {ingredients.map((ingredient, igd) => (
-                <div key={igd}>
+                <div
+                  key={igd}
+                  // onChange={e => handleIngredientChange(e, igd)}
+                >
                   <div
                     className={`${styles.ingredientInputContainer} ${styles.flexRow} ${styles.inputFieldContainer}`}
                   >
                     {/* <input
                       type="text"
                       className={`${styles.inputField}`}
-                      name="name"
+                      name="ingre"
                       placeholder="Enter ingredients"
                       list="igdList"
                       autoComplete="off"
+                      onChange={setIng}
                       // style={{ borderRight:  2px solid #ff8600 }}
                     /> */}
                     <Select
                       className={`${styles.inputField} ${styles.select}`}
                       classNamePrefix="select"
                       options={ingredientOPtion}
+                      // onFocus={setIsFocus(true)}
                       placeholder={`Enter ingredient`}
-                      onChange={setIng}
+                      onChange={e => handleIngredientChange(e, igd)}
                       styles={{
                         control: (baseStyles, state) => ({
                           ...baseStyles,
@@ -285,11 +312,13 @@ const PublishRecipe = () => {
                       className={`${styles.inputField}`}
                       name="quantity"
                       placeholder="Quantity"
+                      onChange={e => setQuantity(e.target.value)}
                       // autoComplete='on'
                     />
                     <Select
                       className={`${styles.inputField} ${styles.select}`}
                       classNamePrefix="select"
+                      name={'ingre'}
                       options={unitOptions}
                       placeholder={`unit`}
                       onChange={setUnit}
@@ -334,6 +363,7 @@ const PublishRecipe = () => {
               className={styles.addIgd}
               type="button"
               onClick={handleAddIngredient}
+              // onChange={splice}
             >
               <i className="fa-solid fa-circle-plus"></i>
               <span> Add More Ingredients </span>
