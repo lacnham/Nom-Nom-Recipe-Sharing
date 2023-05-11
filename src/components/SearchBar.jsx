@@ -92,18 +92,6 @@ const SearchBar = ({
     setSearchInput(searchValue)
   }
 
-  useEffect(() => {
-    sessionStorage.removeItem('recipe')
-  }, [])
-
-  // useEffect(() => {
-  //   if ('recipe' in sessionStorage) {
-  //     console.log('yes')
-  //   } else {
-  //     console.log('no');
-  //   }
-  // })
-
   function compareObjectsByRecipeId(obj1, obj2) {
     const result = {}
 
@@ -122,16 +110,14 @@ const SearchBar = ({
     return result
   }
 
-  function transformData(data) {
-    const dietArray = Array.from(data.diet, item => item.name)
+  function transformData(diet, country) {
+    const dietArray = Array.from(diet, item => item.name)
     const transformedDietData = dietArray.map(item => ({
       value: item,
       label: item
     }))
     setDietOptions(transformedDietData)
-    console.log(transformedDietData)
-
-    const countryArray = Array.from(data.country, item => ({
+    const countryArray = Array.from(country, item => ({
       value: item.id,
       label: item.name
     }))

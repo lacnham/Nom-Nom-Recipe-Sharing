@@ -26,7 +26,7 @@ export const logout = async () => {
   }
 }
 
-export const dietFetch = async (userData) => {
+export const dietFetch = async userData => {
   if (userData) {
     try {
       const response = await fetch(
@@ -37,20 +37,20 @@ export const dietFetch = async (userData) => {
             'Content-Type': 'application/json'
           }
         }
-      );
+      )
 
       if (response.ok) {
-        const data = await response.json();
-        console.log('return data', data);
-        return data; // Return the data instead of setting state
+        const data = await response.json()
+        console.log('return data', data)
+        return data // Return the data instead of setting state
       } else {
-        throw new Error('Unable to get dietary preference');
+        throw new Error('Unable to get dietary preference')
       }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
-};
+}
 
 const accesstoken = localStorage.getItem('accesstoken')
 
@@ -84,7 +84,7 @@ const AuthContextProvider = props => {
     }
   }
 
-  const getDietaryData = async (userData) => {
+  const getDietaryData = async userData => {
     if (userData) {
       // console.log(`http://localhost:3000/get-dietary-preference/${userData.user.id}`);
       try {
@@ -112,7 +112,7 @@ const AuthContextProvider = props => {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getUserSession()
       .then(data => {
         setUserData(data)
@@ -121,12 +121,13 @@ const AuthContextProvider = props => {
       .catch(error => {
         setUserData(null)
       })
-  },[])
+  }, [])
 
   return (
     // <AuthContext.Provider value={{ userData, backendMsg }}>
-    <AuthContext.Provider value={{ userData, logout, dietData, dietFetch, userCollectionData }}>
-
+    <AuthContext.Provider
+      value={{ userData, logout, dietData, dietFetch, userCollectionData }}
+    >
       {props.children}
     </AuthContext.Provider>
   )

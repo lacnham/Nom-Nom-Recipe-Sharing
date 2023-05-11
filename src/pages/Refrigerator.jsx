@@ -8,15 +8,8 @@ import Select from 'react-select'
 import { Button2 } from '../components/Button'
 import AutoClickButton from '../components/AutoClickButton'
 import { Link } from 'react-router-dom'
-import { FetchAllIngAndCountry } from '../components/Fetch/FetchAllIngAndCountry'
+
 const Refrigerator = () => {
-  const { countryOptions, unitOptions, ingredientOption } =
-    FetchAllIngAndCountry()
-
-  useEffect(() => {
-    console.log(ingredientOption)
-  }, [])
-
   const [firstTime, setFirstTime] = useState(true)
 
   const [ingData, setIngData] = useState([])
@@ -29,108 +22,87 @@ const Refrigerator = () => {
   const [selectedOptions, setSelectedOptions] = useState([])
 
   const handleOptionChange = selected => {
-    console.log(selected.map(item => item.value))
     setSelectedOptions(selected.map(item => item.value))
   }
-  // const handleOptionChange = selected => {
-  //   if (selected.length <= 4) {
-  //     console.log(selected)
-  //     setSelectedOptions(selected)
-  //   } else {
-  //     console.log('max option is only 4')
-  //     console.log(selected)
-  //   }
-  // }
 
   const handleSubmit = async event => {
     event.preventDefault()
-    // Additional form submission logic here
     setFirstTime(false)
+    if (selectedOptions.length === 0) {
+      setData(await fetchDataWithOutInput())
+    } else {
+      setData(await fetchDataWithInput())
+    }
+  }
+
+  async function fetchDataWithInput() {
+    const url = 'http://localhost:3000/recipe/search-by-ingredients'
+    const body = {
+      ingredients: selectedOptions
+    }
     try {
-      const response = await axios.get('http://localhost:3000/recipe')
-      setData(response.data)
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        return data
+      } else {
+        throw new Error('Failed to fetch data')
+      }
     } catch (error) {
-      console.log(error)
-      setData([])
+      console.error(error)
+    }
+  }
+
+  async function fetchDataWithOutInput() {
+    const url = 'http://localhost:3000/recipe'
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      if (response.ok) {
+        const data = await response.json()
+        return data
+      } else {
+        throw new Error('Failed to fetch data')
+      }
+    } catch (error) {
+      console.error(error)
     }
   }
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setItemsToRender(prev => prev + perLoad)
-          }
-        })
-      },
-      { rootMargin: '0px 0px 10px 0px' } // Load next batch before the bottom of the page
-    )
+    // Function to fetch the options asynchronously
+    const fetchOptions = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/ingredient/get-all')
+        const data = await response.json()
 
-    const bottomElement = document.querySelector('#bottom')
-    if (bottomElement) {
-      observer.observe(bottomElement)
-    }
-
-    return () => {
-      if (bottomElement) {
-        observer.unobserve(bottomElement)
+        // Extract ing_name from each child
+        const extractedData = data.map(child => child.ing_name)
+        setIngData(
+          extractedData.map(item => ({
+            value: item,
+            label: item
+          }))
+        )
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      } finally {
       }
     }
-  }, [perLoad])
 
-  const [loading, setLoading] = useState(false)
-
-  // useEffect(() => {
-  //   // Function to fetch the options asynchronously
-  //   const fetchOptions = async () => {
-  //     setLoading(true)
-  //     try {
-  //       const response = await fetch('http://localhost:3000/ingredient/get-all')
-  //       const data = await response.json()
-
-  //       // Extract ing_name from each child
-  //       const extractedData = data.map(child => child.ing_name)
-  //       setIngData(
-  //         extractedData.map(item => ({
-  //           value: item,
-  //           label: item
-  //         }))
-  //       )
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error)
-  //     } finally {
-  //       setLoading(false)
-  //     }
-  //   }
-
-  //   fetchOptions()
-  // }, [])
-
-  const fetchOptions = async () => {
-    setLoading(true)
-    try {
-      const response = await fetch('http://localhost:3000/ingredient/get-all')
-      const data = await response.json()
-
-      // Extract ing_name from each child
-      const extractedData = data.map(child => child.ing_name)
-      setIngData(
-        extractedData.map(item => ({
-          value: item,
-          label: item
-        }))
-      )
-    } catch (error) {
-      console.error('Error fetching data:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    console.log(ingData)
-  }, [ingData])
+    fetchOptions()
+  }, [])
 
   const Card = lazy(() => import('../components/Card'))
 
@@ -148,8 +120,8 @@ const Refrigerator = () => {
           >
             <div className={styles.filter_Container}>
               <Select
-                onFocus={fetchOptions}
-                // onMenuOpen={fetchOptions}
+                closeMenuOnSelect={false}
+                // onFocus={fetchOptions}
                 className="basic-single"
                 classNamePrefix="select"
                 isClearable={true}
@@ -159,7 +131,7 @@ const Refrigerator = () => {
                 maxMenuHeight={160}
                 onChange={handleOptionChange}
                 placeholder={'Choose your ingredients...'}
-                isLoading={loading} // Show a loading indicator while fetching options
+                onMenuScrollToBottom={() => setIngData([])}
                 // onInputChange={}
                 styles={{
                   control: (baseStyles, state) => ({
