@@ -30,7 +30,7 @@ export const UserProfileDetail = () => {
         className={`${styles.detailContainer} ${styles.flexRow}`}
         style={{ display: `${profileDisplay}` }}
       >
-        <div className={`${styles.avatarContainer}`}>
+        <div className={`${styles.avatarContainer}`}>         
           <img src={img} alt="user avatar" />
         </div>
         <div className={`${styles.infoContainerAndUpdate}`}>

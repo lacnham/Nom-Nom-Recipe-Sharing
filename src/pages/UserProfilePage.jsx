@@ -5,8 +5,6 @@ import UserProfileSide from '../components/UserProfileComponents/UserProfileSide
 import styles from '../styles/UserProfile/UserProfileMainPage.module.css'
 import { RecipeSection } from '../components/UserProfileComponents/UserProfileRecipe/RecipeSection'
 import { useState } from 'react'
-import { UpdateForm } from '../components/FormComponents/UpdateForm'
-import { UserProfileTab } from '../components/UserProfileComponents/UserProfileSide/UserProfileTab'
 
 const UserProfileMainPage = () => {
   const [currentStyle, setCurrentStyle] = useState('none')
