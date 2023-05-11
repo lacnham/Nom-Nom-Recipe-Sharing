@@ -165,6 +165,7 @@ const SearchBar = ({
           </div>
           <div className={styles.filter_Container}>
             <Select
+              maxMenuHeight={160}
               className="basic-single"
               classNamePrefix="select"
               isClearable={true}
@@ -188,6 +189,7 @@ const SearchBar = ({
               }}
             />
             <Select
+              maxMenuHeight={160}
               className="basic-single"
               classNamePrefix="select"
               isClearable={true}

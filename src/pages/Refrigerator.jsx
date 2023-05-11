@@ -8,8 +8,15 @@ import Select from 'react-select'
 import { Button2 } from '../components/Button'
 import AutoClickButton from '../components/AutoClickButton'
 import { Link } from 'react-router-dom'
-
+import { FetchAllIngAndCountry } from '../components/Fetch/FetchAllIngAndCountry'
 const Refrigerator = () => {
+  const { countryOptions, unitOptions, ingredientOption } =
+    FetchAllIngAndCountry()
+
+  useEffect(() => {
+    console.log(ingredientOption)
+  }, [])
+
   const [firstTime, setFirstTime] = useState(true)
 
   const [ingData, setIngData] = useState([])
@@ -18,6 +25,22 @@ const Refrigerator = () => {
 
   const [data, setData] = useState([])
   const [itemsToRender, setItemsToRender] = useState(0)
+
+  const [selectedOptions, setSelectedOptions] = useState([])
+
+  const handleOptionChange = selected => {
+    console.log(selected.map(item => item.value))
+    setSelectedOptions(selected.map(item => item.value))
+  }
+  // const handleOptionChange = selected => {
+  //   if (selected.length <= 4) {
+  //     console.log(selected)
+  //     setSelectedOptions(selected)
+  //   } else {
+  //     console.log('max option is only 4')
+  //     console.log(selected)
+  //   }
+  // }
 
   const handleSubmit = async event => {
     event.preventDefault()
@@ -56,7 +79,36 @@ const Refrigerator = () => {
     }
   }, [perLoad])
 
-  async function fetchData() {
+  const [loading, setLoading] = useState(false)
+
+  // useEffect(() => {
+  //   // Function to fetch the options asynchronously
+  //   const fetchOptions = async () => {
+  //     setLoading(true)
+  //     try {
+  //       const response = await fetch('http://localhost:3000/ingredient/get-all')
+  //       const data = await response.json()
+
+  //       // Extract ing_name from each child
+  //       const extractedData = data.map(child => child.ing_name)
+  //       setIngData(
+  //         extractedData.map(item => ({
+  //           value: item,
+  //           label: item
+  //         }))
+  //       )
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error)
+  //     } finally {
+  //       setLoading(false)
+  //     }
+  //   }
+
+  //   fetchOptions()
+  // }, [])
+
+  const fetchOptions = async () => {
+    setLoading(true)
     try {
       const response = await fetch('http://localhost:3000/ingredient/get-all')
       const data = await response.json()
@@ -71,13 +123,10 @@ const Refrigerator = () => {
       )
     } catch (error) {
       console.error('Error fetching data:', error)
+    } finally {
+      setLoading(false)
     }
   }
-
-  // Call the fetchData function to initiate the data fetching process
-  useEffect(() => {
-    fetchData()
-  }, [])
 
   useEffect(() => {
     console.log(ingData)
@@ -99,20 +148,25 @@ const Refrigerator = () => {
           >
             <div className={styles.filter_Container}>
               <Select
+                onFocus={fetchOptions}
+                // onMenuOpen={fetchOptions}
                 className="basic-single"
                 classNamePrefix="select"
                 isClearable={true}
                 isSearchable={true}
                 options={ingData}
-                // onChange={setSelectedDiet}
+                isMulti={true}
+                maxMenuHeight={160}
+                onChange={handleOptionChange}
                 placeholder={'Choose your ingredients...'}
+                isLoading={loading} // Show a loading indicator while fetching options
+                // onInputChange={}
                 styles={{
                   control: (baseStyles, state) => ({
                     ...baseStyles,
                     borderColor: state.isFocused ? '#ff8600' : '#ff8600',
                     borderWidth: '2px',
                     borderRadius: '8px',
-                    // This line disable the blue border
                     boxShadow: state.isFocused ? 0 : 0,
                     '&:hover': {
                       borderColor: '#ff8600',

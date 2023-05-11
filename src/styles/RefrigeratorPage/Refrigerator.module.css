@@ -85,3 +85,8 @@
   border: none;
   width: 350px;
 }
+
+.menu-option {
+  background-color: lightgray;
+  padding: 10px;
+}
