@@ -4,6 +4,9 @@ import styles from '../../styles/LandingPage/Feed.module.css'
 import { useContext } from 'react'
 import { AuthContext } from '../SessionVerification/AuthContext'
 import { Link } from 'react-router-dom'
+import StickyBox from 'react-sticky-box'
+import { BackToTopButton } from '../Button'
+
 export default function Feed() {
   //   const [like, setLike] = useState(post.like)
   //   const [isliked, setIsLiked] = useState(false)
@@ -118,28 +121,62 @@ export default function Feed() {
 
   console.log(feedData)
 
-  return (
-    <div>
-      <div>Feed here</div>
-
-      {feedData.map(post => (
-        <Suspense
-          fallback={<div className={styles.cardLazyLoading}></div>}
-          key={post.recipe_id}
-        >
-          <div>
-            <Post
-              name={post.name}
-              description={post.description}
-              timeElapsed={getTimeElapsed(post.created_at)}
-              duration={post.duration.minutes}
-              caloriesData={post.caloriesData}
-              serving_size={post.serving_size}
-              image_link={post.image_link}
-            />
+  const HomeRightbar = () => {
+    return (
+      <>
+        <StickyBox offsetTop={20} offsetBottom={20}>
+          <div className={styles.rightbarContainer}>
+            <span className={styles.rightbarText}>
+              <b>Place Holder</b> write <b> sth </b> here.
+            </span>
           </div>
-        </Suspense>
-      ))}
+          <div className={styles.rignhtbarAd}>
+            <img src="src/images/BrandConcept.svg" alt="" />
+          </div>
+          <div className={styles.rightbarLink}>
+            <h4 className={styles.rightbarTitle}>sth Here</h4>
+            <ul className={styles.rightbarList}>some button</ul>
+          </div>
+        </StickyBox>
+      </>
+    )
+  }
+
+  return (
+    <div
+      className={styles.feedContainer}
+      style={{ display: 'flex', alignItems: 'flex-start' }}
+    >
+      <BackToTopButton />
+
+      <div keyword="place_holder" className={styles.placeHolder}></div>
+      <div className={styles.postContainer}>
+        <div className={styles.feedHeader}>
+          <i className="fa-solid fa-kitchen-set fa-2xl"></i>
+          <h1>Find your favorite dishes</h1>
+        </div>
+
+        {feedData.map(post => (
+          <Suspense
+            fallback={<div className={styles.cardLazyLoading}></div>}
+            key={post.recipe_id}
+          >
+            <div>
+              <Post
+                name={post.name}
+                description={post.description}
+                timeElapsed={getTimeElapsed(post.created_at)}
+                duration={post.duration.minutes}
+                caloriesData={Math.round(post.caloriesData)}
+                serving_size={Math.round(post.serving_size)}
+                image_link={post.image_link}
+              />
+            </div>
+          </Suspense>
+        ))}
+      </div>
+
+      <HomeRightbar />
     </div>
   )
 }
@@ -151,17 +188,7 @@ function Post(props) {
       <div className={styles.postWrapper}>
         <div className={styles.postTop}>
           <div className={styles.postTopLeft}>
-            <img
-              className={styles.postProfileImg}
-              // src={
-              //   Users.filter(u => u.id === post.userId)[0].profilePicture
-              // }
-              alt=""
-            />
-            <span className={styles.postUsername}>
-              {/* {Users.filter(u => u.id === post.userId)[0].username} */}
-              usename
-            </span>
+            <h1 className={styles.postRecipeName}>{props.name}</h1>
             <span className={styles.postDate}>{props.timeElapsed}</span>
           </div>
           <div className={styles.postTopRight}>
@@ -185,13 +212,13 @@ function Post(props) {
             </span>
           </span>
           <br />
-          <span className={styles.postText}>
-            <h4>{props.name}</h4>
+          <div className={styles.postText}>
             <p>{props.description}</p>
-          </span>
+          </div>
           <div className={styles.postImgContainer}>
             <img
               className={styles.postImg}
+              // TODO replace with this when real data have image or when before deploy
               // src={props.image_link}
               src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80"
               alt="Recipe Image"
@@ -200,7 +227,7 @@ function Post(props) {
         </div>
         <div className={styles.postBottom}>
           <div className={styles.postBottomLeft} keyword="place_holder">
-            <img
+            {/* <img
               className={styles.likeIcon}
               src="/assets/like.png"
               // onClick={likeHandler}
@@ -212,7 +239,7 @@ function Post(props) {
               // onClick={likeHandler}
               alt=""
             />
-            <span className={styles.postLikeCounter}>666 people like it</span>
+            <span className={styles.postLikeCounter}>666 people like it</span> */}
           </div>
           <div className={styles.postBottomRight}>
             <span className={styles.postVisit}>
