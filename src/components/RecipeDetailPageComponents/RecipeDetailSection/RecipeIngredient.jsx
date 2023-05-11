@@ -31,7 +31,7 @@ const RecipeIngredient = props => {
   // const labelDetail = props.ingredients.map(ele => (
   const labelDetail = ingredients.map(ele => (
     <div key={ele.id} className={`${styles.eleContainer} ${styles.flexRow}`}>
-      <img src={doneIcon} />
+      <i class="fa-solid fa-check"></i>
       <div>{ele.ing_name}</div>
       <div>{ele.quantity}</div>
       <div>{ele.unit_name}</div>
@@ -40,7 +40,7 @@ const RecipeIngredient = props => {
 
   const nutrition = nutritionToArr.map(ele => (
     <div key={ele.id} className={`${styles.eleContainer} ${styles.flexRow}`}>
-      <img src={doneIcon} />
+      <i class="fa-solid fa-check"></i>
       <div>{ele[0]}</div>
       <div>{Math.round(ele[1] * 100) / 100}</div>
       {/* <div>{ele.unit_name}</div> */}

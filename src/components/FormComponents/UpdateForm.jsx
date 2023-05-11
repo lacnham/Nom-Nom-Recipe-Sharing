@@ -83,6 +83,7 @@ export const UpdateForm = props => {
           // rows={3}
           id="note"
           name="note"
+          rows={10}
           value={note}
           onChange={handleChangeNote}
           // rows="5"

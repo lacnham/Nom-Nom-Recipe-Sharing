@@ -16,11 +16,11 @@ const RecipeIntro = props => {
       <div className={styles.title}>{props.recipe.title}</div>
       <div className={styles.commonInfo}>
         <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
-          <img src={timeIcon} alt="duration icon" />
+          <i class="fa-solid fa-clock"></i>
           <div>{props.recipe.commonInfo.duration}</div>
         </div>
         <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
-          <img src={peopleIcon} alt="people icon" />
+          <i class="fa-solid fa-user"></i>
           <div>{props.recipe.commonInfo.serving}</div>
         </div>
         {/* <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
