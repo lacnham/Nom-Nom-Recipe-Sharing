@@ -70,6 +70,12 @@ const Header = () => {
                   title: 'Diet Plan',
                   icon: 'fa-solid fa-utensils',
                   link: '/diet'
+                },
+                {
+                  id: 3,
+                  title: 'Add Recipe',
+                  icon: 'fa-solid fa-pen-to-square',
+                  link: ''
                 }
               ]}
             ></Dropdown>

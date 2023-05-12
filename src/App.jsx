@@ -9,11 +9,12 @@ import AllRecipe from './pages/AllRecipe'
 import RecoverPage from './pages/RecoverPage'
 import DietPage from './pages/DietPage'
 import UserProfileMainPage from './pages/UserProfilePage'
+import Refrigerator from './pages/Refrigerator'
 import { CollectionRecipes } from './components/UserProfileComponents/UserProfileCollection/CollectionRecipes'
 
 // import CollectionRecipes from './components/UserProfileComponents/CollectionRecipes'
 
-function App () {
+function App() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -52,6 +53,8 @@ function App () {
 
           <Route path="/PublishRecipe" element={<PublishRecipe />} />
           <Route path="/AllRecipe" element={<AllRecipe />} />
+
+          <Route path="/refrigerator" element={<Refrigerator />} />
 
           <Route path="/recipe/:name/:id" element={<DetailRecipePage />} />
           <Route path="/Recover" element={<RecoverPage />} />

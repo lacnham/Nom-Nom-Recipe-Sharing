@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react'
 import { FetchRecipeByID } from '../components/Fetch/Recipes/FetchRecipeByID'
 import { useParams } from 'react-router-dom'
 import { FetchIngAndNutri } from '../components/Fetch/Recipes/FetchIngAndNutri'
+import StickyBox from 'react-sticky-box'
+
 // import { LLogin } from '../components/Login'
 
 const DetailRecipePage = () => {
@@ -75,7 +77,10 @@ const DetailRecipePage = () => {
       {/* TODO CSS clashes with PublicRecipe.module.css page [FIX] */}
       <Header />
       <div className={`${styles.body}`}>
-        <div className={`${styles.mainContainer} ${styles.flexRow}`}>
+        <div
+          className={`${styles.mainContainer} ${styles.flexRow}`}
+          style={{ display: 'flex', alignItems: 'flex-start' }}
+        >
           <RecipeDetail
             id={id}
             recipe={recipe}
@@ -83,7 +88,9 @@ const DetailRecipePage = () => {
             // nutritions={nutritions}
           />
           {/* <RecipeDetail recipe={recipe} id={id} /> */}
-          <RecipeReview recipe={recipe} id={id} />
+          <StickyBox offsetTop={20} offsetBottom={20} style={{ width: '30%' }}>
+            <RecipeReview recipe={recipe} id={id} />
+          </StickyBox>
         </div>
       </div>
     </>

@@ -12,7 +12,6 @@ const RecipeIngredient = props => {
     props.servingNum
   )
 
-  // let nutritionToArr = Object.entries(props.nutritions)
   let nutritionToArr = Object.entries(nutritions)
 
   for (let i = 0; i < nutritionToArr.length; i++) {
@@ -21,34 +20,35 @@ const RecipeIngredient = props => {
     }
   }
 
-  // const label = props.ingredients.map(ele => (
-  const label = ingredients.map(ele => (
-    <div key={ele.id} className={styles.label}>
-      {ele.ing_name}
-    </div>
-  ))
+  const label = ingredients
+    ? ingredients.map(ele => (
+        <div key={ele.id} className={styles.label}>
+          {ele.ing_name}
+        </div>
+      ))
+    : null
 
-  // const labelDetail = props.ingredients.map(ele => (
-  const labelDetail = ingredients.map(ele => (
-    <div key={ele.id} className={`${styles.eleContainer} ${styles.flexRow}`}>
-      <i class="fa-solid fa-check"></i>
-      <div>{ele.ing_name}</div>
-      <div>{ele.quantity}</div>
-      <div>{ele.unit_name}</div>
-    </div>
-  ))
+  const labelDetail = ingredients
+    ? ingredients.map(ele => (
+        <div
+          key={ele.id}
+          className={`${styles.eleContainer} ${styles.flexRow}`}
+        >
+          <i class="fa-solid fa-check"></i>
+          <div>{ele.ing_name}</div>
+          <div>{ele.quantity}</div>
+          <div>{ele.unit_name}</div>
+        </div>
+      ))
+    : null
 
-  const nutrition = nutritionToArr.map(ele => (
-    <div key={ele.id} className={`${styles.eleContainer} ${styles.flexRow}`}>
+  const nutrition = nutritionToArr.map((ele, index) => (
+    <div key={index} className={`${styles.eleContainer} ${styles.flexRow}`}>
       <i class="fa-solid fa-check"></i>
       <div>{ele[0]}</div>
       <div>{Math.round(ele[1] * 100) / 100}</div>
-      {/* <div>{ele.unit_name}</div> */}
     </div>
   ))
-
-  // const label = props.recipe.ingredients.map(ele => RenderLabel(ele))
-  // const labelDetail = props.recipe.ingredients.map(ele => RenderDetail(ele))
 
   return (
     <div
@@ -61,12 +61,9 @@ const RecipeIngredient = props => {
 
       <div className={`${styles.ingredientTab}`}>
         <div className={styles.title}>Nutrition facts</div>
-        {/* <div className={styles.ingDetailContainer}>{nutritionFacts}</div> */}
-
         <div
           className={`${styles.ingDetailContainer} ${styles.nutritionDetail}`}
         >
-          {/* {' '} */}
           {nutrition}
         </div>
       </div>

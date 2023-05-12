@@ -26,7 +26,7 @@ const LoginForm = () => {
         JSON.stringify(response.data.refreshtoken).replace(/"/g, '')
       )
       console.log(localStorage)
-      window.location.replace('/allrecipe')
+      window.location.replace('/')
       FetchAllIngAndCountry()
     } catch (error) {
       console.error(error)

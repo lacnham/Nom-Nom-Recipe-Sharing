@@ -2,6 +2,8 @@
 @import '../globalStyles.css';
 
 .body {
+  font-family: Noto Sans JP !important;
+
   width: 100%;
   height: fit-content;
   /* background-color: var(--light-orange) ; */
@@ -186,6 +188,6 @@
 }
 
 .reviewsContainer {
-  width: 36%;
+  width: 100%;
   background-color: var(--light-orange);
 }

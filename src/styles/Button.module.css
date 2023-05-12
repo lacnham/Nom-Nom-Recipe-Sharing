@@ -8,11 +8,7 @@ button {
   padding: 10px 20px;
   border: none;
   cursor: pointer;
-  min-width: 97px;
-}
-
-button > i {
-  margin-right: 5px;
+  /* min-width: 97px; */
 }
 
 button > i {
@@ -51,4 +47,38 @@ button > i {
 .defaultButton:hover {
   background-color: white;
   color: black;
+}
+
+.backToTopButton {
+  position: fixed;
+  padding: 0px !important;
+  bottom: 20px;
+  right: 20px;
+  width: 60px !important;
+  height: 60px !important;
+  background-color: #3d233a;
+  color: white;
+  border-radius: 50%; /* Use 50% to create a circle shape */
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+  border: 3px solid #3d233a;
+  pointer-events: none;
+}
+
+.backToTopButton:hover{
+  background-color: white;
+  color: #3d233a;
+
+}
+
+.backToTopButton > i {
+  /* color: white; */
+  margin-right: 0px;
+  font-size: 2rem;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
