@@ -7,7 +7,7 @@ const Modal = ({ isShowing, hide, ...props }) =>
   isShowing
     ? ReactDOM.createPortal(
         <React.Fragment>
-          <div className={styles.modal_overlay}  />
+          <div className={styles.modal_overlay} />
           <div
             className={styles.modal_wrapper}
             aria-modal
@@ -37,7 +37,7 @@ const Modal = ({ isShowing, hide, ...props }) =>
                   )}
                 </div>
               </div>
-              <p className={styles.modal_body}>{props.modalMsg}</p>
+              <div className={styles.modal_body}>{props.modalMsg}</div>
 
               <div className={styles.modal_btnContainer}>
                 <Button2

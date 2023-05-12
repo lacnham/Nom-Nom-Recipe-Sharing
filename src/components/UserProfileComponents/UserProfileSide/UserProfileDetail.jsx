@@ -5,7 +5,8 @@ import { useContext, useState } from 'react'
 import { FetchCurrentuser } from '../../FetchCurrentUser'
 import { UpdateButton } from '../UpdateProfileButton'
 import { UpdateProfileDetail } from './UpdateProfileDetail'
-
+import useModal from '../../ModalComponents/useModal'
+import Modal from '../../../components/ModalComponents/Modal'
 export const UserProfileDetail = () => {
   const { userData } = useContext(AuthContext)
   // const user = FetchCurrentuser()
@@ -20,29 +21,49 @@ export const UserProfileDetail = () => {
   const [profileDisplay, setProfileDisplay] = useState('flex')
 
   const handleClick = () => {
+    toggle()
     setDisplay('flex')
     setProfileDisplay('none')
   }
+  const { isShowing, toggle } = useModal()
 
   return (
     <div className={`${styles.detailMainContainer}`}>
-      <div
+      <Modal
+        isShowing={isShowing}
+        hide={toggle}
+        btnMsg={'Close'}
+        title={'User Profile Update'}
+        modalMsg={
+          <UpdateProfileDetail user={userData.user} display={display} />
+        }
+        closeable={true}
+        titleIcon={<i className="fa-solid fa-note-sticky"></i>}
+        btnFn={() => {
+          toggle()
+        }}
+      />
+      {/* <div
         className={`${styles.detailContainer} ${styles.flexRow}`}
         style={{ display: `${profileDisplay}` }}
-      >
+      > */}
+      <div className={`${styles.detailContainer}`}>
         <div className={`${styles.avatarContainer}`}>
           <img src={img} alt="user avatar" />
         </div>
-        <div className={`${styles.infoContainerAndUpdate}`}>
+        <div className={`${styles.infoContainer}`}>
           <div className={`${styles.infoContainer}`}>
             <div>ID: {userData.user.id}</div>
-            <div>{userData.user.username}</div>
-            <div>{userData.user.email}</div>
+            <h2>{userData.user.username}</h2>
+            <div>
+              <i className="fa-solid fa-envelope"></i>
+              {userData.user.email}
+            </div>
           </div>
+
           <UpdateButton fn={handleClick} option={'Update'} />
         </div>
       </div>
-      <UpdateProfileDetail user={userData.user} display={display} />
     </div>
   )
 }

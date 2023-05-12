@@ -7,6 +7,7 @@ import { RecipeSection } from '../components/UserProfileComponents/UserProfileRe
 import { useState } from 'react'
 import { UpdateForm } from '../components/FormComponents/UpdateForm'
 import { UserProfileTab } from '../components/UserProfileComponents/UserProfileSide/UserProfileTab'
+import { BackToTopButton } from '../components/Button'
 
 const UserProfileMainPage = () => {
   const [currentStyle, setCurrentStyle] = useState('none')
@@ -37,8 +38,13 @@ const UserProfileMainPage = () => {
   return (
     <>
       <Header />
-      <div className={`${styles.body}`}>
-        <div className={`${styles.flexRow} ${styles.profileMainContainer}`}>
+      <div>
+        <div
+          className={`${styles.flexRow} ${styles.profileMainContainer}`}
+          style={{ display: 'flex', alignItems: 'flex-start' }}
+        >
+          <BackToTopButton />
+
           {/* Section container fixed width, height fit content, display grid 3 */}
           {/* <CollectionSection></CollectionSection> */}
           {/* <CollectionSection /> */}

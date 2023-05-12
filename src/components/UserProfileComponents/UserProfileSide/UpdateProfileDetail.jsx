@@ -26,56 +26,58 @@ export const UpdateProfileDetail = props => {
 
   return (
     <form
-      className={`${styles.detailContainer} ${styles.flexRow} ${styles.form}`}
+      className={`${styles.formContainer} ${styles.flexRow} ${styles.form}`}
       style={{ display: `${props.display}` }}
       //   style={{ display: `none` }}
     >
-      <div className={`${styles.avatarContainer}`}></div>
-      <div className={styles.infoContainerAndUpdate}>
-        <div className={`${styles.infoContainer}`}>
-          <div>
-            <input
-              className={`${styles.inputField}`}
-              type="text"
-              name="username"
-              id="username"
-              value={name}
-              onChange={handleChangeName}
-            />
-          </div>
-          <div>
-            {/* <input
+      <div className={styles.infoUpdate}>
+        <div>
+          <label>Username:</label>
+          <input
+            className={`${styles.inputField}`}
+            type="text"
+            name="username"
+            id="username"
+            value={name}
+            onChange={handleChangeName}
+          />
+        </div>
+        {/* <div>
+          <input
               className={`${styles.inputField}`}
               type="email"
               name="email"
               id="email"
               value={email}
               onChange={handleChangeEmail}
-            /> */}
-            <div>{email}</div>
-          </div>
-          <div>
-            <input
-              className={`${styles.inputField}`}
-              type="password"
-              name="password"
-              id="password"
-              placeholder="New password"
-              value={password}
-              onChange={handleChangePassword}
             />
-          </div>
-          <div>
-            <input
-              className={`${styles.inputField}`}
-              type="password"
-              name="verify password"
-              id="verify password"
-              placeholder="Re-type password"
-              value={veryPassword}
-              onChange={handleVerifyPassword}
-            />
-          </div>
+          <div>{email}</div>
+        </div> */}
+        <div>
+          <label>Password:</label>
+
+          <input
+            className={`${styles.inputField}`}
+            type="new-password"
+            name="password"
+            id="password"
+            placeholder="New password"
+            value={password}
+            onChange={handleChangePassword}
+          />
+        </div>
+        <div>
+          <label>Retype-Password:</label>
+
+          <input
+            className={`${styles.inputField}`}
+            type="new-password"
+            name="verify password"
+            id="verify password"
+            placeholder="Re-type password"
+            value={veryPassword}
+            onChange={handleVerifyPassword}
+          />
         </div>
         <UpdateButton />
       </div>
