@@ -1,25 +1,46 @@
 import styles from '../styles/Card.module.css'
 import React from 'react'
+import { useState } from 'react'
 
-function CardImage (props) {
-  const isImageURL = props.image
-  // If an image was passed:
-  if (isImageURL) {
-    return (
-      <div className={styles.Image} style={{ width: props.width + 'px' }}>
-        <img
-          style={{ width: props.width + 'px', marginTop: '-8%' }}
-          src={props.image}
-          alt="Seattle"
-          loading="lazy"
-        />
-      </div>
-    )
+function CardImage(props) {
+  const [imageURL, setImageURL] = useState(
+    props.image || 'src/images/Default_img.svg'
+  )
+  const [imageError, setImageError] = useState(false)
+
+  const handleImageError = () => {
+    if (!imageError) {
+      setImageURL('src/images/Default_img.svg')
+      setImageError(true)
+      console.log()
+    }
   }
-  return null
+
+  const imageStyle = {
+    width: imageURL === 'src/images/Default_img.svg' ? '200px' : '100%',
+    objectFit: imageURL === 'src/images/Default_img.svg' ? 'cover' : 'cover'
+  }
+
+  const containerStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: imageURL === 'src/images/Default_img.svg' ? 'center' : 'cover'
+  }
+
+  return (
+    <div className={styles.Image} style={containerStyle}>
+      <img
+        style={imageStyle}
+        src={imageURL}
+        alt="Seattle"
+        loading="lazy"
+        onError={handleImageError}
+      />
+    </div>
+  )
 }
 
-function CardContent (props) {
+function CardContent(props) {
   return (
     <div className={styles.CardContent}>
       <p className={styles.CardTitle}>{props.title}</p>
@@ -38,7 +59,7 @@ function CardContent (props) {
 }
 
 export default class Card extends React.Component {
-  render () {
+  render() {
     return (
       <div className={styles.Card}>
         <div>

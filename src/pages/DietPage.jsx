@@ -10,7 +10,6 @@ import useModal from '../components/ModalComponents/useModal'
 import Modal from '../components/ModalComponents/Modal'
 import { useNavigate } from 'react-router-dom'
 const Diet = () => {
-  
   const navigate = useNavigate()
 
   //diet data
@@ -29,28 +28,8 @@ const Diet = () => {
         dietData.msg.map(preference => preference.dietary_preference_name)
       )
     }
-    console.log(dietaryPreferences)
     // setCheckedDivContent(dietaryPreferences)
   }, [dietData])
-
-  // function findCheckedDivContent() {
-  //   const checkedDivs = document.querySelectorAll('div#checked')
-  //   const contentArray = []
-  //   checkedDivs.forEach(div => {
-  //     contentArray.push(div.querySelector('p').innerHTML)
-  //   })
-  //   setCheckedDivContent(contentArray) // Update the state variable
-  // }
-
-  // This useEffect hook will log the checkedDivContent array
-  // whenever it is updated.
-  // useEffect(() => {
-  //   console.log(checkedDivContent)
-  // }, [checkedDivContent])
-
-  // useEffect(() => {
-  //   findCheckedDivContent()
-  // }, [])
 
   const [diet, setDiet] = useState([])
   const fetchData = async () => {
@@ -67,7 +46,7 @@ const Diet = () => {
   }, [])
 
   function waitForCheckedDivContent() {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       const interval = setInterval(() => {
         const checkedDivs = document.querySelectorAll('div#checked')
         if (checkedDivs.length > 0) {
@@ -80,17 +59,29 @@ const Diet = () => {
             dietaryPreference: contentArray
           }
           resolve(transformedData)
+        } else if (checkedDivs.length === 0) {
+          clearInterval(interval)
+          setError(true)
+          reject(new Error('No checked div elements found'))
         }
       }, 100)
     })
   }
 
-  const updateDietPpreference = async () => {
-    console.log(
-      'await is here',
-      JSON.stringify(await waitForCheckedDivContent())
-    )
+  const updateDietPreference = async () => {
     try {
+      const data = await waitForCheckedDivContent().catch(error => {
+        console.log(error.message)
+      })
+
+      if (!data) {
+        console.log(
+          'No checked div elements found. Skipping updateDietPreference.'
+        )
+
+        return
+      }
+
       const response = await fetch(
         `http://localhost:3000/update-dietary-preference/${userData.user.id}`,
         {
@@ -98,10 +89,10 @@ const Diet = () => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(await waitForCheckedDivContent())
+          body: JSON.stringify(data)
         }
       )
-      console.log(response.json())
+
       if (response.ok) {
         console.log('Data sent successfully.')
         toggle()
@@ -185,6 +176,7 @@ const Diet = () => {
 
   const { isShowing, toggle } = useModal()
 
+  const [error, setError] = useState(false)
 
   return (
     <div className={styles.page}>
@@ -202,9 +194,23 @@ const Diet = () => {
                 closeable={false}
                 titleIcon={<i className="fa-solid fa-circle-check"></i>}
                 btnFn={() => {
-                  navigate('/')
+                  window.location.href = '/'
+                  // navigate('/', { replace: true })
                 }}
               />
+              <Modal
+                isShowing={error}
+                hide={() => ''}
+                btnMsg={'Close'}
+                title={'Error'}
+                modalMsg={'You have to choose atlease one diet preference'}
+                closeable={false}
+                titleIcon={<i className="fa-solid fa-circle-xmark"></i>}
+                btnFn={() => {
+                  setError(false)
+                }}
+              />
+
               <h1>
                 Select Your Diet Plan (you can change this later in your user
                 setting)
@@ -230,7 +236,7 @@ const Diet = () => {
                   type={'button'}
                   options={'Save'}
                   fn={() => {
-                    updateDietPpreference()
+                    updateDietPreference()
                   }}
                 />
               </div>

@@ -83,7 +83,7 @@ export default function SignUpForm() {
 
   const { isShowing, toggle } = useModal()
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <form onSubmit={handleSubmit} method="POST">
@@ -92,11 +92,13 @@ export default function SignUpForm() {
         hide={toggle}
         btnMsg={'Confirm'}
         title={'Account Created Successfully!'}
-        modalMsg={'Your account has been created successfully. You can now log in and start exploring our website!'}
+        modalMsg={
+          'Your account has been created successfully. You can now log in and start exploring our website!'
+        }
         closeable={false}
         titleIcon={<i className="fa-solid fa-circle-check"></i>}
         btnFn={() => {
-          navigate('/login')
+          navigate('/login', { replace: true })
         }}
       />
       <div className={styles.formError}>{signUpEr}</div>

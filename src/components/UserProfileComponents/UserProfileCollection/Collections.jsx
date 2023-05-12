@@ -29,6 +29,19 @@ const Collections = props => {
   //   props.setSection(<RecipeTemp id={props.collection.collection_id} />)
   // }
 
+  const [imageURL, setImageURL] = useState(
+    props.image || 'src/images/Default_img.svg'
+  )
+  const [imageError, setImageError] = useState(false)
+
+  const handleImageError = () => {
+    if (!imageError) {
+      setImageURL('src/images/Default_img.svg')
+      setImageError(true)
+      console.log()
+    }
+  }
+
   return (
     <div
       className={`${styles.collectionContainer} ${styles.boxShadowPurple} ${styles.flexColumn}`}
@@ -38,7 +51,7 @@ const Collections = props => {
         key={props.collection.collection_id}
       >
         <div className={`${styles.contContainer} ${styles.flexColumn}`}>
-          <img alt="collection image" src={props.collection.img} />
+          <img alt="collection image" src={imageURL} />
           <div className={`${styles.title}`}>{props.collection.name}</div>
           <div className={`${styles.textOverFlowEcllipse} ${styles.text}`}>
             {props.collection.note}

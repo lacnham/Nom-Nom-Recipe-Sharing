@@ -5,7 +5,8 @@ import { useContext } from 'react'
 import { AuthContext } from '../SessionVerification/AuthContext'
 import { Link } from 'react-router-dom'
 import StickyBox from 'react-sticky-box'
-import { BackToTopButton } from '../Button'
+import { BackToTopButton, Button2 } from '../Button'
+import { useNavigate } from 'react-router-dom'
 
 export default function Feed() {
   //   const [like, setLike] = useState(post.like)
@@ -15,9 +16,25 @@ export default function Feed() {
   //     setLike(isliked ? like - 1 : like + 1)
   //     setIsLiked(!isliked)
   //   }
+
+  const navigate = useNavigate()
+
   const { userData } = useContext(AuthContext)
 
   const [feedData, setFeedData] = useState([])
+
+  const [isDietNull, setIsDietNull] = useState(null)
+
+  const { dietData } = useContext(AuthContext)
+  useEffect(() => {
+    if (dietData != null) {
+      if (dietData.msg.length === 0) {
+        setIsDietNull(true)
+      } else {
+        setIsDietNull(false)
+      }
+    }
+  }, [dietData, isDietNull])
 
   async function fetchRecommendationsByDietary(userID) {
     const url = `http://localhost:3000/recipe/recommendations/dietary/${userID}`
@@ -50,7 +67,6 @@ export default function Feed() {
         )
 
         setFeedData(updatedFeedData)
-        console.log(feedData)
       } else {
         throw new Error('Failed to fetch data')
       }
@@ -119,8 +135,6 @@ export default function Feed() {
     }
   }
 
-  console.log(feedData)
-
   const HomeRightbar = () => {
     return (
       <>
@@ -134,8 +148,22 @@ export default function Feed() {
             <img src="src/images/BrandConcept.svg" alt="" />
           </div>
           <div className={styles.rightbarLink}>
-            <h4 className={styles.rightbarTitle}>sth Here</h4>
-            <ul className={styles.rightbarList}>some button</ul>
+            <h4 className={styles.rightbarTitle}>Other places</h4>
+            <ul className={styles.rightbarList}>
+              <a href="/allRecipe">
+                <li>
+                  <i className="fa-solid fa-magnifying-glass fa-lg"></i>
+                  Search All Recipes
+                </li>
+              </a>
+
+              <a href="/refrigerator">
+                <li>
+                  <i className="fa-solid fa-filter fa-lg"></i>
+                  Filter Recipes
+                </li>
+              </a>
+            </ul>
           </div>
         </StickyBox>
       </>
@@ -151,30 +179,64 @@ export default function Feed() {
 
       <div keyword="place_holder" className={styles.placeHolder}></div>
       <div className={styles.postContainer}>
-        <div className={styles.feedHeader}>
-          <i className="fa-solid fa-kitchen-set fa-2xl"></i>
-          <h1>Find your favorite dishes</h1>
-        </div>
-
-        {feedData.map(post => (
-          <Suspense
-            fallback={<div className={styles.cardLazyLoading}></div>}
-            key={post.recipe_id}
-          >
-            <div>
-              <Post
-                recipe_id={post.recipe_id}
-                name={post.name}
-                description={post.description}
-                timeElapsed={getTimeElapsed(post.created_at)}
-                duration={post.duration.minutes}
-                caloriesData={Math.round(post.caloriesData)}
-                serving_size={Math.round(post.serving_size)}
-                image_link={post.image_link}
-              />
+        {isDietNull ? (
+          <div className={styles.noResultsFound}>
+            <img src="src/images/noDiet.svg" alt="" />
+            <h2>You dont&#8217;t have any diet preference</h2>
+            <p>
+              Choose a diet plan for personalized recommendations and guidance
+              that match your goals!
+            </p>
+            <Button2
+              icon={<i className="fa-solid fa-utensils"></i>}
+              options={'Choose Your Diet Plan'}
+              fn={() => (window.location.href = '/diet')}
+            />
+          </div>
+        ) : (
+          <div>
+            <div className={styles.feedHeader}>
+              <i className="fa-solid fa-kitchen-set fa-2xl"></i>
+              <h1>Find your favorite dishes</h1>
             </div>
-          </Suspense>
-        ))}
+
+            {feedData.map(post => (
+              <Suspense
+                fallback={<div className={styles.cardLazyLoading}></div>}
+                key={post.recipe_id}
+              >
+                <div>
+                  <Post
+                    recipe_id={post.recipe_id}
+                    name={post.name}
+                    description={post.description}
+                    timeElapsed={getTimeElapsed(post.created_at)}
+                    duration={post.duration.minutes}
+                    caloriesData={Math.round(post.caloriesData)}
+                    serving_size={Math.round(post.serving_size)}
+                    image_link={(() => {
+                      let imageLinkFallback = 'src/images/Default_img.svg'
+                      try {
+                        if (post.image_link) {
+                          // Check if the image URL is valid by creating a new Image object
+                          const img = new Image()
+                          img.src = post.image_link
+                          if (img.complete) {
+                            // Image is successfully loaded
+                            imageLinkFallback = post.image_link
+                          }
+                        }
+                      } catch (error) {
+                        // Error occurred, use fallback image URL
+                      }
+                      return imageLinkFallback
+                    })()}
+                  />
+                </div>
+              </Suspense>
+            ))}
+          </div>
+        )}
       </div>
 
       <HomeRightbar />
@@ -220,8 +282,8 @@ function Post(props) {
             <img
               className={styles.postImg}
               // TODO replace with this when real data have image or when before deploy
-              // src={props.image_link}
-              src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80"
+              src={props.image_link}
+              // src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80"
               alt="Recipe Image"
             />
           </div>
