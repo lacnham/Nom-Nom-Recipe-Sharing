@@ -22,8 +22,8 @@ export const UserProfileDetail = () => {
 
   const handleClick = () => {
     toggle()
-    setDisplay('flex')
-    setProfileDisplay('none')
+    // setDisplay('flex')
+    // setProfileDisplay('none')
   }
   const { isShowing, toggle } = useModal()
 
@@ -34,10 +34,8 @@ export const UserProfileDetail = () => {
         hide={toggle}
         btnMsg={'Close'}
         title={'User Profile Update'}
-        modalMsg={
-          <UpdateProfileDetail user={userData.user} display={display} />
-        }
-        closeable={true}
+        modalMsg={<UpdateProfileDetail user={userData.user} />}
+        // closeable={true}
         titleIcon={<i className="fa-solid fa-note-sticky"></i>}
         btnFn={() => {
           toggle()
@@ -61,7 +59,7 @@ export const UserProfileDetail = () => {
             </div>
           </div>
 
-          <UpdateButton fn={handleClick} option={'Update'} />
+          <UpdateButton fn={() => handleClick()} option={'Update'} />
         </div>
       </div>
     </div>

@@ -8,7 +8,6 @@
   background-color: #000;
   opacity: 0.7;
   backdrop-filter: blur(2px); /* apply blur filter */
-
 }
 
 .modal_wrapper {
@@ -71,4 +70,15 @@
 .modal_btnContainer {
   display: flex;
   justify-content: end;
+}
+
+.placeHolder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* Make the child element invisible */
+  z-index: 99; /* Ensure the child element is above other content */
+  cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from '../../../styles/UserProfile/UserProfileDetail/UserProfileDetail.module.css'
 import { UpdateButton } from '../UpdateProfileButton'
 
@@ -7,8 +7,9 @@ export const UpdateProfileDetail = props => {
   const [email, setEmail] = useState(props.user.email)
   const [password, setPassword] = useState('')
   const [veryPassword, setVeryPassword] = useState('')
+  const [data, setData] = useState({})
 
-  console.log(props.user)
+  // console.log(props.user)
 
   const handleChangeName = e => {
     setName(e.target.value)
@@ -22,12 +23,50 @@ export const UpdateProfileDetail = props => {
     setVeryPassword(e.target.value)
   }
 
+  useEffect(() => {
+    console.log(name, password)
+    setData({
+      username: name,
+      password: password,
+      verifypassword: veryPassword
+    })
+
+    console.log(data)
+  }, [name, password, veryPassword])
+
   let config = {}
+
+  const userDataUpdate = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/update-dietary-preference/${userData.user.id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }
+      )
+
+      if (response.ok) {
+        console.log('Data sent successfully.')
+      } else {
+        console.error(
+          'Failed to send data:',
+          response.status,
+          response.statusText
+        )
+      }
+    } catch (error) {
+      console.error('Error while sending data:', error)
+    }
+  }
 
   return (
     <form
+      autocomplete="off"
       className={`${styles.formContainer} ${styles.flexRow} ${styles.form}`}
-      style={{ display: `${props.display}` }}
       //   style={{ display: `none` }}
     >
       <div className={styles.infoUpdate}>
@@ -79,7 +118,7 @@ export const UpdateProfileDetail = props => {
             onChange={handleVerifyPassword}
           />
         </div>
-        <UpdateButton />
+        <UpdateButton fn={() => console.log('hello')} />
       </div>
     </form>
   )

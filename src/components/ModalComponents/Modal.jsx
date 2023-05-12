@@ -14,7 +14,7 @@ const Modal = ({ isShowing, hide, ...props }) =>
             aria-hidden
             tabIndex={-1}
             role="dialog"
-            onClick={hide}
+            // onClick={hide}
           >
             <div className={styles.modal}>
               <div className={styles.modal_header}>
@@ -47,6 +47,8 @@ const Modal = ({ isShowing, hide, ...props }) =>
                 ></Button2>
               </div>
             </div>
+
+            <div className={styles.placeHolder} onClick={hide}></div>
           </div>
         </React.Fragment>,
         document.body
