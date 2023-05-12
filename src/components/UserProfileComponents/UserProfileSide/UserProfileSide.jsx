@@ -8,7 +8,6 @@ const UserProfileSide = props => {
     <div
       className={`${styles.userProfileSideMainContainer} ${styles.flexColumn}`}
     >
-      <UpdateAvatar />
       <UserProfileDetail></UserProfileDetail>
       <div className={`${styles.tabContainer} ${styles.flexRow}`}>
         <UserProfileTab

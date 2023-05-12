@@ -35,6 +35,20 @@
   font: var(--primary-font);
 }
 
+.closeIconDiv {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+}
+
+.closeIconDiv img {
+  width: 2rem;
+}
+
+.closeIconDiv:hover {
+  cursor: pointer;
+}
+
 .avatarContainer {
   border-right: 2px solid rgba(0, 0, 0, 0.5);
   width: 30%;
@@ -43,14 +57,56 @@
   align-items: center;
 }
 
-.avatarContainer > img {
+.avatarSmallContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+.avatarSmallContainer > img {
+  width: 100%;
   width: 80px;
   height: 80px;
 }
 
+.avatarSmallContainer .updateAvatar {
+  color: black;
+  font-size: 0.9rem;
+  padding: 0;
+  margin: 0;
+}
+
+/* .updateAvatar:hover {
+  cursor: pointer;
+  color: rgba(105, 103, 103, 0.5);
+  text-decoration: underline;
+} */
+
+.updateImgTextContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  column-gap: 5px;
+  padding: 8px 2px;
+}
+
+.updateImgTextContainer img {
+  width: 16px;
+}
+
+.updateImgTextContainer {
+  transition: background-color 0.3s ease;
+}
+
+.updateImgTextContainer:hover {
+  cursor: pointer;
+  background-color: rgba(239, 239, 239, 0.563);
+}
+
 .infoContainerAndUpdate {
   width: 70%;
-
   /* background-color: wheat; */
   display: flex;
   /* align-items: center; */

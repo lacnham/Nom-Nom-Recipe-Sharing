@@ -5,6 +5,7 @@ import { useContext, useState } from 'react'
 import { FetchCurrentuser } from '../../FetchCurrentUser'
 import { UpdateButton } from '../UpdateProfileButton'
 import { UpdateProfileDetail } from './UpdateProfileDetail'
+import UpdateAvatar from '../UpdateAvatar'
 
 export const UserProfileDetail = () => {
   const { userData } = useContext(AuthContext)
@@ -31,7 +32,8 @@ export const UserProfileDetail = () => {
         style={{ display: `${profileDisplay}` }}
       >
         <div className={`${styles.avatarContainer}`}>         
-          <img src={img} alt="user avatar" />
+          {/* <img src={img} alt="user avatar" /> */}
+          <UpdateAvatar user={userData.user}/>
         </div>
         <div className={`${styles.infoContainerAndUpdate}`}>
           <div className={`${styles.infoContainer}`}>
