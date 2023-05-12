@@ -10,6 +10,20 @@
 
 @import url('../styles/globalStyles.css');
 
+.uploadImage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.uploadImageButton {
+  cursor: pointer;
+}
+
+.faImage {
+  width: 40px;
+}
+
 .textArea {
   border-top-style: hidden;
   border-right-style: hidden;
@@ -76,6 +90,7 @@ span {
 }
 
 .fieldLabel {
+  width: fit-content;
   border-right: 1px solid black;
   padding: 0 8px;
 }
@@ -109,15 +124,19 @@ span {
 .ingredientInputContainer {
   width: 100%;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 0.2fr;
+  grid-template-columns: 4fr 0.5fr 1.5fr 0.2fr;
 }
 
 .ingredientInputContainer > .inputField {
   border-radius: 0 !important;
 }
-.ingredientInputContainer > input:nth-child(1),
-.ingredientInputContainer > input:nth-child(2) {
+.ingredientInputContainer > .inputField:nth-child(1) {
   border-right: 2px solid #ff8600 !important;
+}
+
+.ingredientInputContainer > .inputField:nth-child(2) {
+  padding-right: 0px !important;
+  text-align: right !important;
 }
 
 .formControl2 {

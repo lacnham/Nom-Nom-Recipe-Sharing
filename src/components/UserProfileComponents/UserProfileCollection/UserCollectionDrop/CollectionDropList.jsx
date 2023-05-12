@@ -39,11 +39,11 @@ const CollectionDropList = props => {
     >
       <div className={`${styles.searchBarAndCreateButtonContainer}`}>
         <div className={`${styles.searchBar} ${styles.flexRow}`}>
-          <img
+          {/* <img
             className={`${styles.searchIconContainer}`}
             src={searchIcon}
-          ></img>
-
+          ></img> */}
+          <i class="fa-solid fa-magnifying-glass"></i>
           <input className={`${styles.inputFieldContainer}`} />
           {/* check with user collections */}
         </div>

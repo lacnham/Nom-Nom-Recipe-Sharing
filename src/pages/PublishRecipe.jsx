@@ -1,14 +1,22 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from '../styles/PublishRecipe.module.css'
 import Header from '../components/Header'
 import { useEffect } from 'react'
 import { FetchAllIngAndCountry } from '../components/Fetch/FetchAllIngAndCountry'
 import Select from 'react-select'
+import axios from 'axios'
+import { DefaultButton } from '../components/Button'
 
 const PublishRecipe = () => {
-  const { countryOptions, unitOptions, ingredientOPtion } =
+  const { countryOptions, unitOptions, ingredientOPtion, dietOptions } =
     FetchAllIngAndCountry()
   // console.log(countryOptions)
+  // console.log(unitOptions[0])
+
+  // const unitArray = Array.from(unitOptions)
+  // useEffect(() => {
+  //   console.log(unitArray)
+  // }, [])
 
   const durationUnits = ['hours', 'minutes']
   const [name, setName] = useState('')
@@ -17,59 +25,71 @@ const PublishRecipe = () => {
   const [origin, setOrigin] = useState('')
   const [duration, setDuration] = useState('' + durationUnits[1])
   const [servings, setServings] = useState('')
-
-  const [quantity, setQuantity] = useState('')
-  const [ing, setIng] = useState({})
-
-  // const [ingTemp, setIngtemp] = useState({})
   const [ingredients, setIngredients] = useState([
-    { id: '', name: '', quantity: '' }
+    { ingredientId: '', quantity: '', unit_name: `` }
   ])
 
-  // const [ingreTemp, setIngreTemp] = useState({
-  //   id: ing.value,
-  //   name: ing.label,
-  //   quantity: quantity
-  // })
-  const [unit, setUnit] = useState('')
+  const [diets, setDiets] = useState([])
 
-  // let arrayIng = []
-  // const handleIngredient = e => {
-  //   setIng()
-  //   arrayIng.push(ing)
-  //   setIngredients(arrayIng)
-  // }
+  useEffect(() => {
+    // console.log(ingredients)
+    console.log('Diet ne ', diets)
+  }, [diets])
 
-  if (ing != '') {
-    console.log(ing)
-
-    console.log(ingredients)
+  const handleAddOrigin = e => {
+    console.log('Origin ne hihi', e.value)
+    setOrigin(e.value)
   }
 
   const handleIngredientChange = (e, igd) => {
     console.log('Vo roi ne', e)
-    setIng(e)
     let newIngredients = [...ingredients]
     for (let i = 0; i < newIngredients.length; i++) {
-      // console.log('Ingredients ne hehe', newIngredients[i].id, ' ', e.value)
       if (newIngredients[i].id === e.value) {
         alert('Cannot add more')
         return newIngredients
       }
     }
-    newIngredients[igd].id = e.value
-    newIngredients[igd].name = e.label
+    newIngredients[igd].ingredientId = e.value
+    // newIngredients[igd].name = e.label
+  }
+
+  const handleQuantity = (e, igd) => {
+    let newIngredients = [...ingredients]
+    newIngredients[igd].quantity = e.target.value
+  }
+
+  const handleUnit = (e, igd) => {
+    let newIngredients = [...ingredients]
+    newIngredients[igd].unit_name = e.value
+  }
+
+  const handleDietAdd = e => {
+    // console.log('e trong diet ne', ...e)
+    let temp = []
+    for (let i = 0; i < e.length; i++) {
+      temp.push(e[i].value)
+    }
+
+    setDiets(temp)
   }
 
   const handleAddIngredient = () => {
-    // setIng('')
-    setIngredients([...ingredients, { id: '', name: '', quantity: '' }])
-    // handleIngredientChange(igd)
+    for (let i = 0; i < ingredients.length; i++) {
+      if (
+        ingredients[i].ingredientId === '' ||
+        ingredients[i].quantity === '' ||
+        ingredients[i].unit_name === ''
+      ) {
+        alert('Please fill in the empty field before create more')
+        return
+      }
+    }
+    setIngredients([
+      ...ingredients,
+      { ingredientId: '', quantity: 0, unit_name: `` }
+    ])
   }
-
-  // useEffect(() => {
-  //   handleIngredientChange()
-  // }, [])
 
   const handleRemoveIngredient = igd => {
     const newIngredients = [...ingredients]
@@ -77,23 +97,33 @@ const PublishRecipe = () => {
     setIngredients(newIngredients)
   }
 
-  // const handleUnit = event => {
+  const file = useRef(null)
+  const onFileChange = e => {
+    setImage(e.target.files[0])
+  }
 
-  //   setUnit(event.target.value)
-  // }
+  const handleUploadImage = () => {
+    file.current.click()
+  }
 
   let config = {
     method: 'post',
     url: 'http://localhost:3000/recipe',
     headers: {
-      Authorization: localStorage.accessToken
+      Authorization: localStorage.accesstoken
     },
     data: {
       name: name,
       servingSize: servings,
       duration: duration,
       imageLink: image,
-      description: description
+      description: description,
+      ingredients: ingredients,
+      dietaryPrefs: diets,
+      countryPrefs: [origin]
+      // ingredients: ingredients.map(ele => {
+      //   ingredientId:  ele.id,
+      // })
     }
   }
 
@@ -101,6 +131,7 @@ const PublishRecipe = () => {
     // console.log('Access token ' + localStorage.accesstoken)
     try {
       const res = await axios.request(config)
+      alert(res.data.msg)
     } catch (error) {
       console.log(error)
     }
@@ -116,9 +147,21 @@ const PublishRecipe = () => {
     // console.log(props.recipe.recipe_id)
   }
 
+  const refreshPage = () => {
+    window.location.reload(false)
+  }
+
   const handleSubmit = event => {
     event.preventDefault()
-    handleCreateRecipe()
+    // useEffect(() => {
+    try {
+      handleCreateRecipe()
+      refreshPage()
+    } catch (error) {
+      console.log(error)
+    }
+
+    // }, [])
   }
 
   return (
@@ -150,23 +193,39 @@ const PublishRecipe = () => {
                 <span style={{ width: '100%' }}>Upload your image</span>
               )}
               <input
-                className={`${styles.inputField}`}
+                className={`${styles.inputField} `}
                 style={{ visibility: 'hidden' }}
+                ref={file}
                 type="file"
                 placeholder="Upload your image"
-                onChange={e => {
-                  setImage(e.target.files[0])
-                  console.log(e.target.files[0].name)
-                }}
+                onChange={e => onFileChange(e)}
               />
-              <div style={{ marginLeft: 'auto' }}>
-                <i className="fa-solid fa-image"></i>
+              {/* <DefaultButton
+                fn={handleUploadImage}
+                options={'Upload'}
+                style={''}
+                // className={styles.submitBtn}
+              /> */}
+              <div
+                className={`${styles.uploadImageButton}`}
+                onClick={handleUploadImage}
+              >
+                {/* <i className="fa-solid fa-image"></i> */}
+                <img
+                  width="36"
+                  height="36"
+                  src="https://img.icons8.com/dotty/80/add-image.png"
+                  alt="add-image"
+                />
               </div>
             </div>
           </div>
           {image ? (
-            <div>
-              <img src={URL.createObjectURL(image)} />
+            <div className={`${styles.uploadImage}`}>
+              <img
+                // className={`${styles.uploadImage}`}
+                src={URL.createObjectURL(image)}
+              />
             </div>
           ) : null}
 
@@ -191,7 +250,7 @@ const PublishRecipe = () => {
                   classNamePrefix="select"
                   options={countryOptions}
                   placeholder={`Recipe origin`}
-                  onChange={setOrigin}
+                  onChange={e => handleAddOrigin(e)}
                   styles={{
                     control: (baseStyles, state) => ({
                       ...baseStyles,
@@ -255,8 +314,52 @@ const PublishRecipe = () => {
               </div>
             </div>
           </div>
+          <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
+            <div className={`${styles.inputFieldContainer} ${styles.flexRow}`}>
+              <label className={`${styles.fieldLabel}`}>
+                Dietary preferences
+              </label>
+              {/* <input
+                className={`${styles.inputField}`}
+                type="text"
+                // value={duration}
+                min={'1'}
+                placeholder="1"
+                onChange={e => setDuration(e.target.value)}
+              /> */}
+              <Select
+                className={`${styles.inputField} ${styles.select}`}
+                classNamePrefix="select"
+                isMulti
+                options={dietOptions}
+                // placeholder={``}
+                onChange={e => handleDietAdd(e)}
+                styles={{
+                  control: (baseStyles, state) => ({
+                    ...baseStyles,
+                    border: 'none',
+                    width: '100%',
+                    // This line disable the blue border
+                    boxShadow: state.isFocused ? 0 : 0,
 
-          <div className={styles.formControl}>
+                    '&:hover': {
+                      borderColor: '#ff8600',
+                      outline: 'none'
+                    }
+                  }),
+                  menu: (baseStyles, state) => ({
+                    ...baseStyles,
+                    width: 'fit-content',
+                    height: '200px',
+                    overflow: 'auto',
+                    display: 'flex'
+                  })
+                }}
+              />
+            </div>
+          </div>
+
+          <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
             <div className={styles.title}>Ingredients:</div>
             <ul className={`${styles.addIngredientContainer}`}>
               {ingredients.map((ingredient, igd) => (
@@ -267,16 +370,6 @@ const PublishRecipe = () => {
                   <div
                     className={`${styles.ingredientInputContainer} ${styles.flexRow} ${styles.inputFieldContainer}`}
                   >
-                    {/* <input
-                      type="text"
-                      className={`${styles.inputField}`}
-                      name="ingre"
-                      placeholder="Enter ingredients"
-                      list="igdList"
-                      autoComplete="off"
-                      onChange={setIng}
-                      // style={{ borderRight:  2px solid #ff8600 }}
-                    /> */}
                     <Select
                       className={`${styles.inputField} ${styles.select}`}
                       classNamePrefix="select"
@@ -308,11 +401,12 @@ const PublishRecipe = () => {
                     />
 
                     <input
-                      type="text"
+                      type="number"
                       className={`${styles.inputField}`}
                       name="quantity"
-                      placeholder="Quantity"
-                      onChange={e => setQuantity(e.target.value)}
+                      min={0}
+                      placeholder={0}
+                      onChange={e => handleQuantity(e, igd)}
                       // autoComplete='on'
                     />
                     <Select
@@ -320,8 +414,8 @@ const PublishRecipe = () => {
                       classNamePrefix="select"
                       name={'ingre'}
                       options={unitOptions}
-                      placeholder={`unit`}
-                      onChange={setUnit}
+                      placeholder={'unit'}
+                      onChange={e => handleUnit(e, igd)}
                       styles={{
                         control: (baseStyles, state) => ({
                           ...baseStyles,
@@ -370,7 +464,11 @@ const PublishRecipe = () => {
             </div>
           </div>
           <div className={styles.btnWrap}>
-            <button className={styles.submitBtn} type="submit">
+            <button
+              className={styles.submitBtn}
+              type="submit"
+              onClick={e => handleSubmit(e)}
+            >
               Submit
             </button>
           </div>
