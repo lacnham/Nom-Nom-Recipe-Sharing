@@ -163,6 +163,7 @@ export default function Feed() {
           >
             <div>
               <Post
+                recipe_id={post.recipe_id}
                 name={post.name}
                 description={post.description}
                 timeElapsed={getTimeElapsed(post.created_at)}
@@ -241,11 +242,16 @@ function Post(props) {
             />
             <span className={styles.postLikeCounter}>666 people like it</span> */}
           </div>
-          <div className={styles.postBottomRight}>
-            <span className={styles.postVisit}>
-              <i className="fa-solid fa-right-long fa-2xl"></i>
-            </span>
-          </div>
+          <Link
+            to={`/recipe/${props.name}/${props.recipe_id}`}
+            key={props.recipe_id}
+          >
+            <div className={styles.postBottomRight}>
+              <span className={styles.postVisit}>
+                <i className="fa-solid fa-right-long fa-2xl"></i>
+              </span>
+            </div>
+          </Link>
         </div>
       </div>
     </div>
