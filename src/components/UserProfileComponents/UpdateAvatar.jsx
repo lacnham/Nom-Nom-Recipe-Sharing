@@ -14,9 +14,17 @@ const UpdateAvatar = props => {
   const [croppedImage, setCroppedImage] = useState(null)
   const [crop, setCrop] = useState({
     unit: 'px',
-    width: 500,
-    height: 500
+    width: 400,
+    height: 400
   })
+  const [imgErrorMsg, setImgErrorMsg] = useState('')
+  const allowedTypes = [
+    'image/png',
+    'image/jpeg',
+    'image/webp',
+    'image/jfif'
+  ]
+
   Modal.setAppElement('#root')
 
   useEffect(() => {
@@ -35,9 +43,20 @@ const UpdateAvatar = props => {
   }, [])
 
   const handleChange = e => {
+    const selectedFile = e.target.files[0]
     setFile(e.target.files[0])
     console.log('LOGG:', e.target.files[0])
     setModalIsOpen(true)
+
+    if (selectedFile && allowedTypes.includes(selectedFile.type)) {
+      // Valid image file
+      setImgErrorMsg('')
+    } else {
+      // Invalid file type
+      setImgErrorMsg(
+        'Invalid file type. Please upload a PNG, JPEG, WebP, or JFIF image.'
+      )
+    }
   }
 
   const config = {
@@ -87,7 +106,7 @@ const UpdateAvatar = props => {
         blob => {
           setCroppedImage(blob)
         },
-        'image/jpeg',
+        file.type,
         1
       )
     }
@@ -95,6 +114,7 @@ const UpdateAvatar = props => {
 
   const handleSubmit = async e => {
     e.preventDefault()
+
     if (croppedImage) {
       const formData = new FormData()
       formData.append('avatarImage', croppedImage, file.name)
@@ -135,10 +155,22 @@ const UpdateAvatar = props => {
           }}
         >
           <p>
-            * You click 'Submit' the image after dragging the crop box to area you
-            want.
+            * You click 'Submit' the image after dragging the crop box to area
+            you want.
           </p>
-          <p>* A square-shaped crop is recommended to avoid image distortion.</p>
+          <p>
+            * A square-shaped crop is recommended to avoid image distortion.
+          </p>
+          {imgErrorMsg != '' && (
+            <p
+              style={{
+                paddingTop: '0.5rem',
+                color: 'rgba(231, 0, 0, 0.59)'
+              }}
+            >
+              **{imgErrorMsg}**
+            </p>
+          )}
         </div>
 
         <ReactCrop
