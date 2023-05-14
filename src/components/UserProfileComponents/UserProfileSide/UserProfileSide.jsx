@@ -1,4 +1,5 @@
 import styles from '../../../styles/UserProfile/UserProfileMainPage.module.css'
+import UpdateAvatar from '../UpdateAvatar'
 import { UserProfileDetail } from './UserProfileDetail'
 import { UserProfileTab } from './UserProfileTab'
 import StickyBox from 'react-sticky-box'

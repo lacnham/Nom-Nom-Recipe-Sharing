@@ -9,6 +9,7 @@ import { UpdateForm } from '../components/FormComponents/UpdateForm'
 import { UserProfileTab } from '../components/UserProfileComponents/UserProfileSide/UserProfileTab'
 import { BackToTopButton } from '../components/Button'
 import { withoutAuth } from '../components/SessionVerification/AuthChecking'
+
 const UserProfileMainPage = () => {
   const [currentStyle, setCurrentStyle] = useState('none')
 

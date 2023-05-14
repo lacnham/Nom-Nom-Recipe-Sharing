@@ -7,6 +7,8 @@ import { UpdateButton } from '../UpdateProfileButton'
 import { UpdateProfileDetail } from './UpdateProfileDetail'
 import useModal from '../../ModalComponents/useModal'
 import Modal from '../../../components/ModalComponents/Modal'
+import UpdateAvatar from '../UpdateAvatar'
+
 export const UserProfileDetail = () => {
   const { userData } = useContext(AuthContext)
   // const user = FetchCurrentuser()
@@ -48,18 +50,22 @@ export const UserProfileDetail = () => {
       <div className={`${styles.detailContainer}`}>
         <div className={`${styles.avatarContainer}`}>
           <img src={img} alt="user avatar" />
-        </div>
-        <div className={`${styles.infoContainer}`}>
-          <div className={`${styles.infoContainer}`}>
-            <div>ID: {userData.user.id}</div>
-            <h2>{userData.user.username}</h2>
-            <div>
-              <i className="fa-solid fa-envelope"></i>
-              {userData.user.email}
-            </div>
+          <div className={`${styles.avatarContainer}`}>
+            {/* <img src={img} alt="user avatar" /> */}
+            <UpdateAvatar user={userData.user} />
           </div>
+          <div className={`${styles.infoContainer}`}>
+            <div className={`${styles.infoContainer}`}>
+              <div>ID: {userData.user.id}</div>
+              <h2>{userData.user.username}</h2>
+              <div>
+                <i className="fa-solid fa-envelope"></i>
+                {userData.user.email}
+              </div>
+            </div>
 
-          <UpdateButton fn={() => handleClick()} option={'Update'} />
+            <UpdateButton fn={() => handleClick()} option={'Update'} />
+          </div>
         </div>
       </div>
     </div>
