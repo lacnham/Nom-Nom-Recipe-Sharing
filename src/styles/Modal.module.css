@@ -70,6 +70,12 @@
 .modal_btnContainer {
   display: flex;
   justify-content: end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.modal_btnContainer > button {
+  min-width: 100px;
 }
 
 .placeHolder {

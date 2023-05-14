@@ -6,6 +6,7 @@ import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 import imageIcon from '/icons/image-icon.png'
 import closeIcon from '/icons/close-icon.png'
+import { Button1 } from '../Button'
 
 const UpdateAvatar = props => {
   const [imgUrl, setImgUrl] = useState('')
@@ -18,12 +19,7 @@ const UpdateAvatar = props => {
     height: 400
   })
   const [imgErrorMsg, setImgErrorMsg] = useState('')
-  const allowedTypes = [
-    'image/png',
-    'image/jpeg',
-    'image/webp',
-    'image/jfif'
-  ]
+  const allowedTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/jfif']
 
   Modal.setAppElement('#root')
 
@@ -117,6 +113,7 @@ const UpdateAvatar = props => {
 
     if (croppedImage) {
       const formData = new FormData()
+      console.log(croppedImage, file.name)
       formData.append('avatarImage', croppedImage, file.name)
 
       try {
@@ -139,10 +136,10 @@ const UpdateAvatar = props => {
   return (
     <>
       <div className={`${styles.avatarSmallContainer}`}>
-        <img src={imgUrl} alt="Avatar" />
+        {/* <img src={imgUrl} alt="Avatar" /> */}
+        <img src="/src/images/avatarTemp.png" alt="Avatar"></img>
         <div className={`${styles.updateImgTextContainer}`} onClick={openModal}>
-          <img src={imageIcon} alt="image-icon" />
-          <span className={`${styles.updateAvatar}`}>Update Avatar</span>
+          <i className="fa-solid fa-pen-to-square fa-2xl"></i>
         </div>
       </div>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
@@ -194,11 +191,10 @@ const UpdateAvatar = props => {
               onChange={handleChange}
             />
           </div>
-
-          <button type="submit">Submit</button>
+          <Button1 type="submit" options={'Submit'} />
         </form>
         <span className={`${styles.closeIconDiv}`} onClick={closeModal}>
-          <img src={closeIcon} alt="Close Icon" />
+          <i className="fa-solid fa-xmark fa-lg"></i>
         </span>
       </Modal>
     </>

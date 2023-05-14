@@ -40,6 +40,7 @@ const Modal = ({ isShowing, hide, ...props }) =>
               <div className={styles.modal_body}>{props.modalMsg}</div>
 
               <div className={styles.modal_btnContainer}>
+                {props.extraButton}
                 <Button2
                   type={'button'}
                   options={props.btnMsg}

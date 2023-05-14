@@ -2,14 +2,16 @@ import { useEffect, useState } from 'react'
 import styles from '../../../styles/UserProfile/UserProfileDetail/UserProfileDetail.module.css'
 import { UpdateButton } from '../UpdateProfileButton'
 
-export const UpdateProfileDetail = props => {
-  const [name, setName] = useState(props.user.username)
-  const [email, setEmail] = useState(props.user.email)
+export const UpdateProfileDetail = ({ props, onDataFromChild }) => {
+  const [name, setName] = useState(props.username)
+  const [email, setEmail] = useState(props.email)
   const [password, setPassword] = useState('')
   const [veryPassword, setVeryPassword] = useState('')
   const [data, setData] = useState({})
 
-  // console.log(props.user)
+  console.log(props)
+
+  const [childMessage, setChildMessage] = useState('')
 
   const handleChangeName = e => {
     setName(e.target.value)
@@ -25,47 +27,23 @@ export const UpdateProfileDetail = props => {
 
   useEffect(() => {
     console.log(name, password)
-    setData({
+    const updatedData = {
       username: name,
       password: password,
       verifypassword: veryPassword
-    })
-
-    console.log(data)
+    }
+    setData(updatedData)
+    handleChildData(updatedData)
   }, [name, password, veryPassword])
 
-  let config = {}
-
-  const userDataUpdate = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/update-dietary-preference/${userData.user.id}`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        }
-      )
-
-      if (response.ok) {
-        console.log('Data sent successfully.')
-      } else {
-        console.error(
-          'Failed to send data:',
-          response.status,
-          response.statusText
-        )
-      }
-    } catch (error) {
-      console.error('Error while sending data:', error)
-    }
+  const handleChildData = updatedData => {
+    setChildMessage(updatedData)
+    onDataFromChild(updatedData)
   }
 
   return (
     <form
-      autocomplete="off"
+      autoComplete="off"
       className={`${styles.formContainer} ${styles.flexRow} ${styles.form}`}
       //   style={{ display: `none` }}
     >
@@ -94,10 +72,9 @@ export const UpdateProfileDetail = props => {
         </div> */}
         <div>
           <label>Password:</label>
-
           <input
             className={`${styles.inputField}`}
-            type="new-password"
+            type="password"
             name="password"
             id="password"
             placeholder="New password"
@@ -107,10 +84,9 @@ export const UpdateProfileDetail = props => {
         </div>
         <div>
           <label>Retype-Password:</label>
-
           <input
             className={`${styles.inputField}`}
-            type="new-password"
+            type="password"
             name="verify password"
             id="verify password"
             placeholder="Re-type password"
@@ -118,7 +94,6 @@ export const UpdateProfileDetail = props => {
             onChange={handleVerifyPassword}
           />
         </div>
-        <UpdateButton fn={() => console.log('hello')} />
       </div>
     </form>
   )

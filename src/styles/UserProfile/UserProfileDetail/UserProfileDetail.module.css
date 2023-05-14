@@ -26,8 +26,8 @@
 
 .closeIconDiv {
   position: absolute;
-  top: 20px;
-  right: 25px;
+  top: 10px;
+  right: 15px;
 }
 
 .closeIconDiv img {
@@ -55,25 +55,18 @@
   width: 100%;
 }
 .avatarSmallContainer {
-  width: 100%;
+  /* width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  row-gap: 0.5rem;
+  row-gap: 0.5rem; */
+  display: grid;
 }
 
 .avatarSmallContainer > img {
-  width: 100%;
-  width: 80px;
-  height: 80px;
-}
-
-.avatarSmallContainer .updateAvatar {
-  color: black;
-  font-size: 0.9rem;
-  padding: 0;
-  margin: 0;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 /* .updateAvatar:hover {
@@ -83,23 +76,27 @@
 } */
 
 .updateImgTextContainer {
+  width: 100%;
+  height: 100%;
+  grid-column: 1;
+  grid-row: 1;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  /* display: flex;
   flex-wrap: nowrap;
   column-gap: 5px;
-  padding: 8px 2px;
-}
-
-.updateImgTextContainer img {
-  width: 16px;
-}
-
-.updateImgTextContainer {
-  transition: background-color 0.3s ease;
+  padding: 8px 2px; */
+  transition: all 0.3s ease-in-out;
+  border-radius: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.519);
+  color: #ddd;
 }
 
 .updateImgTextContainer:hover {
   cursor: pointer;
-  background-color: rgba(239, 239, 239, 0.563);
+  opacity: 1;
 }
 
 .infoContainerAndUpdate {
