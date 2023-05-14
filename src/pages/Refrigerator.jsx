@@ -236,4 +236,4 @@ const Refrigerator = () => {
 }
 
 // export default withoutAuth(Refrigerator)
-export default Refrigerator
+export default withoutAuth(Refrigerator)

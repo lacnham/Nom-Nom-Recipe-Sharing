@@ -48,7 +48,7 @@ const withoutAuth = (
     useEffect(() => {
       const handleNavigation = () => {
         if (options.redirectUnauthenticated && !userData) {
-          navigate('/login', { replace: true })
+          navigate('/', { replace: true })
         }
       }
 

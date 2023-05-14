@@ -14,7 +14,7 @@ const CollectionSection = props => {
   // }
 
   const { userCollectionData } = useContext(AuthContext)
-  console.log('here:', userCollectionData)
+  // console.log('here:', userCollectionData)
 
   // const collections = FetchUserCollections()
 
