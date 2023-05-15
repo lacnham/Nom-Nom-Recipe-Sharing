@@ -67,6 +67,10 @@
 .avatarSmallContainer > img {
   grid-column: 1;
   grid-row: 1;
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
 }
 
 /* .updateAvatar:hover {
@@ -147,6 +151,17 @@
   justify-content: center;
   flex-direction: column;
   border-radius: inherit;
+}
+
+.warning {
+  font-size: small;
+  padding: 2px;
+  padding-left: 20px;
+  min-width: 50px;
+  color: #e43636;
+  text-align: start;
+  background-color: rgb(228, 54, 54, 0.1);
+  border-radius: 8px;
 }
 
 .infoUpdate > div {

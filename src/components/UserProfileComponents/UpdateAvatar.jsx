@@ -4,10 +4,8 @@ import styles from '../../styles/UserProfile/UserProfileDetail/UserProfileDetail
 import Modal from 'react-modal'
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
-import imageIcon from '/icons/image-icon.png'
-import closeIcon from '/icons/close-icon.png'
 import { Button1 } from '../Button'
-
+import { Suspense } from 'react'
 const UpdateAvatar = props => {
   const [imgUrl, setImgUrl] = useState('')
   const [file, setFile] = useState(null)
@@ -40,13 +38,64 @@ const UpdateAvatar = props => {
 
   const handleChange = e => {
     const selectedFile = e.target.files[0]
-    setFile(e.target.files[0])
-    console.log('LOGG:', e.target.files[0])
     setModalIsOpen(true)
 
     if (selectedFile && allowedTypes.includes(selectedFile.type)) {
       // Valid image file
       setImgErrorMsg('')
+
+      const reader = new FileReader()
+      reader.readAsDataURL(selectedFile)
+      reader.onload = event => {
+        const img = new Image()
+        img.src = event.target.result
+
+        img.onload = () => {
+          const { width, height } = img
+
+          // Set the desired width and height for resizing
+          const maxWidth = 800
+          const maxHeight = 800
+
+          let newWidth = width
+          let newHeight = height
+
+          // Calculate the new width and height while maintaining aspect ratio
+          if (width > height) {
+            if (width > maxWidth) {
+              newWidth = maxWidth
+              newHeight = (height * maxWidth) / width
+            }
+          } else {
+            if (height > maxHeight) {
+              newHeight = maxHeight
+              newWidth = (width * maxHeight) / height
+            }
+          }
+
+          const canvas = document.createElement('canvas')
+          canvas.width = newWidth
+          canvas.height = newHeight
+
+          const ctx = canvas.getContext('2d')
+          ctx.drawImage(img, 0, 0, newWidth, newHeight)
+
+          // Convert the canvas content back to a File object
+          canvas.toBlob(
+            blob => {
+              const resizedFile = new File([blob], selectedFile.name, {
+                type: selectedFile.type,
+                lastModified: selectedFile.lastModified
+              })
+              setFile(resizedFile)
+              setCroppedImage(resizedFile)
+              handleCropChange(crop)
+            },
+            selectedFile.type,
+            1
+          )
+        }
+      }
     } else {
       // Invalid file type
       setImgErrorMsg(
@@ -76,6 +125,38 @@ const UpdateAvatar = props => {
     }
   }
 
+  // const getCroppedImage = (file, crop) => {
+  //   const image = new Image()
+  //   image.src = URL.createObjectURL(file)
+
+  //   image.onload = () => {
+  //     const canvas = document.createElement('canvas')
+  //     canvas.width = crop.width
+  //     canvas.height = crop.height
+
+  //     const ctx = canvas.getContext('2d')
+  //     ctx.drawImage(
+  //       image,
+  //       crop.x,
+  //       crop.y,
+  //       crop.width,
+  //       crop.height,
+  //       0,
+  //       0,
+  //       crop.width,
+  //       crop.height
+  //     )
+
+  //     canvas.toBlob(
+  //       blob => {
+  //         setCroppedImage(blob)
+  //       },
+  //       file.type,
+  //       1
+  //     )
+  //   }
+  // }
+
   const getCroppedImage = (file, crop) => {
     const image = new Image()
     image.src = URL.createObjectURL(file)
@@ -100,7 +181,11 @@ const UpdateAvatar = props => {
 
       canvas.toBlob(
         blob => {
-          setCroppedImage(blob)
+          const croppedFile = new File([blob], file.name, {
+            type: file.type,
+            lastModified: file.lastModified
+          })
+          setCroppedImage(croppedFile)
         },
         file.type,
         1
@@ -113,7 +198,8 @@ const UpdateAvatar = props => {
 
     if (croppedImage) {
       const formData = new FormData()
-      console.log(croppedImage, file.name)
+      console.log('croppedImage', croppedImage)
+      console.log('file.name', file.name)
       formData.append('avatarImage', croppedImage, file.name)
 
       try {
@@ -133,11 +219,16 @@ const UpdateAvatar = props => {
     }
   }
 
+  useEffect(() => {
+    console.log(croppedImage)
+  }, [croppedImage])
+
   return (
     <>
       <div className={`${styles.avatarSmallContainer}`}>
-        {/* <img src={imgUrl} alt="Avatar" /> */}
-        <img src="/src/images/avatarTemp.png" alt="Avatar"></img>
+        <img src={imgUrl} alt="Avatar" />
+
+        {/* <img src="/src/images/avatarTemp.png" alt="Avatar"></img> */}
         <div className={`${styles.updateImgTextContainer}`} onClick={openModal}>
           <i className="fa-solid fa-pen-to-square fa-2xl"></i>
         </div>
@@ -173,9 +264,9 @@ const UpdateAvatar = props => {
         <ReactCrop
           crop={crop}
           onChange={handleCropChange}
-          style={{ maxWidth: '100%' }}
+          style={{ maxWidth: '500px' }}
           onComplete={crop => {
-            setCroppedImage(crop)
+            // setCroppedImage(crop)
             console.log('CROPPED IMAGE:', croppedImage)
           }}
         >

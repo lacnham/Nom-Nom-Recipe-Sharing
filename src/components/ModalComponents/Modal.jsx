@@ -48,8 +48,11 @@ const Modal = ({ isShowing, hide, ...props }) =>
                 ></Button2>
               </div>
             </div>
-
-            <div className={styles.placeHolder} onClick={hide}></div>
+            {props.closeable ? (
+              <div className={styles.placeHolder} onClick={hide}></div>
+            ) : (
+              ''
+            )}
           </div>
         </React.Fragment>,
         document.body

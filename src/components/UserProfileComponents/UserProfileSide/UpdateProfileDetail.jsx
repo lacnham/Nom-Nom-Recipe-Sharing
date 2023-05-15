@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import styles from '../../../styles/UserProfile/UserProfileDetail/UserProfileDetail.module.css'
 import { UpdateButton } from '../UpdateProfileButton'
 
-export const UpdateProfileDetail = ({ props, onDataFromChild }) => {
+export const UpdateProfileDetail = ({ props, onDataFromChild, error }) => {
   const [name, setName] = useState(props.username)
   const [email, setEmail] = useState(props.email)
   const [password, setPassword] = useState('')
@@ -48,6 +48,8 @@ export const UpdateProfileDetail = ({ props, onDataFromChild }) => {
       //   style={{ display: `none` }}
     >
       <div className={styles.infoUpdate}>
+        {error ? <div className={styles.warning}>{error}</div> : ''}
+
         <div>
           <label>Username:</label>
           <input

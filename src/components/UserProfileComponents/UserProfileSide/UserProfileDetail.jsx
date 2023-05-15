@@ -13,6 +13,8 @@ import UpdateAvatar from '../UpdateAvatar'
 export const UserProfileDetail = () => {
   const { userData } = useContext(AuthContext)
   const [data, setData] = useState([])
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(false)
 
   const [parentMessage, setParentMessage] = useState(data)
 
@@ -37,15 +39,13 @@ export const UserProfileDetail = () => {
 
   const handleClick = () => {
     toggle()
-    // setDisplay('flex')
-    // setProfileDisplay('none')
   }
   const { isShowing, toggle } = useModal()
 
   const userDataUpdate = async data => {
     try {
       const response = await fetch(
-        `http://localhost:3000/update-profile/${userData.user.id}`,
+        `http://localhost:3000/user/update-profile/${userData.user.id}`,
         {
           method: 'PATCH',
           headers: {
@@ -55,17 +55,20 @@ export const UserProfileDetail = () => {
         }
       )
 
+      const responseData = await response.json() // Parse response body as JSON
+      setError(responseData.msg)
+      console.log(error)
+      console.log(response)
+
       if (response.ok) {
         console.log('Data sent successfully.')
+        setSuccess(true)
+        console.log(success)
       } else {
-        console.error(
-          'Failed to send data:',
-          response.status,
-          response.statusText
-        )
+        console.log(response)
       }
     } catch (error) {
-      console.error('Error while sending data:', error)
+      console.log(response)
     }
   }
 
@@ -77,10 +80,20 @@ export const UserProfileDetail = () => {
         btnMsg={'Close'}
         title={'User Profile Update'}
         modalMsg={
-          <UpdateProfileDetail
-            props={userData.user}
-            onDataFromChild={handleParentData}
-          />
+          <div>
+            {success ? <>hello</> : <p>hi</p>}
+            {success ? (
+              <div>
+                <UpdateProfileDetail
+                  props={userData.user}
+                  onDataFromChild={handleParentData}
+                  error={error}
+                />
+              </div>
+            ) : (
+              <p>User Data Updated</p>
+            )}
+          </div>
         }
         closeable={true}
         titleIcon={<i className="fa-solid fa-note-sticky"></i>}
