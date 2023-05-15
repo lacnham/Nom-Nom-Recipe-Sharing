@@ -55,15 +55,6 @@ const CollectionSection = props => {
     file.current.click()
   }
 
-  const camera = useRef(null)
-  const handleHover = () => {
-    camera.current.style.display = 'block'
-  }
-
-  const handleOut = () => {
-    camera.current.style.display = 'none'
-  }
-
   const form = useRef(null)
   const handleDisplay = () => {
     form.current.style.display = 'flex'
@@ -113,7 +104,11 @@ const CollectionSection = props => {
     >
       <div className={`${styles.createNewContainer} ${styles.flexColumn}`}>
         <DefaultButton
-          options={'Create new collection'}
+          options={
+            <div>
+              <i className="fa-solid fa-plus"></i>
+            </div>
+          }
           style={style}
           className={`${styles.createNewButton}`}
           fn={handleDisplay}
@@ -135,8 +130,8 @@ const CollectionSection = props => {
           >
             <div
               className={`${styles.imgContainer}`}
-              onMouseEnter={handleHover}
-              onMouseLeave={handleOut}
+              // onMouseEnter={handleHover}
+              // onMouseLeave={handleOut}
             >
               {image ? (
                 // <div className={`${styles.uploadImage}`}>
@@ -146,17 +141,10 @@ const CollectionSection = props => {
                 />
               ) : (
                 // </div>
-                <img src="https://s3-alpha-sig.figma.com/img/a9d5/c9e4/7bcdb80be4eeb5cc36cf4b46e74dcfb7?Expires=1684713600&Signature=F4xTgsc2NTv-yipgbW35D0ZnqIYtbU89Yvkj5G1RS8q2CzJTqepsgmLYrAhK3BAQqRfQHWffqfZjm~xYGx~e6CALP1nMzshTLDrlQadcWW37L7RoR78MHGxab2hTeVvcqfLjfZN8zTL2YO5tWo~gv2vGIVDuukj5ix~GzB0dYACKE5Emet8swVZyL~HCbg8nULIIW1FPFXgC3Yrx0bd33vWozIxfnpVutaix3hl4k~LOWckucsQuhO4aUF-FWi-8ET1a59-CSnsSJU2v-DM9ClYS1hEarBTksqNr-M-IfAMcdhGoC13b8F7CsTColwpJaz9TQj1-MZzigEIPSUZ1pg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"></img>
+                <i className="fa-solid fa-image fa-10x"></i>
+                // <img src="https://s3-alpha-sig.figma.com/img/a9d5/c9e4/7bcdb80be4eeb5cc36cf4b46e74dcfb7?Expires=1684713600&Signature=F4xTgsc2NTv-yipgbW35D0ZnqIYtbU89Yvkj5G1RS8q2CzJTqepsgmLYrAhK3BAQqRfQHWffqfZjm~xYGx~e6CALP1nMzshTLDrlQadcWW37L7RoR78MHGxab2hTeVvcqfLjfZN8zTL2YO5tWo~gv2vGIVDuukj5ix~GzB0dYACKE5Emet8swVZyL~HCbg8nULIIW1FPFXgC3Yrx0bd33vWozIxfnpVutaix3hl4k~LOWckucsQuhO4aUF-FWi-8ET1a59-CSnsSJU2v-DM9ClYS1hEarBTksqNr-M-IfAMcdhGoC13b8F7CsTColwpJaz9TQj1-MZzigEIPSUZ1pg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"></img>
               )}
             </div>
-            <i
-              ref={camera}
-              class="fa-solid fa-camera fa-xl"
-              style={{
-                position: 'absolute',
-                display: 'none'
-              }}
-            ></i>
           </div>
           <div className={`${styles.formControl} ${styles.flexColumn}`}>
             <div className={`${styles.infoFormControl} ${styles.flexColumn}`}>
