@@ -19,10 +19,12 @@ const RecipeDetail = props => {
     }
   )
 
+  console.log('Hinh ne hehe', props.recipe.image_link)
+
   const recipe = {
     id: props.id,
     title: props.recipe.name,
-    img: image,
+    img: props.recipe.image_link,
     commonInfo: {
       duration: duration,
       serving: `${parseInt(props.recipe.serving_size)} people`,

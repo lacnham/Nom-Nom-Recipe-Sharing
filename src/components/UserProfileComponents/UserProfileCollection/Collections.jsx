@@ -29,6 +29,7 @@ const Collections = props => {
   //   props.setSection(<RecipeTemp id={props.collection.collection_id} />)
   // }
 
+  console.log(props.collection.img)
   return (
     <div
       className={`${styles.collectionContainer} ${styles.boxShadowPurple} ${styles.flexColumn}`}
