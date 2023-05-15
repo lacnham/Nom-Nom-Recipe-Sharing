@@ -24,7 +24,6 @@ export const RecipeSection = props => {
     }
   }
   const [recipes, setRecipes] = useState([])
-
   useEffect(() => {
     axios
       .request(config)
@@ -35,13 +34,15 @@ export const RecipeSection = props => {
   const Card = lazy(() => import('../../Card'))
 
   const recipe = recipes.map(ele => (
-    <Card
-      image={ele.image_link}
-      title={ele.name}
-      category={['asd', 'asd1', 'asd2']}
-      location="Downtown, Seattle WA"
-      description={ele.description}
-    />
+    <div key={ele.recipe_id}>
+      <Card
+        image={ele.image_link}
+        title={ele.name}
+        category={['asd', 'asd1', 'asd2']}
+        location="Downtown, Seattle WA"
+        description={ele.description}
+      />
+    </div>
   ))
 
   return (
