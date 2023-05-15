@@ -2,7 +2,7 @@ import styles from '../../styles/LoginAndSignUp/LoginAndSignUp.module.css'
 import { Button2 } from '../Button'
 import React, { useState } from 'react'
 import axios from 'axios'
-import { FetchAllIngAndCountry } from '../Fetch/FetchAllIngAndCountry'
+import { FetchAllIngAndCountry } from '../ApiFetch/FetchAllIngAndCountry'
 
 const LoginForm = () => {
   const [loginEr, setLoginEr] = useState(null)
