@@ -1,9 +1,4 @@
-import RenderLabel from './RenderLabel'
-import RenderDetail from './RenderDetail'
 import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css'
-import axios from 'axios'
-import doneIcon from '../../../images/Nom nom icons/Done.png'
-import { useState, useEffect } from 'react'
 import { FetchIngAndNutri } from '../../Fetch/Recipes/FetchIngAndNutri'
 
 const RecipeIngredient = props => {

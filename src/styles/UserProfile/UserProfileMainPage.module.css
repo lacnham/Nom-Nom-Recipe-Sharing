@@ -1,6 +1,131 @@
 @import url('../globalStyles.css');
 @import url('../RecipeDetailPage/DetailRecipePage.module.css');
 @import url('../UserProfile/UserProfileDetail/UserProfileDetail.module.css');
+
+.createNewContainer {
+  width: 100%;
+  /* height: 200px; */
+  /* position: relative; */
+  max-width: 1000px;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  /* background-color: red; */
+}
+
+.createNewButton {
+  /* width: 30%; */
+  align-self: flex-end;
+  font: var(--primary-font);
+  font-weight: 900;
+  background-color: var(--light-orange);
+  color: var(--black-purple);
+  padding: 16px 16px;
+  border-radius: 16px;
+  border: 4px solid var(--light-orange);
+}
+
+.createForm {
+  width: 80%;
+  align-items: center;
+  background-color: rebeccapurple;
+  /* height: 200px; */
+  padding: 0 !important;
+  border-radius: 16px;
+  background-color: var(--light-orange);
+  font: var(--primary-font);
+  display: none;
+  transition-duration: 0.5s;
+}
+
+.createButton {
+  /* align-self: flex-end;
+  justify-self: flex-end; */
+
+  width: 160px !important;
+  font-size: 16px;
+  color: var(--black-purple) !important;
+  border-bottom-right-radius: inherit;
+}
+
+.imageFormControl {
+  width: 40%;
+  height: 100%;
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.imgContainer {
+  width: 260px;
+  height: 260px;
+  position: relative;
+  /* background-color: red; */
+}
+
+.imgContainer > img {
+  width: 100%;
+}
+
+.formControl {
+  width: 60%;
+  height: 100%;
+  /* background-color: wheat; */
+  border-radius: inherit;
+}
+
+.infoFormControl {
+  width: 100%;
+  height: fit-content;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.name {
+  width: 100%;
+  background-color: white;
+  padding: 8px 8px;
+  gap: 4px;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.labelName {
+  padding-right: 8px;
+  border-right: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+.note {
+  background-color: white;
+  border-radius: 8px;
+}
+
+.labelNote {
+  /* display: block; */
+  padding: 8px 0;
+  margin: 0 16px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+.note > textarea {
+  width: 100%;
+  padding: 4px 12px;
+  outline: none;
+  border: none;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  font: var(--primary-font);
+}
+
+.inputField {
+  /* height: ; */
+  font: var(--primary-font);
+}
+
 .profileMainContainer {
   margin-top: 8%;
   padding: 0px 100px;
@@ -13,12 +138,12 @@
 
 .sectionContainer {
   position: relative;
-  width: 200%;
+  width: 100%;
   height: fit-content;
 }
 
 .collectionMainContainer {
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   height: fit-content;
   flex-wrap: wrap;
