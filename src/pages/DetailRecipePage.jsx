@@ -16,7 +16,7 @@ const DetailRecipePage = () => {
 
   const { recipe, dietary } = FetchRecipeByID(id)
 
-  console.log('Troi oi recipe ne', recipe)
+  // console.log('Troi oi recipe ne', recipe)
 
   return (
     <>

@@ -19,8 +19,6 @@ const RecipeDetail = props => {
     }
   )
 
-  console.log('Hinh ne hehe', props.recipe.image_link)
-
   const recipe = {
     id: props.id,
     title: props.recipe.name,
