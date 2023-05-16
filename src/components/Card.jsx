@@ -2,7 +2,7 @@ import styles from '../styles/Card.module.css'
 import React from 'react'
 import { useState } from 'react'
 
-function CardImage(props) {
+function CardImage (props) {
   const [imageURL, setImageURL] = useState(
     props.image || 'src/images/Default_img.svg'
   )
@@ -40,7 +40,7 @@ function CardImage(props) {
   )
 }
 
-function CardContent(props) {
+function CardContent (props) {
   return (
     <div className={styles.CardContent}>
       <p className={styles.CardTitle}>{props.title}</p>
@@ -59,7 +59,7 @@ function CardContent(props) {
 }
 
 export default class Card extends React.Component {
-  render() {
+  render () {
     return (
       <div className={styles.Card}>
         <div>

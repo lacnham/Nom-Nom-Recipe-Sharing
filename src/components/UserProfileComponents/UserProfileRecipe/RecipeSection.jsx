@@ -4,12 +4,21 @@ import img from '../../../images/recipeImage.png'
 import { FetchCurrentuser } from '../../FetchCurrentUser'
 import { Suspense, lazy, useEffect, useState } from 'react'
 import axios from 'axios'
+import { DefaultButton } from '../../Button'
+import { Link, useNavigate } from 'react-router-dom'
 
 export const RecipeSection = props => {
   const collection = {
     title: 'tet',
     description: 'lorem',
     img: img
+  }
+
+  const style = {
+    backgroundColor: 'var(--light-orange)',
+    color: 'var(--black-purple)',
+    backgroundColorHover: 'white',
+    colorHover: 'var(--black-purple)'
   }
 
   // const userData = FetchCurrentuser()
@@ -44,17 +53,34 @@ export const RecipeSection = props => {
     />
   ))
 
+  const navigate = useNavigate()
+
+  const handleCreateNewRecipe = () => {
+    navigate(`/publishRecipe`)
+  }
+
   return (
     <div
       className={`${styles.collectionMainContainer} ${styles.flexRow}`}
       style={{ display: `${props.display.recipe}` }}
       // style={{ display: `none` }}
     >
+      <div className={`${styles.createNewContainer} ${styles.flexColumn}`}>
+        <DefaultButton
+          options={'Create new recipe'}
+          style={style}
+          className={`${styles.createNewButton}`}
+          fn={handleCreateNewRecipe}
+        />
+      </div>
       {/* <Collections collection={collection}></Collections>
       <Collections collection={collection}></Collections>
       <Collections collection={collection}></Collections>
       <Collections collection={collection}></Collections> */}
-      <Suspense>{recipe}</Suspense>
+
+      <div className={`${styles.collectionMainContainer} ${styles.flexRow}`}>
+        <Suspense>{recipe}</Suspense>
+      </div>
     </div>
   )
 }

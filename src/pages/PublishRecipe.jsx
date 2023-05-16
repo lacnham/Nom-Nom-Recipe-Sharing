@@ -6,6 +6,8 @@ import { FetchAllIngAndCountry } from '../components/Fetch/FetchAllIngAndCountry
 import Select from 'react-select'
 import axios from 'axios'
 import { DefaultButton } from '../components/Button'
+import Modal from '../components/ModalComponents/Modal'
+import useModal from '../components/ModalComponents/useModal'
 
 const PublishRecipe = () => {
   const { countryOptions, unitOptions, ingredientOPtion, dietOptions } =
@@ -23,11 +25,15 @@ const PublishRecipe = () => {
   const [image, setImage] = useState('')
   const [description, setDescription] = useState('')
   const [origin, setOrigin] = useState('')
-  const [duration, setDuration] = useState('' + durationUnits[1])
+  const [duration, setDuration] = useState('')
   const [servings, setServings] = useState('')
   const [ingredients, setIngredients] = useState([
     { ingredientId: '', quantity: '', unit_name: `` }
   ])
+
+  const [message, setMessage] = useState('')
+
+  const { isShowing, toggle } = useModal()
 
   const [diets, setDiets] = useState([])
 
@@ -106,6 +112,8 @@ const PublishRecipe = () => {
     file.current.click()
   }
 
+  console.log('Cai duration ne ba', duration)
+
   let config = {
     method: 'post',
     url: 'http://localhost:3000/recipe',
@@ -115,7 +123,7 @@ const PublishRecipe = () => {
     data: {
       name: name,
       servingSize: servings,
-      duration: duration,
+      duration: duration + ' ' + durationUnits[1],
       imageLink: image,
       description: description,
       ingredients: ingredients,
@@ -131,7 +139,7 @@ const PublishRecipe = () => {
     // console.log('Access token ' + localStorage.accesstoken)
     try {
       const res = await axios.request(config)
-      alert(res.data.msg)
+      setMessage(res.data.message)
     } catch (error) {
       console.log(error)
     }
@@ -156,7 +164,8 @@ const PublishRecipe = () => {
     // useEffect(() => {
     try {
       handleCreateRecipe()
-      refreshPage()
+      toggle()
+      // refreshPage()
     } catch (error) {
       console.log(error)
     }
@@ -169,6 +178,19 @@ const PublishRecipe = () => {
     <div>
       <Header></Header>
       <div className={styles.container}>
+        <Modal
+          isShowing={isShowing}
+          hide={toggle}
+          btnMsg={'Confirm'}
+          title={''}
+          modalMsg={message}
+          closeable={true}
+          titleIcon={<i className="fa-solid fa-circle-check"></i>}
+          btnFn={
+            console.log('hello') // navigate('/', { replace: true })
+            // handleSubmit
+          }
+        />
         <form className={styles.publish} onSubmit={handleSubmit}>
           <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
             <div className={`${styles.inputFieldContainer} ${styles.flexRow}`}>

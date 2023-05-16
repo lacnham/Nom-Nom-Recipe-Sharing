@@ -29,7 +29,7 @@ const RecipeDetail = props => {
       duration: duration,
       serving: `${parseInt(props.recipe.serving_size)} people`,
       // calories: `${props.nutritions.calories}`,
-      dietType: ''
+      dietType: Array.from(props.dietary)
     },
     origin: 'france',
     description: props.recipe.description
@@ -46,7 +46,7 @@ const RecipeDetail = props => {
         // nutritions={props.nutritions}
       />
       <RecipeIngredient
-        recipe={recipe}
+        // recipe={recipe}
         servingNum={props.recipe.serving_size}
         id={props.id}
         // ingredients={props.ingredients}

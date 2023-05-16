@@ -4,9 +4,15 @@ import timeIcon from '../../../images/Nom nom icons/Time_atack.png'
 import peopleIcon from '../../../images/Nom nom icons/User_alt_fill.png'
 
 const RecipeIntro = props => {
-  if (props.recipe.commonInfo.dietType == '') {
+  if (props.recipe.commonInfo.dietType == null) {
     props.recipe.commonInfo.dietType = 'none'
   }
+
+  console.log('Dietary in common info', props.recipe.commonInfo.dietType)
+
+  const dietary = props.recipe.commonInfo.dietType.map(
+    (ele, id) => ele.name + ', '
+  )
 
   return (
     <div
@@ -30,7 +36,7 @@ const RecipeIntro = props => {
         </div> */}
         <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
           <div>
-            <b>Diet type</b>: {props.recipe.commonInfo.dietType}
+            <b>Diet type</b>: {dietary}
           </div>
         </div>
       </div>
