@@ -56,7 +56,6 @@ export const RecipeSection = props => {
     }
   }
   const [recipes, setRecipes] = useState([])
-
   useEffect(() => {
     axios
       .request(config)
@@ -69,6 +68,7 @@ export const RecipeSection = props => {
   // console.log('Nay la recipes ne bro', recipes, recipes[0].author_id)
 
   const Card = lazy(() => import('../../Card'))
+
 
   const handleUpdate = (recId, name, des, serv, dur) => {
     setId(recId)
