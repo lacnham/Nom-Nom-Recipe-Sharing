@@ -6,6 +6,8 @@ import UserReview from './UserReviews'
 import { useState } from 'react'
 import ClickChangeStyle from '../../ClickChangeStyle'
 import { UserReviewForm } from './UserReviewForm'
+import SocialMediaButton from '../../SocialMediaButton/SocialMediaButton'
+import { useLocation } from 'react-router-dom'
 
 const RecipeReview = props => {
   //   const buttonList = [
@@ -57,6 +59,7 @@ const RecipeReview = props => {
           current={current}
           id={props.id}
         ></CollectionDropList>
+        <SocialMediaButton link={window.location.href} />
       </div>
       <UserReviewForm id={props.id} />
       <UserReview id={props.id}></UserReview>

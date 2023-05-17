@@ -1,8 +1,9 @@
 import React from 'react'
 import styles from '../SocialMediaButton/SocialMediaButton.module.css'
 
-const SocialMediaButton = () => {
-  const link = encodeURI('https://youtu.be/w8vPZrMFiZ4') //de link recipe dzo trong day nha
+const SocialMediaButton = props => {
+  // const link = encodeURI('https://youtu.be/w8vPZrMFiZ4') //
+  const link = encodeURI(props.link) //de link recipe dzo trong day nha
   const msg = encodeURIComponent('YUMMY RECIPE FOR YOU TO EAT SON')
   const title = encodeURIComponent('YUMMY RECIPE FOR FAT ASS HOOMAN')
 

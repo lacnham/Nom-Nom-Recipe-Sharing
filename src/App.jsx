@@ -12,6 +12,7 @@ import UserProfileMainPage from './pages/UserProfilePage'
 import Refrigerator from './pages/Refrigerator'
 import { CollectionRecipes } from './components/UserProfileComponents/UserProfileCollection/CollectionRecipes'
 import { UpdateRecipe } from './components/UserProfileComponents/UserProfileRecipe/UpdateRecipe'
+import MemberTable from './components/AboutUs/AboutUs'
 
 // import CollectionRecipes from './components/UserProfileComponents/CollectionRecipes'
 
@@ -64,6 +65,8 @@ function App () {
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/CreateRecipe" element={<PublishRecipe />} />
           <Route path="/temp" element={<UpdateRecipe />} />
+
+          <Route path="/AboutUs" element={<MemberTable />}></Route>
         </Routes>
       </BrowserRouter>
     </>

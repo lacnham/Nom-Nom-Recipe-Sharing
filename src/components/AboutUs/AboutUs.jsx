@@ -1,6 +1,7 @@
-import React from 'react';
-import AboutUsStyles from '../AboutUs/AboutUs.module.css';
-import nham_img from '/images/nham_avatar.png';
+import React from 'react'
+import AboutUsStyles from '../AboutUs/AboutUs.module.css'
+import nham_img from '/images/nham_avatar.png'
+import Header from '../Header'
 
 const member = [
   {
@@ -28,40 +29,51 @@ const member = [
     buttonText: 'Github',
     url: 'https://github.com/KN2222'
   }
-];
+]
 
-function MemberTable() {
+function MemberTable () {
   return (
-    <div className={`${AboutUsStyles.background} ${AboutUsStyles.scrollable}`}>
-      <div className={AboutUsStyles.background}>
-        <div className={AboutUsStyles.container}>
-          <div className={`${AboutUsStyles.panel} ${AboutUsStyles['table']}`}>
-            {member.map(({ title, features, buttonText, url, isFeatured, img }) => (
-              <div key={title} className={AboutUsStyles['info']}>
-                <img src={img} className={AboutUsStyles['img']} />
-                <h2 className={AboutUsStyles['header']}>{title}</h2>
-                <ul className={AboutUsStyles['features']}>
-                  {features.map(feature => (
-                    <li key={feature} className={AboutUsStyles['features-item']}>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href={url}
-                  className={`${AboutUsStyles['button']} ${
-                    isFeatured ? AboutUsStyles['is-featured'] : ''
-                  }`}
-                >
-                  {buttonText}
-                </a>
-              </div>
-            ))}
+    <>
+      <Header />
+
+      <div
+        className={`${AboutUsStyles.background} ${AboutUsStyles.scrollable}`}
+      >
+        <div className={AboutUsStyles.background}>
+          <div className={AboutUsStyles.container}>
+            <div className={`${AboutUsStyles.panel} ${AboutUsStyles['table']}`}>
+              {member.map(
+                ({ title, features, buttonText, url, isFeatured, img }) => (
+                  <div key={title} className={AboutUsStyles['info']}>
+                    <img src={img} className={AboutUsStyles['img']} />
+                    <h2 className={AboutUsStyles['header']}>{title}</h2>
+                    <ul className={AboutUsStyles['features']}>
+                      {features.map(feature => (
+                        <li
+                          key={feature}
+                          className={AboutUsStyles['features-item']}
+                        >
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <a
+                      href={url}
+                      className={`${AboutUsStyles['button']} ${
+                        isFeatured ? AboutUsStyles['is-featured'] : ''
+                      }`}
+                    >
+                      {buttonText}
+                    </a>
+                  </div>
+                )
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </>
+  )
 }
 
-export default MemberTable;
+export default MemberTable
