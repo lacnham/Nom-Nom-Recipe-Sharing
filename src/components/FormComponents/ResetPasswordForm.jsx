@@ -13,10 +13,8 @@ const ResetPasswordForm = () => {
   const [errors, setErrors] = useState('')
 
   useEffect(() => {
-    console.log(password, confirmPassword)
     const validatedErrors = validateInput({ password, confirmPassword })
     setErrors(validatedErrors)
-    console.log(validatedErrors)
   }, [password, confirmPassword])
 
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
@@ -41,7 +39,6 @@ const ResetPasswordForm = () => {
   }
 
   useEffect(() => {
-    console.log(resetToken, userId)
     const resetPassword = async (resetToken, userId) => {
       try {
         const response = await fetch(
@@ -52,11 +49,8 @@ const ResetPasswordForm = () => {
           }
         )
         const data = await response.json()
-        console.log(data) // Process the response data
         if (data.msg === 'data and salt arguments required') {
-          console.log('hello')
           setValidToken(true)
-          console.log(validToken)
         }
       } catch (error) {
         setValidToken(false)
@@ -90,8 +84,6 @@ const ResetPasswordForm = () => {
       return
     }
 
-    console.log(password, confirmPassword)
-
     try {
       const url = `http://localhost:3000/reset-password/${resetToken}/${userId}`
       const data = { password: password }
@@ -99,7 +91,6 @@ const ResetPasswordForm = () => {
       const response = await axios.post(url, data, {
         method: 'post'
       })
-      console.log(response.data) // Handle the response data as needed
       setValidToken(false)
       setResetSuccess(true)
 
