@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import styles from '../../styles/LoginAndSignUp/LoginAndSignUp.module.css'
-import { Button2 } from '../Button'
+import { Button2, DisabledButton } from '../Button'
 import { renderDom } from 'react-dom'
 import axios from 'axios'
 const ResetPasswordForm = () => {
@@ -10,6 +10,35 @@ const ResetPasswordForm = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [resetSuccess, setResetSuccess] = useState(false)
+  const [errors, setErrors] = useState('')
+
+  useEffect(() => {
+    console.log(password, confirmPassword)
+    const validatedErrors = validateInput({ password, confirmPassword })
+    setErrors(validatedErrors)
+    console.log(validatedErrors)
+  }, [password, confirmPassword])
+
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+
+  function validateInput({ password, confirmPassword }) {
+    const errors = {}
+
+    if (!password || !confirmPassword) {
+      errors.general = 'Please fill in all fields'
+    }
+
+    if (!passwordRegex.test(password)) {
+      errors.password =
+        'Password must be at least 8 characters and contain a lowercase letter, an uppercase letter, and a number'
+    }
+
+    if (confirmPassword !== password) {
+      errors.confirmPassword = 'Passwords do not match'
+    }
+
+    return errors
+  }
 
   useEffect(() => {
     console.log(resetToken, userId)
@@ -34,7 +63,7 @@ const ResetPasswordForm = () => {
       }
     }
     console.log(resetPassword(resetToken, userId))
-  })
+  }, [resetToken, userId])
 
   if (validToken === false) {
     if (resetSuccess) {
@@ -71,6 +100,7 @@ const ResetPasswordForm = () => {
         method: 'post'
       })
       console.log(response.data) // Handle the response data as needed
+      setValidToken(false)
       setResetSuccess(true)
 
       // Assuming the password reset was successful
@@ -81,31 +111,49 @@ const ResetPasswordForm = () => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <div className={styles.inputContainer}>
-        <i className={`${styles.icon} ${'fa-solid fa-lock'}`}></i>
-        <input
-          placeholder="Password"
-          type="password"
-          id="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
+      <div>
+        {errors.password && (
+          <div className={styles.warning}>{errors.password}</div>
+        )}
+        <div className={styles.inputContainer}>
+          <i className={`${styles.icon} ${'fa-solid fa-lock'}`}></i>
+          <input
+            placeholder="Password"
+            type="password"
+            id="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </div>
+        {errors.confirmPassword && (
+          <div className={styles.warning}>{errors.confirmPassword}</div>
+        )}
+        <div className={styles.inputContainer}>
+          <i className={`${styles.icon} ${'fa-solid fa-lock'}`}></i>
+          <input
+            placeholder="Retype Password"
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
+          />
+        </div>
       </div>
-      <div className={styles.inputContainer}>
-        <i className={`${styles.icon} ${'fa-solid fa-lock'}`}></i>
-        <input
-          placeholder="Retype Password"
-          type="password"
-          id="confirmPassword"
-          value={confirmPassword}
-          onChange={handleConfirmPasswordChange}
-        />
+
+      <div className={styles.btnContainer}>
+        {Object.keys(errors).length === 0 ? (
+          <Button2
+            type={'submit'}
+            options={'Reset Password'}
+            fn={() => ''}
+          ></Button2>
+        ) : (
+          <DisabledButton
+            options={'Reset Password'}
+            disabled={true}
+          ></DisabledButton>
+        )}
       </div>
-      <Button2
-        type={'submit'}
-        options={'Reset Password'}
-        fn={() => ''}
-      ></Button2>
     </form>
   )
 }
