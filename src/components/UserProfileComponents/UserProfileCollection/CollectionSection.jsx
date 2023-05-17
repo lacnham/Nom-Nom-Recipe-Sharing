@@ -142,14 +142,13 @@ const CollectionSection = props => {
               onChange={e => onFileChange(e)}
             ></input>
             <div
-
               className={`${styles.imageFormControl}`}
               onClick={handleClickImage}
             >
               <div
                 className={`${styles.imgContainer}`}
-                onMouseEnter={handleHover}
-                onMouseLeave={handleOut}
+                // onMouseEnter={handleHover}
+                // onMouseLeave={handleOut}
               >
                 {image ? (
                   // <div className={`${styles.uploadImage}`}>
@@ -163,8 +162,7 @@ const CollectionSection = props => {
                 )}
               </div>
               <i
-                ref={camera}
-                class="fa-solid fa-camera fa-xl"
+                className="fa-solid fa-camera fa-xl"
                 style={{
                   position: 'absolute',
                   display: 'none'

@@ -39,7 +39,9 @@ const RecipeDetail = props => {
     parseInt(props.recipe.serving_size)
   )
 
-  const ref = useRef(parseInt(props.recipe.serving_size))
+  const ref = useRef(
+    parseInt(props.recipe.serving_size) / parseInt(props.recipe.serving_size)
+  )
 
   // const { ingredients, nutritions } = FetchIngAndNutri(props.id, currentSize)
 
