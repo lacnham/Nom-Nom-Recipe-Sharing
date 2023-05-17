@@ -84,6 +84,10 @@ form {
   color: #e43636;
 }
 
+.formOk {
+  color: #259d63;
+}
+
 .inputContainer {
   display: flex;
   width: 100%;

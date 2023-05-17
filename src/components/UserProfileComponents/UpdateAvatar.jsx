@@ -169,12 +169,13 @@ const UpdateAvatar = props => {
   const sleep = ms => {
     return new Promise(resolve => setTimeout(resolve, ms))
   }
+
   const handleSubmit = async e => {
     e.preventDefault()
 
     if (croppedImage) {
       console.log(croppedImage)
-      await sleep(1000)
+      // await sleep(1000)
       const formData = new FormData()
       console.log('croppedImage', croppedImage)
       console.log('file.name', file.name)

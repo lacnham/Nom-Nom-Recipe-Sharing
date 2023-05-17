@@ -7,6 +7,7 @@ import DetailRecipePage from './pages/DetailRecipePage'
 import PublishRecipe from './pages/PublishRecipe'
 import AllRecipe from './pages/AllRecipe'
 import RecoverPage from './pages/RecoverPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
 import DietPage from './pages/DietPage'
 import UserProfileMainPage from './pages/UserProfilePage'
 import Refrigerator from './pages/Refrigerator'
@@ -59,6 +60,10 @@ function App () {
           <Route path="/refrigerator" element={<Refrigerator />} />
 
           <Route path="/recipe/:name/:id" element={<DetailRecipePage />} />
+          <Route
+            path="/reset-password/:resetToken/:userId"
+            element={<ResetPasswordPage />}
+          />
           <Route path="/Recover" element={<RecoverPage />} />
           <Route path="/Diet" element={<DietPage />} />
 

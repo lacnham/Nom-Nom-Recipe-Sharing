@@ -1,25 +1,75 @@
 import styles from '../../styles/LoginAndSignUp/LoginAndSignUp.module.css'
-import { Button2 } from '../Button'
-import React, { useState } from 'react'
+import { Button2, DisabledButton } from '../Button'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import useModal from '../ModalComponents/useModal'
+import Modal from '../ModalComponents/Modal'
 
 const RecoverForm = () => {
   const [email, setEmail] = useState('')
+  const [isDataSend, setIsDataSend] = useState(false)
+
+  const [modalProps, setModalProps] = useState({
+    title: '',
+    msg: '',
+    icon: ''
+  })
+
+  const { isShowing, toggle } = useModal()
+
   const handleSubmit = async e => {
+    e.preventDefault()
+
     axios
       .post('http://localhost:3000/forgot-password', {
         email: email
       })
       .then(response => {
         console.log(response.data)
+        setModalProps(prevState => ({
+          ...prevState,
+          title: 'Success',
+          msg: response.data.msg,
+          icon: 'fa-solid fa-circle-check'
+        }))
+        setIsDataSend(true)
+        toggle()
       })
       .catch(error => {
-        console.error(error)
+        if (error.response) {
+          console.log(error.response.data)
+          setModalProps(prevState => ({
+            ...prevState,
+            title: 'Error',
+            msg: error.response.data.msg,
+            icon: 'fa-solid fa-circle-xmark'
+          }))
+
+          toggle()
+        } else {
+          console.error(error)
+        }
       })
   }
 
+  useEffect(() => {
+    console.log(modalProps)
+  }, [modalProps])
+
   return (
-    <form onSubmit={handleSubmit} method="POST">
+    <form onSubmit={handleSubmit}>
+      <Modal
+        isShowing={isShowing}
+        hide={toggle}
+        btnMsg={'Confirm'}
+        title={modalProps.title}
+        modalMsg={modalProps.msg}
+        closeable={false}
+        titleIcon={<i className={modalProps.icon}></i>}
+        btnFn={() => {
+          toggle()
+        }} // Invoke the function inside the btnFn prop
+      />
       <div>
         <div className={styles.inputContainer}>
           <i className={`${styles.icon} ${'fa-solid fa-envelope'}`}></i>
@@ -33,7 +83,11 @@ const RecoverForm = () => {
           />
         </div>
         <div className={styles.btnContainer}>
-          <Button2 type={'submit'} options={'Send'} fn={() => ''}></Button2>
+          {isDataSend ? (
+            <DisabledButton options={'Send'} />
+          ) : (
+            <Button2 type={'submit'} options={'Send'} fn={() => ''}></Button2>
+          )}
         </div>
       </div>
     </form>

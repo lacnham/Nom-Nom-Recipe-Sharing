@@ -18,14 +18,15 @@ function CardImage (props) {
   }
 
   const imageStyle = {
-    width: imageURL === 'src/images/Default_img.svg' ? '200px' : '100%',
-    objectFit: imageURL === 'src/images/Default_img.svg' ? 'cover' : 'cover'
+    width:
+      imageURL != 'src/images/Default_img.svg' ? '100% !important' : '200px',
+    objectFit: 'cover'
   }
 
   const containerStyle = {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: imageURL === 'src/images/Default_img.svg' ? 'center' : 'cover'
+    alignItems: 'center'
   }
 
   return (

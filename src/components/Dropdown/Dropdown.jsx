@@ -36,7 +36,7 @@ const Dropdown = props => {
       })
   }, [])
   const onSelectOption = option => {
-    setIsActive(false)((window.location.href = `${option.link}`))
+    window.location.href = `${option.link}`
     // navigate(`${option.link}`, { replace: true })
   }
 
