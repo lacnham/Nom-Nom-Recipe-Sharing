@@ -5,7 +5,7 @@ import styles from '../../../styles/UserProfile/UserProfileMainPage.module.css'
 import { Suspense, lazy, useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { DefaultButton } from '../../Button'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../SessionVerification/AuthContext'
 
 import useModal from '../../ModalComponents/useModal'
@@ -69,7 +69,6 @@ export const RecipeSection = props => {
 
   const Card = lazy(() => import('../../Card'))
 
-
   const handleUpdate = (recId, name, des, serv, dur) => {
     setId(recId)
     setUpdateData({
@@ -82,24 +81,28 @@ export const RecipeSection = props => {
   }
 
   const recipeTmp = recipes.map(ele => (
-    <Card
-      key={ele.recipe_id}
-      userID={ele.author_id}
-      image={ele.image_link}
-      title={ele.name}
-      category={['asd', 'asd1', 'asd2']}
-      location="Downtown, Seattle WA"
-      description={ele.description}
-      fn={() =>
-        handleUpdate(
-          ele.recipe_id,
-          ele.name,
-          ele.description,
-          ele.serving_size,
-          ele.duration
-        )
-      }
-    />
+    <Link to={`/recipe/${ele.name}/${ele.recipe_id}`} key={ele.recipe_id}>
+      <Suspense>
+        <Card
+          key={ele.recipe_id}
+          userID={ele.author_id}
+          image={ele.image_link}
+          title={ele.name}
+          category={['asd', 'asd1', 'asd2']}
+          location="Downtown, Seattle WA"
+          description={ele.description}
+          fn={() =>
+            handleUpdate(
+              ele.recipe_id,
+              ele.name,
+              ele.description,
+              ele.serving_size,
+              ele.duration
+            )
+          }
+        />
+      </Suspense>
+    </Link>
   ))
 
   const navigate = useNavigate()
@@ -179,7 +182,8 @@ export const RecipeSection = props => {
       <Collections collection={collection}></Collections> */}
 
       <div className={`${styles.collectionMainContainer} ${styles.flexRow}`}>
-        <Suspense>{recipeTmp}</Suspense>
+        {/* <Suspense>{recipeTmp}</Suspense> */}
+        {recipeTmp}
       </div>
     </div>
   )
