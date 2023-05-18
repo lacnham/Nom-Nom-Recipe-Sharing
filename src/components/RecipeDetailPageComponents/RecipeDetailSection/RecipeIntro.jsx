@@ -5,6 +5,18 @@ import peopleIcon from '../../../images/Nom nom icons/User_alt_fill.png'
 import { useState } from 'react'
 
 const RecipeIntro = props => {
+  const [imageURL, setImageURL] = useState(
+    props.recipe.img || 'src/images/Default_img.svg'
+  )
+  const [imageError, setImageError] = useState(false)
+
+  const handleImageError = () => {
+    if (!imageError) {
+      setImageURL('src/images/Default_img.svg')
+      setImageError(true)
+    }
+  }
+
   if (props.recipe.commonInfo.dietType == null) {
     props.recipe.commonInfo.dietType = 'none'
   }
@@ -27,7 +39,12 @@ const RecipeIntro = props => {
     <div
       className={`${styles.recipePrimaryContainer} ${styles.boxShadowPurple}`}
     >
-      <img className={styles.recipeImg} src={props.recipe.img} />
+      <img
+        className={styles.recipeImg}
+        alt={`${props.recipe.title} img`}
+        src={imageURL}
+        onError={handleImageError}
+      />
       <div className={styles.title}>{props.recipe.title}</div>
       <div className={styles.commonInfo}>
         <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
