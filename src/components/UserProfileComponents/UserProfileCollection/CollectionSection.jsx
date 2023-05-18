@@ -8,6 +8,8 @@ import { Button1, DefaultButton } from '../../Button'
 import { UpdateButton } from '../UpdateProfileButton'
 import { Post } from '../../ApiPost/Post'
 import axios from 'axios'
+import Modal from '../../ModalComponents/Modal'
+import useModal from '../../ModalComponents/useModal'
 // import { CollectionContext } from './UserCollectionContext'
 
 const CollectionSection = props => {
@@ -20,8 +22,11 @@ const CollectionSection = props => {
   const [name, setName] = useState('')
   const [note, setNote] = useState('')
   const [image, setImage] = useState()
+  const [message, setMessage] = useState('')
 
   const { userCollectionData } = useContext(AuthContext)
+
+  const { isShowing, toggle } = useModal()
   // console.log('here:', userCollectionData)
 
   // const collections = FetchUserCollections()
@@ -80,8 +85,8 @@ const CollectionSection = props => {
   const handleSubmit = async () => {
     try {
       const res = await axios.request(config)
-      // alert(res.data.message)
-      window.location.reload(false)
+      setMessage(res.data.message)
+      toggle()
     } catch (error) {
       console.log(error)
     }
@@ -106,6 +111,20 @@ const CollectionSection = props => {
       className={`${styles.collectionMainContainer} ${styles.flexRow}`}
       style={{ display: `${props.display.collection}` }}
     >
+      <Modal
+        isShowing={isShowing}
+        hide={toggle}
+        btnMsg={'Confirm'}
+        title={''}
+        modalMsg={message}
+        closeable={true}
+        titleIcon={<i className="fa-solid fa-circle-check"></i>}
+        btnFn={
+          // console.log('hello') // navigate('/', { replace: true })
+          //
+          () => window.location.reload(false)
+        }
+      />
       <div className={`${styles.createNewContainer} ${styles.flexColumn}`}>
         <DefaultButton
           options={
@@ -158,7 +177,10 @@ const CollectionSection = props => {
                   />
                 ) : (
                   // </div>
-                  <img src="https://s3-alpha-sig.figma.com/img/a9d5/c9e4/7bcdb80be4eeb5cc36cf4b46e74dcfb7?Expires=1684713600&Signature=F4xTgsc2NTv-yipgbW35D0ZnqIYtbU89Yvkj5G1RS8q2CzJTqepsgmLYrAhK3BAQqRfQHWffqfZjm~xYGx~e6CALP1nMzshTLDrlQadcWW37L7RoR78MHGxab2hTeVvcqfLjfZN8zTL2YO5tWo~gv2vGIVDuukj5ix~GzB0dYACKE5Emet8swVZyL~HCbg8nULIIW1FPFXgC3Yrx0bd33vWozIxfnpVutaix3hl4k~LOWckucsQuhO4aUF-FWi-8ET1a59-CSnsSJU2v-DM9ClYS1hEarBTksqNr-M-IfAMcdhGoC13b8F7CsTColwpJaz9TQj1-MZzigEIPSUZ1pg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"></img>
+                  <img
+                    src="https://s3-alpha-sig.figma.com/img/a9d5/c9e4/7bcdb80be4eeb5cc36cf4b46e74dcfb7?Expires=1684713600&Signature=F4xTgsc2NTv-yipgbW35D0ZnqIYtbU89Yvkj5G1RS8q2CzJTqepsgmLYrAhK3BAQqRfQHWffqfZjm~xYGx~e6CALP1nMzshTLDrlQadcWW37L7RoR78MHGxab2hTeVvcqfLjfZN8zTL2YO5tWo~gv2vGIVDuukj5ix~GzB0dYACKE5Emet8swVZyL~HCbg8nULIIW1FPFXgC3Yrx0bd33vWozIxfnpVutaix3hl4k~LOWckucsQuhO4aUF-FWi-8ET1a59-CSnsSJU2v-DM9ClYS1hEarBTksqNr-M-IfAMcdhGoC13b8F7CsTColwpJaz9TQj1-MZzigEIPSUZ1pg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+                    style={{ width: '100%' }}
+                  ></img>
                 )}
               </div>
               <i

@@ -3,10 +3,15 @@ import styles from '../../../styles/RecipeDetailPage/UserReviewForm.module.css'
 import ReactStars from 'react-rating-stars-component'
 import { UpdateButton } from '../../UserProfileComponents/UpdateProfileButton'
 import axios from 'axios'
+import useModal from '../../ModalComponents/useModal'
+import Modal from '../../ModalComponents/Modal'
 
 export const UserReviewForm = id => {
   const [rating, setRating] = useState(5)
   const [comment, setComment] = useState('')
+  const [message, setMessage] = useState('')
+
+  const { isShowing, toggle } = useModal()
 
   const handleChange = newRating => {
     console.log(newRating)
@@ -46,7 +51,9 @@ export const UserReviewForm = id => {
       const res = await axios.request(config)
       console.log(config.data)
       console.log(res)
-      refreshPage()
+      setMessage(res.data.message)
+      // refreshPage()
+      toggle()
     } catch (error) {
       console.log(error)
     }
@@ -60,6 +67,23 @@ export const UserReviewForm = id => {
     <form
       className={`${styles.userReviewContainer} ${styles.flexColumn} ${styles.boxShadowPurple}`}
     >
+      <Modal
+        isShowing={isShowing}
+        hide={toggle}
+        btnMsg={'Confirm'}
+        title={''}
+        modalMsg={message}
+        closeable={true}
+        titleIcon={<i className="fa-solid fa-circle-check"></i>}
+        btnFn={
+          // console.log('hello') // navigate('/', { replace: true })
+          // handleSubmit
+
+          () => {
+            refreshPage()
+          }
+        }
+      />
       <div className={`${styles.ratingContainer}`}>
         <ReactStars {...star} onChange={handleChange}></ReactStars>
       </div>

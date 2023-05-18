@@ -21,11 +21,11 @@ export const RecipeSection = props => {
   // const [image, setImage] =  useState('')
   const [id, setId] = useState('')
 
-  const [name, setName] = useState('')
-  const [des, setDes] = useState('')
-  const [dur, setDur] = useState('')
-  const [serv, setServ] = useState('')
-  const [image, setImage] = useState('')
+  // const [name, setName] = useState('')
+  // const [des, setDes] = useState('')
+  // const [dur, setDur] = useState('')
+  // const [serv, setServ] = useState('')
+  // const [image, setImage] = useState('')
 
   const [updateData, setUpdateData] = useState({
     name: '',

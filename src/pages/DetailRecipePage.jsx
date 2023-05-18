@@ -20,7 +20,7 @@ const DetailRecipePage = () => {
 
   // console.log('Troi oi recipe ne', recipe)
 
-  console.log('cai recipe ne', recipe, dietary)
+  // console.log('cai recipe ne', recipe, dietary)
   return (
     <>
       {/* TODO CSS clashes with PublicRecipe.module.css page [FIX] */}

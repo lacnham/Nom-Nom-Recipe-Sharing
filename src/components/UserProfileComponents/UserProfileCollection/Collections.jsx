@@ -14,10 +14,11 @@ const Collections = props => {
     props.setCurrentStyle('flex')
   }
 
-  const { isShowing, toggle } = useModal(true)
+  const { isShowing, ndIsShowing, toggle, secondToggle } = useModal(true)
 
   const [name, setName] = useState(props.collection.name)
   const [note, setNote] = useState(props.collection.note)
+  const [message, setMessage] = useState('')
 
   let config = {
     method: 'PUT',
@@ -37,8 +38,9 @@ const Collections = props => {
     e.preventDefault()
     try {
       const res = await axios.request(config)
-      // setMessage(res.data.message)
-      refreshPage()
+      setMessage(res.data.message)
+      toggle()
+      secondToggle()
     } catch (error) {
       console.log(error)
     }
@@ -56,10 +58,12 @@ const Collections = props => {
   const handleDelete = async () => {
     try {
       const res = await axios.request(configDelete)
-      alert(res.data.message)
-      refreshPage()
+      setMessage(res.data.message)
+      // refreshPage()
+      // confirm()
+      secondToggle()
     } catch (error) {
-      alert(error)
+      setMessage(res.data.message)
     }
   }
 
@@ -137,6 +141,21 @@ const Collections = props => {
         btnFn={
           // console.log('hello') // navigate('/', { replace: true })
           handleSubmit
+        }
+      />
+      <Modal
+        isShowing={ndIsShowing}
+        hide={secondToggle}
+        btnMsg={'Confirm'}
+        title={''}
+        modalMsg={message}
+        closeable={true}
+        titleIcon={<i className="fa-solid fa-circle-check"></i>}
+        btnFn={
+          // console.log('hello') // navigate('/', { replace: true })
+          () => {
+            refreshPage()
+          }
         }
       />
       <div className={`${styles.updateDeleteContainer} ${styles.flexRow}`}>

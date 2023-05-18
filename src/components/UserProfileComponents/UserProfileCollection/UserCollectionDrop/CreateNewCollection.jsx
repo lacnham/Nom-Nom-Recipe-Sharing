@@ -3,6 +3,8 @@ import { DefaultButton } from '../../../Button'
 import { useState } from 'react'
 import ClickChangeStyle from '../../../ClickChangeStyle'
 import axios from 'axios'
+import Modal from '../../../ModalComponents/Modal'
+import useModal from '../../../ModalComponents/useModal'
 // import {
 //   EnterToSubmit,
 //   handleInputChange,
@@ -16,6 +18,10 @@ export const CreateNewCollection = props => {
   }
 
   const [currentDisplay, setCurrentDisplay] = useState('none')
+
+  const [message, setMessage] = useState()
+
+  const { isShowing, toggle } = useModal()
 
   // let handleClick = props => {
   const styleElement = {
@@ -61,7 +67,9 @@ export const CreateNewCollection = props => {
     try {
       const res = await axios.request(config)
       console.log(res.data.message)
+      setMessage(res.data.message)
       props.setCurrent('none')
+      toggle()
     } catch (error) {
       console.log(error)
     }
@@ -69,6 +77,20 @@ export const CreateNewCollection = props => {
 
   return (
     <>
+      <Modal
+        isShowing={isShowing}
+        hide={toggle}
+        btnMsg={'Confirm'}
+        title={''}
+        modalMsg={message}
+        closeable={true}
+        titleIcon={<i className="fa-solid fa-circle-check"></i>}
+        btnFn={
+          // console.log('hello') // navigate('/', { replace: true })
+          // handleSubmit
+          toggle
+        }
+      />
       <div className={`${styles.createNewCollection}`}>
         <DefaultButton
           fn={handleClick}
