@@ -38,7 +38,7 @@ export const CollectionInDropList = props => {
     try {
       const res = await axios.request(config)
       setMessage(res.data.message)
-      console.log('log choi choi 1 cai gi do', res.data)
+      // console.log('log choi choi 1 cai gi do', res.data)
       setIsSuccess(true)
       handleBlur()
       toggle()

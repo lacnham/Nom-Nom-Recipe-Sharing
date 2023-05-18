@@ -56,7 +56,7 @@ const ResetPasswordForm = () => {
         setValidToken(false)
       }
     }
-    console.log(resetPassword(resetToken, userId))
+    // console.log(resetPassword(resetToken, userId))
   }, [resetToken, userId])
 
   if (validToken === false) {

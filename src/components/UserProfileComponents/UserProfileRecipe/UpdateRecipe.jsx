@@ -47,7 +47,7 @@ export const UpdateRecipe = props => {
     file.current.click()
   }
 
-  console.log(props.data)
+  // console.log(props.data)
 
   return (
     <form

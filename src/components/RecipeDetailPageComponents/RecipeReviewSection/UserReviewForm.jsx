@@ -14,7 +14,7 @@ export const UserReviewForm = id => {
   const { isShowing, toggle } = useModal()
 
   const handleChange = newRating => {
-    console.log(newRating)
+    // console.log(newRating)
     setRating(newRating)
   }
 
@@ -27,7 +27,7 @@ export const UserReviewForm = id => {
     isHalf: true
   }
 
-  console.log('This is the id hehe=', id.id)
+  // console.log('This is the id hehe=', id.id)
 
   let config = {
     method: 'post',
@@ -49,8 +49,8 @@ export const UserReviewForm = id => {
     e.preventDefault()
     try {
       const res = await axios.request(config)
-      console.log(config.data)
-      console.log(res)
+      // console.log(config.data)
+      // console.log(res)
       setMessage(res.data.message)
       // refreshPage()
       toggle()

@@ -56,7 +56,7 @@ const CollectionSection = props => {
     setImage(e.target.files[0])
   }
   const handleClickImage = () => {
-    console.log(file)
+    // console.log(file)
     file.current.click()
   }
 

@@ -63,10 +63,10 @@ export const CreateNewCollection = props => {
   }
 
   const handleSubmit = async () => {
-    console.log('submit')
+    // console.log('submit')
     try {
       const res = await axios.request(config)
-      console.log(res.data.message)
+      // console.log(res.data.message)
       setMessage(res.data.message)
       props.setCurrent('none')
       toggle()

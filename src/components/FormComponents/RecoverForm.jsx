@@ -25,7 +25,7 @@ const RecoverForm = () => {
         email: email
       })
       .then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         setModalProps(prevState => ({
           ...prevState,
           title: 'Success',
@@ -52,9 +52,9 @@ const RecoverForm = () => {
       })
   }
 
-  useEffect(() => {
-    console.log(modalProps)
-  }, [modalProps])
+  // useEffect(() => {
+  //   console.log(modalProps)
+  // }, [modalProps])
 
   return (
     <form onSubmit={handleSubmit}>

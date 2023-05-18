@@ -45,7 +45,7 @@ const RecipeIngredient = props => {
     return <div> loading...</div>
   }
 
-  console.log('hello', props.servingNum)
+  // console.log('hello', props.servingNum)
 
   let nutritionToArr = Object.entries(props.nutritionsTmp)
 

@@ -127,7 +127,7 @@ export const RecipeSection = props => {
   }
   const handleSubmit = async e => {
     e.preventDefault()
-    console.log('submit dc roi ne')
+    // console.log('submit dc roi ne')
     try {
       const res = await axios.request(configUpdate)
       refreshPage()

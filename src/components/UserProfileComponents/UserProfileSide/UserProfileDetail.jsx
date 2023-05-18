@@ -18,9 +18,9 @@ export const UserProfileDetail = () => {
 
   const [parentMessage, setParentMessage] = useState(data)
 
-  useEffect(() => {
-    console.log(parentMessage)
-  }, [parentMessage])
+  // useEffect(() => {
+  //   console.log(parentMessage)
+  // }, [parentMessage])
 
   const handleParentData = data => {
     setParentMessage(data)
@@ -63,7 +63,7 @@ export const UserProfileDetail = () => {
       if (response.ok) {
         console.log('Data sent successfully.')
         setSuccess(true)
-        console.log(success)
+        // console.log(success)
       } else {
         console.log(response)
       }
@@ -81,8 +81,9 @@ export const UserProfileDetail = () => {
         title={'User Profile Update'}
         modalMsg={
           <div>
-            {success ? <>hello</> : <p>hi</p>}
             {success ? (
+              <p>User Data Updated</p>
+            ) : (
               <div>
                 <UpdateProfileDetail
                   props={userData.user}
@@ -90,24 +91,30 @@ export const UserProfileDetail = () => {
                   error={error}
                 />
               </div>
-            ) : (
-              <p>User Data Updated</p>
             )}
           </div>
         }
         closeable={true}
         titleIcon={<i className="fa-solid fa-note-sticky"></i>}
         extraButton={
-          <Button1
-            fn={() => {
-              userDataUpdate(parentMessage)
-              console.log('hello')
-            }}
-            options={'Confirm'}
-          />
+          <div>
+            {success ? (
+              ''
+            ) : (
+              <div>
+                <Button1
+                  fn={() => {
+                    userDataUpdate(parentMessage)
+                    // console.log('hello')
+                  }}
+                  options={'Confirm'}
+                />
+              </div>
+            )}
+          </div>
         }
         btnFn={() => {
-          toggle()
+          window.location.reload()
         }}
       />
       {/* <div

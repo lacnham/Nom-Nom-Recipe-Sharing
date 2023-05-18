@@ -70,7 +70,7 @@ const UserReview = props => {
     fetch()
   }, [])
 
-  console.log('This is the reviews', reviews)
+  // console.log('This is the reviews', reviews)
 
   const userReview = reviews.map(review => (
     <div

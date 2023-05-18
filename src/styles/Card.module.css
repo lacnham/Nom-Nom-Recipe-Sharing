@@ -4,7 +4,7 @@
   width: 350px;
   border-radius: 8px;
   box-shadow: 8px 8px 8px #ddd;
-  margin: 12px 0px;
+
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
   flex-basis: 33.33333%;
@@ -12,6 +12,9 @@
   flex-direction: column;
   justify-content: space-between;
   background-color: #fff;
+  margin: auto;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .Card:hover {

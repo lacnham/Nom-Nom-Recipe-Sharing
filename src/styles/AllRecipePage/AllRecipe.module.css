@@ -20,9 +20,8 @@
   flex-basis: 33.33333%;
 }
 
-.cardContainer > a{
-  display: flex;
-  justify-content: center;
+.cardContainer > a {
+  display: inline-block;
 }
 
 .cardContainer > div:empty {

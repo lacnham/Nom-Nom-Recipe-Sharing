@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { useState } from 'react'
 import { AuthContext } from './SessionVerification/AuthContext'
 
-function CardImage (props) {
+function CardImage(props) {
   const [imageURL, setImageURL] = useState(
     props.image || 'src/images/Default_img.svg'
   )
@@ -13,7 +13,6 @@ function CardImage (props) {
     if (!imageError) {
       setImageURL('src/images/Default_img.svg')
       setImageError(true)
-      console.log()
     }
   }
 
@@ -42,7 +41,7 @@ function CardImage (props) {
   )
 }
 
-function UpdateRecipeButton ({ userID, fn }) {
+function UpdateRecipeButton({ userID, fn }) {
   const { userData } = useContext(AuthContext)
 
   if (userID == userData.user.id) {
@@ -55,7 +54,7 @@ function UpdateRecipeButton ({ userID, fn }) {
   return null
 }
 
-function CardContent (props) {
+function CardContent(props) {
   return (
     <div className={styles.CardContent}>
       <p className={styles.CardTitle}>{props.title}</p>
@@ -74,7 +73,7 @@ function CardContent (props) {
 }
 
 export default class Card extends React.Component {
-  render () {
+  render() {
     return (
       <div className={styles.Card}>
         <div>

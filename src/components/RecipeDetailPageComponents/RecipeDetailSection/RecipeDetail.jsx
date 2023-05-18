@@ -81,7 +81,7 @@ const RecipeDetail = props => {
 
     ref.current = event.target.value / props.recipe.serving_size
 
-    console.log('cai ref ne', ref.current.valueOf)
+    // console.log('cai ref ne', ref.current.valueOf)
     let configIng = {
       method: 'post',
       url: `http://localhost:3000/recipe/nutritions/total-ing-nutrition-facts/${props.id}`,
@@ -106,7 +106,7 @@ const RecipeDetail = props => {
     )
   }
 
-  console.log('ingredients ne', ingredientsTmp)
+  // console.log('ingredients ne', ingredientsTmp)
 
   return (
     <div

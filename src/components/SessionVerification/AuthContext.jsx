@@ -15,7 +15,7 @@ export const logout = async () => {
     if (response.ok) {
       localStorage.removeItem('accesstoken')
       localStorage.removeItem('refreshtoken')
-      console.log('this is logout')
+      // console.log('this is logout')
       window.location.reload()
     } else {
       throw new Error('Error logging out')
@@ -40,7 +40,7 @@ export const dietFetch = async userData => {
 
       if (response.ok) {
         const data = await response.json()
-        console.log('return data', data)
+        // console.log('return data', data)
         return data // Return the data instead of setting state
       } else {
         throw new Error('Unable to get dietary preference')

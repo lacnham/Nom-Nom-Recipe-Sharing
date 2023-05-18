@@ -5,7 +5,7 @@ export const FetchIngAndNutri = (id, servingNum) => {
   const [ingredients, setIngredients] = useState([])
   const [nutritions, setNutritions] = useState([])
 
-  console.log('serving ne', servingNum)
+  // console.log('serving ne', servingNum)
 
   let configIng = {
     method: 'post',

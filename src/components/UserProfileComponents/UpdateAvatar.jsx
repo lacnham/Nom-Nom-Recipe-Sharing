@@ -37,7 +37,7 @@ const UpdateAvatar = props => {
   }, [])
 
   const handleChange = e => {
-    console.log('Change')
+    // console.log('Change')
     const selectedFile = e.target.files[0]
     setModalIsOpen(true)
 
@@ -122,7 +122,7 @@ const UpdateAvatar = props => {
   const handleCropChange = crop => {
     setCrop(crop)
 
-    console.log(crop)
+    // console.log(crop)
     if (file && crop.width && crop.height) {
       getCroppedImage(file, crop)
     }
@@ -149,7 +149,7 @@ const UpdateAvatar = props => {
         crop.height
       )
 
-      console.log(ctx)
+      // console.log(ctx)
 
       canvas.toBlob(
         blob => {
@@ -158,7 +158,7 @@ const UpdateAvatar = props => {
             lastModified: file.lastModified
           })
           setCroppedImage(croppedFile)
-          console.log(croppedFile)
+          // console.log(croppedFile)
         },
         file.type,
         1
@@ -174,11 +174,11 @@ const UpdateAvatar = props => {
     e.preventDefault()
 
     if (croppedImage) {
-      console.log(croppedImage)
+      // console.log(croppedImage)
       // await sleep(1000)
       const formData = new FormData()
-      console.log('croppedImage', croppedImage)
-      console.log('file.name', file.name)
+      // console.log('croppedImage', croppedImage)
+      // console.log('file.name', file.name)
       formData.append('avatarImage', croppedImage, file.name)
 
       try {
@@ -187,7 +187,7 @@ const UpdateAvatar = props => {
           formData
         )
 
-        console.log(response.data)
+        // console.log(response.data)
         window.location.reload()
         // Close the modal after successful upload
         setModalIsOpen(false)
@@ -251,7 +251,7 @@ const UpdateAvatar = props => {
             // style={{ maxWidth: '500px' }}
             onComplete={crop => {
               getCroppedImage(file, crop)
-              console.log('CROPPED IMAGE:', croppedImage)
+              // console.log('CROPPED IMAGE:', croppedImage)
             }}
           >
             {file && <img src={URL.createObjectURL(file)} alt="Avatar" />}

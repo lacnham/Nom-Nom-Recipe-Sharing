@@ -81,7 +81,7 @@ export const FetchAllIngAndCountry = () => {
       label: item
     }))
 
-    console.log(transFormedDiet)
+    // console.log(transFormedDiet)
 
     setUnitOptions(transformUnitData)
     setCountryOptions(transformedCountryData)

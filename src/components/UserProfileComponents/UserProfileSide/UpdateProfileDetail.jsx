@@ -8,8 +8,36 @@ export const UpdateProfileDetail = ({ props, onDataFromChild, error }) => {
   const [password, setPassword] = useState('')
   const [veryPassword, setVeryPassword] = useState('')
   const [data, setData] = useState({})
+  const [errors, setErrors] = useState('')
+  const [isFormOk, setIsFormOk] = useState(false)
 
-  console.log(props)
+  // console.log(props)
+
+  useEffect(() => {
+    const validatedErrors = validateInput({ password, veryPassword })
+    setErrors(validatedErrors)
+  }, [password, veryPassword])
+
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+
+  function validateInput({ password, veryPassword }) {
+    const errors = {}
+
+    if (!password || !veryPassword) {
+      errors.general = 'Please fill in all fields'
+    }
+
+    if (!passwordRegex.test(password)) {
+      errors.password =
+        'Password must be at least 8 characters and contain a lowercase letter, an uppercase letter, and a number'
+    }
+
+    if (veryPassword !== password) {
+      errors.veryPassword = 'Passwords do not match'
+    }
+
+    return errors
+  }
 
   const [childMessage, setChildMessage] = useState('')
 
@@ -26,15 +54,21 @@ export const UpdateProfileDetail = ({ props, onDataFromChild, error }) => {
   }
 
   useEffect(() => {
-    console.log(name, password)
-    const updatedData = {
-      username: name,
-      password: password,
-      verifypassword: veryPassword
+    // console.log(Object.keys(errors).length)
+    if (Object.keys(errors).length === 0) {
+      // console.log(name, password)
+      const updatedData = {
+        username: name,
+        password: password,
+        verifypassword: veryPassword
+      }
+      setData(updatedData)
+      handleChildData(updatedData)
+    } else {
+      setData('')
+      handleChildData('')
     }
-    setData(updatedData)
-    handleChildData(updatedData)
-  }, [name, password, veryPassword])
+  }, [name, password, veryPassword, errors])
 
   const handleChildData = updatedData => {
     setChildMessage(updatedData)
@@ -73,6 +107,9 @@ export const UpdateProfileDetail = ({ props, onDataFromChild, error }) => {
           <div>{email}</div>
         </div> */}
         <div>
+          {errors.password && (
+            <div className={styles.warning}>{errors.password}</div>
+          )}
           <label>Password:</label>
           <input
             className={`${styles.inputField}`}
@@ -85,6 +122,9 @@ export const UpdateProfileDetail = ({ props, onDataFromChild, error }) => {
           />
         </div>
         <div>
+          {errors.veryPassword && (
+            <div className={styles.warning}>{errors.veryPassword}</div>
+          )}
           <label>Retype-Password:</label>
           <input
             className={`${styles.inputField}`}
