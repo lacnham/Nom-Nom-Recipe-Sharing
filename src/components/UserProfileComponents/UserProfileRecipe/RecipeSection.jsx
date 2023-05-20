@@ -12,6 +12,7 @@ import useModal from '../../ModalComponents/useModal'
 import Modal from '../../ModalComponents/Modal'
 import { UpdateRecipe } from './UpdateRecipe'
 import { FetchRecipeByID } from '../../Fetch/Recipes/FetchRecipeByID'
+import { UploadCollectionImage, UploadImage } from '../../ApiPost/LoadImage'
 
 export const RecipeSection = props => {
   // const [name, setName] = useState('')
@@ -35,6 +36,8 @@ export const RecipeSection = props => {
     description: ''
   })
 
+  const [message, setMessage] = useState()
+
   const style = {
     backgroundColor: 'var(--light-orange)',
     color: 'var(--black-purple)',
@@ -42,7 +45,7 @@ export const RecipeSection = props => {
     colorHover: 'var(--black-purple)'
   }
 
-  const { isShowing, toggle } = useModal(true)
+  const { isShowing, toggle, ndIsShowing, secondToggle } = useModal(true)
 
   const { userData } = useContext(AuthContext)
   // console.log('user data ', userData)
@@ -135,7 +138,10 @@ export const RecipeSection = props => {
     // console.log('submit dc roi ne')
     try {
       const res = await axios.request(configUpdate)
-      refreshPage()
+      setMessage(res.data.message)
+      UploadImage(updateData.image_link, id, setMessage)
+      secondToggle()
+      toggle()
     } catch (error) {
       console.log(error)
     }
@@ -147,6 +153,33 @@ export const RecipeSection = props => {
       style={{ display: `${props.display.recipe}` }}
       // style={{ display: `none` }}
     >
+      <Modal
+        isShowing={ndIsShowing}
+        hide={secondToggle}
+        btnMsg={'Confirm'}
+        title={''}
+        modalMsg={
+          // <UpdateForm
+          //   // collection={props.collection}
+          //   setUpdateForm={props.setUpdateForm}
+          //   setCurrentStyle={props.setCurrentStyle}
+          //   setName={setName}
+          //   setNote={setNote}
+          //   name={name}
+          //   note={note}
+          // />
+          message
+        }
+        closeable={true}
+        titleIcon={<i className="fa-solid fa-circle-check"></i>}
+        btnFn={
+          // console.log('hello') // navigate('/', { replace: true })
+          // handleSubmit
+          () => {
+            refreshPage()
+          }
+        }
+      />
       <Modal
         isShowing={isShowing}
         hide={toggle}
@@ -162,7 +195,12 @@ export const RecipeSection = props => {
           //   name={name}
           //   note={note}
           // />
-          <UpdateRecipe data={updateData} id={id} setData={setUpdateData} />
+          <UpdateRecipe
+            data={updateData}
+            id={id}
+            setData={setUpdateData}
+            setMessage={setMessage}
+          />
         }
         closeable={true}
         titleIcon={<i className="fa-solid fa-circle-check"></i>}

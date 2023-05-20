@@ -1,37 +1,47 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from '../../../styles/UserProfile/UpdateForm.module.css'
 import { FetchRecipeByID } from '../../Fetch/Recipes/FetchRecipeByID'
+import { UploadImage } from '../../ApiPost/LoadImage'
+import Select from 'react-select'
 
 export const UpdateRecipe = props => {
   // const { recipe } = FetchRecipeByID(props.id)
 
   // console.log(recipe && recipe)
-  let duration = [{ val: '', key: '' }]
-  const durUnits = ['minutes', 'hours']
+  const durUnits = [
+    { value: 'minutes', label: 'minutes' },
+    { value: 'hours', label: 'hours' }
+  ]
   const [name, setName] = useState('')
   const [des, setDes] = useState('')
   const [dur, setDur] = useState('')
+  const [durUnit, setDurunit] = useState('')
   const [serv, setServ] = useState('')
   const [image, setImage] = useState('')
+  const [message, setMessage] = useState('')
 
   useEffect(() => {
     console.log(props.data)
-    duration = Object.entries(props.data.duration).map(([key, val] = entry) => {
-      return `${val} ${key}`
-    })
-    setDur(duration[0].val)
+    let duration = Object.entries(props.data.duration).map(
+      ([key, val] = entry) => {
+        setDur(val)
+        setDurunit(key)
+        // return { val, key }
+      }
+    )
+
     setName(props.data.name)
     setDes(props.data.description)
     setServ(props.data.serving_size)
   }, [])
 
+  // console.log(dur)
+
   const handleOnChange = () => {
     props.setData({
       name: name,
       serving_size: serv,
-      duration: {
-        hour: dur
-      },
+      duration: `${dur} ${durUnit}`,
       image_link: image,
       description: des
     })
@@ -40,7 +50,7 @@ export const UpdateRecipe = props => {
   const file = useRef(null)
   const handleUploadImage = e => {
     // console.log('Hinh ne ba', e.target.file)
-    setImage(e.target.file[0])
+    setImage(e.target.files[0])
   }
 
   const handleTrigger = () => {
@@ -67,7 +77,9 @@ export const UpdateRecipe = props => {
           onChange={e => setName(e.target.value)}
         />
       </div>
-      <div className={`${styles.updateName} ${styles.flexRow}`}>
+      <div
+        className={`${styles.updateName} ${styles.flexRow}  ${styles.oneLine}`}
+      >
         <div
           className={`${styles.flexRow} ${styles.boxShadowPurple} ${styles.inputFieldContainer}`}
         >
@@ -88,13 +100,48 @@ export const UpdateRecipe = props => {
             className={`${styles.inputField}`}
             type="number"
             name="duration"
+            defaultValue={dur}
             min={1}
-            placeholder={serv}
-            onChange={e => setDur(e.target.value)}
+            placeholder={`${dur.val}`}
+            onChange={e => setDur({ val: e.target.value, key: dur.key })}
           />
 
           {/* <span>{duration[0].key}</span> */}
-          <span>{duration[0].key}</span>
+          <Select
+            className={`${styles.inputField} ${styles.select}`}
+            classNamePrefix="select"
+            options={durUnits}
+            defaultValue={durUnit}
+            placeholder={durUnit}
+            onChange={e => setDurunit(e.value)}
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                border: 'none',
+                width: '100%',
+                padding: '0',
+                // This line disable the blue border
+                boxShadow: state.isFocused ? 0 : 0,
+
+                '&:hover': {
+                  borderColor: '#ff8600',
+                  outline: 'none'
+                }
+              }),
+              menu: (baseStyles, state) => ({
+                ...baseStyles,
+                width: 'fit-content',
+                height: '200px',
+                overflow: 'auto',
+                display: 'flex'
+              }),
+
+              valueContainer: (baseStyles, state) => ({
+                ...baseStyles,
+                padding: '0'
+              })
+            }}
+          />
         </div>
         <div
           className={`${styles.boxShadowPurple} ${styles.imageButton}`}
@@ -105,7 +152,7 @@ export const UpdateRecipe = props => {
             type="file"
             style={{ display: 'none' }}
             ref={file}
-            onChange={handleUploadImage}
+            onChange={e => handleUploadImage(e)}
           />
           {/* <span>Image</span> */}
           <i class="fa-solid fa-images fa-lg"></i>
@@ -117,6 +164,7 @@ export const UpdateRecipe = props => {
         <div className={`${styles.updateImage}`}>
           <img
             // className={`${styles.uploadImage}`}
+            style={{ width: '100%' }}
             src={URL.createObjectURL(image)}
           />
         </div>

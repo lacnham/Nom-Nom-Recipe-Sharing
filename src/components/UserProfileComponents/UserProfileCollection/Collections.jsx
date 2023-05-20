@@ -9,6 +9,7 @@ import { RecipeTemp } from './RecipeTemp'
 import useModal from '../../ModalComponents/useModal'
 import Modal from '../../ModalComponents/Modal'
 import axios from 'axios'
+import { UploadCollectionImage } from '../../ApiPost/LoadImage'
 const Collections = props => {
   const handleDisplay = () => {
     props.setCurrentStyle('flex')
@@ -18,6 +19,7 @@ const Collections = props => {
 
   const [name, setName] = useState(props.collection.name)
   const [note, setNote] = useState(props.collection.note)
+  const [image, setImage] = useState('')
   const [message, setMessage] = useState('')
 
   let config = {
@@ -39,6 +41,7 @@ const Collections = props => {
     try {
       const res = await axios.request(config)
       setMessage(res.data.message)
+      UploadCollectionImage(image, props.collection.collection_id)
       toggle()
       secondToggle()
     } catch (error) {
@@ -134,6 +137,8 @@ const Collections = props => {
             setNote={setNote}
             name={name}
             note={note}
+            image={image}
+            setImage={setImage}
           />
         }
         closeable={true}

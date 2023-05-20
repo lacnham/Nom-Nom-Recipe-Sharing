@@ -10,6 +10,7 @@ import { Post } from '../../ApiPost/Post'
 import axios from 'axios'
 import Modal from '../../ModalComponents/Modal'
 import useModal from '../../ModalComponents/useModal'
+import { UploadCollectionImage } from '../../ApiPost/LoadImage'
 // import { CollectionContext } from './UserCollectionContext'
 
 const CollectionSection = props => {
@@ -85,6 +86,7 @@ const CollectionSection = props => {
   const handleSubmit = async () => {
     try {
       const res = await axios.request(config)
+      // UploadCollectionImage(image, res.data.collection_id)
       setMessage(res.data.message)
       toggle()
     } catch (error) {
@@ -170,17 +172,16 @@ const CollectionSection = props => {
                 // onMouseLeave={handleOut}
               >
                 {image ? (
-                  // <div className={`${styles.uploadImage}`}>
-                  <img
-                    // className={`${styles.uploadImage}`}
-                    src={URL.createObjectURL(image)}
-                  />
+                  <div className={`${styles.uploadImage}`}>
+                    <img
+                      // className={`${styles.uploadImage}`}
+                      style={{ width: '100%' }}
+                      src={URL.createObjectURL(image)}
+                    />
+                  </div>
                 ) : (
                   // </div>
-                  <img
-                    src="https://s3-alpha-sig.figma.com/img/a9d5/c9e4/7bcdb80be4eeb5cc36cf4b46e74dcfb7?Expires=1684713600&Signature=F4xTgsc2NTv-yipgbW35D0ZnqIYtbU89Yvkj5G1RS8q2CzJTqepsgmLYrAhK3BAQqRfQHWffqfZjm~xYGx~e6CALP1nMzshTLDrlQadcWW37L7RoR78MHGxab2hTeVvcqfLjfZN8zTL2YO5tWo~gv2vGIVDuukj5ix~GzB0dYACKE5Emet8swVZyL~HCbg8nULIIW1FPFXgC3Yrx0bd33vWozIxfnpVutaix3hl4k~LOWckucsQuhO4aUF-FWi-8ET1a59-CSnsSJU2v-DM9ClYS1hEarBTksqNr-M-IfAMcdhGoC13b8F7CsTColwpJaz9TQj1-MZzigEIPSUZ1pg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
-                    style={{ width: '100%' }}
-                  ></img>
+                  <img src="https://s3-alpha-sig.figma.com/img/a9d5/c9e4/7bcdb80be4eeb5cc36cf4b46e74dcfb7?Expires=1684713600&Signature=F4xTgsc2NTv-yipgbW35D0ZnqIYtbU89Yvkj5G1RS8q2CzJTqepsgmLYrAhK3BAQqRfQHWffqfZjm~xYGx~e6CALP1nMzshTLDrlQadcWW37L7RoR78MHGxab2hTeVvcqfLjfZN8zTL2YO5tWo~gv2vGIVDuukj5ix~GzB0dYACKE5Emet8swVZyL~HCbg8nULIIW1FPFXgC3Yrx0bd33vWozIxfnpVutaix3hl4k~LOWckucsQuhO4aUF-FWi-8ET1a59-CSnsSJU2v-DM9ClYS1hEarBTksqNr-M-IfAMcdhGoC13b8F7CsTColwpJaz9TQj1-MZzigEIPSUZ1pg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"></img>
                 )}
               </div>
               <i

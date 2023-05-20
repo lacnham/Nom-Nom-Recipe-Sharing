@@ -34,6 +34,8 @@ const RecipeDetail = props => {
     description: props.recipe.description
   }
 
+  console.log('Image link ne', props.recipe.image_link)
+
   const [currentSize, setCurrentSize] = useState(
     // recipe.serving ? recipe.serving : ''
     parseInt(props.recipe.serving_size)

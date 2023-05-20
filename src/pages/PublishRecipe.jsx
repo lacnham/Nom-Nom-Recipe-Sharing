@@ -8,6 +8,7 @@ import axios from 'axios'
 import { DefaultButton } from '../components/Button'
 import Modal from '../components/ModalComponents/Modal'
 import useModal from '../components/ModalComponents/useModal'
+import { UploadImage } from '../components/ApiPost/LoadImage'
 
 const PublishRecipe = () => {
   const { countryOptions, unitOptions, ingredientOPtion, dietOptions } =
@@ -103,6 +104,7 @@ const PublishRecipe = () => {
   }
 
   const file = useRef(null)
+
   const onFileChange = e => {
     setImage(e.target.files[0])
   }
@@ -136,6 +138,8 @@ const PublishRecipe = () => {
     // console.log('Access token ' + localStorage.accesstoken)
     try {
       const res = await axios.request(config)
+      UploadImage(image, res.data.recipeId, setMessage)
+      console.log(res.data.recipeId)
       setMessage(res.data.message)
     } catch (error) {
       console.log(error)

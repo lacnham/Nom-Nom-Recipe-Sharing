@@ -102,13 +102,19 @@
   padding: 0px 8px;
 }
 
-.inputFieldContainer:nth-child(1),
-.inputFieldContainer:nth-child(2) {
-  margin-right: 20px;
+.oneLine {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 0.1fr;
+  gap: 8px;
+}
+.one {
+  width: 100%;
+  gap: 8px;
 }
 
-.inputFieldContainer>.inputField {
-  
+.inputFieldContainer:nth-child(2) {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 }
 
 .imageButton {
