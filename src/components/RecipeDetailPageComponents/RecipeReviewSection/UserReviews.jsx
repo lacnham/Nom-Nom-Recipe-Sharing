@@ -15,41 +15,7 @@ const UserReview = props => {
     isHalf: true
   }
 
-  // const userReviewList = [
-  //   {
-  //     key: 1,
-  //     avatar: avatar,
-  //     name: 'Khoi',
-  //     ratingValue: 4,
-  //     feedBack:
-  //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur'
-  //   },
-  //   {
-  //     key: 2,
-  //     avatar: avatar,
-  //     name: 'Khoi',
-  //     ratingValue: 3.5,
-  //     feedBack:
-  //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur'
-  //   },
-  //   {
-  //     key: 3,
-  //     avatar: avatar,
-  //     name: 'Khoi',
-  //     ratingValue: 5,
-  //     feedBack:
-  //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur'
-  //   },
-  //   {
-  //     key: 4,
-  //     avatar: avatar,
-  //     name: 'Khoi',
-  //     ratingValue: 2,
-  //     feedBack:
-  //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur'
-  //   }
-  // ]
-
+  const [imgURL, setImgURL] = useState('src/images/Default_img.svg')
   const [reviews, setReviews] = useState([])
 
   let config = {
@@ -57,10 +23,24 @@ const UserReview = props => {
     url: `http://localhost:3000/recipe/${props.id}/reviews`
   }
 
+  const fetchImage = async id => {
+    let configImg = {
+      method: 'GET',
+      url: `http://localhost:3000/user/get-avatar/${id}`
+    }
+    try {
+      const res = await axios.request(configImg)
+      setImgURL(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const fetch = async () => {
     try {
       const res = await axios.request(config)
       setReviews(res && res.data)
+      fetchImage(res && res.data.id)
     } catch (error) {
       console.log(error)
     }
@@ -78,7 +58,7 @@ const UserReview = props => {
       className={`${styles.userReviewContainer} ${styles.boxShadowPurple}`}
     >
       <div className={`${styles.flexRow} ${styles.userInfoContainer}`}>
-        <img className={`${styles.userAvatar}`} src={review.avatar} />
+        <img className={`${styles.userAvatar}`} src={imgURL} />
         <div className={`${styles.flexColumm}`}>
           <div>{review.username}</div>
           <ReactStars {...star} value={review.rating} />

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styles from '../../../styles/UserProfile/UserProfileMainPage.module.css'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { UpdateButton } from '../UpdateProfileButton'
 import { UpdateForm } from '../../FormComponents/UpdateForm'
 import { RecipeTemp } from './RecipeTemp'
@@ -21,6 +21,7 @@ const Collections = props => {
   const [note, setNote] = useState(props.collection.note)
   const [image, setImage] = useState('')
   const [message, setMessage] = useState('')
+  const [imageURL, setImageURL] = useState('src/images/Default_img.svg')
 
   let config = {
     method: 'PUT',
@@ -31,6 +32,25 @@ const Collections = props => {
     },
     data: { name: name, note: note }
   }
+
+  let configImg = {
+    method: 'GET',
+    url: `http://localhost:3000/collection/get-img/${props.collection.collection_id}`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: localStorage.accesstoken
+    }
+  }
+
+  useEffect(() => {
+    axios
+      .request(configImg)
+      .then(res => {
+        console.log(res.data)
+        res && setImageURL(res.data)
+      })
+      .catch(error => console.log(error))
+  })
 
   const refreshPage = () => {
     window.location.reload(false)
@@ -78,9 +98,6 @@ const Collections = props => {
   //   props.setSection(<RecipeTemp id={props.collection.collection_id} />)
   // }
 
-  const [imageURL, setImageURL] = useState(
-    props.image || 'src/images/Default_img.svg'
-  )
   const [imageError, setImageError] = useState(false)
 
   const handleImageError = () => {

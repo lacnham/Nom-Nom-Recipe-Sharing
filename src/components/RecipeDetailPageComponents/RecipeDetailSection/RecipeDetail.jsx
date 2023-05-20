@@ -23,7 +23,7 @@ const RecipeDetail = props => {
   const recipe = {
     id: props.id,
     title: props.recipe.name,
-    img: props.recipe.image_link,
+    img: props.recipe.image_link || 'src/images/Default_img.svg',
     commonInfo: {
       duration: duration,
       serving: parseInt(props.recipe.serving_size),
@@ -34,7 +34,7 @@ const RecipeDetail = props => {
     description: props.recipe.description
   }
 
-  console.log('Image link ne', props.recipe.image_link)
+  // console.log('Image link ne', props.recipe.image_link)
 
   const [currentSize, setCurrentSize] = useState(
     // recipe.serving ? recipe.serving : ''
