@@ -38,11 +38,6 @@ const PublishRecipe = () => {
 
   const [diets, setDiets] = useState([])
 
-  useEffect(() => {
-    // console.log(ingredients)
-    // console.log('Diet ne ', diets)
-  }, [diets])
-
   const handleAddOrigin = e => {
     // console.log('Origin ne hihi', e.value)
     setOrigin(e.value)

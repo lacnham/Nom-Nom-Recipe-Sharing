@@ -9,17 +9,19 @@ import { RecipeTemp } from './RecipeTemp'
 import useModal from '../../ModalComponents/useModal'
 import Modal from '../../ModalComponents/Modal'
 import axios from 'axios'
-import { UploadCollectionImage } from '../../ApiPost/LoadImage'
+import { DefaultImage, UploadCollectionImage } from '../../ApiPost/LoadImage'
 const Collections = props => {
   const handleDisplay = () => {
     props.setCurrentStyle('flex')
   }
 
+  const { defaultFile } = DefaultImage()
+
   const { isShowing, ndIsShowing, toggle, secondToggle } = useModal(true)
 
   const [name, setName] = useState(props.collection.name)
   const [note, setNote] = useState(props.collection.note)
-  const [image, setImage] = useState('')
+  // const [image, setImage] = useState(defaultFile)
   const [message, setMessage] = useState('')
   const [imageURL, setImageURL] = useState('')
 

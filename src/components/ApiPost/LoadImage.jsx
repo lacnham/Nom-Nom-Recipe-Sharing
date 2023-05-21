@@ -2,8 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Form } from 'react-router-dom'
 
-export const UploadImage = async (image, id, setMessage) => {
-  console.log('work roi ne ba')
+export const UploadImage = async (image, id) => {
   const allowedTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/jfif']
 
   const formData = new FormData()
@@ -14,13 +13,13 @@ export const UploadImage = async (image, id, setMessage) => {
       Authorization: localStorage.accesstoken
     }
   }
-  let URL = `http://localhost:3000/collection/update-img/${id}`
-
-  console.log('cai id de upload image ne', id)
+  let URL = `http://localhost:3000/recipe/update-img/${id}`
+  console.log('log them cai id nua', id)
+  console.log('log cai image ra coi choi', image)
   try {
     const res = await axios.post(URL, formData, config)
   } catch (error) {
-    setMessage(error)
+    console.log(error)
   }
 }
 

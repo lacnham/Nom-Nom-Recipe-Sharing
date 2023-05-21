@@ -2,12 +2,11 @@ import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css
 
 import timeIcon from '../../../images/Nom nom icons/Time_atack.png'
 import peopleIcon from '../../../images/Nom nom icons/User_alt_fill.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const RecipeIntro = props => {
-  const [imageURL, setImageURL] = useState(
-    props.recipe.img || 'src/images/Default_img.svg'
-  )
+  const [imageURL, setImageURL] = useState('src/images/Default_img.svg')
   const [imageError, setImageError] = useState(false)
 
   const handleImageError = () => {
@@ -20,6 +19,17 @@ const RecipeIntro = props => {
   if (props.recipe.commonInfo.dietType == null) {
     props.recipe.commonInfo.dietType = 'none'
   }
+  let config = {
+    method: 'get',
+    url: `http://localhost:3000/recipe/get-img/${props.recipe.id}`
+  }
+
+  useEffect(() => {
+    axios
+      .request(config)
+      .then(res => setImageURL(res.data))
+      .catch(error => console.log(error))
+  })
 
   // console.log('Dietary in common info', props.recipe.commonInfo.dietType)
 
