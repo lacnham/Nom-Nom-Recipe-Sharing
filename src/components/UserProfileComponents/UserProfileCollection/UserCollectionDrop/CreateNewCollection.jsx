@@ -20,6 +20,7 @@ export const CreateNewCollection = props => {
   const [currentDisplay, setCurrentDisplay] = useState('none')
 
   const [message, setMessage] = useState()
+  const [imageURL, setImageURL] = useState('')
 
   const { isShowing, toggle } = useModal()
 
@@ -68,6 +69,7 @@ export const CreateNewCollection = props => {
       const res = await axios.request(config)
       // console.log(res.data.message)
       setMessage(res.data.message)
+      UploadCollectionImage(imageURL, res.data.collectionId)
       props.setCurrent('none')
       toggle()
     } catch (error) {

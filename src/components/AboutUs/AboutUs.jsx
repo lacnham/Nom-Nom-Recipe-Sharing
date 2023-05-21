@@ -1,6 +1,7 @@
 import React from 'react'
 import AboutUsStyles from '../AboutUs/AboutUs.module.css'
 import nham_img from '/images/nham_avatar.png'
+import linh_img from '/images/346121653_949292926116672_4015539475013775595_n.jpg'
 import Header from '../Header'
 
 const member = [
@@ -13,8 +14,12 @@ const member = [
   },
   {
     title: 'Linh',
-    features: ['Back-end Coder', 'TOI CHI MUON NAM NGU HELP'],
+    features: [
+      'Back-end Coder',
+      'Beautys faithful simp for the gorgeous, fueled by beauty and cat😇'
+    ],
     buttonText: 'Github',
+    img: linh_img,
     url: 'https://github.com/Linh-0v0'
   },
   {

@@ -3,11 +3,13 @@ import styles from '../../../../styles/UserProfile/UserProfleCollection/Collecti
 import axios from 'axios'
 import Modal from '../../../ModalComponents/Modal'
 import useModal from '../../../ModalComponents/useModal'
+import { UploadCollectionImage } from '../../../ApiPost/LoadImage'
 // import { AddRecipeToCollection } from './AddRecipeToCollection'
 
 export const CollectionInDropList = props => {
   const [message, setMessage] = useState('')
   const [isSuccess, setIsSuccess] = useState(false)
+  //
 
   const { isShowing, toggle } = useModal()
 
@@ -38,6 +40,7 @@ export const CollectionInDropList = props => {
     try {
       const res = await axios.request(config)
       setMessage(res.data.message)
+
       // console.log('log choi choi 1 cai gi do', res.data)
       setIsSuccess(true)
       handleBlur()

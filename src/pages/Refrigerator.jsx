@@ -7,7 +7,7 @@ import { BackToTopButton } from '../components/Button'
 import Select from 'react-select'
 import { Button2 } from '../components/Button'
 import AutoClickButton from '../components/AutoClickButton'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Refrigerator = () => {
   const [firstTime, setFirstTime] = useState(true)
@@ -35,7 +35,7 @@ const Refrigerator = () => {
     }
   }
 
-  async function fetchDataWithInput() {
+  async function fetchDataWithInput () {
     const url = 'http://localhost:3000/recipe/search-by-ingredients'
     const body = {
       ingredients: selectedOptions
@@ -60,7 +60,7 @@ const Refrigerator = () => {
     }
   }
 
-  async function fetchDataWithOutInput() {
+  async function fetchDataWithOutInput () {
     const url = 'http://localhost:3000/recipe'
     try {
       const response = await fetch(url, {
@@ -103,6 +103,12 @@ const Refrigerator = () => {
 
     fetchOptions()
   }, [])
+
+  const navigation = useNavigate()
+
+  const clickToAdd = () => {
+    navigation('/publishRecipe')
+  }
 
   const Card = lazy(() => import('../components/Card'))
 
@@ -186,6 +192,7 @@ const Refrigerator = () => {
                   <Button2
                     icon={<i className={'fa-solid fa-pen-to-square'}></i>}
                     options={'Add recipe'}
+                    fn={clickToAdd}
                   />
                 </div>
               ) : (

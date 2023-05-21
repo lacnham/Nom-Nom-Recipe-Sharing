@@ -21,7 +21,7 @@ const Collections = props => {
   const [note, setNote] = useState(props.collection.note)
   const [image, setImage] = useState('')
   const [message, setMessage] = useState('')
-  const [imageURL, setImageURL] = useState('src/images/Default_img.svg')
+  const [imageURL, setImageURL] = useState('')
 
   let config = {
     method: 'PUT',
@@ -45,10 +45,7 @@ const Collections = props => {
   useEffect(() => {
     axios
       .request(configImg)
-      .then(res => {
-        console.log(res.data)
-        res && setImageURL(res.data)
-      })
+      .then(res => setImageURL(res.data))
       .catch(error => console.log(error))
   })
 
@@ -61,7 +58,7 @@ const Collections = props => {
     try {
       const res = await axios.request(config)
       setMessage(res.data.message)
-      UploadCollectionImage(image, props.collection.collection_id)
+      UploadCollectionImage(imageURL, props.collection.collection_id)
       toggle()
       secondToggle()
     } catch (error) {
@@ -82,8 +79,6 @@ const Collections = props => {
     try {
       const res = await axios.request(configDelete)
       setMessage(res.data.message)
-      // refreshPage()
-      // confirm()
       secondToggle()
     } catch (error) {
       setMessage(res.data.message)
@@ -154,8 +149,8 @@ const Collections = props => {
             setNote={setNote}
             name={name}
             note={note}
-            image={image}
-            setImage={setImage}
+            image={imageURL}
+            setImage={setImageURL}
           />
         }
         closeable={true}

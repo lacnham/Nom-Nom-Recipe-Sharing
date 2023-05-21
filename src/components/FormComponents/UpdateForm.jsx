@@ -7,7 +7,7 @@ export const UpdateForm = props => {
   // const [note, setNote] = useState(props.collectionData.note)
   // const [name, setName] = useState(props.collection.name)
   // const [note, setNote] = useState(props.collection.note)
-  // const [image, setImage] = useState('')
+  const [image, setImage] = useState('')
   // const [message, setMessage] = useState('')
 
   const handleChangeName = e => {
@@ -25,7 +25,7 @@ export const UpdateForm = props => {
 
   const fileTemp = useRef(null)
   const handleUploadImage = e => {
-    props.setImage(e.target.files[0])
+    setImage(e.target.files[0])
   }
 
   const handleTrigger = () => {
@@ -48,6 +48,7 @@ export const UpdateForm = props => {
           <label className={`${styles.label}`}>Name</label>
           <input
             className={styles.inputField}
+            required={true}
             type="text"
             id="name"
             name="name"
@@ -63,6 +64,7 @@ export const UpdateForm = props => {
         >
           <input
             className={`${styles.inputField}`}
+            required={true}
             type="file"
             style={{ display: 'none' }}
             ref={fileTemp}
@@ -72,13 +74,13 @@ export const UpdateForm = props => {
           <i class="fa-solid fa-images fa-lg"></i>
         </div>
       </div>
-      {props.image ? (
+      {image ? (
         // <div className={`${styles.uploadImage}`}>
         <div className={`${styles.updateImage}`}>
           <img
             // className={`${styles.uploadImage}`}
             style={{ width: '100%' }}
-            src={URL.createObjectURL(props.image)}
+            src={URL.createObjectURL(image)}
           />
         </div>
       ) : // </div>
@@ -92,6 +94,7 @@ export const UpdateForm = props => {
           id="note"
           name="note"
           rows={10}
+          // required={true}
           // value={props.note}
           defaultValue={props.note}
           // placeholder={props.note}
