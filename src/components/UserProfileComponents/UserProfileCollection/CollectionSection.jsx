@@ -30,22 +30,10 @@ const CollectionSection = props => {
   const { userCollectionData } = useContext(AuthContext)
 
   const { isShowing, toggle } = useModal()
-  // console.log('here:', userCollectionData)
-
-  // const collections = FetchUserCollections()
-
-  // console.log(collections)
 
   if (!userCollectionData) {
     return <div>Loading user data...</div>
   }
-
-  // const style = {
-  //   collection: props.display.collection,
-  //   recipes: 'none'
-  // }
-
-  // const [display, setDisplay] = useState(style)
 
   const style = {
     backgroundColor: 'var(--light-orange)',
@@ -59,7 +47,6 @@ const CollectionSection = props => {
     setImage(e.target.files[0])
   }
   const handleClickImage = () => {
-    // console.log(file)
     file.current.click()
   }
 
@@ -95,9 +82,6 @@ const CollectionSection = props => {
       console.log(error)
     }
   }
-  // const handleSubmit = () => {
-  //   Post(name, note)
-  // }
 
   const collection = userCollectionData.map(ele => (
     <Collections
@@ -105,8 +89,6 @@ const CollectionSection = props => {
       collection={ele}
       setCurrentStyle={props.setCurrentStyle}
       setUpdateForm={props.setUpdateForm}
-      // setDisplay={setDisplay}
-      // setSection={props.setSection}x
     ></Collections>
   ))
 
@@ -123,11 +105,7 @@ const CollectionSection = props => {
         modalMsg={message}
         closeable={true}
         titleIcon={<i className="fa-solid fa-circle-check"></i>}
-        btnFn={
-          // console.log('hello') // navigate('/', { replace: true })
-          //
-          () => window.location.reload(false)
-        }
+        btnFn={() => window.location.reload(false)}
       />
       <div className={`${styles.createNewContainer} ${styles.flexColumn}`}>
         <DefaultButton
@@ -164,21 +142,15 @@ const CollectionSection = props => {
               className={`${styles.imageFormControl}`}
               onClick={handleClickImage}
             >
-              <div
-                className={`${styles.imgContainer}`}
-                // onMouseEnter={handleHover}
-                // onMouseLeave={handleOut}
-              >
+              <div className={`${styles.imgContainer}`}>
                 {image ? (
                   <div className={`${styles.uploadImage}`}>
                     <img
-                      // className={`${styles.uploadImage}`}
                       style={{ width: '100%' }}
                       src={URL.createObjectURL(image)}
                     />
                   </div>
                 ) : (
-                  // </div>
                   <img
                     style={{ width: '100%' }}
                     src="https://s3-alpha-sig.figma.com/img/a9d5/c9e4/7bcdb80be4eeb5cc36cf4b46e74dcfb7?Expires=1684713600&Signature=F4xTgsc2NTv-yipgbW35D0ZnqIYtbU89Yvkj5G1RS8q2CzJTqepsgmLYrAhK3BAQqRfQHWffqfZjm~xYGx~e6CALP1nMzshTLDrlQadcWW37L7RoR78MHGxab2hTeVvcqfLjfZN8zTL2YO5tWo~gv2vGIVDuukj5ix~GzB0dYACKE5Emet8swVZyL~HCbg8nULIIW1FPFXgC3Yrx0bd33vWozIxfnpVutaix3hl4k~LOWckucsQuhO4aUF-FWi-8ET1a59-CSnsSJU2v-DM9ClYS1hEarBTksqNr-M-IfAMcdhGoC13b8F7CsTColwpJaz9TQj1-MZzigEIPSUZ1pg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"

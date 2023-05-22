@@ -107,7 +107,6 @@ const Collections = props => {
     if (!imageError) {
       setImageURL('src/images/Default_img.svg')
       setImageError(true)
-      console.log()
     }
   }
 
@@ -163,10 +162,7 @@ const Collections = props => {
         }
         closeable={true}
         titleIcon={<i className="fa-solid fa-circle-check"></i>}
-        btnFn={
-          // console.log('hello') // navigate('/', { replace: true })
-          handleSubmit
-        }
+        btnFn={handleSubmit}
       />
       <Modal
         isShowing={ndIsShowing}
@@ -176,12 +172,9 @@ const Collections = props => {
         modalMsg={message}
         closeable={true}
         titleIcon={<i className="fa-solid fa-circle-check"></i>}
-        btnFn={
-          // console.log('hello') // navigate('/', { replace: true })
-          () => {
-            refreshPage()
-          }
-        }
+        btnFn={() => {
+          refreshPage()
+        }}
       />
       <div className={`${styles.updateDeleteContainer} ${styles.flexRow}`}>
         <UpdateButton fn={handleClick} option={'Update'} />

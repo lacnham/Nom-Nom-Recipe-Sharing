@@ -36,7 +36,6 @@ const RecoverForm = () => {
       })
       .catch(error => {
         if (error.response) {
-          console.log(error.response.data)
           setModalProps(prevState => ({
             ...prevState,
             title: 'Error',

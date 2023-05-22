@@ -16,13 +16,6 @@ export const CollectionRecipes = props => {
     return <div> Loading...</div>
   }
 
-  // console.log(recipes)
-
-  // const collection = {
-  //   title: 'tet',
-  //   description: 'lorem',
-  //   img: img
-  // }
   return (
     <>
       <Header />
