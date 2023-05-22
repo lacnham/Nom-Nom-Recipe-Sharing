@@ -8,10 +8,10 @@ const ClickChangeStyle = (current, set, style) => {
     let newStyle
     if (current == style.default) {
       newStyle = style.change
-      console.log(1)
+      // console.log(1)
     } else {
       newStyle = style.default
-      console.log(2)
+      // console.log(2)
     }
 
     set(newStyle)

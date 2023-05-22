@@ -56,10 +56,10 @@ const SearchBar = ({
         )
         const recipesByCountryPreferenceJSON =
           await recipesByCountryPreference.json()
-        console.log(
-          recipesByCountryPreferenceJSON,
-          recipesByDietaryPreferenceJSON
-        )
+        // console.log(
+        //   recipesByCountryPreferenceJSON,
+        //   recipesByDietaryPreferenceJSON
+        // )
         handleChildData(
           compareObjectsByRecipeId(
             recipesByCountryPreferenceJSON,

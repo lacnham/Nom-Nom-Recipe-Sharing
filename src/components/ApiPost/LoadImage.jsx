@@ -14,8 +14,8 @@ export const UploadImage = async (image, id) => {
     }
   }
   let URL = `http://localhost:3000/recipe/update-img/${id}`
-  console.log('log them cai id nua', id)
-  console.log('log cai image ra coi choi', image)
+  // console.log('log them cai id nua', id)
+  // console.log('log cai image ra coi choi', image)
   try {
     const res = await axios.post(URL, formData, config)
   } catch (error) {
