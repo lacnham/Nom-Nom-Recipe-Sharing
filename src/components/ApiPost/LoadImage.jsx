@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Form } from 'react-router-dom'
+import { Form, json } from 'react-router-dom'
 
 export const UploadImage = async (image, id) => {
   const allowedTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/jfif']
@@ -38,6 +38,23 @@ export const UploadCollectionImage = async (image, id) => {
 
   try {
     const res = await axios.post(URL, formData, config)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const LoadUserImg = async id => {
+  let configImg = {
+    method: 'GET',
+    url: `http://localhost:3000/user/get-avatar/${id}`
+  }
+
+  console.log('id of img', id)
+
+  try {
+    const res = await axios.request(configImg)
+    console.log('Response data:', res.data)
+    return res.data
   } catch (error) {
     console.log(error)
   }

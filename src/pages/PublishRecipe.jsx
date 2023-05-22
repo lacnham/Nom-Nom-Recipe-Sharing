@@ -13,13 +13,6 @@ import { UploadImage } from '../components/ApiPost/LoadImage'
 const PublishRecipe = () => {
   const { countryOptions, unitOptions, ingredientOPtion, dietOptions } =
     FetchAllIngAndCountry()
-  // console.log(countryOptions)
-  // console.log(unitOptions[0])
-
-  // const unitArray = Array.from(unitOptions)
-  // useEffect(() => {
-  //   console.log(unitArray)
-  // }, [])
 
   const durationUnits = ['hours', 'minutes']
   const [name, setName] = useState('')

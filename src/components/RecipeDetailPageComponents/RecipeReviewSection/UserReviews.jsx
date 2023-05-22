@@ -3,6 +3,7 @@ import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css
 import avatar from '../../../images/avatarTemp.png'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { LoadUserImg } from '../../ApiPost/LoadImage'
 // import RatingStars from './ReviewRatingStars';
 
 const UserReview = props => {
@@ -15,32 +16,21 @@ const UserReview = props => {
     isHalf: true
   }
 
-  const [imgURL, setImgURL] = useState('src/images/Default_img.svg')
+  const [imgURL, setImgURL] = useState('')
+  // const [userID, setUserID] = useState('')
   const [reviews, setReviews] = useState([])
+
+  // let userID = []
 
   let config = {
     method: 'GET',
     url: `http://localhost:3000/recipe/${props.id}/reviews`
   }
 
-  const fetchImage = async id => {
-    let configImg = {
-      method: 'GET',
-      url: `http://localhost:3000/user/get-avatar/${id}`
-    }
-    try {
-      const res = await axios.request(configImg)
-      setImgURL(res.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   const fetch = async () => {
     try {
       const res = await axios.request(config)
       setReviews(res && res.data)
-      fetchImage(res && res.data.id)
     } catch (error) {
       console.log(error)
     }
@@ -50,13 +40,47 @@ const UserReview = props => {
     fetch()
   }, [])
 
+  console.log('important', LoadUserImg('1'))
+
+  async function getImageURLs (reviews) {
+    const imageUrls = []
+    for (const review of reviews) {
+      const userImgURL = await LoadUserImg(review.id)
+      imageUrls.push(userImgURL)
+    }
+    return imageUrls
+  }
+
+  const [reviewImg, setReviewImg] = useState([]) // Fix the variable name
+
+  // Usage example
+  async function processReviews (reviews) {
+    setReviewImg(await getImageURLs(reviews))
+    // console.log(reviewImg) // Access the array of image URLs
+  }
+
+  // processReviews(reviews)
+
+  useEffect(() => {
+    if (reviewImg.length === 0) {
+      processReviews(reviews)
+    }
+  })
+
+  useEffect(() => {
+    console.log(reviewImg)
+  }, [reviewImg])
+
   const userReview = reviews.map(review => (
     <div
       key={review.review_id}
       className={`${styles.userReviewContainer} ${styles.boxShadowPurple}`}
     >
       <div className={`${styles.flexRow} ${styles.userInfoContainer}`}>
-        <img className={`${styles.userAvatar}`} src={imgURL} />
+        <img
+          className={`${styles.userAvatar}`}
+          src={reviewImg[review.review_id - 1]}
+        />
         <div className={`${styles.flexColumm}`}>
           <div>{review.username}</div>
           <ReactStars {...star} value={review.rating} />

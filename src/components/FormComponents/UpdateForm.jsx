@@ -3,12 +3,7 @@ import styles from '../../styles/UserProfile/UpdateForm.module.css'
 import axios from 'axios'
 
 export const UpdateForm = props => {
-  // const [name, setName] = useState(props.collectionData.name)
-  // const [note, setNote] = useState(props.collectionData.note)
-  // const [name, setName] = useState(props.collection.name)
-  // const [note, setNote] = useState(props.collection.note)
   const [image, setImage] = useState('')
-  // const [message, setMessage] = useState('')
 
   const handleChangeName = e => {
     props.setName(e.target.value)
@@ -17,11 +12,6 @@ export const UpdateForm = props => {
   const handleChangeNote = e => {
     props.setNote(e.target.value)
   }
-
-  // const handleCloseButton = () => {
-  //   props.setUpdateForm(<div></div>)
-  //   props.setCurrentStyle('none')
-  // }
 
   const fileTemp = useRef(null)
   const handleUploadImage = e => {
