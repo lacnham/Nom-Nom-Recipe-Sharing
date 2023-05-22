@@ -14,6 +14,7 @@ export const UploadImage = async (image, id) => {
     }
   }
   let URL = `http://localhost:3000/recipe/update-img/${id}`
+
   try {
     const res = await axios.post(URL, formData, config)
   } catch (error) {
