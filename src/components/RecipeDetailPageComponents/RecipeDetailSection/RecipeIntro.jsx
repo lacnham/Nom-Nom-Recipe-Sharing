@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const RecipeIntro = props => {
-  const [imageURL, setImageURL] = useState('src/images/Default_img.svg')
+  const [imageURL, setImageURL] = useState('/src/images/Default_img.svg')
   const [imageError, setImageError] = useState(false)
 
   const handleImageError = () => {
@@ -27,11 +27,15 @@ const RecipeIntro = props => {
   useEffect(() => {
     axios
       .request(config)
-      .then(res => setImageURL(res.data))
+      .then(res => {
+        // if (res.data.msg) {
+        //   setImageURL(defaultImg)
+        // } else {
+        setImageURL(res.data)
+        // }
+      })
       .catch(error => console.log(error))
   })
-
-  // console.log('Dietary in common info', props.recipe.commonInfo.dietType)
 
   const dietary = props.recipe.commonInfo.dietType
     ? props.recipe.commonInfo.dietType.map((ele, id) => (
@@ -64,12 +68,7 @@ const RecipeIntro = props => {
         <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
           <i class="fa-solid fa-user"></i>
 
-          <div
-          // onMouseUp={e => {
-          //   console.log('hello')
-          //   handleChange(e)
-          // }}
-          >
+          <div>
             <input
               type="number"
               min={1}
@@ -91,13 +90,8 @@ const RecipeIntro = props => {
             />{' '}
             people
           </div>
-          {/* <div><input type='number' min={1} value={props.currentSize} onChange={e => props.setCurrentSize(e)}/>{props.recipe.commonInfo.serving} people</div> */}
         </div>
-        {/* <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
-          <div>
-            <b>Calories</b>: {props.recipe.commonInfo.calories}
-          </div>
-        </div> */}
+
         <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
           <div>
             <b>Diet type</b>: {dietary}

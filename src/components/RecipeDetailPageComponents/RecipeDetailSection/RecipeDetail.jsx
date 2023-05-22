@@ -27,14 +27,11 @@ const RecipeDetail = props => {
     commonInfo: {
       duration: duration,
       serving: parseInt(props.recipe.serving_size),
-      // calories: `${props.nutritions.calories}`,
       dietType: Array.from(props.dietary)
     },
     origin: 'france',
     description: props.recipe.description
   }
-
-  // console.log('Image link ne', props.recipe.image_link)
 
   const [currentSize, setCurrentSize] = useState(
     // recipe.serving ? recipe.serving : ''
@@ -44,8 +41,6 @@ const RecipeDetail = props => {
   const ref = useRef(
     parseInt(props.recipe.serving_size) / parseInt(props.recipe.serving_size)
   )
-
-  // const { ingredients, nutritions } = FetchIngAndNutri(props.id, currentSize)
 
   const [ingredientsTmp, setIngredients] = useState('')
   const [nutritionsTmp, setNutritions] = useState('')
@@ -69,21 +64,15 @@ const RecipeDetail = props => {
   useEffect(() => {
     axios.all([axios.request(configIng), axios.request(configNutrition)]).then(
       axios.spread((resIng, resNutri) => {
-        // console.log('ing ', resIng, 'Nug ', resNutri)
         setIngredients(resIng && resIng.data.ingredientFactsOfRecipe)
         setNutritions(resNutri && resNutri.data.ingredientFactsOfRecipe[0])
       })
     )
   }, [])
 
-  // console.log('Current size', props.servingNum)
   const handleChange = event => {
-    // setCurrentSize(event.target.value / props.recipe.serving_size)
-    // ref.current = currentSize
-
     ref.current = event.target.value / props.recipe.serving_size
 
-    // console.log('cai ref ne', ref.current.valueOf)
     let configIng = {
       method: 'post',
       url: `http://localhost:3000/recipe/nutritions/total-ing-nutrition-facts/${props.id}`,
@@ -101,14 +90,11 @@ const RecipeDetail = props => {
     }
     axios.all([axios.request(configIng), axios.request(configNutrition)]).then(
       axios.spread((resIng, resNutri) => {
-        // console.log('ing ', resIng, 'Nug ', resNutri)
         setIngredients(resIng && resIng.data.ingredientFactsOfRecipe)
         setNutritions(resNutri && resNutri.data.ingredientFactsOfRecipe[0])
       })
     )
   }
-
-  // console.log('ingredients ne', ingredientsTmp)
 
   return (
     <div
@@ -117,24 +103,14 @@ const RecipeDetail = props => {
       <RecipeIntro
         recipe={recipe}
         setCurrentSize={setCurrentSize}
-        // changeEle={changeEle}
         handleChange={handleChange}
-        // click={click}
       />
-      <RecipeDescription
-        recipe={recipe}
-        id={props.id}
-        // nutritions={props.nutritions}
-      />
+      <RecipeDescription recipe={recipe} id={props.id} />
       <RecipeIngredient
         recipe={recipe}
         servingSize={props.recipe.serving_size}
         servingNum={currentSize}
-        // changeEle={changeEle}
         id={props.id}
-        // handleChange={handleChange}
-        // setCurrentSize={setCurrentSize}
-        // ref={ref}
         ingredientsTmp={ingredientsTmp}
         nutritionsTmp={nutritionsTmp}
       />

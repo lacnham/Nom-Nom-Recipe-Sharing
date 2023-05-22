@@ -4,7 +4,6 @@ import { useState } from 'react'
 export default function EnterToSubmit (value, setValue) {
   const handleSubmit = e => {
     e.preventDefault()
-    console.log('Submitted', value)
   }
 
   const handleInputChange = setValue => {

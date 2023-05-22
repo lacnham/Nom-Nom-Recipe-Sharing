@@ -19,7 +19,7 @@ const ResetPasswordForm = () => {
 
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
 
-  function validateInput({ password, confirmPassword }) {
+  function validateInput ({ password, confirmPassword }) {
     const errors = {}
 
     if (!password || !confirmPassword) {
@@ -56,7 +56,6 @@ const ResetPasswordForm = () => {
         setValidToken(false)
       }
     }
-    // console.log(resetPassword(resetToken, userId))
   }, [resetToken, userId])
 
   if (validToken === false) {
@@ -78,9 +77,7 @@ const ResetPasswordForm = () => {
   const handleFormSubmit = async e => {
     e.preventDefault()
 
-    // Perform password validation
     if (password !== confirmPassword) {
-      // Handle password mismatch error
       return
     }
 
@@ -96,7 +93,7 @@ const ResetPasswordForm = () => {
 
       // Assuming the password reset was successful
     } catch (error) {
-      console.error(error) // Handle the error
+      console.error(error)
     }
   }
 

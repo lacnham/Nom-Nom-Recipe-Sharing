@@ -14,7 +14,6 @@ export const UserReviewForm = id => {
   const { isShowing, toggle } = useModal()
 
   const handleChange = newRating => {
-    // console.log(newRating)
     setRating(newRating)
   }
 
@@ -26,8 +25,6 @@ export const UserReviewForm = id => {
     value: rating,
     isHalf: true
   }
-
-  // console.log('This is the id hehe=', id.id)
 
   let config = {
     method: 'post',
@@ -41,8 +38,6 @@ export const UserReviewForm = id => {
     }
   }
 
-  console.log('log cai accesstoken ra coi choi', localStorage.accesstoken)
-
   const refreshPage = () => {
     window.location.reload(false)
   }
@@ -51,10 +46,9 @@ export const UserReviewForm = id => {
     e.preventDefault()
     try {
       const res = await axios.request(config)
-      // console.log(config.data)
-      // console.log(res)
+
       setMessage(res.data.message)
-      // refreshPage()
+
       toggle()
     } catch (error) {
       console.log(error)
@@ -77,14 +71,9 @@ export const UserReviewForm = id => {
         modalMsg={message}
         closeable={true}
         titleIcon={<i className="fa-solid fa-circle-check"></i>}
-        btnFn={
-          // console.log('hello') // navigate('/', { replace: true })
-          // handleSubmit
-
-          () => {
-            refreshPage()
-          }
-        }
+        btnFn={() => {
+          refreshPage()
+        }}
       />
       <div className={`${styles.ratingContainer}`}>
         <ReactStars {...star} onChange={handleChange}></ReactStars>

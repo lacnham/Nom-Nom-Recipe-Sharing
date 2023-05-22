@@ -5,17 +5,17 @@ import { useEffect, useState } from 'react'
 import { UpdateButton } from '../UpdateProfileButton'
 import { UpdateForm } from '../../FormComponents/UpdateForm'
 import { RecipeTemp } from './RecipeTemp'
+
+import defaultImg from '/src/images/Default_img.svg'
 // import { CollectionRecipes } from './CollectionRecipes'
 import useModal from '../../ModalComponents/useModal'
 import Modal from '../../ModalComponents/Modal'
 import axios from 'axios'
-import { DefaultImage, UploadCollectionImage } from '../../ApiPost/LoadImage'
+import { UploadCollectionImage } from '../../ApiPost/LoadImage'
 const Collections = props => {
   const handleDisplay = () => {
     props.setCurrentStyle('flex')
   }
-
-  const { defaultFile } = DefaultImage()
 
   const { isShowing, ndIsShowing, toggle, secondToggle } = useModal(true)
 
@@ -47,7 +47,13 @@ const Collections = props => {
   useEffect(() => {
     axios
       .request(configImg)
-      .then(res => setImageURL(res.data))
+      .then(res => {
+        if (res.data == 'Cannot get image.') {
+          setImageURL(defaultImg)
+        } else {
+          setImageURL(res.data)
+        }
+      })
       .catch(error => console.log(error))
   })
 

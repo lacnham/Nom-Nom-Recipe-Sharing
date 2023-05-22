@@ -10,7 +10,7 @@ import { Post } from '../../ApiPost/Post'
 import axios from 'axios'
 import Modal from '../../ModalComponents/Modal'
 import useModal from '../../ModalComponents/useModal'
-import { DefaultImage, UploadCollectionImage } from '../../ApiPost/LoadImage'
+import { UploadCollectionImage } from '../../ApiPost/LoadImage'
 // import { CollectionContext } from './UserCollectionContext'
 
 const CollectionSection = props => {
@@ -20,11 +20,11 @@ const CollectionSection = props => {
   //   img: img
   // }
 
-  const { defaultFile } = DefaultImage()
+  // const { defaultFile } = DefaultImage()
 
   const [name, setName] = useState('')
   const [note, setNote] = useState('')
-  const [image, setImage] = useState(defaultFile)
+  const [image, setImage] = useState('')
   const [message, setMessage] = useState('')
 
   const { userCollectionData } = useContext(AuthContext)

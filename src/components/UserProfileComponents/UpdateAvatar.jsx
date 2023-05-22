@@ -22,13 +22,10 @@ const UpdateAvatar = props => {
   Modal.setAppElement('#root')
 
   useEffect(() => {
-    // console.log('USERDATA', props)
     axios
       .get(`http://localhost:3000/user/get-avatar/${props.user.id}`)
       .then(response => {
         setImgUrl(response.data)
-        // Handle the response
-        // console.log(response.data)
       })
       .catch(error => {
         // Handle the error
@@ -37,12 +34,10 @@ const UpdateAvatar = props => {
   }, [])
 
   const handleChange = e => {
-    // console.log('Change')
     const selectedFile = e.target.files[0]
     setModalIsOpen(true)
 
     if (selectedFile && allowedTypes.includes(selectedFile.type)) {
-      // Valid image file
       setImgErrorMsg('')
 
       const reader = new FileReader()
@@ -54,14 +49,12 @@ const UpdateAvatar = props => {
         img.onload = () => {
           const { width, height } = img
 
-          // Set the desired width and height for resizing
           const maxWidth = 800
           const maxHeight = 800
 
           let newWidth = width
           let newHeight = height
 
-          // Calculate the new width and height while maintaining aspect ratio
           if (width > height) {
             if (width > maxWidth) {
               newWidth = maxWidth
@@ -81,7 +74,6 @@ const UpdateAvatar = props => {
           const ctx = canvas.getContext('2d')
           ctx.drawImage(img, 0, 0, newWidth, newHeight)
 
-          // Convert the canvas content back to a File object
           canvas.toBlob(
             blob => {
               const resizedFile = new File([blob], selectedFile.name, {
@@ -98,7 +90,6 @@ const UpdateAvatar = props => {
         }
       }
     } else {
-      // Invalid file type
       setImgErrorMsg(
         'Invalid file type. Please upload a PNG, JPEG, WebP, or JFIF image.'
       )
@@ -121,8 +112,7 @@ const UpdateAvatar = props => {
 
   const handleCropChange = crop => {
     setCrop(crop)
-
-    // console.log(crop)
+    å
     if (file && crop.width && crop.height) {
       getCroppedImage(file, crop)
     }
@@ -149,8 +139,6 @@ const UpdateAvatar = props => {
         crop.height
       )
 
-      // console.log(ctx)
-
       canvas.toBlob(
         blob => {
           const croppedFile = new File([blob], file.name, {
@@ -158,7 +146,6 @@ const UpdateAvatar = props => {
             lastModified: file.lastModified
           })
           setCroppedImage(croppedFile)
-          // console.log(croppedFile)
         },
         file.type,
         1
@@ -174,11 +161,8 @@ const UpdateAvatar = props => {
     e.preventDefault()
 
     if (croppedImage) {
-      // console.log(croppedImage)
-      // await sleep(1000)
       const formData = new FormData()
-      // console.log('croppedImage', croppedImage)
-      // console.log('file.name', file.name)
+
       formData.append('avatarImage', croppedImage, file.name)
 
       try {
@@ -187,13 +171,11 @@ const UpdateAvatar = props => {
           formData
         )
 
-        // console.log(response.data)
         window.location.reload()
-        // Close the modal after successful upload
+
         setModalIsOpen(false)
       } catch (error) {
         console.error(error)
-        // Handle the error
       }
     }
   }
@@ -251,7 +233,6 @@ const UpdateAvatar = props => {
             // style={{ maxWidth: '500px' }}
             onComplete={crop => {
               getCroppedImage(file, crop)
-              // console.log('CROPPED IMAGE:', croppedImage)
             }}
           >
             {file && <img src={URL.createObjectURL(file)} alt="Avatar" />}

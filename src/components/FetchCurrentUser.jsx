@@ -17,17 +17,9 @@ export const FetchCurrentuser = () => {
     const fetchData = async () => {
       const res = await axios.request(config).catch(console.error())
       setUserData(res.data)
-      // .then(setUserData(res.data))
-      // .catch(error => {
-      //   console.log(error)
-      // })
     }
     fetchData()
   }, [])
-
-  // console.log(localStorage.getItem('accesstoken'))
-
-  // console.log(userData)
 
   return userData
 }

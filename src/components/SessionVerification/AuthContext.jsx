@@ -15,7 +15,7 @@ export const logout = async () => {
     if (response.ok) {
       localStorage.removeItem('accesstoken')
       localStorage.removeItem('refreshtoken')
-      // console.log('this is logout')
+
       window.location.reload()
     } else {
       throw new Error('Error logging out')
@@ -40,8 +40,8 @@ export const dietFetch = async userData => {
 
       if (response.ok) {
         const data = await response.json()
-        // console.log('return data', data)
-        return data // Return the data instead of setting state
+
+        return data
       } else {
         throw new Error('Unable to get dietary preference')
       }
@@ -73,8 +73,6 @@ const AuthContextProvider = props => {
 
   const userCollectionData = FetchUserCollections()
 
-  // const userRecipes = FetchUserRecipe(userData)
-
   const getUserSession = async () => {
     if (accesstoken) {
       try {
@@ -100,7 +98,6 @@ const AuthContextProvider = props => {
 
   const getDietaryData = async userData => {
     if (userData) {
-      // console.log(`http://localhost:3000/get-dietary-preference/${userData.user.id}`);
       try {
         const response = await fetch(
           `http://localhost:3000/get-dietary-preference/${userData.user.id}`,
@@ -114,9 +111,8 @@ const AuthContextProvider = props => {
 
         if (response.ok) {
           const data = await response.json()
-          // console.log('data here:', data)
+
           setDietData(data)
-          // console.log(dietData);
         } else {
           throw new Error('Unable to get dietary preference')
         }
@@ -138,7 +134,6 @@ const AuthContextProvider = props => {
   }, [])
 
   return (
-    // <AuthContext.Provider value={{ userData, backendMsg }}>
     <AuthContext.Provider
       value={{
         userData,

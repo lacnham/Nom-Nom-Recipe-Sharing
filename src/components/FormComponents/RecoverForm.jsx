@@ -25,7 +25,6 @@ const RecoverForm = () => {
         email: email
       })
       .then(response => {
-        // console.log(response.data)
         setModalProps(prevState => ({
           ...prevState,
           title: 'Success',
@@ -52,10 +51,6 @@ const RecoverForm = () => {
       })
   }
 
-  // useEffect(() => {
-  //   console.log(modalProps)
-  // }, [modalProps])
-
   return (
     <form onSubmit={handleSubmit}>
       <Modal
@@ -68,7 +63,7 @@ const RecoverForm = () => {
         titleIcon={<i className={modalProps.icon}></i>}
         btnFn={() => {
           toggle()
-        }} // Invoke the function inside the btnFn prop
+        }}
       />
       <div>
         <div className={styles.inputContainer}>

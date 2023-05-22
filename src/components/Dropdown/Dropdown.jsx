@@ -16,8 +16,6 @@ const Dropdown = props => {
 
   const { logout, userData } = useContext(AuthContext)
 
-  // console.log(userData.user.id)
-
   const handleLogout = () => {
     logout()
   }
@@ -27,8 +25,6 @@ const Dropdown = props => {
       .get(`http://localhost:3000/user/get-avatar/${userData.user.id}`)
       .then(response => {
         setImgUrl(response.data)
-        // Handle the response
-        // console.log(response.data)
       })
       .catch(error => {
         // Handle the error
@@ -37,18 +33,13 @@ const Dropdown = props => {
   }, [])
   const onSelectOption = option => {
     window.location.href = `${option.link}`
-    // navigate(`${option.link}`, { replace: true })
   }
 
   return (
     <div className={styles.dropdown}>
       <button className={styles.dropdownButton} onClick={onClick}>
         <span> {props.username} </span>
-        <img
-          src={imgUrl}
-          // src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/df/df7789f313571604c0e4fb82154f7ee93d9989c6.jpg"
-          alt="User avatar"
-        />
+        <img src={imgUrl} alt="User avatar" />
       </button>
       <ul
         className={`${styles.dropdownMenu} ${isActive ? styles.active : ''}`}

@@ -61,8 +61,6 @@ export const FetchAllIngAndCountry = () => {
       label: item[1]
     }))
 
-    // console.log(transformedCountryData)
-
     const unitsArray = Array.from(units, item => item.unit_name)
     const transformUnitData = unitsArray.map(item => ({
       value: item,
@@ -80,8 +78,6 @@ export const FetchAllIngAndCountry = () => {
       value: item,
       label: item
     }))
-
-    // console.log(transFormedDiet)
 
     setUnitOptions(transformUnitData)
     setCountryOptions(transformedCountryData)
