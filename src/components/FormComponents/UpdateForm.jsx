@@ -3,12 +3,7 @@ import styles from '../../styles/UserProfile/UpdateForm.module.css'
 import axios from 'axios'
 
 export const UpdateForm = props => {
-  // const [name, setName] = useState(props.collectionData.name)
-  // const [note, setNote] = useState(props.collectionData.note)
-  // const [name, setName] = useState(props.collection.name)
-  // const [note, setNote] = useState(props.collection.note)
   const [image, setImage] = useState('')
-  // const [message, setMessage] = useState('')
 
   const handleChangeName = e => {
     props.setName(e.target.value)
@@ -17,11 +12,6 @@ export const UpdateForm = props => {
   const handleChangeNote = e => {
     props.setNote(e.target.value)
   }
-
-  // const handleCloseButton = () => {
-  //   props.setUpdateForm(<div></div>)
-  //   props.setCurrentStyle('none')
-  // }
 
   const fileTemp = useRef(null)
   const handleUploadImage = e => {
@@ -34,13 +24,6 @@ export const UpdateForm = props => {
 
   return (
     <form className={`${styles.updateForm} ${styles.flexColumn}`}>
-      {/* <div
-        type="button"
-        className={`${styles.closeButton}`}
-        onClick={handleCloseButton}
-      >
-        X
-      </div> */}
       <div className={`${styles.one} ${styles.flexRow}`}>
         <div
           className={`${styles.updateName} ${styles.flexRow} ${styles.boxShadowPurple}`}
@@ -53,7 +36,6 @@ export const UpdateForm = props => {
             id="name"
             name="name"
             defaultValue={props.name}
-            // placeholder={props.name}
             onChange={handleChangeName}
           />
         </div>
@@ -70,47 +52,26 @@ export const UpdateForm = props => {
             ref={fileTemp}
             onChange={e => handleUploadImage(e)}
           />
-          {/* <span>Image</span> */}
           <i className="fa-solid fa-images fa-lg"></i>
         </div>
       </div>
       {image ? (
-        // <div className={`${styles.uploadImage}`}>
         <div className={`${styles.updateImage}`}>
-          <img
-            // className={`${styles.uploadImage}`}
-            style={{ width: '100%' }}
-            src={URL.createObjectURL(image)}
-          />
+          <img style={{ width: '100%' }} src={URL.createObjectURL(image)} />
         </div>
-      ) : // </div>
-      null}
+      ) : null}
       <div
         className={`${styles.updateNote} ${styles.flexColumn} ${styles.boxShadowPurple}`}
       >
         <label className={`${styles.noteLabel}`}>Note</label>
         <textarea
-          // rows={3}
           id="note"
           name="note"
           rows={10}
-          // required={true}
-          // value={props.note}
           defaultValue={props.note}
-          // placeholder={props.note}
           onChange={handleChangeNote}
-          // rows="5"
         ></textarea>
       </div>
-      {/* <div className={`${styles.submitButton}`}> */}
-      {/* <button
-        className={`${styles.submitButton}`}
-        type="submit"
-        onClick={handleSubmit}
-      >
-        Update
-      </button> */}
-      {/* </div> */}
     </form>
   )
 }

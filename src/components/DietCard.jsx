@@ -28,11 +28,6 @@ class DietCardContent extends React.Component {
         onClick={this.handleDivClick}
       >
         <div className={styles.dietCardTitle}>
-          {/* <div>
-            {this.props.data.map(value => (
-              <p key={value}>{value}</p>
-            ))}
-          </div> */}
           <p>{this.props.title}</p>
           <input
             type="checkbox"

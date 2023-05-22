@@ -18,16 +18,10 @@ export const UserProfileDetail = () => {
 
   const [parentMessage, setParentMessage] = useState(data)
 
-  // useEffect(() => {
-  //   console.log(parentMessage)
-  // }, [parentMessage])
-
   const handleParentData = data => {
     setParentMessage(data)
   }
 
-  // const user = FetchCurrentuser()
-  // console.log('user ++++' + userData.user.id)
   if (!userData) {
     return <div>Loading user data...</div>
   }
@@ -55,7 +49,6 @@ export const UserProfileDetail = () => {
         }
       )
 
-      const responseData = await response.json() // Parse response body as JSON
       setError(responseData.msg)
       console.log(error)
       console.log(response)
@@ -63,7 +56,6 @@ export const UserProfileDetail = () => {
       if (response.ok) {
         console.log('Data sent successfully.')
         setSuccess(true)
-        // console.log(success)
       } else {
         console.log(response)
       }
@@ -105,7 +97,6 @@ export const UserProfileDetail = () => {
                 <Button1
                   fn={() => {
                     userDataUpdate(parentMessage)
-                    // console.log('hello')
                   }}
                   options={'Confirm'}
                 />
@@ -117,10 +108,7 @@ export const UserProfileDetail = () => {
           window.location.reload()
         }}
       />
-      {/* <div
-        className={`${styles.detailContainer} ${styles.flexRow}`}
-        style={{ display: `${profileDisplay}` }}
-      > */}
+
       <div className={`${styles.detailContainer}`}>
         <div className={`${styles.avatarContainer}`}>
           <UpdateAvatar user={userData.user} />

@@ -28,19 +28,7 @@ export const CollectionRecipes = props => {
             <div className={`${styles.collectionNote}`}>{collection.note}</div>
           </div>
         </div>
-        {/* <div className={`${styles.collectionBody}`}> */}
         <RecipesInCollection id={id} />
-        {/* <Collections collection={collection} />
-          <Collections collection={collection} />
-          <Collections collection={collection} />
-          <Collections collection={collection} />
-          <Collections collection={collection} />
-          <Collections collection={collection} /> */}
-        {/* <Collections collection={collection} />
-          <Collections collection={collection} />
-          <Collections collection={collection} />
-          <Collections collection={collection} /> */}
-        {/* </div> */}
       </div>
     </>
   )

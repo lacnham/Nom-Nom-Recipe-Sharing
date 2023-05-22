@@ -11,8 +11,6 @@ export const UpdateProfileDetail = ({ props, onDataFromChild, error }) => {
   const [errors, setErrors] = useState('')
   const [isFormOk, setIsFormOk] = useState(false)
 
-  // console.log(props)
-
   useEffect(() => {
     const validatedErrors = validateInput({ password, veryPassword })
     setErrors(validatedErrors)
@@ -54,9 +52,7 @@ export const UpdateProfileDetail = ({ props, onDataFromChild, error }) => {
   }
 
   useEffect(() => {
-    // console.log(Object.keys(errors).length)
     if (Object.keys(errors).length === 0) {
-      // console.log(name, password)
       const updatedData = {
         username: name,
         password: password,
@@ -79,7 +75,6 @@ export const UpdateProfileDetail = ({ props, onDataFromChild, error }) => {
     <form
       autoComplete="off"
       className={`${styles.formContainer} ${styles.flexRow} ${styles.form}`}
-      //   style={{ display: `none` }}
     >
       <div className={styles.infoUpdate}>
         {error ? <div className={styles.warning}>{error}</div> : ''}
@@ -95,17 +90,7 @@ export const UpdateProfileDetail = ({ props, onDataFromChild, error }) => {
             onChange={handleChangeName}
           />
         </div>
-        {/* <div>
-          <input
-              className={`${styles.inputField}`}
-              type="email"
-              name="email"
-              id="email"
-              value={email}
-              onChange={handleChangeEmail}
-            />
-          <div>{email}</div>
-        </div> */}
+
         <div>
           {errors.password && (
             <div className={styles.warning}>{errors.password}</div>

@@ -6,7 +6,6 @@ export const UpdateButton = ({ fn, className, style, option }) => {
       type="button"
       style={style}
       onClick={fn}
-      // placeholder="Update"
       className={`${styles.updateDeleteButton} ${className}`}
     >
       {option}

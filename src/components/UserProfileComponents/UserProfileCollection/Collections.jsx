@@ -7,7 +7,6 @@ import { UpdateForm } from '../../FormComponents/UpdateForm'
 import { RecipeTemp } from './RecipeTemp'
 
 import defaultImg from '/src/images/Default_img.svg'
-// import { CollectionRecipes } from './CollectionRecipes'
 import useModal from '../../ModalComponents/useModal'
 import Modal from '../../ModalComponents/Modal'
 import axios from 'axios'
@@ -21,7 +20,6 @@ const Collections = props => {
 
   const [name, setName] = useState(props.collection.name)
   const [note, setNote] = useState(props.collection.note)
-  // const [image, setImage] = useState(defaultFile)
   const [message, setMessage] = useState('')
   const [imageURL, setImageURL] = useState('')
 
@@ -97,10 +95,6 @@ const Collections = props => {
     toggle()
   }
 
-  // const handleSetSection = () => {
-  //   props.setSection(<RecipeTemp id={props.collection.collection_id} />)
-  // }
-
   const [imageError, setImageError] = useState(false)
 
   const handleImageError = () => {
@@ -126,22 +120,7 @@ const Collections = props => {
           </div>
         </div>
       </Link>
-      {/* <div
-        // to={`/collection/${props.collection.collection_id}`}
-        onClick={handleSetSection}
-        key={props.collection.collection_id}
-      >
-        <div className={`${styles.contContainer} ${styles.flexColumn}`}>
-          <img alt="collection image" src={props.collection.img} />
-          <div className={`${styles.title}`}>{props.collection.name}</div>
-          <div className={`${styles.textOverFlowEcllipse} ${styles.text}`}>
-            {props.collection.note}
-          </div>
-        </div>
-      </div> */}
-      {/* <button onClick={handleClick} className={styles.updateDeleteContainer}>
-        Update
-      </button> */}
+
       <Modal
         isShowing={isShowing}
         hide={toggle}
@@ -149,7 +128,6 @@ const Collections = props => {
         title={'Update collection'}
         modalMsg={
           <UpdateForm
-            // collection={props.collection}
             setUpdateForm={props.setUpdateForm}
             setCurrentStyle={props.setCurrentStyle}
             setName={setName}
@@ -184,8 +162,4 @@ const Collections = props => {
   )
 }
 
-// export const addToCollection = props => {
-//   const newList = props.collection.recipe.concat(recipe)
-//   setlist(newList)
-// }
 export default Collections

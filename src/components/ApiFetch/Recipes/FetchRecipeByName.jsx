@@ -7,6 +7,4 @@ export const FetchRecipeWithName = name => {
   }
 
   const [recipe, setRecipe] = useState([])
-
-  // useFe
 }

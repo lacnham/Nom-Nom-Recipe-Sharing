@@ -5,9 +5,6 @@ import { UploadImage } from '../../ApiPost/LoadImage'
 import Select from 'react-select'
 
 export const UpdateRecipe = props => {
-  // const { recipe } = FetchRecipeByID(props.id)
-
-  // console.log(recipe && recipe)
   const durUnits = [
     { value: 'minutes', label: 'minutes' },
     { value: 'hours', label: 'hours' }
@@ -26,7 +23,6 @@ export const UpdateRecipe = props => {
       ([key, val] = entry) => {
         setDur(val)
         setDurunit(key)
-        // return { val, key }
       }
     )
 
@@ -34,8 +30,6 @@ export const UpdateRecipe = props => {
     setDes(props.data.description)
     setServ(props.data.serving_size)
   }, [])
-
-  // console.log(dur)
 
   const handleOnChange = () => {
     props.setData({
@@ -49,15 +43,12 @@ export const UpdateRecipe = props => {
 
   const file = useRef(null)
   const handleUploadImage = e => {
-    // console.log('Hinh ne ba', e.target.file)
     setImage(e.target.files[0])
   }
 
   const handleTrigger = () => {
     file.current.click()
   }
-
-  // console.log(props.data)
 
   return (
     <form
@@ -67,7 +58,6 @@ export const UpdateRecipe = props => {
       <div
         className={`${styles.updateName} ${styles.flexRow} ${styles.boxShadowPurple}`}
       >
-        {/* dsdas */}
         <label className={`${styles.label}`}>Name</label>
         <input
           className={`${styles.inputField}`}
@@ -106,7 +96,6 @@ export const UpdateRecipe = props => {
             onChange={e => setDur({ val: e.target.value, key: dur.key })}
           />
 
-          {/* <span>{duration[0].key}</span> */}
           <Select
             className={`${styles.inputField} ${styles.select}`}
             classNamePrefix="select"
@@ -120,7 +109,6 @@ export const UpdateRecipe = props => {
                 border: 'none',
                 width: '100%',
                 padding: '0',
-                // This line disable the blue border
                 boxShadow: state.isFocused ? 0 : 0,
 
                 '&:hover': {
@@ -154,35 +142,25 @@ export const UpdateRecipe = props => {
             ref={file}
             onChange={e => handleUploadImage(e)}
           />
-          {/* <span>Image</span> */}
           <i className="fa-solid fa-images fa-lg"></i>
         </div>
       </div>
 
       {image ? (
-        // <div className={`${styles.uploadImage}`}>
         <div className={`${styles.updateImage}`}>
-          <img
-            // className={`${styles.uploadImage}`}
-            style={{ width: '100%' }}
-            src={URL.createObjectURL(image)}
-          />
+          <img style={{ width: '100%' }} src={URL.createObjectURL(image)} />
         </div>
-      ) : // </div>
-      null}
+      ) : null}
       <div
         className={`${styles.updateNote} ${styles.flexColumn} ${styles.boxShadowPurple}`}
       >
         <label className={`${styles.noteLabel}`}>Descriptions</label>
         <textarea
-          // rows={3}
           id="note"
           name="note"
           rows={5}
-          // value={props.note}
           placeholder={des}
           onChange={e => setDes(e.target.value)}
-          // rows="5"
         ></textarea>
       </div>
     </form>

@@ -3,13 +3,6 @@ import axios from 'axios'
 
 export const FetchRecipeByID = id => {
   const [recipe, setRecipe] = useState()
-  // const [ingredients, setIngredients] = useState([])
-  // const [nutritions, setNutritions] = useState([])
-  // const [servingNum, setServingNum] = useState('')
-  // const [isLoading, setIsLoading] = useState(true)
-  // const [ingredients, setIngredients] = useState([])
-
-  // const [nutritions, setNutritions] = useState([])
 
   let configRecipe = {
     method: 'GET',

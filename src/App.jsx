@@ -15,9 +15,7 @@ import { CollectionRecipes } from './components/UserProfileComponents/UserProfil
 import { UpdateRecipe } from './components/UserProfileComponents/UserProfileRecipe/UpdateRecipe'
 import MemberTable from './components/AboutUs/AboutUs'
 
-// import CollectionRecipes from './components/UserProfileComponents/CollectionRecipes'
-
-function App () {
+function App() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -50,9 +48,7 @@ function App () {
           <Route path="/Signup" element={<Signup />} />
 
           <Route path="/User" element={<UserProfileMainPage />} />
-          {/* <Route path="/Recipe" element={<Collec />} /> */}
           <Route path="/Collection/:id" element={<CollectionRecipes />} />
-          {/* <Route path="/Detail" element={<DetailRecipePage />} /> */}
 
           <Route path="/PublishRecipe" element={<PublishRecipe />} />
           <Route path="/AllRecipe" element={<AllRecipe />} />

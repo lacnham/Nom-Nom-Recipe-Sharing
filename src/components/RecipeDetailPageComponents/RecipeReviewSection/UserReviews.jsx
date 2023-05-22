@@ -3,7 +3,6 @@ import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css
 import avatar from '../../../images/avatarTemp.png'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-// import RatingStars from './ReviewRatingStars';
 
 const UserReview = props => {
   let star = {

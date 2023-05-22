@@ -1,7 +1,4 @@
 import styles from '../../../styles/UserProfile/UserProfileMainPage.module.css'
-// import Collections from '../UserProfileCollection/Collections'
-// import img from '../../../images/recipeImage.png'
-// import { FetchCurrentuser } from '../../FetchCurrentUser'
 import { Suspense, lazy, useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { DefaultButton } from '../../Button'
@@ -15,18 +12,7 @@ import { FetchRecipeByID } from '../../Fetch/Recipes/FetchRecipeByID'
 import { UploadCollectionImage, UploadImage } from '../../ApiPost/LoadImage'
 
 export const RecipeSection = props => {
-  // const [name, setName] = useState('')
-  // const [description, setDescription] = useState('')
-  // const [duration, setDuration] =  useState('')
-  // const [serving, setServing] = useState('')
-  // const [image, setImage] =  useState('')
   const [id, setId] = useState('')
-
-  // const [name, setName] = useState('')
-  // const [des, setDes] = useState('')
-  // const [dur, setDur] = useState('')
-  // const [serv, setServ] = useState('')
-  // const [image, setImage] = useState('')
 
   const [updateData, setUpdateData] = useState({
     name: '',
@@ -48,9 +34,7 @@ export const RecipeSection = props => {
   const { isShowing, toggle, ndIsShowing, secondToggle } = useModal(true)
 
   const { userData } = useContext(AuthContext)
-  // console.log('user data ', userData)
 
-  // const userID = userData.user.id
   let config = {
     method: 'get',
     url: `http://localhost:3000/recipe/user/${userData.user.id}`,
@@ -65,10 +49,6 @@ export const RecipeSection = props => {
       .then(res => setRecipes(res.data))
       .catch(error => console.log(error))
   }, [])
-
-  // const { userRecipes } = useContext(AuthContext)
-
-  // console.log('Nay la recipes ne bro', recipes, recipes[0].author_id)
 
   const Card = lazy(() => import('../../Card'))
 
@@ -85,8 +65,6 @@ export const RecipeSection = props => {
 
   const navigate = useNavigate()
 
-  // const { recipe } = FetchRecipeByID(id)
-
   const handleCreateNewRecipe = () => {
     navigate(`/publishRecipe`)
   }
@@ -96,7 +74,6 @@ export const RecipeSection = props => {
   }
 
   const recipeTmp = recipes.map(ele => (
-    // <Link to={`/recipe/${ele.name}/${ele.recipe_id}`} key={ele.recipe_id}>
     <Suspense key={ele.recipe_id}>
       <Card
         key={ele.recipe_id}
@@ -118,7 +95,6 @@ export const RecipeSection = props => {
         fn2={() => handleMoveToRecipePage(ele.name, ele.recipe_id)}
       />
     </Suspense>
-    // </Link>
   ))
 
   let configUpdate = {
@@ -135,7 +111,6 @@ export const RecipeSection = props => {
   }
   const handleSubmit = async e => {
     e.preventDefault()
-    // console.log('submit dc roi ne')
     try {
       const res = await axios.request(configUpdate)
       setMessage(res.data.message)
@@ -151,34 +126,18 @@ export const RecipeSection = props => {
     <div
       className={`${styles.collectionMainContainer} ${styles.flexRow}`}
       style={{ display: `${props.display.recipe}` }}
-      // style={{ display: `none` }}
     >
       <Modal
         isShowing={ndIsShowing}
         hide={secondToggle}
         btnMsg={'Confirm'}
         title={''}
-        modalMsg={
-          // <UpdateForm
-          //   // collection={props.collection}
-          //   setUpdateForm={props.setUpdateForm}
-          //   setCurrentStyle={props.setCurrentStyle}
-          //   setName={setName}
-          //   setNote={setNote}
-          //   name={name}
-          //   note={note}
-          // />
-          message
-        }
+        modalMsg={message}
         closeable={true}
         titleIcon={<i className="fa-solid fa-circle-check"></i>}
-        btnFn={
-          // console.log('hello') // navigate('/', { replace: true })
-          // handleSubmit
-          () => {
-            refreshPage()
-          }
-        }
+        btnFn={() => {
+          refreshPage()
+        }}
       />
       <Modal
         isShowing={isShowing}
@@ -186,15 +145,6 @@ export const RecipeSection = props => {
         btnMsg={'Confirm'}
         title={'Update collection'}
         modalMsg={
-          // <UpdateForm
-          //   // collection={props.collection}
-          //   setUpdateForm={props.setUpdateForm}
-          //   setCurrentStyle={props.setCurrentStyle}
-          //   setName={setName}
-          //   setNote={setNote}
-          //   name={name}
-          //   note={note}
-          // />
           <UpdateRecipe
             data={updateData}
             id={id}
@@ -204,11 +154,7 @@ export const RecipeSection = props => {
         }
         closeable={true}
         titleIcon={<i className="fa-solid fa-circle-check"></i>}
-        btnFn={
-          // console.log('hello') // navigate('/', { replace: true })
-          // handleSubmit
-          handleSubmit
-        }
+        btnFn={handleSubmit}
       />
       <div className={`${styles.createNewContainer} ${styles.flexColumn}`}>
         <DefaultButton
@@ -217,15 +163,9 @@ export const RecipeSection = props => {
           className={`${styles.createNewButton}`}
           fn={handleCreateNewRecipe}
         />
-        {/* <button onClick={toggle}></button> */}
       </div>
-      {/* <Collections collection={collection}></Collections>
-      <Collections collection={collection}></Collections>
-      <Collections collection={collection}></Collections>
-      <Collections collection={collection}></Collections> */}
 
       <div className={`${styles.collectionMainContainer} ${styles.flexRow}`}>
-        {/* <Suspense>{recipeTmp}</Suspense> */}
         {recipeTmp}
       </div>
     </div>

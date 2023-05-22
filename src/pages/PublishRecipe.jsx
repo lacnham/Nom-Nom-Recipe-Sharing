@@ -13,14 +13,6 @@ import { UploadImage } from '../components/ApiPost/LoadImage'
 const PublishRecipe = () => {
   const { countryOptions, unitOptions, ingredientOPtion, dietOptions } =
     FetchAllIngAndCountry()
-  // console.log(countryOptions)
-  // console.log(unitOptions[0])
-
-  // const unitArray = Array.from(unitOptions)
-  // useEffect(() => {
-  //   console.log(unitArray)
-  // }, [])
-
   const durationUnits = ['hours', 'minutes']
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
@@ -39,7 +31,6 @@ const PublishRecipe = () => {
   const [diets, setDiets] = useState([])
 
   const handleAddOrigin = e => {
-    // console.log('Origin ne hihi', e.value)
     setOrigin(e.value)
   }
 
@@ -52,7 +43,6 @@ const PublishRecipe = () => {
       }
     }
     newIngredients[igd].ingredientId = e.value
-    // newIngredients[igd].name = e.label
   }
 
   const handleQuantity = (e, igd) => {
@@ -66,7 +56,6 @@ const PublishRecipe = () => {
   }
 
   const handleDietAdd = e => {
-    // console.log('e trong diet ne', ...e)
     let temp = []
     for (let i = 0; i < e.length; i++) {
       temp.push(e[i].value)
@@ -123,14 +112,10 @@ const PublishRecipe = () => {
       ingredients: ingredients,
       dietaryPrefs: diets,
       countryPrefs: [origin]
-      // ingredients: ingredients.map(ele => {
-      //   ingredientId:  ele.id,
-      // })
     }
   }
 
   const handleCreateRecipe = async () => {
-    // console.log('Access token ' + localStorage.accesstoken)
     try {
       const res = await axios.request(config)
       UploadImage(image, res.data.recipeId, setMessage)
@@ -139,16 +124,6 @@ const PublishRecipe = () => {
     } catch (error) {
       console.log(error)
     }
-
-    // console.log('Collection id ' + props.collection.collection_id)
-    // console.log('Recipe id ' + props.recipe.recipe_id)
-    // handleBlur()
-    // if (isSuccess) {
-    //   console.log(message)
-    // }
-
-    // console.log('Collection id' + props.collection.collection_id)
-    // console.log(props.recipe.recipe_id)
   }
 
   const refreshPage = () => {
@@ -157,20 +132,15 @@ const PublishRecipe = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    // useEffect(() => {
     try {
       handleCreateRecipe()
       toggle()
-      // refreshPage()
     } catch (error) {
       console.log(error)
     }
-
-    // }, [])
   }
 
   return (
-    // TODO add header and change page size
     <div>
       <Header></Header>
       <div className={styles.container}>
@@ -182,13 +152,10 @@ const PublishRecipe = () => {
           modalMsg={message}
           closeable={true}
           titleIcon={<i className="fa-solid fa-circle-check"></i>}
-          btnFn={
-            () => {
-              toggle()
-              refreshPage()
-            } // navigate('/', { replace: true })
-            // handleSubmit
-          }
+          btnFn={() => {
+            toggle()
+            refreshPage()
+          }}
         />
         <form className={styles.publish} onSubmit={handleSubmit}>
           <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
@@ -221,17 +188,11 @@ const PublishRecipe = () => {
                 placeholder="Upload your image"
                 onChange={e => onFileChange(e)}
               />
-              {/* <DefaultButton
-                fn={handleUploadImage}
-                options={'Upload'}
-                style={''}
-                // className={styles.submitBtn}
-              /> */}
+
               <div
                 className={`${styles.uploadImageButton}`}
                 onClick={handleUploadImage}
               >
-                {/* <i className="fa-solid fa-image"></i> */}
                 <img
                   width="36"
                   height="36"
@@ -243,10 +204,7 @@ const PublishRecipe = () => {
           </div>
           {image ? (
             <div className={`${styles.uploadImage}`}>
-              <img
-                // className={`${styles.uploadImage}`}
-                src={URL.createObjectURL(image)}
-              />
+              <img src={URL.createObjectURL(image)} />
             </div>
           ) : null}
 
@@ -265,7 +223,6 @@ const PublishRecipe = () => {
               <div
                 className={`${styles.inputFieldContainer} ${styles.flexRow}`}
               >
-                {/* <label className={`${styles.fieldLabel}`}>Origin</label> */}
                 <Select
                   className={`${styles.inputField} ${styles.select}`}
                   classNamePrefix="select"
@@ -277,7 +234,6 @@ const PublishRecipe = () => {
                       ...baseStyles,
                       border: 'none',
                       width: '100%',
-                      // This line disable the blue border
                       boxShadow: state.isFocused ? 0 : 0,
 
                       '&:hover': {
@@ -294,20 +250,12 @@ const PublishRecipe = () => {
                     })
                   }}
                 />
-                {/* <input
-                  className={`${styles.inputField}`}
-                  type="text"
-                  value={origin}
-                  placeholder="Origins"
-                  onChange={e => setOrigin(e.target.value)}
-                /> */}
               </div>
             </div>
             <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
               <div
                 className={`${styles.inputFieldContainer} ${styles.flexRow} ${styles.duration}`}
               >
-                {/* <label className={`${styles.fieldLabel}`}>Duration</label> */}
                 <input
                   className={`${styles.inputField}`}
                   type="number"
@@ -323,7 +271,6 @@ const PublishRecipe = () => {
               <div
                 className={`${styles.inputFieldContainer} ${styles.flexRow}`}
               >
-                {/* <label className={`${styles.fieldLabel}`}>Servings</label> */}
                 <input
                   className={`${styles.inputField}`}
                   type="number"
@@ -340,27 +287,18 @@ const PublishRecipe = () => {
               <label className={`${styles.fieldLabel}`}>
                 Dietary preferences
               </label>
-              {/* <input
-                className={`${styles.inputField}`}
-                type="text"
-                // value={duration}
-                min={'1'}
-                placeholder="1"
-                onChange={e => setDuration(e.target.value)}
-              /> */}
+
               <Select
                 className={`${styles.inputField} ${styles.select}`}
                 classNamePrefix="select"
                 isMulti
                 options={dietOptions}
-                // placeholder={``}
                 onChange={e => handleDietAdd(e)}
                 styles={{
                   control: (baseStyles, state) => ({
                     ...baseStyles,
                     border: 'none',
                     width: '100%',
-                    // This line disable the blue border
                     boxShadow: state.isFocused ? 0 : 0,
 
                     '&:hover': {
@@ -392,7 +330,6 @@ const PublishRecipe = () => {
                       className={`${styles.inputField} ${styles.select}`}
                       classNamePrefix="select"
                       options={ingredientOPtion}
-                      // onFocus={setIsFocus(true)}
                       placeholder={`Enter ingredient`}
                       onChange={e => handleIngredientChange(e, igd)}
                       styles={{
@@ -400,7 +337,6 @@ const PublishRecipe = () => {
                           ...baseStyles,
                           border: 'none',
                           width: '100%',
-                          // This line disable the blue border
                           boxShadow: state.isFocused ? 0 : 0,
 
                           '&:hover': {
@@ -425,7 +361,6 @@ const PublishRecipe = () => {
                       min={0}
                       placeholder={0}
                       onChange={e => handleQuantity(e, igd)}
-                      // autoComplete='on'
                     />
                     <Select
                       className={`${styles.inputField} ${styles.select}`}
@@ -437,12 +372,8 @@ const PublishRecipe = () => {
                       styles={{
                         control: (baseStyles, state) => ({
                           ...baseStyles,
-                          // borderColor: state.isFocused ? '#ff8600' : '#ff8600',
-                          // borderWidth: '2px',
                           border: 'none',
-                          // borderRadius: '8px',
                           width: '100%',
-                          // This line disable the blue border
                           boxShadow: state.isFocused ? 0 : 0,
 
                           '&:hover': {
@@ -456,8 +387,6 @@ const PublishRecipe = () => {
                           height: '120px',
                           overflow: 'auto',
                           display: 'flex'
-
-                          // position: 'fixed'
                         })
                       }}
                     />
@@ -475,7 +404,6 @@ const PublishRecipe = () => {
               className={styles.addIgd}
               type="button"
               onClick={handleAddIngredient}
-              // onChange={splice}
             >
               <i className="fa-solid fa-circle-plus"></i>
               <span> Add More Ingredients </span>

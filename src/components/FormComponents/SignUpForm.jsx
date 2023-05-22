@@ -26,7 +26,6 @@ export default function SignUpForm() {
         password: enteredData.password,
         verifypassword: enteredData.verifypassword
       })
-      // window.location.replace('/allrecipe');
       setSignUpEr(null)
       toggle()
     } catch (error) {
@@ -146,7 +145,6 @@ export default function SignUpForm() {
             type="password"
             placeholder="Password"
             name="password"
-            // onChange={e => setPassword(e.target.value)}
             onChange={changeHandler}
             value={enteredData.password}
           />

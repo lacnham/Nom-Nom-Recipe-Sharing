@@ -185,7 +185,6 @@ const UpdateAvatar = props => {
       <div className={`${styles.avatarSmallContainer}`}>
         <img src={imgUrl} alt="Avatar" />
 
-        {/* <img src="/src/images/avatarTemp.png" alt="Avatar"></img> */}
         <div className={`${styles.updateImgTextContainer}`} onClick={openModal}>
           <i className="fa-solid fa-pen-to-square fa-2xl"></i>
         </div>
@@ -230,7 +229,6 @@ const UpdateAvatar = props => {
             ruleOfThirds={true}
             crop={crop}
             onChange={handleCropChange}
-            // style={{ maxWidth: '500px' }}
             onComplete={crop => {
               getCroppedImage(file, crop)
             }}

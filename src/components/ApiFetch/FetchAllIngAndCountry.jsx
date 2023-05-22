@@ -39,8 +39,6 @@ export const FetchAllIngAndCountry = () => {
         axios.request(configDiet)
       ])
 
-      // localStorage.setItem('countries', res[0])
-      // localStorage.setItem('units', res[1])
       setContries(res[0].data)
       setUnits(res[1].data)
       setIngredients(res[2].data)
@@ -61,8 +59,6 @@ export const FetchAllIngAndCountry = () => {
       label: item[1]
     }))
 
-    // console.log(transformedCountryData)
-
     const unitsArray = Array.from(units, item => item.unit_name)
     const transformUnitData = unitsArray.map(item => ({
       value: item,
@@ -80,8 +76,6 @@ export const FetchAllIngAndCountry = () => {
       value: item,
       label: item
     }))
-
-    // console.log(transFormedDiet)
 
     setUnitOptions(transformUnitData)
     setCountryOptions(transformedCountryData)

@@ -6,21 +6,6 @@ import { RecipeSection } from '../UserProfileRecipe/RecipeSection'
 import { DefaultButton } from '../../Button'
 
 export const UserProfileTab = props => {
-  // const tabList = [
-  //   {
-  //     key: 1,
-  //     name: 'My collection'
-  //   },
-  //   {
-  //     key: 2,
-  //     name: 'My recipe'
-  //   },
-  //   {
-  //     key: 3,
-  //     name: 'Nutrition intake'
-  //   }
-  // ]
-  // const tab = tabList.map(ele => RenderProfileSection(ele, props.setDisplay))
   const style = {
     backgroundColor: ' #3d233a',
     color: 'white',
@@ -47,17 +32,6 @@ export const UserProfileTab = props => {
 
     props.setDisplay(newDisplay)
   }
-
-  // const tab = tabList.map(ele => (
-  //   <DefaultButton
-  //     className={`${styles.label}`}
-  //     type={'button'}
-  //     key={ele.key}
-  //     style={ele.style}
-  //     fn={handleClick}
-  //     options={section.name}
-  //   ></DefaultButton>
-  // ))
 
   return (
     <DefaultButton

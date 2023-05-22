@@ -2,8 +2,6 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 
 export const FetchUserCollections = () => {
-  // const userData = Login()
-
   let config = {
     method: 'get',
     maxBodlength: Infinity,
@@ -13,8 +11,6 @@ export const FetchUserCollections = () => {
     }
   }
 
-  // console.log(localStorage.accessToken)
-
   const [userCollections, setUserCollections] = useState([])
 
   useEffect(() => {
@@ -22,8 +18,6 @@ export const FetchUserCollections = () => {
       .request(config)
       .then(res => {
         setUserCollections(res && res.data)
-        // console.log(data)
-        // setIsLoading(false)
       })
       .catch(error => {
         console.log(error)

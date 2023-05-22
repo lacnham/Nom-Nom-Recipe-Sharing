@@ -28,11 +28,7 @@ const RecipeIntro = props => {
     axios
       .request(config)
       .then(res => {
-        // if (res.data.msg) {
-        //   setImageURL(defaultImg)
-        // } else {
         setImageURL(res.data)
-        // }
       })
       .catch(error => console.log(error))
   })
@@ -73,8 +69,6 @@ const RecipeIntro = props => {
               type="number"
               min={1}
               defaultValue={parseInt(props.recipe.commonInfo.serving)}
-              // value={parseInt(props.recipe.commonInfo.serving)}
-              // placeholder={parseInt(props.recipe.commonInfo.serving)}
               onChange={e => props.handleChange(e)}
               style={{
                 width: '60px',
@@ -87,7 +81,7 @@ const RecipeIntro = props => {
                 padding: '0 0 0 8px',
                 textAlign: 'right'
               }}
-            />{' '}
+            />
             people
           </div>
         </div>

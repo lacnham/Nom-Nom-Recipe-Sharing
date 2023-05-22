@@ -16,19 +16,13 @@ const Diet = () => {
   const { dietData } = useContext(AuthContext)
   const { userData } = useContext(AuthContext)
 
-  // useEffect(() =>{
-  //   getDietaryData();
-  // },[])
-
   const [dietaryPreferences, setDietaryPreferences] = useState(null)
-  // const [checkedDivContent, setCheckedDivContent] = useState(null)
   useEffect(() => {
     if (dietData) {
       setDietaryPreferences(
         dietData.msg.map(preference => preference.dietary_preference_name)
       )
     }
-    // setCheckedDivContent(dietaryPreferences)
   }, [dietData])
 
   const [diet, setDiet] = useState([])
@@ -45,7 +39,7 @@ const Diet = () => {
     fetchData()
   }, [])
 
-  function waitForCheckedDivContent () {
+  function waitForCheckedDivContent() {
     return new Promise((resolve, reject) => {
       const interval = setInterval(() => {
         const checkedDivs = document.querySelectorAll('div#checked')
@@ -195,7 +189,6 @@ const Diet = () => {
                 titleIcon={<i className="fa-solid fa-circle-check"></i>}
                 btnFn={() => {
                   window.location.href = '/'
-                  // navigate('/', { replace: true })
                 }}
               />
               <Modal

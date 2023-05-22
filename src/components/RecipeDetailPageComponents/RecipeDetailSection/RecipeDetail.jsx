@@ -8,8 +8,6 @@ import { useEffect, useRef, useState, useTransition } from 'react'
 import { FetchIngAndNutri } from '../../Fetch/Recipes/FetchIngAndNutri'
 
 const RecipeDetail = props => {
-  // const duration = Object.entries(props.recipe.duration)
-
   if (!props.recipe) {
     return <div>Loading data....</div>
   }
@@ -34,7 +32,6 @@ const RecipeDetail = props => {
   }
 
   const [currentSize, setCurrentSize] = useState(
-    // recipe.serving ? recipe.serving : ''
     parseInt(props.recipe.serving_size)
   )
 
