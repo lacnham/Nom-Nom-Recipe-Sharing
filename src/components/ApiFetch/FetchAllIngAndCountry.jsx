@@ -39,8 +39,6 @@ export const FetchAllIngAndCountry = () => {
         axios.request(configDiet)
       ])
 
-      // localStorage.setItem('countries', res[0])
-      // localStorage.setItem('units', res[1])
       setContries(res[0].data)
       setUnits(res[1].data)
       setIngredients(res[2].data)

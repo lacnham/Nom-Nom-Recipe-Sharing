@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 
-export default function EnterToSubmit (value, setValue) {
+export default function EnterToSubmit(value, setValue) {
   const handleSubmit = e => {
     e.preventDefault()
   }

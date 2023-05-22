@@ -14,7 +14,6 @@ const Modal = ({ isShowing, hide, ...props }) =>
             aria-hidden
             tabIndex={-1}
             role="dialog"
-            // onClick={hide}
           >
             <div className={styles.modal}>
               <div className={styles.modal_header}>

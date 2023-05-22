@@ -1,7 +1,6 @@
 import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css'
 import SaveRecipeButton from './SaveRecipeButton'
 import CollectionDropList from '../../UserProfileComponents/UserProfileCollection/UserCollectionDrop/CollectionDropList'
-// import RenderLabel from '../RecipeDetailSection/RenderLabel'
 import UserReview from './UserReviews'
 import { useState } from 'react'
 import ClickChangeStyle from '../../ClickChangeStyle'

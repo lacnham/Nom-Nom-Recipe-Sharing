@@ -11,17 +11,8 @@ import axios from 'axios'
 import Modal from '../../ModalComponents/Modal'
 import useModal from '../../ModalComponents/useModal'
 import { UploadCollectionImage } from '../../ApiPost/LoadImage'
-// import { CollectionContext } from './UserCollectionContext'
 
 const CollectionSection = props => {
-  // const collection = {
-  //   title: 'tet',
-  //   description: 'lorem',
-  //   img: img
-  // }
-
-  // const { defaultFile } = DefaultImage()
-
   const [name, setName] = useState('')
   const [note, setNote] = useState('')
   const [image, setImage] = useState('')

@@ -1,9 +1,4 @@
 const ClickChangeStyle = (current, set, style) => {
-  // const styleElement = {
-  //   default: 'none',
-  //   change: 'block'
-  // }
-
   const handleClick = () => {
     let newStyle
     if (current == style.default) {

@@ -5,8 +5,6 @@ import RenderLabel from './RecipeDetailPageComponents/RecipeDetailSection/Render
 import { useState } from 'react'
 
 const NavBar = props => {
-  // export function DefaultButton({fn, options, type, style, className})
-
   const style = {
     backgroundColor: '',
     color: 'black',
@@ -42,7 +40,6 @@ const NavBar = props => {
     <>
       <nav className={`${styles.navBar} ${styles.flexItemCenter}`}>
         <ul className={`${styles.flexItemCenter}`}>{items}</ul>
-        {/* TODO Make items clickable */}
       </nav>
     </>
   )

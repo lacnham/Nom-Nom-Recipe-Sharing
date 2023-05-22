@@ -104,7 +104,7 @@ export function BackToTopButton() {
       className={`${styles.backToTopButton} ${isVisible ? styles.visible : ''}`}
       onClick={scrollToTop}
     >
-      <i className="fa-solid fa-arrow-up"></i>{' '}
+      <i className="fa-solid fa-arrow-up"></i>
     </button>
   )
 }

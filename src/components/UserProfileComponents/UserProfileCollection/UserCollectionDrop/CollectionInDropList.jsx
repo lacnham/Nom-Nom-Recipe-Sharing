@@ -4,12 +4,10 @@ import axios from 'axios'
 import Modal from '../../../ModalComponents/Modal'
 import useModal from '../../../ModalComponents/useModal'
 import { UploadCollectionImage } from '../../../ApiPost/LoadImage'
-// import { AddRecipeToCollection } from './AddRecipeToCollection'
 
 export const CollectionInDropList = props => {
   const [message, setMessage] = useState('')
   const [isSuccess, setIsSuccess] = useState(false)
-  //
 
   const { isShowing, toggle } = useModal()
 
@@ -26,7 +24,6 @@ export const CollectionInDropList = props => {
     method: 'post',
     url: 'http://localhost:3000/collection/add-recipe',
     headers: {
-      // 'Content-Type': 'application/json',
       Authorization: localStorage.accesstoken
     },
     data: {
@@ -36,26 +33,17 @@ export const CollectionInDropList = props => {
   }
 
   const handleAddRecipe = async () => {
-    // console.log('Access token ' + localStorage.accesstoken)
     try {
       const res = await axios.request(config)
       setMessage(res.data.message)
 
-      // console.log('log choi choi 1 cai gi do', res.data)
       setIsSuccess(true)
       handleBlur()
       toggle()
     } catch (error) {
       console.log(error)
     }
-
-    // console.log('Collection id' + props.collection.collection_id)
-    // console.log(props.recipe.recipe_id)
   }
-
-  // const handleConfirm = () => {
-  //   isShowing = false
-  // }
 
   return (
     <div
@@ -71,11 +59,7 @@ export const CollectionInDropList = props => {
         modalMsg={message}
         closeable={true}
         titleIcon={<i className="fa-solid fa-circle-check"></i>}
-        btnFn={
-          // console.log('hello') // navigate('/', { replace: true })
-          // handleSubmit
-          ''
-        }
+        btnFn={''}
       />
       {props.collection.name}
     </div>

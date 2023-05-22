@@ -35,7 +35,7 @@ const Refrigerator = () => {
     }
   }
 
-  async function fetchDataWithInput () {
+  async function fetchDataWithInput() {
     const url = 'http://localhost:3000/recipe/search-by-ingredients'
     const body = {
       ingredients: selectedOptions
@@ -60,7 +60,7 @@ const Refrigerator = () => {
     }
   }
 
-  async function fetchDataWithOutInput () {
+  async function fetchDataWithOutInput() {
     const url = 'http://localhost:3000/recipe'
     try {
       const response = await fetch(url, {
@@ -81,13 +81,11 @@ const Refrigerator = () => {
   }
 
   useEffect(() => {
-    // Function to fetch the options asynchronously
     const fetchOptions = async () => {
       try {
         const response = await fetch('http://localhost:3000/ingredient/get-all')
         const data = await response.json()
 
-        // Extract ing_name from each child
         const extractedData = data.map(child => child.ing_name)
         setIngData(
           extractedData.map(item => ({
@@ -127,7 +125,6 @@ const Refrigerator = () => {
             <div className={styles.filter_Container}>
               <Select
                 closeMenuOnSelect={false}
-                // onFocus={fetchOptions}
                 className="basic-single"
                 classNamePrefix="select"
                 isClearable={true}
@@ -138,7 +135,6 @@ const Refrigerator = () => {
                 onChange={handleOptionChange}
                 placeholder={'Choose your ingredients...'}
                 onMenuScrollToBottom={() => setIngData([])}
-                // onInputChange={}
                 styles={{
                   control: (baseStyles, state) => ({
                     ...baseStyles,
@@ -197,11 +193,6 @@ const Refrigerator = () => {
                 </div>
               ) : (
                 <div>
-                  {/*  <Link
-              to={`/collection/${props.collection.collection_id}`}
-              key={props.collection.collection_id}
-              className={`${styles.collectionContainer} ${styles.boxShadowPurple}`}
-            > */}
                   <div className={styles.cardContainer}>
                     {data.slice(0, itemsToRender).map(item => (
                       <Link
@@ -242,5 +233,4 @@ const Refrigerator = () => {
   )
 }
 
-// export default withoutAuth(Refrigerator)
 export default withoutAuth(Refrigerator)

@@ -4,7 +4,6 @@ import avatar from '../../../images/avatarTemp.png'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { LoadUserImg } from '../../ApiPost/LoadImage'
-// import RatingStars from './ReviewRatingStars';
 
 const UserReview = props => {
   let star = {
@@ -17,10 +16,8 @@ const UserReview = props => {
   }
 
   const [imgURL, setImgURL] = useState('')
-  // const [userID, setUserID] = useState('')
-  const [reviews, setReviews] = useState([])
 
-  // let userID = []
+  const [reviews, setReviews] = useState([])
 
   let config = {
     method: 'GET',

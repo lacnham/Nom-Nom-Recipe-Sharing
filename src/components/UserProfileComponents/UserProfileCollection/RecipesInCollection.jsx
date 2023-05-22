@@ -10,8 +10,6 @@ export const RecipesInCollection = props => {
     return <div>Loading...</div>
   }
 
-  // console.log(recipes)
-
   const Card = lazy(() => import('../../Card'))
 
   const recipe = recipes.map(ele => (
@@ -30,16 +28,7 @@ export const RecipesInCollection = props => {
 
   return (
     <div className={`${styles.collectionBody}`}>
-      <Suspense>
-        {/* <Card
-          image={item.image_link}
-          title={item.name}
-          category={['asd', 'asd1', 'asd2']}
-          location="Downtown, Seattle WA"
-          description={item.description}
-        /> */}
-        {recipe}
-      </Suspense>
+      <Suspense>{recipe}</Suspense>
     </div>
   )
 }

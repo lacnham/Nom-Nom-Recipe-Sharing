@@ -26,10 +26,7 @@ const Header = () => {
           <img src={nomNomLogo} alt="nom-nom-logo" />
         </a>
       </div>
-      {/* <nav className={`${styles.navBar} ${styles.flexItemCenter}`}> */}
-      {/* <ul className={`${styles.flexItemCenter}`}>{items}</ul> */}
-      {/* TODO Make items clickable */}
-      {/* </nav> */}
+
       <NavBar tabList={tabList}></NavBar>
       <div
         className={`${styles.loginSignupContainer} ${styles.flexItemCenter}`}

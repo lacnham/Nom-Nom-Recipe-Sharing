@@ -9,14 +9,6 @@ import { BackToTopButton, Button2 } from '../Button'
 import { useNavigate } from 'react-router-dom'
 
 export default function Feed() {
-  //   const [like, setLike] = useState(post.like)
-  //   const [isliked, setIsLiked] = useState(false)
-
-  //   const likeHandler = () => {
-  //     setLike(isliked ? like - 1 : like + 1)
-  //     setIsLiked(!isliked)
-  //   }
-
   const navigate = useNavigate()
 
   const { userData } = useContext(AuthContext)
@@ -245,7 +237,6 @@ export default function Feed() {
 }
 
 function Post(props) {
-  // props
   return (
     <div className={styles.post}>
       <div className={styles.postWrapper}>
@@ -254,10 +245,7 @@ function Post(props) {
             <h1 className={styles.postRecipeName}>{props.name}</h1>
             <span className={styles.postDate}>{props.timeElapsed}</span>
           </div>
-          <div className={styles.postTopRight}>
-            MoreVert
-            {/* <MoreVert /> */}
-          </div>
+          <div className={styles.postTopRight} keyword="Place Holder"></div>
         </div>
         <div className={styles.postCenter}>
           <span className={styles.postInfo}>
@@ -281,29 +269,13 @@ function Post(props) {
           <div className={styles.postImgContainer}>
             <img
               className={styles.postImg}
-              // TODO replace with this when real data have image or when before deploy
               src={props.image_link}
-              // src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80"
               alt="Recipe Image"
             />
           </div>
         </div>
         <div className={styles.postBottom}>
-          <div className={styles.postBottomLeft} keyword="place_holder">
-            {/* <img
-              className={styles.likeIcon}
-              src="/assets/like.png"
-              // onClick={likeHandler}
-              alt=""
-            />
-            <img
-              className={styles.likeIcon}
-              src="/assets/heart.png"
-              // onClick={likeHandler}
-              alt=""
-            />
-            <span className={styles.postLikeCounter}>666 people like it</span> */}
-          </div>
+          <div className={styles.postBottomLeft} keyword="place_holder"></div>
           <Link
             to={`/recipe/${props.name}/${props.recipe_id}`}
             key={props.recipe_id}

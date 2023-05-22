@@ -14,7 +14,6 @@ const CollectionDropList = props => {
       style={props.style}
       key={ele.collection_id}
       id={props.id}
-      // recipe={props.recipe}
       collection={ele}
     ></CollectionInDropList>
   ))
@@ -33,19 +32,12 @@ const CollectionDropList = props => {
     <div
       className={`${styles.listMainContainer} ${styles.flexColumn} ${styles.boxShadowPurple}`}
       style={{ display: `${props.current}` }}
-      // onBlur={handleBlur}
       ref={collectionDrop}
-      // onFocus={isFocus}
     >
       <div className={`${styles.searchBarAndCreateButtonContainer}`}>
         <div className={`${styles.searchBar} ${styles.flexRow}`}>
-          {/* <img
-            className={`${styles.searchIconContainer}`}
-            src={searchIcon}
-          ></img> */}
           <i className="fa-solid fa-magnifying-glass"></i>
           <input className={`${styles.inputFieldContainer}`} />
-          {/* check with user collections */}
         </div>
 
         <CreateNewCollection

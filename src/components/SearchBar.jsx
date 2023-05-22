@@ -29,7 +29,6 @@ const SearchBar = ({
 
   const handleSubmit = async event => {
     event.preventDefault()
-    // Additional form submission logic here
 
     if (selectedDiet != null && selectedDiet != []) {
       const recipesByDietaryPreference = await fetch(
@@ -141,15 +140,11 @@ const SearchBar = ({
       >
         <div className={styles.form_Container}>
           <div className={styles.search_Container}>
-            {/* {search} */}
             <input
               autoFocus={false}
               placeholder="Type..."
               type="text"
               name="search" // Add a name attribute to the input element
-
-              // value={searchInput}
-              // onChange={e => setSearchInput(e.target.value)}
             />
             <div className={styles.btnContainer}>
               <Button2
@@ -176,7 +171,6 @@ const SearchBar = ({
                   borderColor: state.isFocused ? '#ff8600' : '#ff8600',
                   borderWidth: '2px',
                   borderRadius: '8px',
-                  // This line disable the blue border
                   boxShadow: state.isFocused ? 0 : 0,
                   '&:hover': {
                     borderColor: '#ff8600',
@@ -200,7 +194,6 @@ const SearchBar = ({
                   borderColor: state.isFocused ? '#ff8600' : '#ff8600',
                   borderWidth: '2px',
                   borderRadius: '8px',
-                  // This line disable the blue border
                   boxShadow: state.isFocused ? 0 : 0,
 
                   '&:hover': {

@@ -16,7 +16,6 @@ const SaveRecipeButton = props => {
       style={style}
       fn={props.fn}
       options={'Save'}
-      // handleBlur={props.onBlur}
     ></DefaultButton>
   )
 }

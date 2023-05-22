@@ -26,14 +26,6 @@ const UserProfileMainPage = () => {
     recipe: 'none'
   }
 
-  // const [temp, setTemp] = useState( <CollectionSection
-  //   setCurrentStyle={setCurrentStyle}
-  //   setUpdateForm={setUpdateForm}
-  //   setSection={setSection}
-  // />)
-
-  // console.log(sectionDisplay.collection)
-
   const [display, setDisplay] = useState(sectionDisplay)
 
   return (
@@ -44,19 +36,10 @@ const UserProfileMainPage = () => {
           className={`${styles.flexRow} ${styles.profileMainContainer}`}
           style={{ display: 'flex', alignItems: 'flex-start' }}
         >
-          {/* <div
-            className={`${styles.updateFormBackground}`}
-            style={{ display: `${currentStyle}` }}
-          > */}
-          {/* <UpdateForm /> */}
           {updateForm}
-          {/* </div> */}
 
           <BackToTopButton />
 
-          {/* Section container fixed width, height fit content, display grid 3 */}
-          {/* <CollectionSection></CollectionSection> */}
-          {/* <CollectionSection /> */}
           <div className={`${styles.sectionContainer}`}>
             <CollectionSection
               display={display}

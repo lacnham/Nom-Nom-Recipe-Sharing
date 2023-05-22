@@ -123,15 +123,6 @@ const AllRecipe = () => {
       <div className={styles.text}>
         <h1>Hello</h1>
         <SearchBar
-          // search={
-          //   <input
-          //     placeholder="Type..."
-          //     type="text"
-          //     value={searchInput}
-          //     onChange={e => setSearchInput(e.target.value)}
-          //   />
-          // }
-
           setSearchInput={setSearchInput}
           food={data}
           diet={diet}
@@ -160,11 +151,6 @@ const AllRecipe = () => {
           </div>
         ) : (
           <div>
-            {/*  <Link
-              to={`/collection/${props.collection.collection_id}`}
-              key={props.collection.collection_id}
-              className={`${styles.collectionContainer} ${styles.boxShadowPurple}`}
-            > */}
             <div className={styles.cardContainer}>
               {filteredData.slice(0, itemsToRender).map(item => (
                 <Link
