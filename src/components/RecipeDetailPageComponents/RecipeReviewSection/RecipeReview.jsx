@@ -2,11 +2,11 @@ import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css
 import SaveRecipeButton from './SaveRecipeButton'
 import CollectionDropList from '../../UserProfileComponents/UserProfileCollection/UserCollectionDrop/CollectionDropList'
 import UserReview from './UserReviews'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ClickChangeStyle from '../../ClickChangeStyle'
 import { UserReviewForm } from './UserReviewForm'
 import SocialMediaButton from '../../SocialMediaButton/SocialMediaButton'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const RecipeReview = props => {
   const styleElement = {
@@ -23,6 +23,13 @@ const RecipeReview = props => {
     setCurrent(newStyle)
   }
 
+  const [link, setLink] = useState('')
+
+  useEffect(() => {
+    // setLink(`${window.location.origin}${window.location.pathname}`)
+    setLink(window.location.href)
+  }, [])
+
   return (
     <div
       className={`${styles.recipePrimaryContainer} ${styles.flexColumn} ${styles.boxShadowPurple} ${styles.reviewsContainer}`}
@@ -36,7 +43,7 @@ const RecipeReview = props => {
           current={current}
           id={props.id}
         ></CollectionDropList>
-        <SocialMediaButton link={window.location.hostname} />
+        <SocialMediaButton link={link} />
       </div>
       <UserReviewForm id={props.id} />
       <UserReview id={props.id}></UserReview>

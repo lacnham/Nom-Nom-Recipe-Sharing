@@ -37,8 +37,6 @@ const UserReview = props => {
     fetch()
   }, [])
 
-  console.log('important', LoadUserImg('1'))
-
   async function getImageURLs (reviews) {
     const imageUrls = []
     for (const review of reviews) {
@@ -62,7 +60,7 @@ const UserReview = props => {
     if (reviewImg.length === 0) {
       processReviews(reviews)
     }
-  })
+  }, [])
 
   useEffect(() => {
     console.log(reviewImg)
