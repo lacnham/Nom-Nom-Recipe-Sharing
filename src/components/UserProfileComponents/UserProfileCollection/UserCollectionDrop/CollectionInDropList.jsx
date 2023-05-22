@@ -53,9 +53,9 @@ export const CollectionInDropList = props => {
     // console.log(props.recipe.recipe_id)
   }
 
-  const handleConfirm = () => {
-    isShowing = false
-  }
+  // const handleConfirm = () => {
+  //   isShowing = false
+  // }
 
   return (
     <div
