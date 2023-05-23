@@ -1,6 +1,4 @@
 import styles from '../../../../styles/UserProfile/UserProfleCollection/CollectionDropList.module.css'
-import searchIcon from '/images/Nom nom icons/Search_alt.svg'
-
 import { CreateNewCollection } from './CreateNewCollection'
 import { CollectionInDropList } from './CollectionInDropList'
 import { FetchUserCollections } from '../FetchUserCollections'

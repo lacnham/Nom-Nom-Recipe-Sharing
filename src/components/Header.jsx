@@ -5,8 +5,6 @@ import { useContext } from 'react'
 import { AuthContext } from './SessionVerification/AuthContext'
 import Dropdown from './Dropdown/Dropdown'
 import NavBar from './NavBar'
-import axios from 'axios'
-import { useState, useEffect } from 'react'
 
 const Header = () => {
   const { userData } = useContext(AuthContext)

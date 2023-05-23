@@ -1,8 +1,6 @@
 import styles from '../../../styles/UserProfile/UserProfileDetail/UserProfileDetail.module.css'
-import img from '/images/avatarTemp.png'
 import { AuthContext } from '../../SessionVerification/AuthContext'
 import { useContext, useEffect, useState } from 'react'
-import { FetchCurrentuser } from '../../FetchCurrentUser'
 import { UpdateButton } from '../UpdateProfileButton'
 import { Button1 } from '../../Button'
 import { UpdateProfileDetail } from './UpdateProfileDetail'

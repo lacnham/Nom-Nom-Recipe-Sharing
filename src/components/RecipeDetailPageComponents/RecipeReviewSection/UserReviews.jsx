@@ -1,6 +1,5 @@
 import ReactStars from 'react-rating-stars-component'
 import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css'
-import avatar from '/images/avatarTemp.png'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { LoadUserImg } from '../../ApiPost/LoadImage'
@@ -14,8 +13,6 @@ const UserReview = props => {
     value: 0,
     isHalf: true
   }
-
-  const [imgURL, setImgURL] = useState('')
 
   const [reviews, setReviews] = useState([])
 
@@ -37,7 +34,7 @@ const UserReview = props => {
     fetch()
   }, [])
 
-  async function getImageURLs (reviews) {
+  async function getImageURLs(reviews) {
     const imageUrls = []
     for (const review of reviews) {
       const userImgURL = await LoadUserImg(review.id)
@@ -49,7 +46,7 @@ const UserReview = props => {
   const [reviewImg, setReviewImg] = useState([]) // Fix the variable name
 
   // Usage example
-  async function processReviews (reviews) {
+  async function processReviews(reviews) {
     setReviewImg(await getImageURLs(reviews))
     // console.log(reviewImg) // Access the array of image URLs
   }

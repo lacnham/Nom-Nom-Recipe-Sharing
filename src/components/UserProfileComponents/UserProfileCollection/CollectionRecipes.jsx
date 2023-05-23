@@ -1,10 +1,7 @@
 import styles from '../../../styles/UserProfile/UserProfleCollection/CollectionRecipe.module.css'
 import Header from '../../Header'
-import Collections from './Collections'
-import img from '/images/recipeImage.png'
 import { FetchCollectionWithID } from './FetchCollectionWithID'
 import { useParams } from 'react-router-dom'
-import { FetchCollectionRecipe } from './FetchCollectionRecipe'
 import { RecipesInCollection } from './RecipesInCollection'
 
 export const CollectionRecipes = props => {

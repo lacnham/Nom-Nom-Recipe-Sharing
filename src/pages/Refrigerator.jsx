@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react'
-import axios from 'axios'
 import Header from '../components/Header'
 import styles from '../styles/RefrigeratorPage/Refrigerator.module.css'
 import { withoutAuth } from '../components/SessionVerification/AuthChecking'
@@ -35,7 +34,7 @@ const Refrigerator = () => {
     }
   }
 
-  async function fetchDataWithInput () {
+  async function fetchDataWithInput() {
     const url = 'http://localhost:3000/recipe/search-by-ingredients'
     const body = {
       ingredients: selectedOptions
@@ -60,7 +59,7 @@ const Refrigerator = () => {
     }
   }
 
-  async function fetchDataWithOutInput () {
+  async function fetchDataWithOutInput() {
     const url = 'http://localhost:3000/recipe'
     try {
       const response = await fetch(url, {
@@ -116,7 +115,6 @@ const Refrigerator = () => {
       <Header />
       <BackToTopButton />
       <div className={styles.text}>
-        <h1>Hello</h1>
         <div className={styles.form_Container}>
           <form
             onSubmit={handleSubmit}
