@@ -8,7 +8,7 @@ import StickyBox from 'react-sticky-box'
 import { BackToTopButton, Button2 } from '../Button'
 import { useNavigate } from 'react-router-dom'
 
-export default function Feed() {
+export default function Feed () {
   const navigate = useNavigate()
 
   const { userData } = useContext(AuthContext)
@@ -28,7 +28,7 @@ export default function Feed() {
     }
   }, [dietData, isDietNull])
 
-  async function fetchRecommendationsByDietary(userID) {
+  async function fetchRecommendationsByDietary (userID) {
     const url = `http://localhost:3000/recipe/recommendations/dietary/${userID}`
     try {
       const response = await fetch(url)
@@ -67,7 +67,7 @@ export default function Feed() {
     }
   }
 
-  async function fetchCaloriesData(recipeId) {
+  async function fetchCaloriesData (recipeId) {
     const data = {
       servingSize: 1
     }
@@ -99,7 +99,7 @@ export default function Feed() {
     fetchRecommendationsByDietary(userData.user.id)
   }, [])
 
-  function getTimeElapsed(createdAt) {
+  function getTimeElapsed (createdAt) {
     const postDate = new Date(createdAt)
     const currentDate = new Date()
 
@@ -137,7 +137,7 @@ export default function Feed() {
             </span>
           </div>
           <div className={styles.rignhtbarAd}>
-            <img src="src/images/BrandConcept.svg" alt="" />
+            <img src="/images/BrandConcept.svg" alt="" />
           </div>
           <div className={styles.rightbarLink}>
             <h4 className={styles.rightbarTitle}>Other places</h4>
@@ -173,7 +173,7 @@ export default function Feed() {
       <div className={styles.postContainer}>
         {isDietNull ? (
           <div className={styles.noResultsFound}>
-            <img src="src/images/noDiet.svg" alt="" />
+            <img src="/images/noDiet.svg" alt="" />
             <h2>You dont&#8217;t have any diet preference</h2>
             <p>
               Choose a diet plan for personalized recommendations and guidance
@@ -207,7 +207,7 @@ export default function Feed() {
                     caloriesData={Math.round(post.caloriesData)}
                     serving_size={Math.round(post.serving_size)}
                     image_link={(() => {
-                      let imageLinkFallback = 'src/images/Default_img.svg'
+                      let imageLinkFallback = '/images/Default_img.svg'
                       try {
                         if (post.image_link) {
                           // Check if the image URL is valid by creating a new Image object
@@ -236,7 +236,7 @@ export default function Feed() {
   )
 }
 
-function Post(props) {
+function Post (props) {
   return (
     <div className={styles.post}>
       <div className={styles.postWrapper}>

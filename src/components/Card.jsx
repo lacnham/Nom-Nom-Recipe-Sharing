@@ -4,22 +4,21 @@ import { useState } from 'react'
 import { AuthContext } from './SessionVerification/AuthContext'
 import { Link } from 'react-router-dom'
 
-function CardImage(props) {
+function CardImage (props) {
   const [imageURL, setImageURL] = useState(
-    props.image || 'src/images/Default_img.svg'
+    props.image || '/images/Default_img.svg'
   )
   const [imageError, setImageError] = useState(false)
 
   const handleImageError = () => {
     if (!imageError) {
-      setImageURL('src/images/Default_img.svg')
+      setImageURL('/images/Default_img.svg')
       setImageError(true)
     }
   }
 
   const imageStyle = {
-    width:
-      imageURL != 'src/images/Default_img.svg' ? '100% !important' : '200px',
+    width: imageURL != '/images/Default_img.svg' ? '100% !important' : '200px',
     objectFit: 'cover'
   }
 
@@ -42,7 +41,7 @@ function CardImage(props) {
   )
 }
 
-function UpdateRecipeButton({ userID, fn }) {
+function UpdateRecipeButton ({ userID, fn }) {
   const { userData } = useContext(AuthContext)
 
   if (userID == userData.user.id) {
@@ -55,7 +54,7 @@ function UpdateRecipeButton({ userID, fn }) {
   return null
 }
 
-function CardContent(props) {
+function CardContent (props) {
   return (
     <div className={styles.CardContent}>
       <p className={styles.CardTitle}>{props.title}</p>
@@ -74,7 +73,7 @@ function CardContent(props) {
 }
 
 export default class Card extends React.Component {
-  render() {
+  render () {
     return (
       <div className={styles.Card}>
         <div>

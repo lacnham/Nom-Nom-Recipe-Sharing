@@ -1,6 +1,6 @@
 import ReactStars from 'react-rating-stars-component'
 import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css'
-import avatar from '../../../images/avatarTemp.png'
+import avatar from '/images/avatarTemp.png'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { LoadUserImg } from '../../ApiPost/LoadImage'

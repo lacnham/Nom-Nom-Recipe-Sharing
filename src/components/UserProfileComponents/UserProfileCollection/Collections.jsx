@@ -6,7 +6,7 @@ import { UpdateButton } from '../UpdateProfileButton'
 import { UpdateForm } from '../../FormComponents/UpdateForm'
 import { RecipeTemp } from './RecipeTemp'
 
-import defaultImg from '/src/images/Default_img.svg'
+import defaultImg from '/images/Default_img.svg'
 import useModal from '../../ModalComponents/useModal'
 import Modal from '../../ModalComponents/Modal'
 import axios from 'axios'
@@ -99,7 +99,7 @@ const Collections = props => {
 
   const handleImageError = () => {
     if (!imageError) {
-      setImageURL('src/images/Default_img.svg')
+      setImageURL('/images/Default_img.svg')
       setImageError(true)
     }
   }

@@ -1,17 +1,15 @@
 import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css'
 
-import timeIcon from '../../../images/Nom nom icons/Time_atack.png'
-import peopleIcon from '../../../images/Nom nom icons/User_alt_fill.png'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const RecipeIntro = props => {
-  const [imageURL, setImageURL] = useState('/src/images/Default_img.svg')
+  const [imageURL, setImageURL] = useState('/images/Default_img.svg')
   const [imageError, setImageError] = useState(false)
 
   const handleImageError = () => {
     if (!imageError) {
-      setImageURL('src/images/Default_img.svg')
+      setImageURL('/images/Default_img.svg')
       setImageError(true)
     }
   }

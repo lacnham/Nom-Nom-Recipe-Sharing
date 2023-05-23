@@ -2,7 +2,7 @@ import RecipeIntro from './RecipeIntro'
 import RecipeIngredient from './RecipeIngredient'
 import RecipeDescription from './RecipeDescription'
 import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css'
-import image from '../../../images/recipeImage.png'
+import image from '/images/recipeImage.png'
 import axios from 'axios'
 import { useEffect, useRef, useState, useTransition } from 'react'
 import { FetchIngAndNutri } from '../../Fetch/Recipes/FetchIngAndNutri'
@@ -21,7 +21,7 @@ const RecipeDetail = props => {
   const recipe = {
     id: props.id,
     title: props.recipe.name,
-    img: props.recipe.image_link || 'src/images/Default_img.svg',
+    img: props.recipe.image_link || '/images/Default_img.svg',
     commonInfo: {
       duration: duration,
       serving: parseInt(props.recipe.serving_size),

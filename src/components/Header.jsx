@@ -1,5 +1,5 @@
 import styles from '../styles/Header.module.css'
-import nomNomLogo from '../images/NomNomHorizontalLogo.png'
+import nomNomLogo from '/images/NomNomHorizontalLogo.png'
 import { Button1, Button2 } from './Button'
 import { useContext } from 'react'
 import { AuthContext } from './SessionVerification/AuthContext'

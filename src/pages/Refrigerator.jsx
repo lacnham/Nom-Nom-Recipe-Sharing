@@ -35,7 +35,7 @@ const Refrigerator = () => {
     }
   }
 
-  async function fetchDataWithInput() {
+  async function fetchDataWithInput () {
     const url = 'http://localhost:3000/recipe/search-by-ingredients'
     const body = {
       ingredients: selectedOptions
@@ -60,7 +60,7 @@ const Refrigerator = () => {
     }
   }
 
-  async function fetchDataWithOutInput() {
+  async function fetchDataWithOutInput () {
     const url = 'http://localhost:3000/recipe'
     try {
       const response = await fetch(url, {
@@ -164,7 +164,7 @@ const Refrigerator = () => {
         <div>
           {firstTime ? (
             <div className={styles.first_Time}>
-              <img src="src/images/TypeE.svg" alt="" />
+              <img src="/images/TypeE.svg" alt="" />
               <h2>
                 Choose the ingredient and we will found the suitable recipe for
                 you

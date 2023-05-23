@@ -1,5 +1,5 @@
 import styles from '../../../styles/UserProfile/UserProfileDetail/UserProfileDetail.module.css'
-import img from '../../../images/avatarTemp.png'
+import img from '/images/avatarTemp.png'
 import { AuthContext } from '../../SessionVerification/AuthContext'
 import { useContext, useEffect, useState } from 'react'
 import { FetchCurrentuser } from '../../FetchCurrentUser'

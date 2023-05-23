@@ -63,7 +63,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('../../images/landingPageImg.svg');
+  background-image: url('/images/landingPageImg.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;

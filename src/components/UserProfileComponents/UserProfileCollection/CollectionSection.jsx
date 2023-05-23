@@ -1,6 +1,6 @@
 import styles from '../../../styles/UserProfile/UserProfileMainPage.module.css'
 import Collections from './Collections'
-import img from '../../../images/recipeImage.png'
+import img from '/images/recipeImage.png'
 import { FetchUserCollections } from './FetchUserCollections'
 import { useContext, useRef, useState } from 'react'
 import { AuthContext } from '../../SessionVerification/AuthContext'
