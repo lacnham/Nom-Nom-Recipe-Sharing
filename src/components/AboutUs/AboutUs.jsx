@@ -2,6 +2,7 @@ import React from 'react'
 import AboutUsStyles from '../AboutUs/AboutUs.module.css'
 import nham_img from '/images/nham_avatar.png'
 import linh_img from '/images/346121653_949292926116672_4015539475013775595_n.jpg'
+import khoi_img from '/images/new.jpeg'
 import Header from '../Header'
 
 const member = [
@@ -24,8 +25,9 @@ const member = [
   },
   {
     title: 'Khoi',
-    features: ['Front-end Coder', 'CON NGUOI NHAM NHI'],
+    features: ['Front-end Coder', 'Love coding, but not that much 🥺'],
     buttonText: 'Github',
+    img: khoi_img,
     url: 'https://github.com/KhoiNguyen-281'
   },
   {
