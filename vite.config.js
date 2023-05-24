@@ -1,9 +1,20 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  build: {
+    optimizeDeps: {
+      include: ['axios', 'lodash'] // Add the necessary dependencies that need to be pre-bundled
+    },
+    outDir: 'dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      main: path.resolve(__dirname, 'src/main.jsx'), // Adjust the path and filename according to your entry point
+    }
+  },
   server: {
     proxy: {
       '/api': {
@@ -14,9 +25,10 @@ export default defineConfig({
           'Access-Control-Allow-Origin': 'http://localhost:5173',
           'Access-Control-Allow-Credentials': true,
           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        },
-      },
-    },
-  },
-});
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+        }
+      }
+    }
+  }
+})
+
