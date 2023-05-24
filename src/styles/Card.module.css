@@ -39,24 +39,25 @@
   margin: 12px 0px 0px 0px;
 }
 
-.LocationLabel {
-  color: #8294aa;
-  font-size: 14px;
-  margin: 4px 0;
-}
-
 .Description {
   font-size: 14px;
   margin: 8px 0 0 0px;
-  word-break: break-all;
+  word-break: break-word;
   text-overflow: ellipsis;
   overflow: hidden;
+
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+
   width: auto;
   height: auto;
-  white-space: nowrap;
+  max-height: 63px;
+  /* white-space: nowrap; */
 }
 
-.pill {
+.LocationLabel {
+  min-height: 25px;
   display: inline-block;
   padding: 0.5em 1em;
   border-radius: 20px;
@@ -71,42 +72,39 @@
   cursor: pointer;
 }
 
-.pill:nth-child(1) {
+.LocationLabel:nth-child(1) {
   background: #f87e7e;
 }
 
-.pill:nth-child(2) {
+.LocationLabel:nth-child(2) {
   background: #ffc483;
 }
 
-.pill:nth-child(3) {
+.LocationLabel:nth-child(3) {
   background: #5a3055;
 }
 
-.pill:nth-child(4) {
+.LocationLabel:nth-child(4) {
   background: #74956a;
 }
 
-.pill:nth-child(5) {
+.LocationLabel:nth-child(5) {
   background: #bf50ff;
 }
 
-.pill:hover {
+.LocationLabel:hover {
   filter: saturate(2);
   color: white;
 }
 
 .buttonContainer {
-  /* width: 350px; */
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: space-between;
   border-radius: inherit;
 }
 
 .seeMoreButton {
-  /* justify-self: flex-end; */
-  align-self: flex-end;
   background-color: #f2f2f2;
   border: none;
   color: #333;

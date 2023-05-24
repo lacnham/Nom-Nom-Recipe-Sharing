@@ -115,7 +115,6 @@ const AllRecipe = () => {
   }, [perLoad])
 
   const Card = lazy(() => import('../components/Card'))
-
   return (
     <div className={styles.page} id="bottom">
       <Header />
@@ -160,10 +159,10 @@ const AllRecipe = () => {
                     fallback={<div className={styles.cardLazyLoading}></div>}
                   >
                     <Card
+                      recipe_id={item.recipe_id}
                       image={item.image_link}
                       title={item.name}
                       description={item.description}
-                      id={item.recipe_id}
                     />
                   </Suspense>
                 </Link>
