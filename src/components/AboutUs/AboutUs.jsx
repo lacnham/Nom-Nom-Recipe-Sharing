@@ -18,7 +18,7 @@ const member = [
     title: 'Linh',
     features: [
       'Back-end Coder',
-      'Beautys faithful simp for the gorgeous, fueled by beauty and cat😇'
+      "Beauty's faithful simp for the gorgeous, fueled by beauty and cat😇"
     ],
     buttonText: 'Github',
     img: linh_img,
