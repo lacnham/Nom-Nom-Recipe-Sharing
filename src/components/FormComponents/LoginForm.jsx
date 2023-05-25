@@ -35,6 +35,19 @@ const LoginForm = () => {
     }
   }
 
+  const [passwordType, setPasswordType] = useState('password')
+  const [passwordIcon, setPasswordIcom] = useState('fa-solid fa-eye-slash')
+
+  const togglePassword = () => {
+    if (passwordType === 'password') {
+      setPasswordType('text')
+      setPasswordIcom('fa-solid fa-eye')
+      return
+    }
+    setPasswordType('password')
+    setPasswordIcom('fa-solid fa-eye-slash')
+  }
+
   return (
     <form onSubmit={handleSubmit} method="POST">
       <div className={styles.formError}>{loginEr}</div>
@@ -56,12 +69,17 @@ const LoginForm = () => {
 
           <input
             className={styles.inputField}
-            type="password"
+            type={passwordType}
             placeholder="Password"
             name="psw"
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
+          <i
+            className={`${styles.pswButton} ${passwordIcon}`}
+            onMouseOver={togglePassword}
+            onMouseLeave={togglePassword}
+          ></i>
         </div>
         <div className={styles.psw}>
           <span>
