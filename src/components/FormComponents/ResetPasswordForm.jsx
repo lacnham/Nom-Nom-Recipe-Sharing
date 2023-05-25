@@ -17,6 +17,19 @@ const ResetPasswordForm = () => {
     setErrors(validatedErrors)
   }, [password, confirmPassword])
 
+  const [passwordType, setPasswordType] = useState('password')
+  const [passwordIcon, setPasswordIcom] = useState('fa-solid fa-eye-slash')
+
+  const togglePassword = () => {
+    if (passwordType === 'password') {
+      setPasswordType('text')
+      setPasswordIcom('fa-solid fa-eye')
+      return
+    }
+    setPasswordType('password')
+    setPasswordIcom('fa-solid fa-eye-slash')
+  }
+
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/
 
@@ -108,7 +121,7 @@ const ResetPasswordForm = () => {
           <i className={`${styles.icon} ${'fa-solid fa-lock'}`}></i>
           <input
             placeholder="Password"
-            type="password"
+            type={passwordType}
             id="password"
             value={password}
             onChange={handlePasswordChange}
@@ -121,11 +134,16 @@ const ResetPasswordForm = () => {
           <i className={`${styles.icon} ${'fa-solid fa-lock'}`}></i>
           <input
             placeholder="Retype Password"
-            type="password"
+            type={passwordType}
             id="confirmPassword"
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
           />
+          <i
+            className={`${styles.pswButton} ${passwordIcon}`}
+            onMouseOver={togglePassword}
+            onMouseLeave={togglePassword}
+          ></i>
         </div>
       </div>
 

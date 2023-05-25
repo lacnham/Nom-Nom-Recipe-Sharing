@@ -42,6 +42,19 @@ export default function SignUpForm() {
     })
   }
 
+  const [passwordType, setPasswordType] = useState('password')
+  const [passwordIcon, setPasswordIcom] = useState('fa-solid fa-eye-slash')
+
+  const togglePassword = () => {
+    if (passwordType === 'password') {
+      setPasswordType('text')
+      setPasswordIcom('fa-solid fa-eye')
+      return
+    }
+    setPasswordType('password')
+    setPasswordIcom('fa-solid fa-eye-slash')
+  }
+
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/
@@ -143,7 +156,7 @@ export default function SignUpForm() {
 
           <input
             className={styles.inputField}
-            type="password"
+            type={passwordType}
             placeholder="Password"
             name="password"
             onChange={changeHandler}
@@ -159,12 +172,17 @@ export default function SignUpForm() {
 
           <input
             className={styles.inputField}
-            type="Password"
+            type={passwordType}
             placeholder="Retype Password"
             name="verifypassword"
             onChange={changeHandler}
             value={enteredData.verifypassword}
           />
+          <i
+            className={`${styles.pswButton} ${passwordIcon}`}
+            onMouseOver={togglePassword}
+            onMouseLeave={togglePassword}
+          ></i>
         </div>
         {enteredData.Errors.verifypassword && (
           <div className={styles.warning}>
