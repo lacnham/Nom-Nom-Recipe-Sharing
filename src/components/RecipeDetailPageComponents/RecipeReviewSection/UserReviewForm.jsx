@@ -55,9 +55,9 @@ export const UserReviewForm = id => {
     }
   }
 
-  useEffect(() => {
-    handleSubmit()
-  }, [])
+  // useEffect(() => {
+  //   handleSubmit()
+  // }, [])
 
   return (
     <form

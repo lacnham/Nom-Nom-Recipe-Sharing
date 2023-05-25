@@ -14,6 +14,7 @@ const Header = () => {
     { key: 2, name: 'Refrigerator', link: '/refrigerator', active: false },
     { key: 3, name: 'About us', link: '/AboutUS', active: false }
   ]
+
   return (
     <header className={`${styles.header} ${styles.flexRow}`}>
       <div

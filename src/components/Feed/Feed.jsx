@@ -133,7 +133,7 @@ export default function Feed() {
         <StickyBox offsetTop={20} offsetBottom={20}>
           <div className={styles.rightbarContainer}>
             <span className={styles.rightbarText}>
-              <b>Place Holder</b> write <b> sth </b> here.
+              <b>Other places</b>
             </span>
           </div>
           <div className={styles.rignhtbarAd}>

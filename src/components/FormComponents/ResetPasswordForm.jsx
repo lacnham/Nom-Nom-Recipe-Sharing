@@ -17,9 +17,10 @@ const ResetPasswordForm = () => {
     setErrors(validatedErrors)
   }, [password, confirmPassword])
 
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/
 
-  function validateInput ({ password, confirmPassword }) {
+  function validateInput({ password, confirmPassword }) {
     const errors = {}
 
     if (!password || !confirmPassword) {

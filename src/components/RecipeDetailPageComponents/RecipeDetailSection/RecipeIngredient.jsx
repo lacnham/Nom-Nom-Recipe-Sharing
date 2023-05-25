@@ -69,7 +69,4 @@ const RecipeIngredient = props => {
   )
 }
 
-{
-}
-
 export default RecipeIngredient

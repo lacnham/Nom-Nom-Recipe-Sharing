@@ -43,7 +43,8 @@ export default function SignUpForm() {
   }
 
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/
 
   function validateInput({ username, email, password, verifypassword }) {
     const errors = {}
