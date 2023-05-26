@@ -1,11 +1,9 @@
 import React, { useRef, useState } from 'react'
 import styles from '../styles/PublishRecipe.module.css'
 import Header from '../components/Header'
-import { useEffect } from 'react'
 import { FetchAllIngAndCountry } from '../components/Fetch/FetchAllIngAndCountry'
 import Select from 'react-select'
 import axios from 'axios'
-import { DefaultButton } from '../components/Button'
 import Modal from '../components/ModalComponents/Modal'
 import useModal from '../components/ModalComponents/useModal'
 import { UploadImage } from '../components/ApiPost/LoadImage'
@@ -108,7 +106,7 @@ const PublishRecipe = () => {
 
   let config = {
     method: 'post',
-    url: 'https://nom-nom-recipe-web-be.herokuapp.com/recipe',
+    url: 'http://localhost:3000/recipe',
     headers: {
       Authorization: localStorage.accesstoken
     },
@@ -143,12 +141,13 @@ const PublishRecipe = () => {
   const handleSubmit = event => {
     event.preventDefault()
     if (
-      name !== '' ||
-      description !== '' ||
-      origin !== '' ||
-      duration !== '' ||
+      name !== '' &&
+      description !== '' &&
+      origin !== '' &&
+      duration !== '' &&
       servings !== ''
     ) {
+      console.log(servingUnit)
       try {
         handleCreateRecipe()
         toggle()

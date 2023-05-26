@@ -60,7 +60,9 @@ const UserReview = props => {
 
   useEffect(() => {
     console.log(reviewImg)
-  }, [reviewImg])
+  }, [])
+
+  // console.log('Image ne ', rev)
 
   const userReview = reviews.map(review => (
     <div
@@ -68,10 +70,7 @@ const UserReview = props => {
       className={`${styles.userReviewContainer} ${styles.boxShadowPurple}`}
     >
       <div className={`${styles.flexRow} ${styles.userInfoContainer}`}>
-        <img
-          className={`${styles.userAvatar}`}
-          src={reviewImg[review.review_id]}
-        />
+        <img className={`${styles.userAvatar}`} src={reviewImg[review.id]} />
         <div className={`${styles.flexColumm}`}>
           <div>{review.username}</div>
           <ReactStars {...star} value={review.rating} />

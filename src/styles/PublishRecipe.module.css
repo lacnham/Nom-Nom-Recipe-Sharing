@@ -157,7 +157,7 @@ span {
 }
 .serving {
   display: grid;
-  grid-template-columns: 1fr 1.8fr;
+  grid-template-columns: 0.6fr 1.6fr;
 }
 .duration {
   display: grid;

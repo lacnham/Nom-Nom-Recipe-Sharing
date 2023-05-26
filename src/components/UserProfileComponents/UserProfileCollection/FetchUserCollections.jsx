@@ -5,7 +5,7 @@ export const FetchUserCollections = () => {
   let config = {
     method: 'get',
     maxBodlength: Infinity,
-    url: 'https://nom-nom-recipe-web-be.herokuapp.com/collection',
+    url: 'http://localhost:3000/collection',
     headers: {
       Authorization: localStorage.accesstoken
     }
