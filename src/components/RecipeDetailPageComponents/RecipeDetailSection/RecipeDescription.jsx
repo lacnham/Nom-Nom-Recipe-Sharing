@@ -31,7 +31,7 @@ const RecipeDescription = props => {
         className={`${styles.recipePrimaryContainer} ${styles.boxShadowPurple}`}
       >
         <div className={styles.title}>Description</div>
-        <p>{props.recipe.description}</p>
+        <p className={`${styles.description}`}>{props.recipe.description}</p>
       </div>
     </>
   )

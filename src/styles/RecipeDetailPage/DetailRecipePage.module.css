@@ -77,6 +77,11 @@
   height: 20px;
 }
 
+.description {
+  word-break: break-all;
+  white-space: normal;
+}
+
 .servingField {
   background-color: var(--light-orange);
   padding: 8px 12px;
