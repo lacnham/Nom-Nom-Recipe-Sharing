@@ -29,7 +29,7 @@ const RecipeIntro = props => {
         setImageURL(res.data)
       })
       .catch(error => console.log(error))
-  })
+  }, [])
 
   const dietary = props.recipe.commonInfo.dietType
     ? props.recipe.commonInfo.dietType.map((ele, id) => (

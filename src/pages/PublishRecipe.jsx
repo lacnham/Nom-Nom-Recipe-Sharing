@@ -108,7 +108,7 @@ const PublishRecipe = () => {
 
   let config = {
     method: 'post',
-    url: 'http://localhost:3000/recipe',
+    url: 'https://nom-nom-recipe-web-be.herokuapp.com/recipe',
     headers: {
       Authorization: localStorage.accesstoken
     },

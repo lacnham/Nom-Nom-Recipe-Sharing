@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import path from 'path';
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,13 +12,13 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     rollupOptions: {
-      main: path.resolve(__dirname, 'src/main.jsx'), // Adjust the path and filename according to your entry point
+      main: path.resolve(__dirname, 'src/main.jsx') // Adjust the path and filename according to your entry point
     }
   },
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'https://nom-nom-recipe-web-be.herokuapp.com',
         changeOrigin: true,
         secure: false,
         headers: {
@@ -31,4 +31,3 @@ export default defineConfig({
     }
   }
 })
-

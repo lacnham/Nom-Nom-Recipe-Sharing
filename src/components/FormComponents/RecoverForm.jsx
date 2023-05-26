@@ -21,7 +21,7 @@ const RecoverForm = () => {
     e.preventDefault()
 
     axios
-      .post('http://localhost:3000/forgot-password', {
+      .post('https://nom-nom-recipe-web-be.herokuapp.com/forgot-password', {
         email: email
       })
       .then(response => {

@@ -5,12 +5,15 @@ export const AuthContext = React.createContext()
 
 export const logout = async () => {
   try {
-    const response = await fetch('http://localhost:3000/auth/logout', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
+    const response = await fetch(
+      'https://nom-nom-recipe-web-be.herokuapp.com/auth/logout',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
-    })
+    )
 
     if (response.ok) {
       localStorage.removeItem('accesstoken')
@@ -29,7 +32,7 @@ export const dietFetch = async userData => {
   if (userData) {
     try {
       const response = await fetch(
-        `http://localhost:3000/get-dietary-preference/${userData.user.id}`,
+        `https://nom-nom-recipe-web-be.herokuapp.com/get-dietary-preference/${userData.user.id}`,
         {
           method: 'GET',
           headers: {
@@ -56,7 +59,7 @@ export const FetchUserRecipe = async userData => {
 
   let config = {
     method: 'GET',
-    url: `http://localhost:3000/recipe/user/${userData.user.id}`
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/user/${userData.user.id}`
   }
 
   const res = await axios.request(config).then(res && setUserRecipes(res.data))
@@ -76,13 +79,16 @@ const AuthContextProvider = props => {
   const getUserSession = async () => {
     if (accesstoken) {
       try {
-        const response = await fetch(`http://localhost:3000/user/my-profile`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: accesstoken
+        const response = await fetch(
+          `https://nom-nom-recipe-web-be.herokuapp.com/user/my-profile`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: accesstoken
+            }
           }
-        })
+        )
         const data = await response.json()
         if (!response.ok) {
           throw new Error(data.msg)
@@ -100,7 +106,7 @@ const AuthContextProvider = props => {
     if (userData) {
       try {
         const response = await fetch(
-          `http://localhost:3000/get-dietary-preference/${userData.user.id}`,
+          `https://nom-nom-recipe-web-be.herokuapp.com/get-dietary-preference/${userData.user.id}`,
           {
             method: 'GET',
             headers: {

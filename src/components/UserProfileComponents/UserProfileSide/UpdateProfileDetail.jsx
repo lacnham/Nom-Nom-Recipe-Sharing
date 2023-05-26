@@ -16,7 +16,8 @@ export const UpdateProfileDetail = ({ props, onDataFromChild, error }) => {
     setErrors(validatedErrors)
   }, [password, veryPassword])
 
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/
 
   function validateInput({ password, veryPassword }) {
     const errors = {}
@@ -71,6 +72,19 @@ export const UpdateProfileDetail = ({ props, onDataFromChild, error }) => {
     onDataFromChild(updatedData)
   }
 
+  const [passwordType, setPasswordType] = useState('password')
+  const [passwordIcon, setPasswordIcom] = useState('fa-solid fa-eye-slash')
+
+  const togglePassword = () => {
+    if (passwordType === 'password') {
+      setPasswordType('text')
+      setPasswordIcom('fa-solid fa-eye')
+      return
+    }
+    setPasswordType('password')
+    setPasswordIcom('fa-solid fa-eye-slash')
+  }
+
   return (
     <form
       autoComplete="off"
@@ -98,7 +112,7 @@ export const UpdateProfileDetail = ({ props, onDataFromChild, error }) => {
           <label>Password:</label>
           <input
             className={`${styles.inputField}`}
-            type="password"
+            type={passwordType}
             name="password"
             id="password"
             placeholder="New password"
@@ -111,15 +125,22 @@ export const UpdateProfileDetail = ({ props, onDataFromChild, error }) => {
             <div className={styles.warning}>{errors.veryPassword}</div>
           )}
           <label>Retype-Password:</label>
-          <input
-            className={`${styles.inputField}`}
-            type="password"
-            name="verify password"
-            id="verify password"
-            placeholder="Re-type password"
-            value={veryPassword}
-            onChange={handleVerifyPassword}
-          />
+          <div>
+            <input
+              className={`${styles.inputField}`}
+              type={passwordType}
+              name="verify password"
+              id="verify password"
+              placeholder="Re-type password"
+              value={veryPassword}
+              onChange={handleVerifyPassword}
+            />
+            <i
+              className={`${styles.pswButton} ${passwordIcon}`}
+              onMouseOver={togglePassword}
+              onMouseLeave={togglePassword}
+            ></i>
+          </div>
         </div>
       </div>
     </form>

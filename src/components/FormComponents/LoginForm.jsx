@@ -13,10 +13,13 @@ const LoginForm = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', {
-        email: email,
-        password: password
-      })
+      const response = await axios.post(
+        'https://nom-nom-recipe-web-be.herokuapp.com/auth/login',
+        {
+          email: email,
+          password: password
+        }
+      )
       localStorage.setItem(
         'accesstoken',
         JSON.stringify(response.data.accesstoken).replace(/"/g, '')
@@ -33,6 +36,19 @@ const LoginForm = () => {
       setLoginEr(error.response.data.error)
       // Handle errors here, such as displaying an error message to the user.
     }
+  }
+
+  const [passwordType, setPasswordType] = useState('password')
+  const [passwordIcon, setPasswordIcom] = useState('fa-solid fa-eye-slash')
+
+  const togglePassword = () => {
+    if (passwordType === 'password') {
+      setPasswordType('text')
+      setPasswordIcom('fa-solid fa-eye')
+      return
+    }
+    setPasswordType('password')
+    setPasswordIcom('fa-solid fa-eye-slash')
   }
 
   return (
@@ -56,12 +72,17 @@ const LoginForm = () => {
 
           <input
             className={styles.inputField}
-            type="password"
+            type={passwordType}
             placeholder="Password"
             name="psw"
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
+          <i
+            className={`${styles.pswButton} ${passwordIcon}`}
+            onMouseOver={togglePassword}
+            onMouseLeave={togglePassword}
+          ></i>
         </div>
         <div className={styles.psw}>
           <span>

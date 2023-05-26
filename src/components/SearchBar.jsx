@@ -32,7 +32,7 @@ const SearchBar = ({
 
     if (selectedDiet != null && selectedDiet != []) {
       const recipesByDietaryPreference = await fetch(
-        `http://localhost:3000/recipe/by-dietary/${selectedDiet.value}`,
+        `https://nom-nom-recipe-web-be.herokuapp.com/recipe/by-dietary/${selectedDiet.value}`,
         {
           method: 'GET',
           headers: {
@@ -45,7 +45,7 @@ const SearchBar = ({
 
       if (selectedCountry != null && selectedCountry != []) {
         const recipesByCountryPreference = await fetch(
-          `http://localhost:3000/recipe/by-country/${selectedCountry.value}`,
+          `https://nom-nom-recipe-web-be.herokuapp.com/recipe/by-country/${selectedCountry.value}`,
           {
             method: 'GET',
             headers: {
@@ -68,7 +68,7 @@ const SearchBar = ({
     } else {
       if (selectedCountry != null && selectedCountry != []) {
         const recipesByCountryPreference = await fetch(
-          `http://localhost:3000/recipe/by-country/${selectedCountry.value}`,
+          `https://nom-nom-recipe-web-be.herokuapp.com/recipe/by-country/${selectedCountry.value}`,
           {
             method: 'GET',
             headers: {

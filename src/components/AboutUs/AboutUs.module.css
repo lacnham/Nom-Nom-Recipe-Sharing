@@ -17,6 +17,9 @@ html {
   padding: 0 25px 25px;
   position: relative;
   width: 100%;
+  background: #f5d682;
+  height: calc(100vh);
+  overflow: hidden;
 }
 
 .background::after {
@@ -127,9 +130,10 @@ html {
 }
 
 .button {
-  border: 1.5px solid #f5d682;
+  border: 2px solid #e6bb2c;
+  font-weight: bold;
   border-radius: 10px;
-  color: #f5d682;
+  color: #e6bb2c;
   display: inline-block;
   margin: 20px 0;
   padding: 10px 25px;
@@ -145,7 +149,7 @@ html {
 }
 
 .button.is-featured {
-  background-color: #e6ee82;
+  background-color: #e6bb2c;
   color: #fff;
 }
 

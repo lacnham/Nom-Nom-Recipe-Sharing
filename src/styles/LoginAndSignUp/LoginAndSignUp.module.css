@@ -151,6 +151,28 @@ form {
   justify-content: center;
 }
 
+.pswButton {
+  padding: 10px;
+  color: #ffc483;
+  min-width: 50px;
+  text-align: center;
+  margin: 8px 0;
+  border: 2px solid #ff8600;
+  /* border-left: 0px; */
+  box-sizing: border-box;
+  border-radius: 8px 8px 8px 8px;
+  display: flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.pswButton:hover {
+  color: #ff8600;
+}
+
 hr {
   height: 2px;
   border-width: 2;

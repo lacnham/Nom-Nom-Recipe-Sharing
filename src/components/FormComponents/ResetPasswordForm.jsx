@@ -17,9 +17,23 @@ const ResetPasswordForm = () => {
     setErrors(validatedErrors)
   }, [password, confirmPassword])
 
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+  const [passwordType, setPasswordType] = useState('password')
+  const [passwordIcon, setPasswordIcom] = useState('fa-solid fa-eye-slash')
 
-  function validateInput ({ password, confirmPassword }) {
+  const togglePassword = () => {
+    if (passwordType === 'password') {
+      setPasswordType('text')
+      setPasswordIcom('fa-solid fa-eye')
+      return
+    }
+    setPasswordType('password')
+    setPasswordIcom('fa-solid fa-eye-slash')
+  }
+
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/
+
+  function validateInput({ password, confirmPassword }) {
     const errors = {}
 
     if (!password || !confirmPassword) {
@@ -42,7 +56,7 @@ const ResetPasswordForm = () => {
     const resetPassword = async (resetToken, userId) => {
       try {
         const response = await fetch(
-          `http://localhost:3000/reset-password/${resetToken}/${userId}`,
+          `https://nom-nom-recipe-web-be.herokuapp.com/reset-password/${resetToken}/${userId}`,
           {
             method: 'POST'
             // Additional request options (headers, body, etc.) can be included here
@@ -82,7 +96,7 @@ const ResetPasswordForm = () => {
     }
 
     try {
-      const url = `http://localhost:3000/reset-password/${resetToken}/${userId}`
+      const url = `https://nom-nom-recipe-web-be.herokuapp.com/reset-password/${resetToken}/${userId}`
       const data = { password: password }
 
       const response = await axios.post(url, data, {
@@ -107,7 +121,7 @@ const ResetPasswordForm = () => {
           <i className={`${styles.icon} ${'fa-solid fa-lock'}`}></i>
           <input
             placeholder="Password"
-            type="password"
+            type={passwordType}
             id="password"
             value={password}
             onChange={handlePasswordChange}
@@ -120,11 +134,16 @@ const ResetPasswordForm = () => {
           <i className={`${styles.icon} ${'fa-solid fa-lock'}`}></i>
           <input
             placeholder="Retype Password"
-            type="password"
+            type={passwordType}
             id="confirmPassword"
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
           />
+          <i
+            className={`${styles.pswButton} ${passwordIcon}`}
+            onMouseOver={togglePassword}
+            onMouseLeave={togglePassword}
+          ></i>
         </div>
       </div>
 
