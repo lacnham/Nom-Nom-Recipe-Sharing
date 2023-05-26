@@ -2,11 +2,8 @@ import Header from '../components/Header'
 import styles from '../styles/RecipeDetailPage/DetailRecipePage.module.css'
 import RecipeDetail from '../components/RecipeDetailPageComponents/RecipeDetailSection/RecipeDetail'
 import RecipeReview from '../components/RecipeDetailPageComponents/RecipeReviewSection/RecipeReview'
-import axios from 'axios'
-import { useState, useEffect } from 'react'
-import { FetchRecipeByID } from '../components/Fetch/Recipes/FetchRecipeByID'
+import { FetchRecipeByID } from '../components/ApiFetch/Recipes/FetchRecipeByID.jsx'
 import { useParams } from 'react-router-dom'
-import { FetchIngAndNutri } from '../components/Fetch/Recipes/FetchIngAndNutri'
 import StickyBox from 'react-sticky-box'
 
 const DetailRecipePage = () => {

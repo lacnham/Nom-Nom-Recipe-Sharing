@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 export const FetchCollectionRecipe = id => {
   let config = {
     method: 'get',
-    url: `http://localhost:3000/collection/${id}/recipes`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/collection/${id}/recipes`,
     headers: {
       Authorization: localStorage.accesstoken
     }

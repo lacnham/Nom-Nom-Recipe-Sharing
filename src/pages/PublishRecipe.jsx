@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import styles from '../styles/PublishRecipe.module.css'
 import Header from '../components/Header'
-import { FetchAllIngAndCountry } from '../components/Fetch/FetchAllIngAndCountry'
+import { FetchAllIngAndCountry } from '../components/ApiFetch/FetchAllIngAndCountry.jsx'
 import Select from 'react-select'
 import axios from 'axios'
 import Modal from '../components/ModalComponents/Modal'
@@ -106,7 +106,7 @@ const PublishRecipe = () => {
 
   let config = {
     method: 'post',
-    url: 'http://localhost:3000/recipe',
+    url: 'https://nom-nom-recipe-web-be.herokuapp.com/recipe',
     headers: {
       Authorization: localStorage.accesstoken
     },

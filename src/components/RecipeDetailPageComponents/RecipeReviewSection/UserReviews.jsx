@@ -18,7 +18,7 @@ const UserReview = props => {
 
   let config = {
     method: 'GET',
-    url: `http://localhost:3000/recipe/${props.id}/reviews`
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/${props.id}/reviews`
   }
 
   const fetch = async () => {
@@ -60,7 +60,7 @@ const UserReview = props => {
 
   useEffect(() => {
     console.log(reviewImg)
-  }, [])
+  }, [reviewImg])
 
   // console.log('Image ne ', rev)
 
@@ -70,7 +70,10 @@ const UserReview = props => {
       className={`${styles.userReviewContainer} ${styles.boxShadowPurple}`}
     >
       <div className={`${styles.flexRow} ${styles.userInfoContainer}`}>
-        <img className={`${styles.userAvatar}`} src={reviewImg[review.id]} />
+        <img
+          className={`${styles.userAvatar}`}
+          src={reviewImg[review.review_id - 1]}
+        />
         <div className={`${styles.flexColumm}`}>
           <div>{review.username}</div>
           <ReactStars {...star} value={review.rating} />

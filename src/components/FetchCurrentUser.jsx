@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 export const FetchCurrentuser = () => {
   let config = {
     method: 'get',
-    url: `http://localhost:3000/user/my-profile`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/user/my-profile`,
     headers: {
       Authorization: localStorage.accesstoken
     }

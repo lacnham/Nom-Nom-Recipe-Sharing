@@ -22,7 +22,7 @@ export const CollectionInDropList = props => {
 
   let config = {
     method: 'post',
-    url: 'http://localhost:3000/collection/add-recipe',
+    url: 'https://nom-nom-recipe-web-be.herokuapp.com/collection/add-recipe',
     headers: {
       Authorization: localStorage.accesstoken
     },

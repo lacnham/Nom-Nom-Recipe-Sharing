@@ -4,19 +4,20 @@ import axios from 'axios'
 export const FetchIngAndNutri = (id, servingNum) => {
   const [ingredients, setIngredients] = useState([])
   const [nutritions, setNutritions] = useState([])
+
   let configIng = {
     method: 'post',
-    url: `http://localhost:3000/recipe/nutritions/total-ing-nutrition-facts/${id}`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/nutritions/total-ing-nutrition-facts/${id}`,
     data: {
-      servingNum: `${servingNum}`
+      servingNum: servingNum
     }
   }
 
   let configNutrition = {
     method: 'post',
-    url: `http://localhost:3000/recipe/nutritions/total-nutrition-facts/${id}`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/nutritions/total-nutrition-facts/${id}`,
     data: {
-      servingNum: `${servingNum}`
+      servingNum: servingNum
     }
   }
 

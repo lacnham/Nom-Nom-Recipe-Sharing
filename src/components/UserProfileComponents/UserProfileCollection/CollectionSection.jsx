@@ -49,7 +49,7 @@ const CollectionSection = props => {
 
   let config = {
     method: 'post',
-    url: `http://localhost:3000/collection`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/collection`,
     headers: {
       Authorization: localStorage.accesstoken
     },

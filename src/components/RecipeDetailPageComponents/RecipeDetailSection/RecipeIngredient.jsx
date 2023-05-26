@@ -1,6 +1,5 @@
 import axios from 'axios'
 import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css'
-import { FetchIngAndNutri } from '../../Fetch/Recipes/FetchIngAndNutri'
 import { useEffect, useState } from 'react'
 
 const RecipeIngredient = props => {

@@ -3,7 +3,7 @@ import { useState } from 'react'
 export const FetchRecipeWithName = name => {
   let config = {
     method: 'get',
-    url: `http://localhost:3000/recipe/name/${name}`
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/name/${name}`
   }
 
   const [recipe, setRecipe] = useState([])

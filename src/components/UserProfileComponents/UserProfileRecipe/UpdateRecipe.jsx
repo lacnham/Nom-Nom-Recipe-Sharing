@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from '../../../styles/UserProfile/UpdateForm.module.css'
-import { FetchRecipeByID } from '../../Fetch/Recipes/FetchRecipeByID'
 import { UploadImage } from '../../ApiPost/LoadImage'
 import Select from 'react-select'
 

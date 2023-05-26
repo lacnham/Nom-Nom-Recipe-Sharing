@@ -3,26 +3,36 @@ import axios from 'axios'
 
 export const FetchRecipeByID = id => {
   const [recipe, setRecipe] = useState()
+  const [dietary, setDietary] = useState([])
 
   let configRecipe = {
     method: 'GET',
-    url: `http://localhost:3000/recipe/${id}`
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/${id}`
   }
 
-  const fetchRecipe = async () => {
+  let configDietary = {
+    method: 'GET',
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/get-dietary/${id}`
+  }
+
+  const fetch = async () => {
     try {
-      const res = await axios.request(configRecipe)
-      setRecipe(res.data)
-      setServingNum(res.data.serving_size)
-      setIsLoading(false)
+      const res = await axios
+        .all([axios.request(configRecipe), axios.request(configDietary)])
+        .then(
+          axios.spread((resRecipe, resDietary) => {
+            setRecipe(resRecipe && resRecipe.data)
+            setDietary(resDietary && resDietary.data)
+          })
+        )
     } catch (error) {
       console.log(error)
     }
   }
 
   useEffect(() => {
-    fetchRecipe()
+    fetch()
   }, [])
 
-  return { recipe }
+  return { recipe, dietary }
 }
