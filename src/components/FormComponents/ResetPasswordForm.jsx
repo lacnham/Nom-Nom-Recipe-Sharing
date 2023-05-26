@@ -56,7 +56,7 @@ const ResetPasswordForm = () => {
     const resetPassword = async (resetToken, userId) => {
       try {
         const response = await fetch(
-          `http://localhost:3000/reset-password/${resetToken}/${userId}`,
+          `https://nom-nom-recipe-web-be.herokuapp.com/reset-password/${resetToken}/${userId}`,
           {
             method: 'POST'
             // Additional request options (headers, body, etc.) can be included here
@@ -96,7 +96,7 @@ const ResetPasswordForm = () => {
     }
 
     try {
-      const url = `http://localhost:3000/reset-password/${resetToken}/${userId}`
+      const url = `https://nom-nom-recipe-web-be.herokuapp.com/reset-password/${resetToken}/${userId}`
       const data = { password: password }
 
       const response = await axios.post(url, data, {

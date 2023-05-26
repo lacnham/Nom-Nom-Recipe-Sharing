@@ -20,12 +20,15 @@ export default function SignUpForm() {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:3000/auth/register', {
-        username: enteredData.username,
-        email: enteredData.email,
-        password: enteredData.password,
-        verifypassword: enteredData.verifypassword
-      })
+      const response = await axios.post(
+        'https://nom-nom-recipe-web-be.herokuapp.com/auth/register',
+        {
+          username: enteredData.username,
+          email: enteredData.email,
+          password: enteredData.password,
+          verifypassword: enteredData.verifypassword
+        }
+      )
       setSignUpEr(null)
       toggle()
     } catch (error) {
