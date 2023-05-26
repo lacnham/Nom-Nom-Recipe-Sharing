@@ -26,6 +26,7 @@ const RecipeDetail = props => {
       serving: parseInt(props.recipe.serving_size),
       dietType: Array.from(props.dietary)
     },
+    servingUnit: props.recipe.sserving_unit,
     origin: 'france',
     description: props.recipe.description
   }
@@ -94,7 +95,7 @@ const RecipeDetail = props => {
 
   return (
     <div
-      className={`${styles.recipePrimaryContainer} ${styles.flexColumn} ${styles.recipeDetailMainContainer}`}
+      className={`${styles.recipePrimaryContainer} ${styles.flexColumn} ${styles.recipeDetailMainContainer} ${styles.boxShadowPurple}`}
     >
       <RecipeIntro
         recipe={recipe}

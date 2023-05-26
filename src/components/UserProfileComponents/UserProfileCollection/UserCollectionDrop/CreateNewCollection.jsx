@@ -1,5 +1,5 @@
 import styles from '../../../../styles/UserProfile/UserProfleCollection/CollectionDropList.module.css'
-import { DefaultButton } from '../../../Button'
+import { Button1, DefaultButton } from '../../../Button'
 import { useState } from 'react'
 import ClickChangeStyle from '../../../ClickChangeStyle'
 import axios from 'axios'
@@ -45,15 +45,27 @@ export const CreateNewCollection = props => {
     }
   }
 
+  const [empty, setEmpty] = useState('')
+
+  const handleInput = () => {
+    if (value == '') {
+      return <div>Name is required</div>
+    } else {
+      return <div></div>
+    }
+  }
+
   const handleSubmit = async () => {
-    try {
-      const res = await axios.request(config)
-      setMessage(res.data.message)
-      UploadCollectionImage(imageURL, res.data.collectionId)
-      props.setCurrent('none')
-      toggle()
-    } catch (error) {
-      console.log(error)
+    if (value !== '') {
+      try {
+        const res = await axios.request(config)
+        setMessage(res.data.message)
+        props.setCurrent('none')
+        toggle()
+        UploadCollectionImage(imageURL, res.data.collectionId)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
@@ -67,7 +79,10 @@ export const CreateNewCollection = props => {
         modalMsg={message}
         closeable={true}
         titleIcon={<i className="fa-solid fa-circle-check"></i>}
-        btnFn={toggle}
+        btnFn={() => {
+          toggle()
+          window.location.reload(false)
+        }}
       />
       <div className={`${styles.createNewCollection}`}>
         <DefaultButton
@@ -85,14 +100,14 @@ export const CreateNewCollection = props => {
       >
         <input
           value={value}
+          style={{ backgroundColor: 'white' }}
           onChange={e => setValue(e.target.value)}
-          onKeyPress={e => {
-            if (e.key === 'Enter') {
-              handleSubmit()
-            }
-          }}
           className={`${styles.inputFieldContainer} `}
         />
+        <div>
+          {handleInput()}
+          <Button1 options={'Create'} fn={handleSubmit} />
+        </div>
       </div>
     </>
   )

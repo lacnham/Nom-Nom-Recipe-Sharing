@@ -59,19 +59,36 @@
   height: fit-content;
   /* background-color: wheat; */
   display: flex;
+  align-items: center;
 }
 .commonInfoEle {
-  /* display: flex;
-    flex-direction: row; */
+  display: flex;
+  align-items: center;
+  /*  flex-direction: row; */
   margin: 8px 8px 16px;
 }
 
 .commonInfoEle > i {
-  margin: 2px 4px;
+  /* margin: 2px 4px; */
+  display: flex;
+  align-items: center;
+  /* text-align: center; */
   width: 20px;
   height: 20px;
 }
 
+.servingField {
+  background-color: var(--light-orange);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.servingInputField {
+  height: 28px;
+  background-color: whitesmoke;
+  padding: 0 12px;
+  border-radius: 4px;
+}
 /* Ingredients */
 
 .ingredientContainer {

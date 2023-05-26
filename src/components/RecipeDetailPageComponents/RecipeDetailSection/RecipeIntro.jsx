@@ -41,7 +41,7 @@ const RecipeIntro = props => {
           {ele.name}
         </div>
       ))
-    : null
+    : 'none'
 
   return (
     <div
@@ -59,17 +59,19 @@ const RecipeIntro = props => {
           <i className="fa-solid fa-clock"></i>
           <div>{props.recipe.commonInfo.duration}</div>
         </div>
-        <div className={`${styles.commonInfoEle} ${styles.flexRow}`}>
+        <div
+          className={`${styles.commonInfoEle} ${styles.flexRow} ${styles.servingField}`}
+        >
           <i className="fa-solid fa-user"></i>
 
-          <div>
+          <div className={`${styles.servingInputField}`}>
             <input
               type="number"
               min={1}
               defaultValue={parseInt(props.recipe.commonInfo.serving)}
               onChange={e => props.handleChange(e)}
               style={{
-                width: '60px',
+                width: '40px',
                 borderStyle: 'none',
                 backgroundColor: 'whitesmoke',
                 height: '20px',
@@ -80,7 +82,9 @@ const RecipeIntro = props => {
                 textAlign: 'right'
               }}
             />
-            people
+            {props.recipe.servingUnit == null
+              ? 'Servings'
+              : props.recipe.servingUnit}
           </div>
         </div>
 

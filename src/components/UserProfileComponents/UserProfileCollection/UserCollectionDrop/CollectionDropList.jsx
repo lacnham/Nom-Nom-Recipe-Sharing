@@ -5,16 +5,9 @@ import { FetchUserCollections } from '../FetchUserCollections'
 import { useRef, useState } from 'react'
 const CollectionDropList = props => {
   const userCollections = FetchUserCollections()
-  const collection = userCollections.map(ele => (
-    <CollectionInDropList
-      current={props.current}
-      setCurrent={props.setCurrent}
-      style={props.style}
-      key={ele.collection_id}
-      id={props.id}
-      collection={ele}
-    ></CollectionInDropList>
-  ))
+  const [input, setInput] = useState('')
+
+  // let collection = ''
 
   const collectionDrop = useRef(null)
 
@@ -26,6 +19,35 @@ const CollectionDropList = props => {
 
   document.addEventListener('mousedown', handleBlur)
 
+  const handleSubmit = () => {
+    if (input == '') {
+      return userCollections.map(ele => (
+        <CollectionInDropList
+          current={props.current}
+          setCurrent={props.setCurrent}
+          style={props.style}
+          key={ele.collection_id}
+          id={props.id}
+          collection={ele}
+        ></CollectionInDropList>
+      ))
+    } else {
+      let newColl = userCollections.filter(item =>
+        item.name.toLowerCase().includes(input.toLowerCase())
+      )
+      console.log('new coll ne', newColl, ' ', userCollections)
+      return newColl.map(ele => (
+        <CollectionInDropList
+          current={props.current}
+          setCurrent={props.setCurrent}
+          style={props.style}
+          key={ele.collection_id}
+          id={props.id}
+          collection={ele}
+        ></CollectionInDropList>
+      ))
+    }
+  }
   return (
     <div
       className={`${styles.listMainContainer} ${styles.flexColumn} ${styles.boxShadowPurple}`}
@@ -34,8 +56,15 @@ const CollectionDropList = props => {
     >
       <div className={`${styles.searchBarAndCreateButtonContainer}`}>
         <div className={`${styles.searchBar} ${styles.flexRow}`}>
-          <i className="fa-solid fa-magnifying-glass"></i>
-          <input className={`${styles.inputFieldContainer}`} />
+          <i
+            className="fa-solid fa-magnifying-glass"
+            // onClick={handleSubmit()}
+          ></i>
+          <input
+            className={`${styles.inputFieldContainer}`}
+            value={input}
+            onChange={e => setInput(e.target.value)}
+          />
         </div>
 
         <CreateNewCollection
@@ -43,7 +72,7 @@ const CollectionDropList = props => {
           id={props.id}
         ></CreateNewCollection>
       </div>
-      <div className={`${styles.itemsContainer}`}>{collection}</div>
+      <div className={`${styles.itemsContainer}`}>{handleSubmit()}</div>
     </div>
   )
 }

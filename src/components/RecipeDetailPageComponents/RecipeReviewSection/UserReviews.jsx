@@ -34,7 +34,7 @@ const UserReview = props => {
     fetch()
   }, [])
 
-  async function getImageURLs(reviews) {
+  async function getImageURLs (reviews) {
     const imageUrls = []
     for (const review of reviews) {
       const userImgURL = await LoadUserImg(review.id)
@@ -46,15 +46,14 @@ const UserReview = props => {
   const [reviewImg, setReviewImg] = useState([]) // Fix the variable name
 
   // Usage example
-  async function processReviews(reviews) {
+  async function processReviews (reviews) {
     setReviewImg(await getImageURLs(reviews))
-    // console.log(reviewImg) // Access the array of image URLs
   }
 
   // processReviews(reviews)
 
   useEffect(() => {
-    if (reviewImg.length === 0) {
+    if (reviewImg.length == 0) {
       processReviews(reviews)
     }
   }, [])
@@ -71,7 +70,7 @@ const UserReview = props => {
       <div className={`${styles.flexRow} ${styles.userInfoContainer}`}>
         <img
           className={`${styles.userAvatar}`}
-          src={reviewImg[review.review_id - 1]}
+          src={reviewImg[review.review_id]}
         />
         <div className={`${styles.flexColumm}`}>
           <div>{review.username}</div>

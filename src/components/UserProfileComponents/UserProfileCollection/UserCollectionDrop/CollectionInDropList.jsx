@@ -36,10 +36,9 @@ export const CollectionInDropList = props => {
     try {
       const res = await axios.request(config)
       setMessage(res.data.message)
-
-      setIsSuccess(true)
       handleBlur()
       toggle()
+      setIsSuccess(true)
     } catch (error) {
       console.log(error)
     }
@@ -59,7 +58,7 @@ export const CollectionInDropList = props => {
         modalMsg={message}
         closeable={true}
         titleIcon={<i className="fa-solid fa-circle-check"></i>}
-        btnFn={''}
+        btnFn={toggle}
       />
       {props.collection.name}
     </div>

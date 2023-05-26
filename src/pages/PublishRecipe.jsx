@@ -18,17 +18,26 @@ const PublishRecipe = () => {
   const [image, setImage] = useState('')
   const [description, setDescription] = useState('')
   const [origin, setOrigin] = useState('')
-  const [duration, setDuration] = useState('')
-  const [servings, setServings] = useState('')
+  const [duration, setDuration] = useState(1)
+  const [servings, setServings] = useState(1)
   const [ingredients, setIngredients] = useState([
     { ingredientId: '', quantity: '', unit_name: `` }
   ])
+
+  const [servingUnit, setServingUnit] = useState('')
 
   const [message, setMessage] = useState('')
 
   const { isShowing, toggle } = useModal()
 
   const [diets, setDiets] = useState([])
+
+  const servingUnitOpt = [
+    { value: 'piece(s)', label: 'piece(s)' },
+    { value: 'people', label: 'people' },
+    { value: 'bowl(s)', label: 'bowl(s)' },
+    { value: 'plate(s)', label: 'plate(s)' }
+  ]
 
   const handleAddOrigin = e => {
     setOrigin(e.value)
@@ -106,6 +115,7 @@ const PublishRecipe = () => {
     data: {
       name: name,
       servingSize: servings,
+      servingUnit: servingUnit,
       duration: duration + ' ' + durationUnits[1],
       imageLink: image,
       description: description,
@@ -132,11 +142,21 @@ const PublishRecipe = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    try {
-      handleCreateRecipe()
-      toggle()
-    } catch (error) {
-      console.log(error)
+    if (
+      name !== '' ||
+      description !== '' ||
+      origin !== '' ||
+      duration !== '' ||
+      servings !== ''
+    ) {
+      try {
+        handleCreateRecipe()
+        toggle()
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      return null
     }
   }
 
@@ -163,11 +183,13 @@ const PublishRecipe = () => {
               <label className={`${styles.fieldLabel}`}>Name</label>
               <input
                 type="text"
+                required
                 value={name}
                 className={`${styles.inputField}`}
                 onChange={e => setName(e.target.value)}
               />
             </div>
+            {name ? '' : <span>This field is required</span>}
           </div>
 
           <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
@@ -212,10 +234,12 @@ const PublishRecipe = () => {
             <div className={styles.title}>Description</div>
             <textarea
               className={`${styles.textArea}`}
+              required
               value={description}
               rows={12}
               onChange={e => setDescription(e.target.value)}
             />
+            {description ? '' : <span>This field is required</span>}
           </div>
 
           <div className={styles.oneline}>
@@ -225,6 +249,7 @@ const PublishRecipe = () => {
               >
                 <Select
                   className={`${styles.inputField} ${styles.select}`}
+                  required
                   classNamePrefix="select"
                   options={countryOptions}
                   placeholder={`Recipe origin`}
@@ -251,6 +276,7 @@ const PublishRecipe = () => {
                   }}
                 />
               </div>
+              {origin ? '' : <span>This field is required</span>}
             </div>
             <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
               <div
@@ -259,6 +285,8 @@ const PublishRecipe = () => {
                 <input
                   className={`${styles.inputField}`}
                   type="number"
+                  required
+                  // defaultValue={1}
                   value={duration}
                   min={'1'}
                   placeholder="1"
@@ -269,15 +297,44 @@ const PublishRecipe = () => {
             </div>
             <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
               <div
-                className={`${styles.inputFieldContainer} ${styles.flexRow}`}
+                className={`${styles.inputFieldContainer} ${styles.flexRow} ${styles.serving}`}
               >
                 <input
                   className={`${styles.inputField}`}
+                  required
+                  // defaultValue={1}
                   type="number"
                   min={'1'}
                   value={servings}
-                  placeholder="Servings"
                   onChange={e => setServings(e.target.value)}
+                />
+                <Select
+                  className={`${styles.inputField} ${styles.select}`}
+                  required
+                  classNamePrefix="select"
+                  options={servingUnitOpt}
+                  placeholder={`units`}
+                  onChange={e => setServingUnit(e.value)}
+                  styles={{
+                    control: (baseStyles, state) => ({
+                      ...baseStyles,
+                      border: 'none',
+                      width: '100%',
+                      boxShadow: state.isFocused ? 0 : 0,
+
+                      '&:hover': {
+                        borderColor: '#ff8600',
+                        outline: 'none'
+                      }
+                    }),
+                    menu: (baseStyles, state) => ({
+                      ...baseStyles,
+                      width: 'fit-content',
+                      height: '200px',
+                      overflow: 'auto',
+                      display: 'flex'
+                    })
+                  }}
                 />
               </div>
             </div>
@@ -292,6 +349,7 @@ const PublishRecipe = () => {
                 className={`${styles.inputField} ${styles.select}`}
                 classNamePrefix="select"
                 isMulti
+                required
                 options={dietOptions}
                 onChange={e => handleDietAdd(e)}
                 styles={{
@@ -329,6 +387,7 @@ const PublishRecipe = () => {
                     <Select
                       className={`${styles.inputField} ${styles.select}`}
                       classNamePrefix="select"
+                      required
                       options={ingredientOPtion}
                       placeholder={`Enter ingredient`}
                       onChange={e => handleIngredientChange(e, igd)}
@@ -356,6 +415,7 @@ const PublishRecipe = () => {
 
                     <input
                       type="number"
+                      required
                       className={`${styles.inputField}`}
                       name="quantity"
                       min={0}
@@ -366,6 +426,7 @@ const PublishRecipe = () => {
                       className={`${styles.inputField} ${styles.select}`}
                       classNamePrefix="select"
                       name={'ingre'}
+                      required
                       options={unitOptions}
                       placeholder={'unit'}
                       onChange={e => handleUnit(e, igd)}

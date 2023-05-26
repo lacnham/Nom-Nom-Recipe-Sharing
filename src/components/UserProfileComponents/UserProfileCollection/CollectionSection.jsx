@@ -71,14 +71,31 @@ const CollectionSection = props => {
     }
   }
 
-  const collection = userCollectionData.map(ele => (
-    <Collections
-      key={ele.collection_id}
-      collection={ele}
-      setCurrentStyle={props.setCurrentStyle}
-      setUpdateForm={props.setUpdateForm}
-    ></Collections>
-  ))
+  // // s
+
+  // const collection = userCollectionData.map(ele => (
+  //   <Collections
+  //     key={ele.collection_id}
+  //     collection={ele}
+  //     setCurrentStyle={props.setCurrentStyle}
+  //     setUpdateForm={props.setUpdateForm}
+  //   ></Collections>
+  // ))
+
+  const collection = () => {
+    if (userCollectionData.length > 0) {
+      return userCollectionData.map(ele => (
+        <Collections
+          key={ele.collection_id}
+          collection={ele}
+          setCurrentStyle={props.setCurrentStyle}
+          setUpdateForm={props.setUpdateForm}
+        ></Collections>
+      ))
+    } else {
+      return <div>You dont have any collection yet, create one</div>
+    }
+  }
 
   return (
     <div
@@ -185,7 +202,7 @@ const CollectionSection = props => {
         </form>
       </div>
       <div className={`${styles.collectionMainContainer} ${styles.flexRow}`}>
-        {collection}
+        {collection()}
       </div>
     </div>
   )

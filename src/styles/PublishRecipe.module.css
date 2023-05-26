@@ -151,9 +151,13 @@ span {
 
 .oneline {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1.5fr;
   gap: 8px;
   width: 100%;
+}
+.serving {
+  display: grid;
+  grid-template-columns: 1fr 1.8fr;
 }
 .duration {
   display: grid;

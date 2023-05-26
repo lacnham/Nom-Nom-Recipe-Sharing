@@ -11,11 +11,11 @@ const SaveRecipeButton = props => {
 
   return (
     <DefaultButton
-      className={`${styles.label} ${styles.save}`}
+      className={`${styles.label} ${styles.save} ${styles.boxShadowPurple}`}
       type={'button'}
       style={style}
       fn={props.fn}
-      options={'Save'}
+      options={'Save to collection'}
     ></DefaultButton>
   )
 }

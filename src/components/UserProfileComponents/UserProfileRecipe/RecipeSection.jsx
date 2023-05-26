@@ -73,29 +73,35 @@ export const RecipeSection = props => {
     navigate(`/recipe/${name}/${id}`)
   }
 
-  const recipeTmp = recipes.map(ele => (
-    <Suspense key={ele.recipe_id}>
-      <Card
-        key={ele.recipe_id}
-        userID={ele.author_id}
-        image={ele.image_link}
-        title={ele.name}
-        category={['asd', 'asd1', 'asd2']}
-        location="Downtown, Seattle WA"
-        description={ele.description}
-        fn={() =>
-          handleUpdate(
-            ele.recipe_id,
-            ele.name,
-            ele.description,
-            ele.serving_size,
-            ele.duration
-          )
-        }
-        fn2={() => handleMoveToRecipePage(ele.name, ele.recipe_id)}
-      />
-    </Suspense>
-  ))
+  const recipeTmp = () => {
+    if (recipes.length > 0) {
+      return recipes.map(ele => (
+        <Suspense key={ele.recipe_id}>
+          <Card
+            key={ele.recipe_id}
+            userID={ele.author_id}
+            image={ele.image_link}
+            title={ele.name}
+            category={['asd', 'asd1', 'asd2']}
+            location="Downtown, Seattle WA"
+            description={ele.description}
+            fn={() =>
+              handleUpdate(
+                ele.recipe_id,
+                ele.name,
+                ele.description,
+                ele.serving_size,
+                ele.duration
+              )
+            }
+            fn2={() => handleMoveToRecipePage(ele.name, ele.recipe_id)}
+          />
+        </Suspense>
+      ))
+    } else {
+      return <div>You did not create any recipe yet, please create one</div>
+    }
+  }
 
   let configUpdate = {
     method: 'PUT',
@@ -166,7 +172,7 @@ export const RecipeSection = props => {
       </div>
 
       <div className={`${styles.collectionMainContainer} ${styles.flexRow}`}>
-        {recipeTmp}
+        {recipeTmp()}
       </div>
     </div>
   )

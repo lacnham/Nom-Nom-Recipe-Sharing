@@ -20,15 +20,23 @@
 
 .searchBar {
   height: 32px;
-  width: calc(280px - 8px);
-  background-color: white;
+  /* width: calc(280px - 8px); */
+  width: 100%;
+  /* background-color: white; */
   padding: 4px;
+  gap: 4px;
   border-radius: 8px;
   margin-bottom: 4px;
 }
 
 .searchBar > i {
   align-self: center;
+}
+
+.searchBar > input {
+  /* background-color: white; */
+  width: 100%;
+  background-color: white;
 }
 
 .searchIconContainer {
@@ -48,7 +56,25 @@
 }
 
 .hiddenInputField {
+  height: fit-content !important;
   display: none;
+}
+
+.hiddenInputField > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* justify-content: flex-end; */
+  /* justify-self: flex-end; */
+}
+
+.hiddenInputField > div > div {
+  color: rgba(236, 91, 68, 1);
+}
+
+.hiddenInputField > div > button {
+  padding: 4px 16px !important;
 }
 .createNewCollection {
   height: 32px;
