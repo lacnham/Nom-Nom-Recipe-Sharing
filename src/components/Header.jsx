@@ -1,7 +1,7 @@
 import styles from '../styles/Header.module.css'
 import nomNomLogo from '/images/NomNomHorizontalLogo.png'
 import { Button1, Button2 } from './Button'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from './SessionVerification/AuthContext'
 import Dropdown from './Dropdown/Dropdown'
 import NavBar from './NavBar'
@@ -9,11 +9,21 @@ import NavBar from './NavBar'
 const Header = () => {
   const { userData } = useContext(AuthContext)
 
-  const tabList = [
-    { key: 1, name: 'Recipes', link: '/allRecipe', active: false },
-    { key: 2, name: 'Refrigerator', link: '/refrigerator', active: false },
-    { key: 3, name: 'About us', link: '/AboutUS', active: false }
-  ]
+  const [tabList, setTabList] = useState([])
+
+  useEffect(() => {
+    if (userData != null) {
+      setTabList([
+        { key: 1, name: 'Recipes', link: '/allRecipe', active: false },
+        { key: 2, name: 'Refrigerator', link: '/refrigerator', active: false },
+        { key: 3, name: 'About us', link: '/AboutUS', active: false }
+      ])
+    } else {
+      setTabList([
+        { key: 1, name: 'About us', link: '/AboutUS', active: false }
+      ])
+    }
+  }, [userData])
 
   return (
     <header className={`${styles.header} ${styles.flexRow}`}>

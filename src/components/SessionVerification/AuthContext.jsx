@@ -19,7 +19,7 @@ export const logout = async () => {
       localStorage.removeItem('accesstoken')
       localStorage.removeItem('refreshtoken')
 
-      window.location.reload()
+      window.location.replace('/')
     } else {
       throw new Error('Error logging out')
     }

@@ -4,13 +4,24 @@ import React from 'react'
 class DietCardContent extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { isChecked: this.props.data.includes(this.props.title) }
+    this.state = {
+      isChecked: false
+    }
     this.handleChange = this.handleChange.bind(this)
     this.handleDivClick = this.handleDivClick.bind(this)
   }
 
+  componentDidMount() {
+    const { data, title } = this.props
+    if (data && title && data.includes(title)) {
+      this.setState({ isChecked: true })
+    }
+  }
+
   handleDivClick() {
-    this.setState({ isChecked: !this.state.isChecked })
+    this.setState(prevState => ({
+      isChecked: !prevState.isChecked
+    }))
   }
 
   handleChange(event) {
@@ -18,12 +29,14 @@ class DietCardContent extends React.Component {
   }
 
   render() {
-    const checkedValue = this.state.isChecked ? 'checked' : ''
+    const { isChecked } = this.state
+    const checkedValue = isChecked ? 'checked' : ''
+
     return (
       <div
         id={checkedValue}
         className={`${styles.dietCardContent} ${
-          this.state.isChecked ? styles.active : ''
+          isChecked ? styles.active : ''
         }`}
         onClick={this.handleDivClick}
       >
@@ -32,9 +45,9 @@ class DietCardContent extends React.Component {
           <input
             type="checkbox"
             onChange={this.handleChange}
-            checked={this.state.isChecked}
+            checked={isChecked}
           />
-          {this.state.isChecked ? (
+          {isChecked ? (
             <i className="fa-regular fa-circle-check"></i>
           ) : (
             <i className="fa-regular fa-circle"></i>
@@ -47,7 +60,7 @@ class DietCardContent extends React.Component {
   }
 }
 
-export default class DietCard extends React.Component {
+class DietCard extends React.Component {
   render() {
     return (
       <div
@@ -72,3 +85,5 @@ DietCard.defaultProps = {
   description: 'Create a vision. To get started, imagine your life.',
   active: false
 }
+
+export default DietCard

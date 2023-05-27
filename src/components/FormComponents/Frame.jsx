@@ -14,7 +14,7 @@ export default function Frame({ Name, Form, Redirect }) {
         <div className={styles.container}>
           <div className={styles.content}>
             <div className={styles.text}>
-              <h1>{Name}</h1>
+              <h2>{Name}</h2>
               {Form}
               <hr />
               {Redirect}

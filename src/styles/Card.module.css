@@ -4,7 +4,7 @@
   width: 350px;
   border-radius: 8px;
   box-shadow: 8px 8px 8px #ddd;
-
+  min-width: 350px;
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
   flex-basis: 33.33333%;

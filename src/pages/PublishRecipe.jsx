@@ -7,7 +7,7 @@ import axios from 'axios'
 import Modal from '../components/ModalComponents/Modal'
 import useModal from '../components/ModalComponents/useModal'
 import { UploadImage } from '../components/ApiPost/LoadImage'
-
+import { withoutAuth } from '../components/SessionVerification/AuthChecking'
 const PublishRecipe = () => {
   const { countryOptions, unitOptions, ingredientOPtion, dietOptions } =
     FetchAllIngAndCountry()
@@ -484,4 +484,4 @@ const PublishRecipe = () => {
   )
 }
 
-export default PublishRecipe
+export default withoutAuth(PublishRecipe)
