@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 const fetchRecipeImg = async recipe_id => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/recipe/get-img/${recipe_id}`
+      `https://nom-nom-recipe-web-be.herokuapp.com/recipe/get-img/${recipe_id}`
     )
     return response.data
   } catch (error) {
@@ -81,7 +81,7 @@ function UpdateRecipeButton ({ userID, fn }) {
 const fetchCountryForRecipe = async recipe_id => {
   try {
     const response = await axios.get(
-      `http://localhost:3000/recipe/get-origin/${recipe_id}`
+      `https://nom-nom-recipe-web-be.herokuapp.com/recipe/get-origin/${recipe_id}`
     )
     const countries = response.data.map(item => item.name)
     return countries

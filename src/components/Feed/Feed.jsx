@@ -29,7 +29,7 @@ export default function Feed () {
   }, [dietData, isDietNull])
 
   async function fetchRecommendationsByDietary (userID) {
-    const url = `http://localhost:3000/recipe/recommendations/dietary/${userID}`
+    const url = `https://nom-nom-recipe-web-be.herokuapp.com/recipe/recommendations/dietary/${userID}`
     try {
       const response = await fetch(url)
       if (response.ok) {
@@ -72,7 +72,7 @@ export default function Feed () {
       servingSize: 1
     }
 
-    const url = `http://localhost:3000/recipe/calories/based_servings/${recipeId}`
+    const url = `https://nom-nom-recipe-web-be.herokuapp.com/recipe/calories/based_servings/${recipeId}`
 
     try {
       const response = await fetch(url, {

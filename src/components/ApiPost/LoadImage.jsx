@@ -13,7 +13,7 @@ export const UploadImage = async (image, id) => {
       Authorization: localStorage.accesstoken
     }
   }
-  let URL = `http://localhost:3000/recipe/update-img/${id}`
+  let URL = `https://nom-nom-recipe-web-be.herokuapp.com/recipe/update-img/${id}`
 
   try {
     const res = await axios.post(URL, formData, config)
@@ -34,7 +34,7 @@ export const UploadCollectionImage = async (image, id) => {
       Authorization: localStorage.accesstoken
     }
   }
-  let URL = `http://localhost:3000/collection/update-img/${id}`
+  let URL = `https://nom-nom-recipe-web-be.herokuapp.com/collection/update-img/${id}`
 
   try {
     const res = await axios.post(URL, formData, config)
@@ -46,7 +46,7 @@ export const UploadCollectionImage = async (image, id) => {
 export const LoadUserImg = async id => {
   let configImg = {
     method: 'GET',
-    url: `http://localhost:3000/user/get-avatar/${id}`
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/user/get-avatar/${id}`
   }
 
   try {

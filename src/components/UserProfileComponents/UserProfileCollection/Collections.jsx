@@ -25,7 +25,7 @@ const Collections = props => {
 
   let config = {
     method: 'PUT',
-    url: `http://localhost:3000/collection/${props.collection.collection_id}`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/collection/${props.collection.collection_id}`,
     headers: {
       'Content-Type': 'application/json',
       Authorization: localStorage.accesstoken
@@ -35,7 +35,7 @@ const Collections = props => {
 
   let configImg = {
     method: 'GET',
-    url: `http://localhost:3000/collection/get-img/${props.collection.collection_id}`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/collection/get-img/${props.collection.collection_id}`,
     headers: {
       'Content-Type': 'application/json',
       Authorization: localStorage.accesstoken
@@ -74,7 +74,7 @@ const Collections = props => {
 
   let configDelete = {
     method: 'DELETE',
-    url: `http://localhost:3000/collection/${props.collection.collection_id}`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/collection/${props.collection.collection_id}`,
     headers: {
       'Content-Type': 'application/json',
       Authorization: localStorage.accesstoken

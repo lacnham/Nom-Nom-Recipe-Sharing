@@ -5,7 +5,7 @@ import axios from 'axios'
 const RecipeDescription = props => {
   let config = {
     method: 'get',
-    url: `http://localhost:3000/recipe/get-origin/${props.id}`
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/get-origin/${props.id}`
   }
 
   const [origins, setOrigins] = useState([])

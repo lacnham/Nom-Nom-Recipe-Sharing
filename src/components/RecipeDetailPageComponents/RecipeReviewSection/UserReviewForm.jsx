@@ -28,7 +28,7 @@ export const UserReviewForm = id => {
 
   let config = {
     method: 'post',
-    url: `http://localhost:3000/recipe/${id.id}/reviews`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/${id.id}/reviews`,
     headers: {
       Authorization: localStorage.accesstoken
     },

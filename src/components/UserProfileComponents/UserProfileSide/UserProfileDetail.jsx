@@ -37,7 +37,7 @@ export const UserProfileDetail = () => {
   const userDataUpdate = async data => {
     try {
       const response = await fetch(
-        `http://localhost:3000/user/update-profile/${userData.user.id}`,
+        `https://nom-nom-recipe-web-be.herokuapp.com/user/update-profile/${userData.user.id}`,
         {
           method: 'PATCH',
           headers: {

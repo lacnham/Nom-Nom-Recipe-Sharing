@@ -7,7 +7,7 @@ export const FetchIngAndNutri = (id, servingNum) => {
 
   let configIng = {
     method: 'post',
-    url: `http://localhost:3000/recipe/nutritions/total-ing-nutrition-facts/${id}`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/nutritions/total-ing-nutrition-facts/${id}`,
     data: {
       servingNum: servingNum
     }
@@ -15,7 +15,7 @@ export const FetchIngAndNutri = (id, servingNum) => {
 
   let configNutrition = {
     method: 'post',
-    url: `http://localhost:3000/recipe/nutritions/total-nutrition-facts/${id}`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/nutritions/total-nutrition-facts/${id}`,
     data: {
       servingNum: servingNum
     }

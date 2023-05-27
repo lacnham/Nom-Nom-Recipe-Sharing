@@ -36,7 +36,7 @@ export const RecipeSection = props => {
 
   let config = {
     method: 'get',
-    url: `http://localhost:3000/recipe/user/${userData.user.id}`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/user/${userData.user.id}`,
     headers: {
       Authorization: localStorage.accesstoken
     }
@@ -104,7 +104,7 @@ export const RecipeSection = props => {
 
   let configUpdate = {
     method: 'PUT',
-    url: `http://localhost:3000/recipe/${id}`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/${id}`,
     headers: {
       Authorization: localStorage.accesstoken
     },

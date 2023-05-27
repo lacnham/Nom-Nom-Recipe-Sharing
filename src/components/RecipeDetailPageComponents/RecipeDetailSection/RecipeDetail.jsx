@@ -43,7 +43,7 @@ const RecipeDetail = props => {
 
   let configIng = {
     method: 'post',
-    url: `http://localhost:3000/recipe/nutritions/total-ing-nutrition-facts/${props.id}`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/nutritions/total-ing-nutrition-facts/${props.id}`,
     data: {
       servingNum: `${ref.current}`
     }
@@ -51,7 +51,7 @@ const RecipeDetail = props => {
 
   let configNutrition = {
     method: 'post',
-    url: `http://localhost:3000/recipe/nutritions/total-nutrition-facts/${props.id}`,
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/nutritions/total-nutrition-facts/${props.id}`,
     data: {
       servingNum: `${ref.current}`
     }
@@ -71,7 +71,7 @@ const RecipeDetail = props => {
 
     let configIng = {
       method: 'post',
-      url: `http://localhost:3000/recipe/nutritions/total-ing-nutrition-facts/${props.id}`,
+      url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/nutritions/total-ing-nutrition-facts/${props.id}`,
       data: {
         servingNum: `${ref.current}`
       }
@@ -79,7 +79,7 @@ const RecipeDetail = props => {
 
     let configNutrition = {
       method: 'post',
-      url: `http://localhost:3000/recipe/nutritions/total-nutrition-facts/${props.id}`,
+      url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/nutritions/total-nutrition-facts/${props.id}`,
       data: {
         servingNum: `${ref.current}`
       }

@@ -18,7 +18,7 @@ const UserReview = props => {
 
   let config = {
     method: 'GET',
-    url: `http://localhost:3000/recipe/${props.id}/reviews`
+    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/${props.id}/reviews`
   }
 
   const fetch = async () => {

@@ -28,7 +28,9 @@ const Diet = () => {
   const [diet, setDiet] = useState([])
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/dietary/get-all')
+      const response = await axios.get(
+        'https://nom-nom-recipe-web-be.herokuapp.com/dietary/get-all'
+      )
       setDiet(response.data) // do something with the data
     } catch (error) {
       console.log(error)
@@ -77,7 +79,7 @@ const Diet = () => {
       }
 
       const response = await fetch(
-        `http://localhost:3000/update-dietary-preference/${userData.user.id}`,
+        `https://nom-nom-recipe-web-be.herokuapp.com/update-dietary-preference/${userData.user.id}`,
         {
           method: 'PATCH',
           headers: {

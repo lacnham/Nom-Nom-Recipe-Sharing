@@ -56,7 +56,9 @@ const AllRecipe = () => {
 
   const fetchRecipes = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/recipe')
+      const response = await axios.get(
+        'https://nom-nom-recipe-web-be.herokuapp.com/recipe'
+      )
       setData(response.data)
     } catch (error) {
       console.log(error)
@@ -66,7 +68,9 @@ const AllRecipe = () => {
 
   const fetchDietary = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/dietary/get-all')
+      const response = await axios.get(
+        'https://nom-nom-recipe-web-be.herokuapp.com/dietary/get-all'
+      )
       setDiet(response.data)
     } catch (error) {
       console.log(error)
@@ -76,7 +80,9 @@ const AllRecipe = () => {
 
   const fetchCountry = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/country/get-all')
+      const response = await axios.get(
+        'https://nom-nom-recipe-web-be.herokuapp.com/country/get-all'
+      )
       setCountry(response.data)
     } catch (error) {
       console.log(error)
