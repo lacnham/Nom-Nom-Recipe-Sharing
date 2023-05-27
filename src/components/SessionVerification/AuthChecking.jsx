@@ -26,7 +26,7 @@ const withAuth = (
 
 const withoutAuth = (
   Component,
-  options = { redirectUnauthenticated: false }
+  options = { redirectUnauthenticated: true }
 ) => {
   const UnauthRoute = props => {
     const navigate = useNavigate()
@@ -44,6 +44,9 @@ const withoutAuth = (
 
       handleRedirect()
     }, [userData, options.redirectUnauthenticated])
+    console.log(options.redirectUnauthenticated)
+    console.log(!userData)
+    console.log(options.redirectUnauthenticated && !userData)
 
     useEffect(() => {
       const handleNavigation = () => {
