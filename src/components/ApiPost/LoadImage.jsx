@@ -49,11 +49,8 @@ export const LoadUserImg = async id => {
     url: `https://nom-nom-recipe-web-be.herokuapp.com/user/get-avatar/${id}`
   }
 
-  console.log('id of img', id)
-
   try {
     const res = await axios.request(configImg)
-    console.log('Response data:', res.data)
     return res.data
   } catch (error) {
     console.log(error)

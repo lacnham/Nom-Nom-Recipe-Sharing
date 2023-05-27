@@ -34,7 +34,7 @@ const UserReview = props => {
     fetch()
   }, [])
 
-  async function getImageURLs (reviews) {
+  async function getImageURLs(reviews) {
     const imageUrls = []
     for (const review of reviews) {
       const userImgURL = await LoadUserImg(review.id)
@@ -46,7 +46,7 @@ const UserReview = props => {
   const [reviewImg, setReviewImg] = useState([]) // Fix the variable name
 
   // Usage example
-  async function processReviews (reviews) {
+  async function processReviews(reviews) {
     setReviewImg(await getImageURLs(reviews))
   }
 
@@ -57,12 +57,6 @@ const UserReview = props => {
       processReviews(reviews)
     }
   }, [])
-
-  useEffect(() => {
-    console.log(reviewImg)
-  }, [])
-
-  // console.log('Image ne ', rev)
 
   const userReview = reviews.map((review, id) => (
     <div

@@ -15,7 +15,6 @@ export const CollectionInDropList = props => {
     let newStyle
     if (props.current == props.style.change) {
       newStyle = props.style.default
-      console.log(2)
     }
     props.setCurrent(newStyle)
   }

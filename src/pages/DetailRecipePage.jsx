@@ -5,6 +5,7 @@ import RecipeReview from '../components/RecipeDetailPageComponents/RecipeReviewS
 import { FetchRecipeByID } from '../components/ApiFetch/Recipes/FetchRecipeByID.jsx'
 import { useParams } from 'react-router-dom'
 import StickyBox from 'react-sticky-box'
+import { withoutAuth } from '../components/SessionVerification/AuthChecking'
 
 const DetailRecipePage = () => {
   const { id } = useParams()
@@ -30,4 +31,4 @@ const DetailRecipePage = () => {
   )
 }
 
-export default DetailRecipePage
+export default withoutAuth(DetailRecipePage)

@@ -127,7 +127,6 @@ const PublishRecipe = () => {
     try {
       const res = await axios.request(config)
       UploadImage(image, res.data.recipeId, setMessage)
-      console.log(res.data.recipeId)
       setMessage(res.data.message)
     } catch (error) {
       console.log(error)
@@ -147,7 +146,6 @@ const PublishRecipe = () => {
       duration !== '' &&
       servings !== ''
     ) {
-      console.log(servingUnit)
       try {
         handleCreateRecipe()
         toggle()

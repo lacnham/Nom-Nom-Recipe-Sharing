@@ -90,7 +90,6 @@ const Diet = () => {
       )
 
       if (response.ok) {
-        console.log('Data sent successfully.')
         toggle()
       } else {
         console.error(

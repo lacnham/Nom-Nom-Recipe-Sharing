@@ -17,7 +17,6 @@ export const UpdateRecipe = props => {
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    console.log(props.data)
     let duration = Object.entries(props.data.duration).map(
       ([key, val] = entry) => {
         setDur(val)

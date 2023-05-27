@@ -49,10 +49,8 @@ export const UserProfileDetail = () => {
 
       setError(responseData.msg)
       console.log(error)
-      console.log(response)
 
       if (response.ok) {
-        console.log('Data sent successfully.')
         setSuccess(true)
       } else {
         console.log(response)
