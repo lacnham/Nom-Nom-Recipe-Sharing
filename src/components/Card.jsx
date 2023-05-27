@@ -52,7 +52,7 @@ function CardImage(props) {
     justifyContent: 'center',
     alignItems: 'center'
   }
-
+  console.log(imageURL)
   return (
     <div className={styles.Image} style={containerStyle}>
       <img

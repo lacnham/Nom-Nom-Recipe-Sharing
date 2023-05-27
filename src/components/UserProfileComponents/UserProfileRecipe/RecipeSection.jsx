@@ -77,12 +77,9 @@ export const RecipeSection = props => {
       return recipes.map(ele => (
         <Suspense key={ele.recipe_id}>
           <Card
-            key={ele.recipe_id}
+            recipe_id={ele.recipe_id}
             userID={ele.author_id}
-            image={ele.image_link}
             title={ele.name}
-            category={['asd', 'asd1', 'asd2']}
-            location="Downtown, Seattle WA"
             description={ele.description}
             fn={() =>
               handleUpdate(
