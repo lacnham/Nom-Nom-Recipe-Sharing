@@ -119,7 +119,7 @@ export const RecipeSection = props => {
     try {
       const res = await axios.request(configUpdate)
       setMessage(res.data.message)
-      UploadImage(updateData.image_link, id, setMessage)
+      await UploadImage(updateData.image_link, id, setMessage)
       secondToggle()
       toggle()
     } catch (error) {

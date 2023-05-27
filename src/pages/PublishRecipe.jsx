@@ -19,7 +19,7 @@ const PublishRecipe = () => {
   const [duration, setDuration] = useState(1)
   const [servings, setServings] = useState(1)
   const [ingredients, setIngredients] = useState([
-    { ingredientId: '', quantity: 0, unit_name: `` }
+    { ingredientId: '', quantity: 1, unit_name: `` }
   ])
 
   const [servingUnit, setServingUnit] = useState('')
@@ -43,8 +43,8 @@ const PublishRecipe = () => {
 
   const handleIngredientChange = (e, igd) => {
     let newIngredients = [...ingredients]
-    for (let i = 0; i < newIngredients.length; i++) {
-      if (newIngredients[i].id === e.value) {
+    for (let ingredient of newIngredients) {
+      if (ingredient.id === e.value) {
         alert('Cannot add more')
         return newIngredients
       }
@@ -72,11 +72,11 @@ const PublishRecipe = () => {
   }
 
   const handleAddIngredient = () => {
-    for (let i = 0; i < ingredients.length; i++) {
+    for (let ingredient of ingredients) {
       if (
-        ingredients[i].ingredientId === '' ||
-        ingredients[i].quantity == 0 ||
-        ingredients[i].unit_name === ''
+        ingredient.ingredientId === '' ||
+        ingredient.quantity == 0 ||
+        ingredient.unit_name === ''
       ) {
         // alert()
         return <div>'Please fill in the empty field before create more'</div>
@@ -84,7 +84,7 @@ const PublishRecipe = () => {
     }
     setIngredients([
       ...ingredients,
-      { ingredientId: '', quantity: 0, unit_name: `` }
+      { ingredientId: '', quantity: 1, unit_name: `` }
     ])
   }
 
@@ -126,7 +126,9 @@ const PublishRecipe = () => {
   const handleCreateRecipe = async () => {
     try {
       const res = await axios.request(config)
-      UploadImage(image, res.data.recipeId, setMessage)
+      await UploadImage(image, res.data.recipeId, setMessage).catch(error => {
+        console.log(error)
+      })
       console.log(res.data.recipeId)
       setMessage(res.data.message)
     } catch (error) {
@@ -138,31 +140,25 @@ const PublishRecipe = () => {
     window.location.reload(false)
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault()
     if (
       name !== '' &&
       description !== '' &&
       origin !== '' &&
-      duration !== '' &&
-      servings !== ''
+      duration != '' &&
+      servings != ''
     ) {
-      for (let i = 0; i < ingredients.length; i++) {
-        if (
-          ingredients[i].ingredientId !== '' &&
-          // ingredients[i].quantity !== '' &&
-          ingredients[i].quantity != 0 &&
-          ingredients[i].unit_name !== ''
-        ) {
-          try {
-            handleCreateRecipe()
-            toggle()
-          } catch (error) {
-            console.log(error)
-          }
-        } else {
+      for (let ingredient of ingredients) {
+        if (ingredient.ingredientId == '' && ingredient.unit_name == '') {
           return <div>Please do not leave any field null before submit</div>
         }
+      }
+      try {
+        await handleCreateRecipe()
+        toggle()
+      } catch (error) {
+        console.log(error)
       }
     } else {
       return <div>Please do not leave any field null before submit</div>
@@ -186,7 +182,8 @@ const PublishRecipe = () => {
             refreshPage()
           }}
         />
-        <form className={styles.publish} onSubmit={handleSubmit}>
+        <form className={styles.publish}>
+          {/* <form className={styles.publish} onSubmit={handleSubmit}> */}
           <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
             <div className={`${styles.inputFieldContainer} ${styles.flexRow}`}>
               <label className={`${styles.fieldLabel}`}>Name</label>
@@ -409,8 +406,9 @@ const PublishRecipe = () => {
                       required
                       className={`${styles.inputField}`}
                       name="quantity"
-                      min={0}
-                      placeholder={0}
+                      min={1}
+                      // value={1}
+                      defaultValue={1}
                       onChange={e => handleQuantity(e, igd)}
                     />
                     <Select

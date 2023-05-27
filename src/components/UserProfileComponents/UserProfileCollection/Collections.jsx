@@ -64,7 +64,7 @@ const Collections = props => {
     try {
       const res = await axios.request(config)
       setMessage(res.data.message)
-      UploadCollectionImage(imageURL, props.collection.collection_id)
+      await UploadCollectionImage(imageURL, props.collection.collection_id)
       toggle()
       secondToggle()
     } catch (error) {
@@ -93,15 +93,6 @@ const Collections = props => {
 
   const handleClick = () => {
     toggle()
-  }
-
-  const [imageError, setImageError] = useState(false)
-
-  const handleImageError = () => {
-    if (!imageError) {
-      setImageURL('/images/Default_img.svg')
-      setImageError(true)
-    }
   }
 
   return (

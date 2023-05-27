@@ -53,10 +53,11 @@ const UserReview = props => {
   // processReviews(reviews)
 
   useEffect(() => {
-    if (reviewImg.length == 0) {
-      processReviews(reviews)
-    }
-  }, [])
+    processReviews(reviews).catch(error => {
+      console.log(error)
+    })
+    // }
+  }, [reviewImg])
 
   const userReview = reviews.map((review, id) => (
     <div

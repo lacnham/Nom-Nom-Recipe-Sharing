@@ -1,10 +1,11 @@
 import Header from '../components/Header'
 import styles from '../styles/RecipeDetailPage/DetailRecipePage.module.css'
-import RecipeDetail from '../components/RecipeDetailPageComponents/RecipeDetailSection/RecipeDetail'
-import RecipeReview from '../components/RecipeDetailPageComponents/RecipeReviewSection/RecipeReview'
+// import RecipeDetail from '../components/RecipeDetailPageComponents/RecipeDetailSection/RecipeDetail'
+import { RecipeReview } from '../components/RecipeDetailPageComponents/RecipeReviewSection/RecipeReview'
 import { FetchRecipeByID } from '../components/ApiFetch/Recipes/FetchRecipeByID.jsx'
 import { useParams } from 'react-router-dom'
 import StickyBox from 'react-sticky-box'
+import { RecipeDetail } from '../components/RecipeDetailPageComponents/RecipeDetailSection/RecipeDetail'
 
 const DetailRecipePage = () => {
   const { id } = useParams()
