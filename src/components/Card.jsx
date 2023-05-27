@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 const fetchRecipeImg = async recipe_id => {
   try {
     const response = await axios.get(
-      `https://nom-nom-recipe-web-be.herokuapp.com/recipe/get-img/${recipe_id}`
+      `http://localhost:3000/recipe/get-img/${recipe_id}`
     )
     return response.data
   } catch (error) {
@@ -17,7 +17,7 @@ const fetchRecipeImg = async recipe_id => {
   }
 }
 
-function CardImage(props) {
+function CardImage (props) {
   const [imageURL, setImageURL] = useState('/images/Default_img.svg')
   const [imageError, setImageError] = useState(false)
 
@@ -52,7 +52,6 @@ function CardImage(props) {
     justifyContent: 'center',
     alignItems: 'center'
   }
-  console.log(imageURL)
   return (
     <div className={styles.Image} style={containerStyle}>
       <img
@@ -66,7 +65,7 @@ function CardImage(props) {
   )
 }
 
-function UpdateRecipeButton({ userID, fn }) {
+function UpdateRecipeButton ({ userID, fn }) {
   const { userData } = useContext(AuthContext)
 
   if (userID == userData.user.id) {
@@ -82,7 +81,7 @@ function UpdateRecipeButton({ userID, fn }) {
 const fetchCountryForRecipe = async recipe_id => {
   try {
     const response = await axios.get(
-      `https://nom-nom-recipe-web-be.herokuapp.com/recipe/get-origin/${recipe_id}`
+      `http://localhost:3000/recipe/get-origin/${recipe_id}`
     )
     const countries = response.data.map(item => item.name)
     return countries
@@ -92,7 +91,7 @@ const fetchCountryForRecipe = async recipe_id => {
   }
 }
 
-function CardContent(props) {
+function CardContent (props) {
   const [categories, setCategories] = React.useState([])
   React.useEffect(() => {
     const fetchCategories = async () => {
@@ -123,7 +122,7 @@ function CardContent(props) {
 }
 
 export default class Card extends React.Component {
-  render() {
+  render () {
     return (
       <div className={styles.Card}>
         <div>

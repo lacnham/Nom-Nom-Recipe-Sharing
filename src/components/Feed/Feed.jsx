@@ -8,7 +8,7 @@ import StickyBox from 'react-sticky-box'
 import { BackToTopButton, Button2 } from '../Button'
 import { useNavigate } from 'react-router-dom'
 
-export default function Feed() {
+export default function Feed () {
   const navigate = useNavigate()
 
   const { userData } = useContext(AuthContext)
@@ -28,8 +28,8 @@ export default function Feed() {
     }
   }, [dietData, isDietNull])
 
-  async function fetchRecommendationsByDietary(userID) {
-    const url = `https://nom-nom-recipe-web-be.herokuapp.com/recipe/recommendations/dietary/${userID}`
+  async function fetchRecommendationsByDietary (userID) {
+    const url = `http://localhost:3000/recipe/recommendations/dietary/${userID}`
     try {
       const response = await fetch(url)
       if (response.ok) {
@@ -67,12 +67,12 @@ export default function Feed() {
     }
   }
 
-  async function fetchCaloriesData(recipeId) {
+  async function fetchCaloriesData (recipeId) {
     const data = {
       servingSize: 1
     }
 
-    const url = `https://nom-nom-recipe-web-be.herokuapp.com/recipe/calories/based_servings/${recipeId}`
+    const url = `http://localhost:3000/recipe/calories/based_servings/${recipeId}`
 
     try {
       const response = await fetch(url, {
@@ -99,7 +99,7 @@ export default function Feed() {
     fetchRecommendationsByDietary(userData.user.id)
   }, [])
 
-  function getTimeElapsed(createdAt) {
+  function getTimeElapsed (createdAt) {
     const postDate = new Date(createdAt)
     const currentDate = new Date()
 
@@ -236,7 +236,7 @@ export default function Feed() {
   )
 }
 
-function Post(props) {
+function Post (props) {
   return (
     <div className={styles.post}>
       <div className={styles.postWrapper}>

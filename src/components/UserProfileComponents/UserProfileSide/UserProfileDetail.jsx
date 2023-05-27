@@ -37,7 +37,7 @@ export const UserProfileDetail = () => {
   const userDataUpdate = async data => {
     try {
       const response = await fetch(
-        `https://nom-nom-recipe-web-be.herokuapp.com/user/update-profile/${userData.user.id}`,
+        `http://localhost:3000/user/update-profile/${userData.user.id}`,
         {
           method: 'PATCH',
           headers: {
@@ -49,10 +49,8 @@ export const UserProfileDetail = () => {
 
       setError(responseData.msg)
       console.log(error)
-      console.log(response)
 
       if (response.ok) {
-        console.log('Data sent successfully.')
         setSuccess(true)
       } else {
         console.log(response)

@@ -18,7 +18,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://nom-nom-recipe-web-be.herokuapp.com',
+        target: 'http://localhost:3000',
         changeOrigin: true,
         secure: false,
         headers: {

@@ -34,7 +34,7 @@ export const CreateNewCollection = props => {
 
   let config = {
     method: 'post',
-    url: `https://nom-nom-recipe-web-be.herokuapp.com/collection`,
+    url: `http://localhost:3000/collection`,
     headers: {
       Authorization: localStorage.accesstoken
     },

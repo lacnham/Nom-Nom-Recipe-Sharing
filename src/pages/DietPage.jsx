@@ -28,9 +28,7 @@ const Diet = () => {
   const [diet, setDiet] = useState([])
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        'https://nom-nom-recipe-web-be.herokuapp.com/dietary/get-all'
-      )
+      const response = await axios.get('http://localhost:3000/dietary/get-all')
       setDiet(response.data) // do something with the data
     } catch (error) {
       console.log(error)
@@ -41,7 +39,7 @@ const Diet = () => {
     fetchData()
   }, [])
 
-  function waitForCheckedDivContent() {
+  function waitForCheckedDivContent () {
     return new Promise((resolve, reject) => {
       const interval = setInterval(() => {
         const checkedDivs = document.querySelectorAll('div#checked')
@@ -79,7 +77,7 @@ const Diet = () => {
       }
 
       const response = await fetch(
-        `https://nom-nom-recipe-web-be.herokuapp.com/update-dietary-preference/${userData.user.id}`,
+        `http://localhost:3000/update-dietary-preference/${userData.user.id}`,
         {
           method: 'PATCH',
           headers: {
@@ -90,7 +88,6 @@ const Diet = () => {
       )
 
       if (response.ok) {
-        console.log('Data sent successfully.')
         toggle()
       } else {
         console.error(

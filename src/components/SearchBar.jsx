@@ -32,7 +32,7 @@ const SearchBar = ({
 
     if (selectedDiet != null && selectedDiet != []) {
       const recipesByDietaryPreference = await fetch(
-        `https://nom-nom-recipe-web-be.herokuapp.com/recipe/by-dietary/${selectedDiet.value}`,
+        `http://localhost:3000/recipe/by-dietary/${selectedDiet.value}`,
         {
           method: 'GET',
           headers: {
@@ -45,7 +45,7 @@ const SearchBar = ({
 
       if (selectedCountry != null && selectedCountry != []) {
         const recipesByCountryPreference = await fetch(
-          `https://nom-nom-recipe-web-be.herokuapp.com/recipe/by-country/${selectedCountry.value}`,
+          `http://localhost:3000/recipe/by-country/${selectedCountry.value}`,
           {
             method: 'GET',
             headers: {
@@ -68,7 +68,7 @@ const SearchBar = ({
     } else {
       if (selectedCountry != null && selectedCountry != []) {
         const recipesByCountryPreference = await fetch(
-          `https://nom-nom-recipe-web-be.herokuapp.com/recipe/by-country/${selectedCountry.value}`,
+          `http://localhost:3000/recipe/by-country/${selectedCountry.value}`,
           {
             method: 'GET',
             headers: {
@@ -88,7 +88,7 @@ const SearchBar = ({
     setSearchInput(searchValue)
   }
 
-  function compareObjectsByRecipeId(obj1, obj2) {
+  function compareObjectsByRecipeId (obj1, obj2) {
     const result = {}
 
     for (const key1 in obj1) {
@@ -106,7 +106,7 @@ const SearchBar = ({
     return result
   }
 
-  function transformData(diet, country) {
+  function transformData (diet, country) {
     const dietArray = Array.from(diet, item => item.name)
     const transformedDietData = dietArray.map(item => ({
       value: item,

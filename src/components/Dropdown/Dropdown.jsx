@@ -22,9 +22,7 @@ const Dropdown = props => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://nom-nom-recipe-web-be.herokuapp.com/user/get-avatar/${userData.user.id}`
-      )
+      .get(`http://localhost:3000/user/get-avatar/${userData.user.id}`)
       .then(response => {
         setImgUrl(response.data)
       })

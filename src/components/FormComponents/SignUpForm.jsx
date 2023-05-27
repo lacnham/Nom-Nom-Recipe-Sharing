@@ -6,7 +6,7 @@ import useModal from '../ModalComponents/useModal'
 import Modal from '../ModalComponents/Modal'
 import { useNavigate } from 'react-router-dom'
 
-export default function SignUpForm() {
+export default function SignUpForm () {
   const [signUpEr, setSignUpEr] = useState(null)
 
   const [enteredData, setEnteredData] = useState({
@@ -20,15 +20,12 @@ export default function SignUpForm() {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post(
-        'https://nom-nom-recipe-web-be.herokuapp.com/auth/register',
-        {
-          username: enteredData.username,
-          email: enteredData.email,
-          password: enteredData.password,
-          verifypassword: enteredData.verifypassword
-        }
-      )
+      const response = await axios.post('http://localhost:3000/auth/register', {
+        username: enteredData.username,
+        email: enteredData.email,
+        password: enteredData.password,
+        verifypassword: enteredData.verifypassword
+      })
       setSignUpEr(null)
       toggle()
     } catch (error) {
@@ -62,7 +59,7 @@ export default function SignUpForm() {
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/
 
-  function validateInput({ username, email, password, verifypassword }) {
+  function validateInput ({ username, email, password, verifypassword }) {
     const errors = {}
 
     if (!username || !email || !password || !verifypassword) {

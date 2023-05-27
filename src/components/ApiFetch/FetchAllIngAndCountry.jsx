@@ -13,22 +13,22 @@ export const FetchAllIngAndCountry = () => {
 
   let configCountries = {
     method: 'GET',
-    url: 'https://nom-nom-recipe-web-be.herokuapp.com/country/get-all'
+    url: 'http://localhost:3000/country/get-all'
   }
 
   let configUnits = {
     method: 'GET',
-    url: 'https://nom-nom-recipe-web-be.herokuapp.com/unit/get-all'
+    url: 'http://localhost:3000/unit/get-all'
   }
 
   let configIng = {
     method: 'GET',
-    url: `https://nom-nom-recipe-web-be.herokuapp.com/ingredient/get-all`
+    url: `http://localhost:3000/ingredient/get-all`
   }
 
   let configDiet = {
     method: 'GET',
-    url: `https://nom-nom-recipe-web-be.herokuapp.com/dietary/get-all`
+    url: `http://localhost:3000/dietary/get-all`
   }
   const fetch = async () => {
     try {

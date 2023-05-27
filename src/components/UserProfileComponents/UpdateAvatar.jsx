@@ -23,9 +23,7 @@ const UpdateAvatar = props => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://nom-nom-recipe-web-be.herokuapp.com/user/get-avatar/${props.user.id}`
-      )
+      .get(`http://localhost:3000/user/get-avatar/${props.user.id}`)
       .then(response => {
         setImgUrl(response.data)
       })
@@ -169,7 +167,7 @@ const UpdateAvatar = props => {
 
       try {
         const response = await axios.post(
-          `https://nom-nom-recipe-web-be.herokuapp.com/user/update-avatar/${props.user.id}`,
+          `http://localhost:3000/user/update-avatar/${props.user.id}`,
           formData
         )
 

@@ -34,9 +34,8 @@ const Refrigerator = () => {
     }
   }
 
-  async function fetchDataWithInput() {
-    const url =
-      'https://nom-nom-recipe-web-be.herokuapp.com/recipe/search-by-ingredients'
+  async function fetchDataWithInput () {
+    const url = 'http://localhost:3000/recipe/search-by-ingredients'
     const body = {
       ingredients: selectedOptions
     }
@@ -60,8 +59,8 @@ const Refrigerator = () => {
     }
   }
 
-  async function fetchDataWithOutInput() {
-    const url = 'https://nom-nom-recipe-web-be.herokuapp.com/recipe'
+  async function fetchDataWithOutInput () {
+    const url = 'http://localhost:3000/recipe'
     try {
       const response = await fetch(url, {
         method: 'GET',
@@ -83,9 +82,7 @@ const Refrigerator = () => {
   useEffect(() => {
     const fetchOptions = async () => {
       try {
-        const response = await fetch(
-          'https://nom-nom-recipe-web-be.herokuapp.com/ingredient/get-all'
-        )
+        const response = await fetch('http://localhost:3000/ingredient/get-all')
         const data = await response.json()
 
         const extractedData = data.map(child => child.ing_name)

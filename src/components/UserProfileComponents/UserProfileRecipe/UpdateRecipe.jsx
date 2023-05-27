@@ -19,7 +19,7 @@ export const UpdateRecipe = props => {
 
   useEffect(() => {
     const duration = Object.entries(props.data.duration)
-    console.log('Duration ne', duration)
+
     setDur(duration[0][1])
     setDurunit(duration[0][0])
 

@@ -7,12 +7,12 @@ export const FetchRecipeByID = id => {
 
   let configRecipe = {
     method: 'GET',
-    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/${id}`
+    url: `http://localhost:3000/recipe/${id}`
   }
 
   let configDietary = {
     method: 'GET',
-    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/get-dietary/${id}`
+    url: `http://localhost:3000/recipe/get-dietary/${id}`
   }
 
   const fetch = async () => {

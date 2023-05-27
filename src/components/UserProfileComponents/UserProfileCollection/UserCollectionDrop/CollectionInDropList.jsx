@@ -15,14 +15,13 @@ export const CollectionInDropList = props => {
     let newStyle
     if (props.current == props.style.change) {
       newStyle = props.style.default
-      console.log(2)
     }
     props.setCurrent(newStyle)
   }
 
   let config = {
     method: 'post',
-    url: 'https://nom-nom-recipe-web-be.herokuapp.com/collection/add-recipe',
+    url: 'http://localhost:3000/collection/add-recipe',
     headers: {
       Authorization: localStorage.accesstoken
     },

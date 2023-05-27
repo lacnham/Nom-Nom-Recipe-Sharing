@@ -18,7 +18,7 @@ const UserReview = props => {
 
   let config = {
     method: 'GET',
-    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/${props.id}/reviews`
+    url: `http://localhost:3000/recipe/${props.id}/reviews`
   }
 
   const fetch = async () => {
@@ -57,12 +57,6 @@ const UserReview = props => {
       processReviews(reviews)
     }
   }, [])
-
-  useEffect(() => {
-    console.log(reviewImg)
-  }, [])
-
-  // console.log('Image ne ', rev)
 
   const userReview = reviews.map((review, id) => (
     <div

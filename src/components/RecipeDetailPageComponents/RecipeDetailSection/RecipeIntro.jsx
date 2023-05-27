@@ -19,7 +19,7 @@ const RecipeIntro = props => {
   }
   let config = {
     method: 'get',
-    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/get-img/${props.recipe.id}`
+    url: `http://localhost:3000/recipe/get-img/${props.recipe.id}`
   }
 
   useEffect(() => {

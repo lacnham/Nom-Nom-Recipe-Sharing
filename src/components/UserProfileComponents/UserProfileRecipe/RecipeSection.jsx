@@ -36,7 +36,7 @@ export const RecipeSection = props => {
 
   let config = {
     method: 'get',
-    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/user/${userData.user.id}`,
+    url: `http://localhost:3000/recipe/user/${userData.user.id}`,
     headers: {
       Authorization: localStorage.accesstoken
     }
@@ -76,7 +76,6 @@ export const RecipeSection = props => {
 
   const recipeTmp = () => {
     if (recipes.length > 0) {
-      console.log('recipe ne', recipes[0])
       return recipes.map(ele => (
         <Suspense key={ele.recipe_id}>
           <Card
@@ -103,11 +102,9 @@ export const RecipeSection = props => {
     }
   }
 
-  console.log(updateData)
-
   let configUpdate = {
     method: 'PUT',
-    url: `https://nom-nom-recipe-web-be.herokuapp.com/recipe/${id}`,
+    url: `http://localhost:3000/recipe/${id}`,
     headers: {
       Authorization: localStorage.accesstoken
     },

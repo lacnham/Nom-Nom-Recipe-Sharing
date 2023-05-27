@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from '../styles/PublishRecipe.module.css'
 import Header from '../components/Header'
 import { FetchAllIngAndCountry } from '../components/ApiFetch/FetchAllIngAndCountry.jsx'
@@ -19,7 +19,7 @@ const PublishRecipe = () => {
   const [duration, setDuration] = useState(1)
   const [servings, setServings] = useState(1)
   const [ingredients, setIngredients] = useState([
-    { ingredientId: '', quantity: '', unit_name: `` }
+    { ingredientId: '', quantity: 0, unit_name: `` }
   ])
 
   const [servingUnit, setServingUnit] = useState('')
@@ -75,7 +75,7 @@ const PublishRecipe = () => {
     for (let i = 0; i < ingredients.length; i++) {
       if (
         ingredients[i].ingredientId === '' ||
-        ingredients[i].quantity === '' ||
+        ingredients[i].quantity == 0 ||
         ingredients[i].unit_name === ''
       ) {
         // alert()
@@ -106,7 +106,7 @@ const PublishRecipe = () => {
 
   let config = {
     method: 'post',
-    url: 'https://nom-nom-recipe-web-be.herokuapp.com/recipe',
+    url: 'http://localhost:3000/recipe',
     headers: {
       Authorization: localStorage.accesstoken
     },
@@ -150,11 +150,10 @@ const PublishRecipe = () => {
       for (let i = 0; i < ingredients.length; i++) {
         if (
           ingredients[i].ingredientId !== '' &&
-          ingredients[i].quantity !== '' &&
-          ingredients[i].quantity !== 0 &&
+          // ingredients[i].quantity !== '' &&
+          ingredients[i].quantity != 0 &&
           ingredients[i].unit_name !== ''
         ) {
-          // console.log(servingUnit)
           try {
             handleCreateRecipe()
             toggle()
@@ -162,11 +161,11 @@ const PublishRecipe = () => {
             console.log(error)
           }
         } else {
-          return null
+          return <div>Please do not leave any field null before submit</div>
         }
       }
     } else {
-      return null
+      return <div>Please do not leave any field null before submit</div>
     }
   }
 
@@ -318,33 +317,15 @@ const PublishRecipe = () => {
                   value={servings}
                   onChange={e => setServings(e.target.value)}
                 />
-                <Select
-                  className={`${styles.inputField} ${styles.select}`}
+                <input
+                  className={`${styles.inputField}`}
                   required
-                  classNamePrefix="select"
-                  options={servingUnitOpt}
-                  placeholder={`units`}
-                  onChange={e => setServingUnit(e.value)}
-                  styles={{
-                    control: (baseStyles, state) => ({
-                      ...baseStyles,
-                      border: 'none',
-                      width: '100%',
-                      boxShadow: state.isFocused ? 0 : 0,
-
-                      '&:hover': {
-                        borderColor: '#ff8600',
-                        outline: 'none'
-                      }
-                    }),
-                    menu: (baseStyles, state) => ({
-                      ...baseStyles,
-                      width: 'fit-content',
-                      height: '200px',
-                      overflow: 'auto',
-                      display: 'flex'
-                    })
-                  }}
+                  defaultValue={'Servings'}
+                  type="text"
+                  // min={'1
+                  placeholder={'Servings'}
+                  // value={servingUnit}
+                  onChange={e => setServingUnit(e.target.value)}
                 />
               </div>
             </div>

@@ -13,13 +13,10 @@ const LoginForm = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post(
-        'https://nom-nom-recipe-web-be.herokuapp.com/auth/login',
-        {
-          email: email,
-          password: password
-        }
-      )
+      const response = await axios.post('http://localhost:3000/auth/login', {
+        email: email,
+        password: password
+      })
       localStorage.setItem(
         'accesstoken',
         JSON.stringify(response.data.accesstoken).replace(/"/g, '')
