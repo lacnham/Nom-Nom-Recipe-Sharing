@@ -34,14 +34,28 @@ const withoutAuth = (
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-      setLoading(false)
-    }, [])
+      const handleRedirect = () => {
+        if (userData === null) {
+          options.redirectUnauthenticated = true
+        } else {
+          setLoading(false)
+        }
+      }
+
+      handleRedirect()
+    }, [userData, options.redirectUnauthenticated])
 
     useEffect(() => {
-      if (options.redirectUnauthenticated && userData === null) {
-        navigate('/', { replace: true })
+      const handleNavigation = () => {
+        if (options.redirectUnauthenticated && !userData) {
+          navigate('/', { replace: true })
+        }
       }
-    }, [userData, navigate, options.redirectUnauthenticated])
+
+      if (!loading) {
+        handleNavigation()
+      }
+    }, [userData, navigate, options.redirectUnauthenticated, loading])
 
     return loading ? null : <Component {...props} />
   }

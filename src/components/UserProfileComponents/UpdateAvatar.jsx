@@ -191,7 +191,19 @@ const UpdateAvatar = props => {
           <i className="fa-solid fa-pen-to-square fa-2xl"></i>
         </div>
       </div>
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={{
+          overlay: {
+            zIndex: 9999,
+            background: 'rgba(0, 0, 0, 0.5)'
+          },
+          content: {
+            margin: '100px 0px 0px 0px'
+          }
+        }}
+      >
         <h2>Update Image:</h2>
         <div
           style={{
