@@ -78,8 +78,8 @@ const PublishRecipe = () => {
         ingredients[i].quantity === '' ||
         ingredients[i].unit_name === ''
       ) {
-        alert('Please fill in the empty field before create more')
-        return
+        // alert()
+        return <div>'Please fill in the empty field before create more'</div>
       }
     }
     setIngredients([
@@ -147,12 +147,23 @@ const PublishRecipe = () => {
       duration !== '' &&
       servings !== ''
     ) {
-      console.log(servingUnit)
-      try {
-        handleCreateRecipe()
-        toggle()
-      } catch (error) {
-        console.log(error)
+      for (let i = 0; i < ingredients.length; i++) {
+        if (
+          ingredients[i].ingredientId !== '' &&
+          ingredients[i].quantity !== '' &&
+          ingredients[i].quantity !== 0 &&
+          ingredients[i].unit_name !== ''
+        ) {
+          // console.log(servingUnit)
+          try {
+            handleCreateRecipe()
+            toggle()
+          } catch (error) {
+            console.log(error)
+          }
+        } else {
+          return null
+        }
       }
     } else {
       return null

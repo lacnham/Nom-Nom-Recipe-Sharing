@@ -93,7 +93,7 @@ const CollectionSection = props => {
         ></Collections>
       ))
     } else {
-      return <div>You dont have any collection yet, please create one</div>
+      return <div>You don't have any collection yet, please create one</div>
     }
   }
 

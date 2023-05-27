@@ -13,27 +13,27 @@ export const UpdateRecipe = props => {
   const [dur, setDur] = useState('')
   const [durUnit, setDurunit] = useState('')
   const [serv, setServ] = useState('')
+  const [servUnit, setServUnit] = useState('')
   const [image, setImage] = useState('')
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    console.log(props.data)
-    let duration = Object.entries(props.data.duration).map(
-      ([key, val] = entry) => {
-        setDur(val)
-        setDurunit(key)
-      }
-    )
+    const duration = Object.entries(props.data.duration)
+    console.log('Duration ne', duration)
+    setDur(duration[0][1])
+    setDurunit(duration[0][0])
 
     setName(props.data.name)
     setDes(props.data.description)
     setServ(props.data.serving_size)
+    setServUnit(props.data.serving_unit)
   }, [])
 
   const handleOnChange = () => {
     props.setData({
       name: name,
       serving_size: serv,
+      serving_unit: servUnit,
       duration: `${dur} ${durUnit}`,
       image_link: image,
       description: des
@@ -62,7 +62,9 @@ export const UpdateRecipe = props => {
           className={`${styles.inputField}`}
           type="text"
           id="name"
-          placeholder={name}
+          value={name}
+          defaultValue={props.data.name}
+          // placeholder={name}
           onChange={e => setName(e.target.value)}
         />
       </div>
@@ -76,11 +78,22 @@ export const UpdateRecipe = props => {
             className={`${styles.inputField}`}
             type="number"
             name="servings"
+            defaultValue={props.data.serving_size}
+            value={serv}
             min={1}
-            placeholder={''}
+            // placeholder={''}
             onChange={e => setServ(e.target.value)}
           />
-          <span>serving(s)</span>
+          <input
+            className={`${styles.inputField}`}
+            type="text"
+            name="servingUnit"
+            value={servUnit}
+            defaultValue={props.data.serving_unit}
+            // placeholder={''}
+            onChange={e => setServUnit(e.target.value)}
+          ></input>
+          {/* <span>serving(s)</span> */}
         </div>
         <div
           className={`${styles.flexRow} ${styles.boxShadowPurple} ${styles.inputFieldContainer}`}
@@ -91,7 +104,7 @@ export const UpdateRecipe = props => {
             name="duration"
             defaultValue={dur}
             min={1}
-            placeholder={`${dur.val}`}
+            // placeholder={`${dur.val}`}
             onChange={e => setDur({ val: e.target.value, key: dur.key })}
           />
 

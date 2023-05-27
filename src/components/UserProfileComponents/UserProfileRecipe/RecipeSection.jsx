@@ -51,12 +51,14 @@ export const RecipeSection = props => {
 
   const Card = lazy(() => import('../../Card'))
 
-  const handleUpdate = (recId, name, des, serv, dur) => {
+  const handleUpdate = (recId, name, des, serv, servUnit, dur) => {
     setId(recId)
     setUpdateData({
       name: name,
       serving_size: serv,
+      serving_unit: servUnit,
       duration: dur,
+      // image_link: '',
       description: des
     })
     toggle()
@@ -74,6 +76,7 @@ export const RecipeSection = props => {
 
   const recipeTmp = () => {
     if (recipes.length > 0) {
+      console.log('recipe ne', recipes[0])
       return recipes.map(ele => (
         <Suspense key={ele.recipe_id}>
           <Card
@@ -87,6 +90,7 @@ export const RecipeSection = props => {
                 ele.name,
                 ele.description,
                 ele.serving_size,
+                ele.serving_unit,
                 ele.duration
               )
             }
@@ -98,6 +102,8 @@ export const RecipeSection = props => {
       return <div>You did not create any recipe yet, please create one</div>
     }
   }
+
+  console.log(updateData)
 
   let configUpdate = {
     method: 'PUT',
