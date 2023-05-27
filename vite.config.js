@@ -12,7 +12,7 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     rollupOptions: {
-      main: path.resolve(__dirname, 'src/index.html') // Adjust the path and filename according to your entry point
+      main: path.resolve(__dirname, 'src/main.html') // Adjust the path and filename according to your entry point
     }
   },
   server: {
