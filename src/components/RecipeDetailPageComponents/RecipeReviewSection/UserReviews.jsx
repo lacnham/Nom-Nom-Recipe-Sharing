@@ -50,13 +50,11 @@ const UserReview = props => {
     setReviewImg(await getImageURLs(reviews))
   }
 
-  // processReviews(reviews)
+  // console.log(reviewImg)
 
   useEffect(() => {
-    if (reviewImg.length == 0) {
-      processReviews(reviews)
-    }
-  }, [])
+    processReviews(reviews)
+  }, [reviews])
 
   const userReview = reviews.map((review, id) => (
     <div
