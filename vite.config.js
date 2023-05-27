@@ -22,7 +22,7 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
         headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:5173',
+          'Access-Control-Allow-Origin': 'https://nomnomrecipe.netlify.app',
           'Access-Control-Allow-Credentials': true,
           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
           'Access-Control-Allow-Headers': 'Content-Type, Authorization'
