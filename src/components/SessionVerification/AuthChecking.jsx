@@ -26,7 +26,7 @@ const withAuth = (
 
 const withoutAuth = (
   Component,
-  options = { redirectUnauthenticated: false }
+  options = { redirectUnauthenticated: true }
 ) => {
   const UnauthRoute = props => {
     const navigate = useNavigate()

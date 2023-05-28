@@ -75,7 +75,7 @@ export default function SignUpForm () {
 
     if (!passwordRegex.test(password)) {
       errors.password =
-        'Password must be at least 8 characters and contain a lowercase letter, an uppercase letter, and a number'
+        'Password must be at least 8 characters and contain a lowercase letter, an uppercase letter, a special character,and a number'
     }
 
     if (verifypassword !== password) {

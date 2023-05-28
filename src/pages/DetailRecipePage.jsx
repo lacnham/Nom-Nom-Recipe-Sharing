@@ -31,4 +31,4 @@ const DetailRecipePage = () => {
   )
 }
 
-export default DetailRecipePage
+export default withoutAuth(DetailRecipePage)

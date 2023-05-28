@@ -35,7 +35,6 @@ const CollectionDropList = props => {
       let newColl = userCollections.filter(item =>
         item.name.toLowerCase().includes(input.toLowerCase())
       )
-
       return newColl.map(ele => (
         <CollectionInDropList
           current={props.current}
