@@ -17,7 +17,7 @@ const fetchRecipeImg = async recipe_id => {
   }
 }
 
-function CardImage(props) {
+function CardImage (props) {
   const [imageURL, setImageURL] = useState('/images/Default_img.svg')
   const [imageError, setImageError] = useState(false)
 
@@ -65,7 +65,7 @@ function CardImage(props) {
   )
 }
 
-function UpdateRecipeButton({ userID, fn }) {
+function UpdateRecipeButton ({ userID, fn }) {
   const { userData } = useContext(AuthContext)
 
   if (userID == userData.user.id) {
@@ -91,7 +91,7 @@ const fetchCountryForRecipe = async recipe_id => {
   }
 }
 
-function CardContent(props) {
+function CardContent (props) {
   const [categories, setCategories] = React.useState([])
   React.useEffect(() => {
     const fetchCategories = async () => {
@@ -122,7 +122,7 @@ function CardContent(props) {
 }
 
 export default class Card extends React.Component {
-  render() {
+  render () {
     return (
       <div className={styles.Card}>
         <div>

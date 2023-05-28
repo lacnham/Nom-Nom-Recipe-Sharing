@@ -34,7 +34,7 @@ const Refrigerator = () => {
     }
   }
 
-  async function fetchDataWithInput() {
+  async function fetchDataWithInput () {
     const url =
       'https://nom-nom-recipe-web-be.herokuapp.com/recipe/search-by-ingredients'
     const body = {
@@ -60,7 +60,7 @@ const Refrigerator = () => {
     }
   }
 
-  async function fetchDataWithOutInput() {
+  async function fetchDataWithOutInput () {
     const url = 'https://nom-nom-recipe-web-be.herokuapp.com/recipe'
     try {
       const response = await fetch(url, {

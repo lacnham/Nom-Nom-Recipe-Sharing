@@ -51,12 +51,14 @@ export const RecipeSection = props => {
 
   const Card = lazy(() => import('../../Card'))
 
-  const handleUpdate = (recId, name, des, serv, dur) => {
+  const handleUpdate = (recId, name, des, serv, servUnit, dur) => {
     setId(recId)
     setUpdateData({
       name: name,
       serving_size: serv,
+      serving_unit: servUnit,
       duration: dur,
+      // image_link: '',
       description: des
     })
     toggle()
@@ -87,6 +89,7 @@ export const RecipeSection = props => {
                 ele.name,
                 ele.description,
                 ele.serving_size,
+                ele.serving_unit,
                 ele.duration
               )
             }
@@ -116,7 +119,7 @@ export const RecipeSection = props => {
     try {
       const res = await axios.request(configUpdate)
       setMessage(res.data.message)
-      UploadImage(updateData.image_link, id, setMessage)
+      await UploadImage(updateData.image_link, id, setMessage)
       secondToggle()
       toggle()
     } catch (error) {

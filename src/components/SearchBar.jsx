@@ -88,7 +88,7 @@ const SearchBar = ({
     setSearchInput(searchValue)
   }
 
-  function compareObjectsByRecipeId(obj1, obj2) {
+  function compareObjectsByRecipeId (obj1, obj2) {
     const result = {}
 
     for (const key1 in obj1) {
@@ -106,7 +106,7 @@ const SearchBar = ({
     return result
   }
 
-  function transformData(diet, country) {
+  function transformData (diet, country) {
     const dietArray = Array.from(diet, item => item.name)
     const transformedDietData = dietArray.map(item => ({
       value: item,

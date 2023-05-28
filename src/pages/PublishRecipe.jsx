@@ -1,4 +1,3 @@
-import React, { useRef, useState } from 'react'
 import styles from '../styles/PublishRecipe.module.css'
 import Header from '../components/Header'
 import { FetchAllIngAndCountry } from '../components/ApiFetch/FetchAllIngAndCountry.jsx'
@@ -19,7 +18,7 @@ const PublishRecipe = () => {
   const [duration, setDuration] = useState(1)
   const [servings, setServings] = useState(1)
   const [ingredients, setIngredients] = useState([
-    { ingredientId: '', quantity: '', unit_name: `` }
+    { ingredientId: '', quantity: 1, unit_name: `` }
   ])
 
   const [servingUnit, setServingUnit] = useState('')
@@ -43,8 +42,8 @@ const PublishRecipe = () => {
 
   const handleIngredientChange = (e, igd) => {
     let newIngredients = [...ingredients]
-    for (let i = 0; i < newIngredients.length; i++) {
-      if (newIngredients[i].id === e.value) {
+    for (let ingredient of newIngredients) {
+      if (ingredient.id === e.value) {
         alert('Cannot add more')
         return newIngredients
       }
@@ -72,19 +71,19 @@ const PublishRecipe = () => {
   }
 
   const handleAddIngredient = () => {
-    for (let i = 0; i < ingredients.length; i++) {
+    for (let ingredient of ingredients) {
       if (
-        ingredients[i].ingredientId === '' ||
-        ingredients[i].quantity === '' ||
-        ingredients[i].unit_name === ''
+        ingredient.ingredientId === '' ||
+        ingredient.quantity == 0 ||
+        ingredient.unit_name === ''
       ) {
-        alert('Please fill in the empty field before create more')
-        return
+        // alert()
+        return <div>'Please fill in the empty field before create more'</div>
       }
     }
     setIngredients([
       ...ingredients,
-      { ingredientId: '', quantity: 0, unit_name: `` }
+      { ingredientId: '', quantity: 1, unit_name: `` }
     ])
   }
 
@@ -126,7 +125,10 @@ const PublishRecipe = () => {
   const handleCreateRecipe = async () => {
     try {
       const res = await axios.request(config)
-      UploadImage(image, res.data.recipeId, setMessage)
+      await UploadImage(image, res.data.recipeId, setMessage).catch(error => {
+        console.log(error)
+      })
+      console.log(res.data.recipeId)
       setMessage(res.data.message)
     } catch (error) {
       console.log(error)
@@ -137,23 +139,28 @@ const PublishRecipe = () => {
     window.location.reload(false)
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault()
     if (
       name !== '' &&
       description !== '' &&
       origin !== '' &&
-      duration !== '' &&
-      servings !== ''
+      duration != '' &&
+      servings != ''
     ) {
+      for (let ingredient of ingredients) {
+        if (ingredient.ingredientId == '' && ingredient.unit_name == '') {
+          return <div>Please do not leave any field null before submit</div>
+        }
+      }
       try {
-        handleCreateRecipe()
+        await handleCreateRecipe()
         toggle()
       } catch (error) {
         console.log(error)
       }
     } else {
-      return null
+      return <div>Please do not leave any field null before submit</div>
     }
   }
 
@@ -174,7 +181,8 @@ const PublishRecipe = () => {
             refreshPage()
           }}
         />
-        <form className={styles.publish} onSubmit={handleSubmit}>
+        <form className={styles.publish}>
+          {/* <form className={styles.publish} onSubmit={handleSubmit}> */}
           <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
             <div className={`${styles.inputFieldContainer} ${styles.flexRow}`}>
               <label className={`${styles.fieldLabel}`}>Name</label>
@@ -305,33 +313,15 @@ const PublishRecipe = () => {
                   value={servings}
                   onChange={e => setServings(e.target.value)}
                 />
-                <Select
-                  className={`${styles.inputField} ${styles.select}`}
+                <input
+                  className={`${styles.inputField}`}
                   required
-                  classNamePrefix="select"
-                  options={servingUnitOpt}
-                  placeholder={`units`}
-                  onChange={e => setServingUnit(e.value)}
-                  styles={{
-                    control: (baseStyles, state) => ({
-                      ...baseStyles,
-                      border: 'none',
-                      width: '100%',
-                      boxShadow: state.isFocused ? 0 : 0,
-
-                      '&:hover': {
-                        borderColor: '#ff8600',
-                        outline: 'none'
-                      }
-                    }),
-                    menu: (baseStyles, state) => ({
-                      ...baseStyles,
-                      width: 'fit-content',
-                      height: '200px',
-                      overflow: 'auto',
-                      display: 'flex'
-                    })
-                  }}
+                  defaultValue={'Servings'}
+                  type="text"
+                  // min={'1
+                  placeholder={'Servings'}
+                  // value={servingUnit}
+                  onChange={e => setServingUnit(e.target.value)}
                 />
               </div>
             </div>
@@ -415,8 +405,9 @@ const PublishRecipe = () => {
                       required
                       className={`${styles.inputField}`}
                       name="quantity"
-                      min={0}
-                      placeholder={0}
+                      min={1}
+                      // value={1}
+                      defaultValue={1}
                       onChange={e => handleQuantity(e, igd)}
                     />
                     <Select

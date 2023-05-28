@@ -41,7 +41,7 @@ const Diet = () => {
     fetchData()
   }, [])
 
-  function waitForCheckedDivContent() {
+  function waitForCheckedDivContent () {
     return new Promise((resolve, reject) => {
       const interval = setInterval(() => {
         const checkedDivs = document.querySelectorAll('div#checked')

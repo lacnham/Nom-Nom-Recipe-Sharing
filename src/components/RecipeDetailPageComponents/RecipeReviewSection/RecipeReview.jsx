@@ -8,7 +8,7 @@ import { UserReviewForm } from './UserReviewForm'
 import SocialMediaButton from '../../SocialMediaButton/SocialMediaButton'
 import { Link, useLocation } from 'react-router-dom'
 
-const RecipeReview = props => {
+export const RecipeReview = props => {
   const styleElement = {
     default: 'none',
     change: 'block'
@@ -50,4 +50,4 @@ const RecipeReview = props => {
     </div>
   )
 }
-export default RecipeReview
+// export default RecipeReview

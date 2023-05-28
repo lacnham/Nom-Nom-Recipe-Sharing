@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import styles from '../../../styles/RecipeDetailPage/DetailRecipePage.module.css'
 import { RenderProfileSection } from '../RenderProfileSection'
-import CollectionSection from '../UserProfileCollection/CollectionSection'
 import { RecipeSection } from '../UserProfileRecipe/RecipeSection'
 import { DefaultButton } from '../../Button'
 

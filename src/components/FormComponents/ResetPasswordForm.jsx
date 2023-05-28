@@ -33,7 +33,7 @@ const ResetPasswordForm = () => {
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/
 
-  function validateInput({ password, confirmPassword }) {
+  function validateInput ({ password, confirmPassword }) {
     const errors = {}
 
     if (!password || !confirmPassword) {

@@ -9,9 +9,9 @@ const RecipeIngredient = props => {
 
   let nutritionToArr = Object.entries(props.nutritionsTmp)
 
-  for (let i = 0; i < nutritionToArr.length; i++) {
-    if (nutritionToArr[i][0].includes('_')) {
-      nutritionToArr[i][0] = nutritionToArr[i][0].replace('_', ' ')
+  for (let nutrition of nutritionToArr) {
+    if (nutrition[0].includes('_')) {
+      nutrition[0] = nutrition[0].replace('_', ' ')
     }
   }
 
