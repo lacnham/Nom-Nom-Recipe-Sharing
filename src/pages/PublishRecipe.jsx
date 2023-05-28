@@ -118,7 +118,7 @@ const PublishRecipe = () => {
     data: {
       name: name,
       servingSize: servings,
-      servingUnit: servingUnit,
+      servingUnit: servingUnit == '' ? 'Servings' : servingUnit,
       duration:
         duration == '' || duration == 0
           ? 1 + ' ' + durationUnits[1]
