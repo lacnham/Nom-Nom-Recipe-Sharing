@@ -35,7 +35,7 @@ export const RecipeDetail = props => {
   )
 
   const ref = useRef(
-    parseInt(props.recipe.serving_size / props.recipe.serving_size)
+    parseInt(props.recipe.serving_size) / parseInt(props.recipe.serving_size)
   )
 
   const [ingredientsTmp, setIngredients] = useState('')
@@ -57,45 +57,45 @@ export const RecipeDetail = props => {
     }
   }
 
-  // useEffect(() => {
-  //   axios.all([axios.request(configIng), axios.request(configNutrition)]).then(
-  //     axios.spread((resIng, resNutri) => {
-  //       setIngredients(resIng.data.ingredientFactsOfRecipe)
-  //       setNutritions(resNutri.data.ingredientFactsOfRecipe[0])
-  //     })
-  //   )
-  // }, [])
-
   useEffect(() => {
-    axios
-      .all([
-        axios
-          .request(configIng)
-          .then(res => {
-            setIngredients(res.data.ingredientFactsOfRecipe)
-          })
-          .catch(error => {
-            console.log(error)
-          }),
-        axios
-          .request(configNutrition)
-          .then(res => {
-            setNutritions(res.data.ingredientFactsOfRecipe[0])
-          })
-          .catch(error => {
-            console.log(error)
-          })
-      ])
-      .catch(error => {
-        console.log(error)
+    axios.all([axios.request(configIng), axios.request(configNutrition)]).then(
+      axios.spread((resIng, resNutri) => {
+        setIngredients(resIng.data.ingredientFactsOfRecipe)
+        setNutritions(resNutri.data.ingredientFactsOfRecipe[0])
       })
-    // .then(
-    //   axios.spread((resIng, resNutri) => {
-    //     setIngredients(resIng.data.ingredientFactsOfRecipe)
-    //     setNutritions(resNutri.data.ingredientFactsOfRecipe[0])
-    //   })
-    // )
+    )
   }, [])
+
+  // useEffect(() => {
+  //   axios
+  //     .all([
+  //       axios
+  //         .request(configIng)
+  //         .then(res => {
+  //           setIngredients(res.data.ingredientFactsOfRecipe)
+  //         })
+  //         .catch(error => {
+  //           console.log(error)
+  //         }),
+  //       axios
+  //         .request(configNutrition)
+  //         .then(res => {
+  //           setNutritions(res.data.ingredientFactsOfRecipe[0])
+  //         })
+  //         .catch(error => {
+  //           console.log(error)
+  //         })
+  //     ])
+  //     .catch(error => {
+  //       console.log(error)
+  //     })
+  // .then(
+  //   axios.spread((resIng, resNutri) => {
+  //     setIngredients(resIng.data.ingredientFactsOfRecipe)
+  //     setNutritions(resNutri.data.ingredientFactsOfRecipe[0])
+  //   })
+  // )
+  // }, [])
 
   const handleChange = async event => {
     ref.current = event.target.value / props.recipe.serving_size
@@ -116,18 +116,12 @@ export const RecipeDetail = props => {
       }
     }
 
-    await axios
-      .all([axios.request(configIng), axios.request(configNutrition)])
-      .then(
-        axios
-          .spread((resIng, resNutri) => {
-            setIngredients(resIng.data.ingredientFactsOfRecipe)
-            setNutritions(resNutri.data.ingredientFactsOfRecipe[0])
-          })
-          .catch(error => {
-            console.log(error)
-          })
-      )
+    axios.all([axios.request(configIng), axios.request(configNutrition)]).then(
+      axios.spread((resIng, resNutri) => {
+        setIngredients(resIng.data.ingredientFactsOfRecipe)
+        setNutritions(resNutri.data.ingredientFactsOfRecipe[0])
+      })
+    )
   }
 
   return (
