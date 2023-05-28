@@ -56,12 +56,7 @@ const PublishRecipe = () => {
   const handleQuantity = (e, igd) => {
     let newIngredients = [...ingredients]
 
-    if (e.target.value == '') {
-      console.log(e.target.value)
-      newIngredients[igd].quantity = 1
-    } else {
-      newIngredients[igd].quantity = e.target.value
-    }
+    newIngredients[igd].quantity = e.target.value
   }
 
   const handleUnit = (e, igd) => {
@@ -200,7 +195,6 @@ const PublishRecipe = () => {
           }}
         />
         <form className={styles.publish}>
-          {/* <form className={styles.publish} onSubmit={handleSubmit}> */}
           <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
             <div className={`${styles.inputFieldContainer} ${styles.flexRow}`}>
               <label className={`${styles.fieldLabel}`}>Name</label>

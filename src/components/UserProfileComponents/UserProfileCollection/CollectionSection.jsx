@@ -63,7 +63,9 @@ export const CollectionSection = props => {
   const handleSubmit = async () => {
     try {
       const res = await axios.request(config)
+
       UploadCollectionImage(image, res.data.collectionId)
+
       setMessage(res.data.message)
       toggle()
     } catch (error) {

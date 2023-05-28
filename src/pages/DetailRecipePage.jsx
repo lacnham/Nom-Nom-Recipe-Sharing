@@ -6,6 +6,7 @@ import { FetchRecipeByID } from '../components/ApiFetch/Recipes/FetchRecipeByID.
 import { useParams } from 'react-router-dom'
 import StickyBox from 'react-sticky-box'
 import { RecipeDetail } from '../components/RecipeDetailPageComponents/RecipeDetailSection/RecipeDetail'
+import { withoutAuth } from '../components/SessionVerification/AuthChecking'
 
 const DetailRecipePage = () => {
   const { id } = useParams()

@@ -58,7 +58,7 @@ export const RecipeSection = props => {
       serving_size: serv,
       serving_unit: servUnit,
       duration: dur,
-      // image_link: '',
+      image_link: '',
       description: des
     })
     toggle()
@@ -117,14 +117,13 @@ export const RecipeSection = props => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const res = await axios
-        .request(configUpdate)
-        .then(
-          setMessage(res.data.message),
-          UploadImage(updateData.image_link, id, setMessage),
-          secondToggle(),
-          toggle()
-        )
+      const res = await axios.request(configUpdate)
+      setMessage(res.data.message)
+
+      UploadImage(updateData.image_link, id, setMessage)
+
+      secondToggle()
+      toggle()
     } catch (error) {
       console.log(error)
     }
@@ -151,7 +150,7 @@ export const RecipeSection = props => {
         isShowing={isShowing}
         hide={toggle}
         btnMsg={'Confirm'}
-        title={'Update collection'}
+        title={'Update recipe'}
         modalMsg={
           <UpdateRecipe
             data={updateData}

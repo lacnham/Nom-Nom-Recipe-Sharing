@@ -15,6 +15,7 @@ export const UpdateForm = props => {
 
   const fileTemp = useRef(null)
   const handleUploadImage = e => {
+    props.setImage(e.target.files[0])
     setImage(e.target.files[0])
   }
 

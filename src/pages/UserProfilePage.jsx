@@ -1,5 +1,6 @@
 import Header from '../components/Header'
-// import { CollectionSection } from '../components/UserProfileComponents/UserProfileCollection/CollectionSection'
+
+import { CollectionSection } from '../components/UserProfileComponents/UserProfileCollection/CollectionSection'
 import UserProfileSide from '../components/UserProfileComponents/UserProfileSide/UserProfileSide'
 import styles from '../styles/UserProfile/UserProfileMainPage.module.css'
 import { RecipeSection } from '../components/UserProfileComponents/UserProfileRecipe/RecipeSection'
@@ -7,7 +8,6 @@ import { useState } from 'react'
 
 import { BackToTopButton } from '../components/Button'
 import { withoutAuth } from '../components/SessionVerification/AuthChecking'
-import { CollectionSection } from '../components/UserProfileComponents/UserProfileCollection/CollectionSection'
 
 const UserProfileMainPage = () => {
   const [currentStyle, setCurrentStyle] = useState('none')
