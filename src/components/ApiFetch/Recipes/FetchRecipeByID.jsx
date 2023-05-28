@@ -21,8 +21,8 @@ export const FetchRecipeByID = id => {
         .all([axios.request(configRecipe), axios.request(configDietary)])
         .then(
           axios.spread((resRecipe, resDietary) => {
-            setRecipe(resRecipe && resRecipe.data)
-            setDietary(resDietary && resDietary.data)
+            setRecipe(resRecipe.data)
+            setDietary(resDietary.data)
           })
         )
     } catch (error) {

@@ -64,7 +64,7 @@ const Collections = props => {
     try {
       const res = await axios.request(config)
       setMessage(res.data.message)
-      await UploadCollectionImage(imageURL, props.collection.collection_id)
+      UploadCollectionImage(imageURL, props.collection.collection_id)
       toggle()
       secondToggle()
     } catch (error) {

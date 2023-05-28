@@ -117,11 +117,14 @@ export const RecipeSection = props => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const res = await axios.request(configUpdate)
-      setMessage(res.data.message)
-      await UploadImage(updateData.image_link, id, setMessage)
-      secondToggle()
-      toggle()
+      const res = await axios
+        .request(configUpdate)
+        .then(
+          setMessage(res.data.message),
+          UploadImage(updateData.image_link, id, setMessage),
+          secondToggle(),
+          toggle()
+        )
     } catch (error) {
       console.log(error)
     }
