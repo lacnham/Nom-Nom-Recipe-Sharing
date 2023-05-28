@@ -58,7 +58,7 @@ export const RecipeSection = props => {
       serving_size: serv,
       serving_unit: servUnit,
       duration: dur,
-      // image_link: '',
+      image_link: '',
       description: des
     })
     toggle()
@@ -122,7 +122,9 @@ export const RecipeSection = props => {
     try {
       const res = await axios.request(configUpdate)
       setMessage(res.data.message)
+
       UploadImage(updateData.image_link, id, setMessage)
+
       secondToggle()
       toggle()
     } catch (error) {
@@ -151,7 +153,7 @@ export const RecipeSection = props => {
         isShowing={isShowing}
         hide={toggle}
         btnMsg={'Confirm'}
-        title={'Update collection'}
+        title={'Update recipe'}
         modalMsg={
           <UpdateRecipe
             data={updateData}

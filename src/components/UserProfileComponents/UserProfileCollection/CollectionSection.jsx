@@ -9,7 +9,7 @@ import Modal from '../../ModalComponents/Modal'
 import useModal from '../../ModalComponents/useModal'
 import { UploadCollectionImage } from '../../ApiPost/LoadImage'
 
-const CollectionSection = props => {
+export const CollectionSection = props => {
   const [name, setName] = useState('')
   const [note, setNote] = useState('')
   const [image, setImage] = useState('')
@@ -63,24 +63,15 @@ const CollectionSection = props => {
   const handleSubmit = async () => {
     try {
       const res = await axios.request(config)
+
       UploadCollectionImage(image, res.data.collectionId)
+
       setMessage(res.data.message)
       toggle()
     } catch (error) {
       console.log(error)
     }
   }
-
-  // // s
-
-  // const collection = userCollectionData.map(ele => (
-  //   <Collections
-  //     key={ele.collection_id}
-  //     collection={ele}
-  //     setCurrentStyle={props.setCurrentStyle}
-  //     setUpdateForm={props.setUpdateForm}
-  //   ></Collections>
-  // ))
 
   const collection = () => {
     if (userCollectionData.length > 0) {
@@ -208,4 +199,4 @@ const CollectionSection = props => {
   )
 }
 
-export default CollectionSection
+// export default CollectionSection

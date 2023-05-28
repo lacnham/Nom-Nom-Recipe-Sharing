@@ -19,8 +19,10 @@ const PublishRecipe = () => {
   const [duration, setDuration] = useState(1)
   const [servings, setServings] = useState(1)
   const [ingredients, setIngredients] = useState([
-    { ingredientId: '', quantity: '', unit_name: `` }
+    { ingredientId: '', quantity: 1, unit_name: '' }
   ])
+
+  const [nullMess, setNullMess] = useState('')
 
   const [servingUnit, setServingUnit] = useState('')
 
@@ -43,8 +45,8 @@ const PublishRecipe = () => {
 
   const handleIngredientChange = (e, igd) => {
     let newIngredients = [...ingredients]
-    for (let i = 0; i < newIngredients.length; i++) {
-      if (newIngredients[i].id === e.value) {
+    for (let ingredient of newIngredients) {
+      if (ingredient.id === e.value) {
         alert('Cannot add more')
         return newIngredients
       }
@@ -72,19 +74,21 @@ const PublishRecipe = () => {
   }
 
   const handleAddIngredient = () => {
-    for (let i = 0; i < ingredients.length; i++) {
+    for (let ingredient of ingredients) {
       if (
-        ingredients[i].ingredientId === '' ||
-        ingredients[i].quantity === '' ||
-        ingredients[i].unit_name === ''
+        ingredient.ingredientId === '' ||
+        ingredient.quantity == 0 ||
+        ingredient.unit_name === ''
       ) {
         // alert()
-        return <div>'Please fill in the empty field before create more'</div>
+        setNullMess('Please fill in the empty field before create more')
+        return
       }
     }
+    setNullMess('')
     setIngredients([
       ...ingredients,
-      { ingredientId: '', quantity: 0, unit_name: `` }
+      { ingredientId: '', quantity: 1, unit_name: '' }
     ])
   }
 
@@ -114,7 +118,10 @@ const PublishRecipe = () => {
       name: name,
       servingSize: servings,
       servingUnit: servingUnit,
-      duration: duration + ' ' + durationUnits[1],
+      duration:
+        duration == '' || duration == 0
+          ? 1 + ' ' + durationUnits[1]
+          : duration + ' ' + durationUnits[1],
       imageLink: image,
       description: description,
       ingredients: ingredients,
@@ -126,8 +133,10 @@ const PublishRecipe = () => {
   const handleCreateRecipe = async () => {
     try {
       const res = await axios.request(config)
-      UploadImage(image, res.data.recipeId, setMessage)
-      console.log(res.data.recipeId)
+      if (image !== '') {
+        UploadImage(image, res.data.recipeId, setMessage)
+      }
+
       setMessage(res.data.message)
     } catch (error) {
       console.log(error)
@@ -138,35 +147,33 @@ const PublishRecipe = () => {
     window.location.reload(false)
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault()
     if (
       name !== '' &&
       description !== '' &&
       origin !== '' &&
       duration !== '' &&
-      servings !== ''
+      servings != ''
     ) {
-      for (let i = 0; i < ingredients.length; i++) {
+      for (let ingredient of ingredients) {
         if (
-          ingredients[i].ingredientId !== '' &&
-          ingredients[i].quantity !== '' &&
-          ingredients[i].quantity !== 0 &&
-          ingredients[i].unit_name !== ''
+          ingredient.ingredientId === '' ||
+          ingredient.unit_name === '' ||
+          ingredient.unit_name === null
         ) {
-          // console.log(servingUnit)
-          try {
-            handleCreateRecipe()
-            toggle()
-          } catch (error) {
-            console.log(error)
-          }
-        } else {
-          return null
+          alert('Please do not leave any field null before submit')
+          return
         }
       }
+      try {
+        handleCreateRecipe()
+        toggle()
+      } catch (error) {
+        console.log(error)
+      }
     } else {
-      return null
+      alert('Please do not leave any field null before submit')
     }
   }
 
@@ -187,7 +194,7 @@ const PublishRecipe = () => {
             refreshPage()
           }}
         />
-        <form className={styles.publish} onSubmit={handleSubmit}>
+        <form className={styles.publish}>
           <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
             <div className={`${styles.inputFieldContainer} ${styles.flexRow}`}>
               <label className={`${styles.fieldLabel}`}>Name</label>
@@ -302,8 +309,9 @@ const PublishRecipe = () => {
                   placeholder="1"
                   onChange={e => setDuration(e.target.value)}
                 />
-                <span>{durationUnits[1]}</span>
+                <label>{durationUnits[1]}</label>
               </div>
+              {duration ? '' : <span>This field is require</span>}
             </div>
             <div className={`${styles.formControl} ${styles.boxShadowPurple} `}>
               <div
@@ -318,33 +326,15 @@ const PublishRecipe = () => {
                   value={servings}
                   onChange={e => setServings(e.target.value)}
                 />
-                <Select
-                  className={`${styles.inputField} ${styles.select}`}
+                <input
+                  className={`${styles.inputField}`}
                   required
-                  classNamePrefix="select"
-                  options={servingUnitOpt}
-                  placeholder={`units`}
-                  onChange={e => setServingUnit(e.value)}
-                  styles={{
-                    control: (baseStyles, state) => ({
-                      ...baseStyles,
-                      border: 'none',
-                      width: '100%',
-                      boxShadow: state.isFocused ? 0 : 0,
-
-                      '&:hover': {
-                        borderColor: '#ff8600',
-                        outline: 'none'
-                      }
-                    }),
-                    menu: (baseStyles, state) => ({
-                      ...baseStyles,
-                      width: 'fit-content',
-                      height: '200px',
-                      overflow: 'auto',
-                      display: 'flex'
-                    })
-                  }}
+                  defaultValue={'Servings'}
+                  type="text"
+                  // min={'1
+                  placeholder={'Servings'}
+                  // value={servingUnit}
+                  onChange={e => setServingUnit(e.target.value)}
                 />
               </div>
             </div>
@@ -428,8 +418,9 @@ const PublishRecipe = () => {
                       required
                       className={`${styles.inputField}`}
                       name="quantity"
-                      min={0}
-                      placeholder={0}
+                      min={1}
+                      placeholder={1}
+                      defaultValue={1}
                       onChange={e => handleQuantity(e, igd)}
                     />
                     <Select
@@ -439,6 +430,7 @@ const PublishRecipe = () => {
                       required
                       options={unitOptions}
                       placeholder={'unit'}
+                      // defaultInputValue='grams'
                       onChange={e => handleUnit(e, igd)}
                       styles={{
                         control: (baseStyles, state) => ({
@@ -479,6 +471,7 @@ const PublishRecipe = () => {
               <i className="fa-solid fa-circle-plus"></i>
               <span> Add More Ingredients </span>
             </div>
+            <div>{nullMess}</div>
           </div>
           <div className={styles.btnWrap}>
             <button

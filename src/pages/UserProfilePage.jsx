@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom'
 import Header from '../components/Header'
-import CollectionSection from '../components/UserProfileComponents/UserProfileCollection/CollectionSection'
+import { CollectionSection } from '../components/UserProfileComponents/UserProfileCollection/CollectionSection'
 import UserProfileSide from '../components/UserProfileComponents/UserProfileSide/UserProfileSide'
 import styles from '../styles/UserProfile/UserProfileMainPage.module.css'
 import { RecipeSection } from '../components/UserProfileComponents/UserProfileRecipe/RecipeSection'
