@@ -43,6 +43,10 @@ export const CollectionInDropList = props => {
     }
   }
 
+  // useEffect(() => {
+  //   handleAddRecipe()
+  // }, [])
+
   return (
     <div
       className={`${styles.item}`}

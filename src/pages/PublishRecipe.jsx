@@ -123,7 +123,6 @@ const PublishRecipe = () => {
         duration == '' || duration == 0
           ? 1 + ' ' + durationUnits[1]
           : duration + ' ' + durationUnits[1],
-      imageLink: image,
       description: description,
       ingredients: ingredients,
       dietaryPrefs: diets,

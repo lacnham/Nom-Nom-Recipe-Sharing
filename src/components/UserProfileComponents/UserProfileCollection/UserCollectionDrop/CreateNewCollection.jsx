@@ -60,9 +60,9 @@ export const CreateNewCollection = props => {
       try {
         const res = await axios.request(config)
         setMessage(res.data.message)
-        if (imageURL !== '') {
-          UploadCollectionImage(imageURL, res.data.collectionId)
-        }
+        // if (imageURL !== '') {
+        //   UploadCollectionImage(imageURL, res.data.collectionId)
+        // }
         props.setCurrent('none')
         toggle()
       } catch (error) {

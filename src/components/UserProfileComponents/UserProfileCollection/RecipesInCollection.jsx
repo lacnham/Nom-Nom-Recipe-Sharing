@@ -14,12 +14,11 @@ export const RecipesInCollection = props => {
 
   const recipe = recipes.map(ele => (
     <Link to={`/recipe/${ele.name}/${ele.recipe_id}`} key={ele.recipe_id}>
-      <Suspense>
+      <Suspense fallback={<div className={styles.cardLazyLoading}></div>}>
         <Card
+          recipe_id={ele.recipe_id}
           image={ele.image_link}
           title={ele.name}
-          category={['asd', 'asd1', 'asd2']}
-          location="Downtown, Seattle WA"
           description={ele.description}
         />
       </Suspense>

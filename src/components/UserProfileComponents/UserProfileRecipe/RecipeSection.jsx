@@ -16,10 +16,12 @@ export const RecipeSection = props => {
   const [updateData, setUpdateData] = useState({
     name: '',
     serving_size: '',
+    serving_unit: '',
     duration: '',
-    image_link: '',
     description: ''
   })
+
+  const [imgUpdate, setImgUpdate] = useState('')
 
   const [message, setMessage] = useState()
 
@@ -51,14 +53,13 @@ export const RecipeSection = props => {
 
   const Card = lazy(() => import('../../Card'))
 
-  const handleUpdate = (recId, name, des, serv, servUnit, dur) => {
+  const handleUpdate = (recId, name, serv, servUnit, dur, des) => {
     setId(recId)
     setUpdateData({
       name: name,
       serving_size: serv,
       serving_unit: servUnit,
       duration: dur,
-      image_link: '',
       description: des
     })
     toggle()
@@ -77,7 +78,10 @@ export const RecipeSection = props => {
   const recipeTmp = () => {
     if (recipes.length > 0) {
       return recipes.map(ele => (
-        <Suspense key={ele.recipe_id}>
+        <Suspense
+          key={ele.recipe_id}
+          fallback={<div className={styles.cardLazyLoading}></div>}
+        >
           <Card
             recipe_id={ele.recipe_id}
             userID={ele.author_id}
@@ -87,10 +91,10 @@ export const RecipeSection = props => {
               handleUpdate(
                 ele.recipe_id,
                 ele.name,
-                ele.description,
                 ele.serving_size,
                 ele.serving_unit,
-                ele.duration
+                ele.duration,
+                ele.description
               )
             }
             fn2={() => handleMoveToRecipePage(ele.name, ele.recipe_id)}
@@ -119,9 +123,9 @@ export const RecipeSection = props => {
     try {
       const res = await axios.request(configUpdate)
       setMessage(res.data.message)
-
-      UploadImage(updateData.image_link, id, setMessage)
-
+      if (imgUpdate !== '') {
+        UploadImage(imgUpdate, id)
+      }
       secondToggle()
       toggle()
     } catch (error) {
@@ -157,6 +161,7 @@ export const RecipeSection = props => {
             id={id}
             setData={setUpdateData}
             setMessage={setMessage}
+            setImageUpdate={setImgUpdate}
           />
         }
         closeable={true}
