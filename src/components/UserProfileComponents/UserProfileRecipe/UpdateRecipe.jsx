@@ -44,8 +44,8 @@ export const UpdateRecipe = props => {
 
   const file = useRef(null)
   const handleUploadImage = e => {
-    setImage(e.target.files[0])
     props.setImageUpdate(e.target.files[0])
+    setImage(e.target.files[0])
   }
 
   const handleTrigger = () => {

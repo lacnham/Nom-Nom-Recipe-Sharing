@@ -47,7 +47,6 @@ const Collections = props => {
     axios
       .request(configImg)
       .then(res => {
-        console.log('res ne hehe', res)
         if (res.data == 'Cannot get image') {
           setImageURL(defaultImg)
         } else {
