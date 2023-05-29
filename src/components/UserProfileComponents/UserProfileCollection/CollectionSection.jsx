@@ -64,7 +64,9 @@ export const CollectionSection = props => {
     try {
       const res = await axios.request(config)
 
-      UploadCollectionImage(image, res.data.collectionId)
+      if (image !== '') {
+        UploadCollectionImage(image, res.data.collectionId)
+      }
 
       setMessage(res.data.message)
       toggle()

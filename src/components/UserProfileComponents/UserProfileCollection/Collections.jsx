@@ -23,6 +23,8 @@ const Collections = props => {
   const [message, setMessage] = useState('')
   const [imageURL, setImageURL] = useState('')
 
+  const [imgUpdate, setImgUpdate] = useState('')
+
   let config = {
     method: 'PUT',
     url: `https://nom-nom-recipe-web-be.herokuapp.com/collection/${props.collection.collection_id}`,
@@ -37,7 +39,6 @@ const Collections = props => {
     method: 'GET',
     url: `https://nom-nom-recipe-web-be.herokuapp.com/collection/get-img/${props.collection.collection_id}`,
     headers: {
-      'Content-Type': 'application/json',
       Authorization: localStorage.accesstoken
     }
   }
@@ -46,7 +47,8 @@ const Collections = props => {
     axios
       .request(configImg)
       .then(res => {
-        if (res.data == 'Cannot get image.') {
+        console.log('res ne hehe', res)
+        if (res.data == 'Cannot get image') {
           setImageURL(defaultImg)
         } else {
           setImageURL(res.data)
@@ -64,9 +66,8 @@ const Collections = props => {
     try {
       const res = await axios.request(config)
       setMessage(res.data.message)
-      console.log(imageURL)
-      if (imageURL !== '') {
-        UploadCollectionImage(imageURL, props.collection.collection_id)
+      if (imgUpdate !== '') {
+        UploadCollectionImage(imgUpdate, props.collection.collection_id)
       }
       toggle()
       secondToggle()
@@ -128,8 +129,8 @@ const Collections = props => {
             setNote={setNote}
             name={name}
             note={note}
-            // image={imageURL}
-            setImage={setImageURL}
+            image={imageURL}
+            setImage={setImgUpdate}
           />
         }
         closeable={true}

@@ -17,12 +17,11 @@ export const UpdateRecipe = props => {
   const [image, setImage] = useState('')
   const [message, setMessage] = useState('')
 
-  useEffect(() => {
-    const duration = Object.entries(props.data.duration)
+  const duration = Object.entries(props.data.duration)
 
+  useEffect(() => {
     setDur(duration[0][1])
     setDurunit(duration[0][0])
-
     setName(props.data.name)
     setDes(props.data.description)
     setServ(props.data.serving_size)
@@ -30,19 +29,23 @@ export const UpdateRecipe = props => {
   }, [])
 
   const handleOnChange = () => {
-    props.setData({
-      name: name,
-      serving_size: serv,
-      serving_unit: servUnit,
-      duration: `${dur} ${durUnit}`,
-      image_link: image,
-      description: des
-    })
+    try {
+      props.setData({
+        name: name,
+        serving_size: serv,
+        serving_unit: servUnit,
+        duration: `${dur} ${durUnit}`,
+        description: des
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const file = useRef(null)
   const handleUploadImage = e => {
     setImage(e.target.files[0])
+    props.setImageUpdate(e.target.files[0])
   }
 
   const handleTrigger = () => {
@@ -62,7 +65,6 @@ export const UpdateRecipe = props => {
           className={`${styles.inputField}`}
           type="text"
           id="name"
-          value={name}
           defaultValue={props.data.name}
           // placeholder={name}
           onChange={e => setName(e.target.value)}
@@ -79,7 +81,6 @@ export const UpdateRecipe = props => {
             type="number"
             name="servings"
             defaultValue={props.data.serving_size}
-            value={serv}
             min={1}
             // placeholder={''}
             onChange={e => setServ(e.target.value)}
@@ -88,7 +89,6 @@ export const UpdateRecipe = props => {
             className={`${styles.inputField}`}
             type="text"
             name="servingUnit"
-            value={servUnit}
             defaultValue={props.data.serving_unit}
             // placeholder={''}
             onChange={e => setServUnit(e.target.value)}
@@ -105,7 +105,7 @@ export const UpdateRecipe = props => {
             defaultValue={dur}
             min={1}
             // placeholder={`${dur.val}`}
-            onChange={e => setDur({ val: e.target.value, key: dur.key })}
+            onChange={e => setDur(e.target.value)}
           />
 
           <Select
