@@ -53,7 +53,7 @@ export const RecipeSection = props => {
 
   const Card = lazy(() => import('../../Card'))
 
-  const handleUpdate = (recId, name, serv, servUnit, dur, des) => {
+  const handleUpdate = async (recId, name, serv, servUnit, dur, des) => {
     setId(recId)
     setUpdateData({
       name: name,
@@ -62,6 +62,7 @@ export const RecipeSection = props => {
       duration: dur,
       description: des
     })
+
     toggle()
   }
 
