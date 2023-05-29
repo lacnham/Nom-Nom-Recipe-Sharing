@@ -20,9 +20,8 @@ Username: mock1@gmail.com </br>
 Password: 1234567 </br>
 
 ### Links
-- Video: </br>
-- Frontend:  </br>
-- Backend:  </br>
+- Frontend: https://github.com/Linh-0v0/Nom-Nom-Recipe-Sharing  </br>
+- Backend: https://github.com/Linh-0v0/Nom-Nom-Recipe-Sharing-BE </br>
 
 
 ### 1. Motivation
