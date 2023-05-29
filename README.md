@@ -11,13 +11,13 @@ Website: https://nomnomrecipe.netlify.app
 
 ### Instruction
 
-Link to validate Company's email to be able for sending email to user (expired in 1h): https://nom-nom-recipe-web-be.herokuapp.com/auth/google
-EMAIL_USER=nommnommrecipe@gmail.com
-EMAIL_PASS=nommnomm12345
+Link to validate Company's email to be able for sending email to user (expired in 1h): https://nom-nom-recipe-web-be.herokuapp.com/auth/google </br>
+EMAIL_USER=nommnommrecipe@gmail.com </br>
+EMAIL_PASS=nommnomm12345 </br>
 
-Account for testing website (you can register a new one):
-Username: mock1@gmail.com
-Password: 1234567
+Account for testing website (you can register a new one): </br>
+Username: mock1@gmail.com </br>
+Password: 1234567 </br>
 
 ### Links
 - Video: </br>
